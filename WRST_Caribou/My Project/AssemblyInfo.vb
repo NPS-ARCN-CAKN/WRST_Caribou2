@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WRST_Caribou")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("WRST_Caribou")>
-<Assembly: AssemblyCopyright("Copyright ©  2017")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTitle("National Park Service Wrangell-St. Elias National Park and Preserve Caribou Monitoring Database Application")>
+<Assembly: AssemblyDescription("National Park Service Wrangell-St. Elias National Park and Preserve Caribou Monitoring Database Application")>
+<Assembly: AssemblyCompany("National Park Service Central Alaska Network Inventory and Monitoring Program")>
+<Assembly: AssemblyProduct("National Park Service Wrangell-St. Elias National Park and Preserve Caribou Monitoring Database Application")>
+<Assembly: AssemblyCopyright("Public Domain")>
+<Assembly: AssemblyTrademark("NPS")>
 
 <Assembly: ComVisible(False)>
 

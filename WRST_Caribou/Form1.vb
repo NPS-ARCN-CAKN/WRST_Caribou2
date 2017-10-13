@@ -92,4 +92,24 @@ Public Class Form1
         Me.Dispose()
         Me.Close()
     End Sub
+
+    Private Sub EditDatabaseConnectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditDatabaseConnectionToolStripMenuItem.Click
+        Dim DatabaseConnectionForm As New DatabaseConnectionForm
+        DatabaseConnectionForm.ShowDialog()
+
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        With My.Application.Info
+            Debug.Print(.AssemblyName)
+            Debug.Print(.CompanyName)
+            Debug.Print(.Description)
+            Debug.Print(.DirectoryPath)
+            Debug.Print(.ProductName)
+            Debug.Print(.Title)
+            Debug.Print(.Version.Major & " minor versino " & .Version.Minor)
+            Debug.Print(My.Settings.WRST_CaribouConnectionString)
+
+        End With
+    End Sub
 End Class
