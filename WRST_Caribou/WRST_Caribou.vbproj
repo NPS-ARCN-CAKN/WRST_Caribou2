@@ -94,6 +94,7 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ImportWaypoints.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -113,6 +114,12 @@
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
     <Compile Include="SplashScreen1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaypointsPreviewForm.Designer.vb">
+      <DependentUpon>WaypointsPreviewForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WaypointsPreviewForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WRST_CaribouDataSet.Designer.vb">
@@ -137,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen1.resx">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaypointsPreviewForm.resx">
+      <DependentUpon>WaypointsPreviewForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

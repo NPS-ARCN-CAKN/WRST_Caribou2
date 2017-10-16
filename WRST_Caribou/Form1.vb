@@ -1,4 +1,5 @@
-﻿Imports Janus.Windows.GridEX
+﻿Imports System.IO
+Imports Janus.Windows.GridEX
 Public Class Form1
     Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         SaveDataset()
@@ -212,30 +213,30 @@ Public Class Form1
                 .AllowEdit = Editable
                 .AllowDelete = Editable
                 .AlternatingColors = True
+                .AutoEdit = False
                 .AutomaticSort = True
                 .CardBorders = False
+                .CardHeaders = True
                 .ColumnAutoSizeMode = ColumnAutoSizeMode.AllCells
                 .ColumnHeaders = InheritableBoolean.True
-                .GroupByBoxVisible = False
+                .Font = MyFont
                 .FilterMode = FilterMode.None
+                .GroupByBoxVisible = False
                 .NewRowPosition = NewRowPosition.BottomRow
                 .RecordNavigator = True
                 .RowHeaders = InheritableBoolean.True
+                .RootTable.TableHeader = InheritableBoolean.True
+                .SelectionMode = SelectionMode.MultipleSelection
                 .SelectOnExpand = False
                 .TotalRowPosition = TotalRowPosition.BottomFixed
-                .Font = MyFont
-                .RowHeaders = InheritableBoolean.True
-                .NewRowPosition = NewRowPosition.BottomRow
-                .SelectOnExpand = False
             End With
         Catch ex As Exception
-            Debug.Print(ex.Message)
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
     Private Sub SaveChangesToDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveChangesToDatabaseToolStripMenuItem.Click
-        SaveDataset
+        SaveDataset()
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
@@ -281,4 +282,160 @@ Public Class Form1
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
         SetUpCampaignsGridEX()
     End Sub
+
+    Private Sub ToggleGridEXTableCardView(GridEX As GridEX)
+        If GridEX.View = View.TableView Then
+            GridEX.View = View.CardView
+        Else
+            GridEX.View = View.TableView
+        End If
+    End Sub
+
+    Private Sub CampaignsGridEX_DoubleClick(sender As Object, e As EventArgs) Handles CampaignsGridEX.DoubleClick
+        ToggleGridEXTableCardView(Me.CampaignsGridEX)
+    End Sub
+
+    Private Sub SurveyFlightsGridEX_DoubleClick(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.DoubleClick
+        ToggleGridEXTableCardView(Me.SurveyFlightsGridEX)
+    End Sub
+
+    Private Sub ImportWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportWaypointsToolStripButton.Click
+        'Try
+        'we must have a FlightID to create child records
+        If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
+                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID")) And Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd")) Then
+
+                    'we also require a flightid and a herd from the survey record
+                    Dim FlightID As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID").Value
+                    Dim Herd As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value
+
+                    'herd must be mentasta or chisana
+                    Herd = Herd.Trim
+                    If Herd <> "Mentasta" And Herd <> "Chisana" Then
+                        MsgBox("Herd must be 'Mentasta' or 'Chisana'")
+                        Exit Sub
+                    End If
+
+                    'Get the waypoints file to import
+                    Dim OFD As New OpenFileDialog
+                    With OFD
+                        .AddExtension = True
+                        .CheckFileExists = True
+                        .Filter = "Excel  files(.xlsx)|*.xlsx|Excel files (*.xls)|*.xls"
+                        .Multiselect = False
+                        .Title = "Select an workbook to open"
+                    End With
+
+                    'show the ofd and get the filename and path
+                    Dim WaypointsInputFile As String = ""
+                    If OFD.ShowDialog = DialogResult.OK Then
+                        WaypointsInputFile = OFD.FileName
+                    End If
+
+                    'make sure the file exists
+                    If My.Computer.FileSystem.FileExists(WaypointsInputFile) Then
+
+                        'get the waypoints file into a FileInfo to get more info about it
+                        Dim WaypointsInputFileInfo As New FileInfo(WaypointsInputFile)
+
+                        'load the waypoints to import into a datatable
+                        Dim WaypointsDataTable As DataTable = WaypointFileToDataTable(WaypointsInputFileInfo.FullName)
+
+                        Dim WaypointsPreviewDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate").Clone()
+
+
+                        'If WaypointsPreviewForm.CorrectCheckBox.Checked = True Then
+                        If Not WaypointsDataTable Is Nothing Then
+                            If WaypointsDataTable.Rows.Count > 0 Then
+                                Dim GroupNumber As Integer = 1
+                                Dim Ident As String = ""
+                                Dim Latitude As Double = 0
+                                Dim Longitude As Double = 0
+                                Dim SightingDate As DateTime
+
+                                'loop through the records in the import file, extract values
+                                For Each Row As DataRow In WaypointsDataTable.Rows
+                                    If Not IsDBNull(Row.Item("IDENT")) Then Ident = Row.Item("IDENT")
+                                    If Not IsDBNull(Row.Item("LATITUDE")) Then Latitude = Row.Item("LATITUDE")
+                                    If Not IsDBNull(Row.Item("LONGITUDE")) Then Longitude = Row.Item("LONGITUDE")
+
+                                    'dnrgps always *cks up the date.  sometimes it's in the LTIME column, other times in the DESC_
+                                    Dim LTIME As DateTime
+                                If Not IsDBNull(Row.Item("LTIME")) And IsDate(Row.Item("LTIME")) Then
+                                    LTIME = Row.Item("LTIME")
+                                End If
+
+                                Dim DESC As DateTime
+                                If Not IsDBNull(Row.Item("DESC_")) And IsDate(Row.Item("DESC_")) Then
+                                    DESC = Row.Item("DESC_")
+                                End If
+
+                                'determine if ltime is better than desc for a waypoint collection date
+                                If IsDate(LTIME) = True And DatePart(DateInterval.Year, LTIME) > 1980 Then
+                                        SightingDate = LTIME
+                                    ElseIf IsDate(DESC) = True Then
+                                        SightingDate = DESC
+                                    End If
+
+                                    'assign a group number
+                                    GroupNumber = GroupNumber + 1
+
+                                    'get a ref to the population estimate table
+                                    Dim PopulationTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate")
+                                    'create a new row and add data to it
+                                    Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
+                                    NewRow.Item("WaypointName") = Ident
+                                    NewRow.Item("Lat") = Latitude
+                                    NewRow.Item("Lon") = Longitude
+                                    NewRow.Item("Herd") = Herd
+                                    NewRow.Item("SearchArea") = "Alaska"
+                                    NewRow.Item("GroupNumber") = GroupNumber
+                                    NewRow.Item("WaypointName") = Ident
+                                    NewRow.Item("SightingDate") = SightingDate
+                                    NewRow.Item("SmallBull") = 0
+                                    NewRow.Item("MediumBull") = 0
+                                    NewRow.Item("LargeBull") = 0
+                                    NewRow.Item("Cow") = 0
+                                    NewRow.Item("Calf") = 0
+                                    NewRow.Item("InOrOut") = 0
+                                    NewRow.Item("Seen") = 0
+                                    NewRow.Item("Marked") = 0
+                                    NewRow.Item("Lat") = Latitude
+                                    NewRow.Item("Lon") = Longitude
+                                    NewRow.Item("SourceFilename") = WaypointsInputFileInfo.Name
+                                    NewRow.Item("FlightID") = FlightID
+                                    NewRow.Item("EID") = Guid.NewGuid.ToString
+                                    NewRow.Item("RecordInsertedDate") = Now
+                                    NewRow.Item("RecordInsertedBy") = My.User.Name
+                                    WaypointsPreviewDataTable.Rows.Add(NewRow)
+                                Next
+
+                                'show the imported waypoints in a form so the user can validate them for importing
+                                Dim WaypointsPreviewForm As New WaypointsPreviewForm(WaypointsPreviewDataTable)
+                                WaypointsPreviewForm.ShowDialog()
+                                If WaypointsPreviewForm.CorrectCheckBox.Checked = True Then
+                                    'finally, import the records!
+                                    For Each WPRow As DataRow In WaypointsPreviewDataTable.Rows
+                                        Me.WRST_CaribouDataSet.Tables("PopulationEstimate").ImportRow(WPRow)
+                                    Next
+                                    MsgBox("Waypoints imported successfully.")
+                                End If
+                            Else
+                                MsgBox("No records.")
+                            End If
+                        Else
+                            MsgBox("Waypoints input DataTable does not exist.")
+                        End If
+                    Else
+                        MsgBox("FlightID and Herd are required parts of the Survey record.")
+                    End If
+                Else
+                    MsgBox("Input file does not exist")
+                End If
+            End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        'End Try
+    End Sub
+
 End Class
