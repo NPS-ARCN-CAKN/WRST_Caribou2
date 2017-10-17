@@ -38,9 +38,12 @@ Partial Class Form1
         Me.CompositionCountsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CompositionCountsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CompCountToolStrip = New System.Windows.Forms.ToolStrip()
         Me.PopulationTabPage = New System.Windows.Forms.TabPage()
         Me.PopulationEstimateGridEX = New Janus.Windows.GridEX.GridEX()
         Me.PopulationEstimateBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PopulationToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.ImportWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.RadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.RadioTrackingGridEX = New Janus.Windows.GridEX.GridEX()
         Me.RadioTrackingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -76,9 +79,6 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.CompCountToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.PopulationToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.ImportWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,6 +90,7 @@ Partial Class Form1
         Me.PopulationTabPage.SuspendLayout()
         CType(Me.PopulationEstimateGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopulationEstimateBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PopulationToolStrip.SuspendLayout()
         Me.RadiotrackingTabPage.SuspendLayout()
         CType(Me.RadioTrackingGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadioTrackingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +114,6 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PopulationToolStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -187,6 +187,15 @@ Partial Class Form1
         Me.SurveyFlightsBindingSource.DataMember = "FK_SurveyFlights_Campaigns"
         Me.SurveyFlightsBindingSource.DataSource = Me.CampaignsBindingSource
         '
+        'CompCountToolStrip
+        '
+        Me.CompCountToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.CompCountToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.CompCountToolStrip.Name = "CompCountToolStrip"
+        Me.CompCountToolStrip.Size = New System.Drawing.Size(770, 25)
+        Me.CompCountToolStrip.TabIndex = 1
+        Me.CompCountToolStrip.Text = "ToolStrip1"
+        '
         'PopulationTabPage
         '
         Me.PopulationTabPage.AutoScroll = True
@@ -216,6 +225,25 @@ Partial Class Form1
         '
         Me.PopulationEstimateBindingSource.DataMember = "FK_PopulationEstimate_SurveyFlights"
         Me.PopulationEstimateBindingSource.DataSource = Me.SurveyFlightsBindingSource
+        '
+        'PopulationToolStrip
+        '
+        Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportWaypointsToolStripButton})
+        Me.PopulationToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.PopulationToolStrip.Name = "PopulationToolStrip"
+        Me.PopulationToolStrip.Size = New System.Drawing.Size(770, 27)
+        Me.PopulationToolStrip.TabIndex = 1
+        Me.PopulationToolStrip.Text = "ToolStrip1"
+        '
+        'ImportWaypointsToolStripButton
+        '
+        Me.ImportWaypointsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ImportWaypointsToolStripButton.Image = CType(resources.GetObject("ImportWaypointsToolStripButton.Image"), System.Drawing.Image)
+        Me.ImportWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportWaypointsToolStripButton.Name = "ImportWaypointsToolStripButton"
+        Me.ImportWaypointsToolStripButton.Size = New System.Drawing.Size(138, 24)
+        Me.ImportWaypointsToolStripButton.Text = "Import waypoints..."
         '
         'RadiotrackingTabPage
         '
@@ -490,34 +518,6 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
-        'CompCountToolStrip
-        '
-        Me.CompCountToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CompCountToolStrip.Location = New System.Drawing.Point(3, 3)
-        Me.CompCountToolStrip.Name = "CompCountToolStrip"
-        Me.CompCountToolStrip.Size = New System.Drawing.Size(770, 25)
-        Me.CompCountToolStrip.TabIndex = 1
-        Me.CompCountToolStrip.Text = "ToolStrip1"
-        '
-        'PopulationToolStrip
-        '
-        Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportWaypointsToolStripButton})
-        Me.PopulationToolStrip.Location = New System.Drawing.Point(3, 3)
-        Me.PopulationToolStrip.Name = "PopulationToolStrip"
-        Me.PopulationToolStrip.Size = New System.Drawing.Size(770, 27)
-        Me.PopulationToolStrip.TabIndex = 1
-        Me.PopulationToolStrip.Text = "ToolStrip1"
-        '
-        'ImportWaypointsToolStripButton
-        '
-        Me.ImportWaypointsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ImportWaypointsToolStripButton.Image = CType(resources.GetObject("ImportWaypointsToolStripButton.Image"), System.Drawing.Image)
-        Me.ImportWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ImportWaypointsToolStripButton.Name = "ImportWaypointsToolStripButton"
-        Me.ImportWaypointsToolStripButton.Size = New System.Drawing.Size(138, 24)
-        Me.ImportWaypointsToolStripButton.Text = "Import waypoints..."
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -542,6 +542,8 @@ Partial Class Form1
         Me.PopulationTabPage.PerformLayout()
         CType(Me.PopulationEstimateGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopulationEstimateBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PopulationToolStrip.ResumeLayout(False)
+        Me.PopulationToolStrip.PerformLayout()
         Me.RadiotrackingTabPage.ResumeLayout(False)
         CType(Me.RadioTrackingGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadioTrackingBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -567,8 +569,6 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PopulationToolStrip.ResumeLayout(False)
-        Me.PopulationToolStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

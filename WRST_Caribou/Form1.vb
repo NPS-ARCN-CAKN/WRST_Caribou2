@@ -300,9 +300,9 @@ Public Class Form1
     End Sub
 
     Private Sub ImportWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportWaypointsToolStripButton.Click
-        'Try
-        'we must have a FlightID to create child records
-        If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
+        Try
+            'we must have a FlightID to create child records
+            If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
                 If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID")) And Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd")) Then
 
                     'we also require a flightid and a herd from the survey record
@@ -316,98 +316,90 @@ Public Class Form1
                         Exit Sub
                     End If
 
-                    'Get the waypoints file to import
-                    Dim OFD As New OpenFileDialog
-                    With OFD
-                        .AddExtension = True
-                        .CheckFileExists = True
-                        .Filter = "Excel  files(.xlsx)|*.xlsx|Excel files (*.xls)|*.xls"
-                        .Multiselect = False
-                        .Title = "Select an workbook to open"
-                    End With
-
-                    'show the ofd and get the filename and path
-                    Dim WaypointsInputFile As String = ""
-                    If OFD.ShowDialog = DialogResult.OK Then
-                        WaypointsInputFile = OFD.FileName
-                    End If
+                    'get the excel file of waypoints
+                    Dim WaypointsImportFile As String = GetExcelFile()
 
                     'make sure the file exists
-                    If My.Computer.FileSystem.FileExists(WaypointsInputFile) Then
+                    If My.Computer.FileSystem.FileExists(WaypointsImportFile) Then
 
                         'get the waypoints file into a FileInfo to get more info about it
-                        Dim WaypointsInputFileInfo As New FileInfo(WaypointsInputFile)
+                        Dim WaypointsImportFileInfo As New FileInfo(WaypointsImportFile)
 
                         'load the waypoints to import into a datatable
-                        Dim WaypointsDataTable As DataTable = WaypointFileToDataTable(WaypointsInputFileInfo.FullName)
-
+                        Dim WaypointsImportDataTable As DataTable = WaypointFileToDataTable(WaypointsImportFileInfo.FullName)
                         Dim WaypointsPreviewDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate").Clone()
+                        WaypointsPreviewDataTable.Clear()
 
-
-                        'If WaypointsPreviewForm.CorrectCheckBox.Checked = True Then
-                        If Not WaypointsDataTable Is Nothing Then
-                            If WaypointsDataTable.Rows.Count > 0 Then
+                        'Load the waypoints into a datatable
+                        If Not WaypointsImportDataTable Is Nothing Then
+                            If WaypointsImportDataTable.Rows.Count > 0 Then
                                 Dim GroupNumber As Integer = 1
-                                Dim Ident As String = ""
-                                Dim Latitude As Double = 0
-                                Dim Longitude As Double = 0
-                                Dim SightingDate As DateTime
+
 
                                 'loop through the records in the import file, extract values
-                                For Each Row As DataRow In WaypointsDataTable.Rows
-                                    If Not IsDBNull(Row.Item("IDENT")) Then Ident = Row.Item("IDENT")
-                                    If Not IsDBNull(Row.Item("LATITUDE")) Then Latitude = Row.Item("LATITUDE")
-                                    If Not IsDBNull(Row.Item("LONGITUDE")) Then Longitude = Row.Item("LONGITUDE")
+                                For Each Row As DataRow In WaypointsImportDataTable.Rows
+                                    'if we don't have a location then we have nothing for the row
+                                    If Not IsDBNull(Row.Item("IDENT")) And Not IsDBNull(Row.Item("LATITUDE")) And Not IsDBNull(Row.Item("LONGITUDE")) Then
+                                        Dim Ident As String = ""
+                                        Dim Latitude As Double = 0
+                                        Dim Longitude As Double = 0
+                                        Dim SightingDate As DateTime
 
-                                    'dnrgps always *cks up the date.  sometimes it's in the LTIME column, other times in the DESC_
-                                    Dim LTIME As DateTime
-                                If Not IsDBNull(Row.Item("LTIME")) And IsDate(Row.Item("LTIME")) Then
-                                    LTIME = Row.Item("LTIME")
-                                End If
+                                        If Not IsDBNull(Row.Item("IDENT")) Then Ident = Row.Item("IDENT")
+                                        If Not IsDBNull(Row.Item("LATITUDE")) Then Latitude = Row.Item("LATITUDE")
+                                        If Not IsDBNull(Row.Item("LONGITUDE")) Then Longitude = Row.Item("LONGITUDE")
 
-                                Dim DESC As DateTime
-                                If Not IsDBNull(Row.Item("DESC_")) And IsDate(Row.Item("DESC_")) Then
-                                    DESC = Row.Item("DESC_")
-                                End If
+                                        'dnrgps always *cks up the date.  sometimes it's in the LTIME column, other times in the DESC_
+                                        Dim LTIME As DateTime
+                                        If Not IsDBNull(Row.Item("LTIME")) And IsDate(Row.Item("LTIME")) Then
+                                            LTIME = Row.Item("LTIME")
+                                        End If
 
-                                'determine if ltime is better than desc for a waypoint collection date
-                                If IsDate(LTIME) = True And DatePart(DateInterval.Year, LTIME) > 1980 Then
-                                        SightingDate = LTIME
-                                    ElseIf IsDate(DESC) = True Then
-                                        SightingDate = DESC
+                                        Dim DESC As DateTime
+                                        If Not IsDBNull(Row.Item("DESC_")) And IsDate(Row.Item("DESC_")) Then
+                                            DESC = Row.Item("DESC_")
+                                        End If
+
+                                        'determine if ltime is better than desc for a waypoint collection date
+                                        If IsDate(LTIME) = True And DatePart(DateInterval.Year, LTIME) > 1980 Then
+                                            SightingDate = LTIME
+                                        ElseIf IsDate(DESC) = True Then
+                                            SightingDate = DESC
+                                        End If
+
+                                        'create a new row and add data to it
+                                        Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
+                                        NewRow.Item("WaypointName") = Ident
+                                        NewRow.Item("Lat") = Latitude
+                                        NewRow.Item("Lon") = Longitude
+                                        NewRow.Item("Herd") = Herd
+                                        NewRow.Item("SearchArea") = "Alaska"
+                                        NewRow.Item("GroupNumber") = GroupNumber
+                                        NewRow.Item("WaypointName") = Ident
+                                        NewRow.Item("SightingDate") = SightingDate
+                                        NewRow.Item("SmallBull") = 0
+                                        NewRow.Item("MediumBull") = 0
+                                        NewRow.Item("LargeBull") = 0
+                                        NewRow.Item("Cow") = 0
+                                        NewRow.Item("Calf") = 0
+                                        NewRow.Item("InOrOut") = 0
+                                        NewRow.Item("Seen") = 0
+                                        NewRow.Item("Marked") = 0
+                                        NewRow.Item("Lat") = Latitude
+                                        NewRow.Item("Lon") = Longitude
+                                        NewRow.Item("SourceFilename") = WaypointsImportFileInfo.Name
+                                        NewRow.Item("FlightID") = FlightID
+                                        NewRow.Item("EID") = Guid.NewGuid.ToString
+                                        NewRow.Item("RecordInsertedDate") = Now
+                                        NewRow.Item("RecordInsertedBy") = My.User.Name
+
+                                        'add the row to the preview datatable
+                                        WaypointsPreviewDataTable.Rows.Add(NewRow)
+
+                                        'increment the group number
+                                        GroupNumber = GroupNumber + 1
                                     End If
 
-                                    'assign a group number
-                                    GroupNumber = GroupNumber + 1
-
-                                    'get a ref to the population estimate table
-                                    Dim PopulationTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate")
-                                    'create a new row and add data to it
-                                    Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
-                                    NewRow.Item("WaypointName") = Ident
-                                    NewRow.Item("Lat") = Latitude
-                                    NewRow.Item("Lon") = Longitude
-                                    NewRow.Item("Herd") = Herd
-                                    NewRow.Item("SearchArea") = "Alaska"
-                                    NewRow.Item("GroupNumber") = GroupNumber
-                                    NewRow.Item("WaypointName") = Ident
-                                    NewRow.Item("SightingDate") = SightingDate
-                                    NewRow.Item("SmallBull") = 0
-                                    NewRow.Item("MediumBull") = 0
-                                    NewRow.Item("LargeBull") = 0
-                                    NewRow.Item("Cow") = 0
-                                    NewRow.Item("Calf") = 0
-                                    NewRow.Item("InOrOut") = 0
-                                    NewRow.Item("Seen") = 0
-                                    NewRow.Item("Marked") = 0
-                                    NewRow.Item("Lat") = Latitude
-                                    NewRow.Item("Lon") = Longitude
-                                    NewRow.Item("SourceFilename") = WaypointsInputFileInfo.Name
-                                    NewRow.Item("FlightID") = FlightID
-                                    NewRow.Item("EID") = Guid.NewGuid.ToString
-                                    NewRow.Item("RecordInsertedDate") = Now
-                                    NewRow.Item("RecordInsertedBy") = My.User.Name
-                                    WaypointsPreviewDataTable.Rows.Add(NewRow)
                                 Next
 
                                 'show the imported waypoints in a form so the user can validate them for importing
@@ -427,15 +419,32 @@ Public Class Form1
                             MsgBox("Waypoints input DataTable does not exist.")
                         End If
                     Else
-                        MsgBox("FlightID and Herd are required parts of the Survey record.")
+                        MsgBox("Input file does not exist")
                     End If
                 Else
-                    MsgBox("Input file does not exist")
+                    MsgBox("FlightID and Herd are required parts of the Survey record.")
                 End If
             End If
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
+    Private Function GetExcelFile() As String
+        Dim ExcelFile As String = ""
+        Dim OFD As New OpenFileDialog
+        With OFD
+            .AddExtension = True
+            .CheckFileExists = True
+            .Filter = "Excel  files(.xlsx)|*.xlsx|Excel files (*.xls)|*.xls"
+            .Multiselect = False
+            .Title = "Select an workbook to open"
+        End With
+
+        'show the ofd and get the filename and path
+        If OFD.ShowDialog = DialogResult.OK Then
+            ExcelFile = OFD.FileName
+        End If
+        Return ExcelFile
+    End Function
 End Class
