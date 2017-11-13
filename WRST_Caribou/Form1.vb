@@ -124,6 +124,7 @@ Public Class Form1
         CertificationLevelList.Add("Raw", "Raw")
         CertificationLevelList.Add("Provisional", "Provisional")
         CertificationLevelList.Add("Accepted", "Accepted")
+        CertificationLevelList.Add("Certified", "Certified")
     End Sub
 
     ''' <summary>
@@ -299,7 +300,7 @@ Public Class Form1
         ToggleGridEXTableCardView(Me.SurveyFlightsGridEX)
     End Sub
 
-    Private Sub ImportWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportWaypointsToolStripButton.Click
+    Private Sub ImportPopulationSurveyWaypoints()
         Try
             'we must have a FlightID to create child records
             If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
@@ -430,6 +431,10 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub ImportWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportWaypointsToolStripButton.Click
+        ImportPopulationSurveyWaypoints()
+    End Sub
+
     Private Function GetExcelFile() As String
         Dim ExcelFile As String = ""
         Dim OFD As New OpenFileDialog
@@ -447,4 +452,6 @@ Public Class Form1
         End If
         Return ExcelFile
     End Function
+
+
 End Class

@@ -27,6 +27,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Dim CompositionCountsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim PopulationEstimateGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim XrefPopulationCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim RadioTrackingGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim CaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
@@ -40,8 +41,11 @@ Partial Class Form1
         Me.SurveyFlightsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CompCountToolStrip = New System.Windows.Forms.ToolStrip()
         Me.PopulationTabPage = New System.Windows.Forms.TabPage()
+        Me.PopulationSurveySplitContainer = New System.Windows.Forms.SplitContainer()
         Me.PopulationEstimateGridEX = New Janus.Windows.GridEX.GridEX()
         Me.PopulationEstimateBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.XrefPopulationCaribouGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.XrefPopulationCaribouBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PopulationToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.RadiotrackingTabPage = New System.Windows.Forms.TabPage()
@@ -88,8 +92,14 @@ Partial Class Form1
         CType(Me.CompositionCountsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PopulationTabPage.SuspendLayout()
+        CType(Me.PopulationSurveySplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PopulationSurveySplitContainer.Panel1.SuspendLayout()
+        Me.PopulationSurveySplitContainer.Panel2.SuspendLayout()
+        Me.PopulationSurveySplitContainer.SuspendLayout()
         CType(Me.PopulationEstimateGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PopulationEstimateBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrefPopulationCaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrefPopulationCaribouBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PopulationToolStrip.SuspendLayout()
         Me.RadiotrackingTabPage.SuspendLayout()
         CType(Me.RadioTrackingGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -199,7 +209,7 @@ Partial Class Form1
         'PopulationTabPage
         '
         Me.PopulationTabPage.AutoScroll = True
-        Me.PopulationTabPage.Controls.Add(Me.PopulationEstimateGridEX)
+        Me.PopulationTabPage.Controls.Add(Me.PopulationSurveySplitContainer)
         Me.PopulationTabPage.Controls.Add(Me.PopulationToolStrip)
         Me.PopulationTabPage.Location = New System.Drawing.Point(4, 25)
         Me.PopulationTabPage.Name = "PopulationTabPage"
@@ -209,6 +219,24 @@ Partial Class Form1
         Me.PopulationTabPage.Text = "Population"
         Me.PopulationTabPage.UseVisualStyleBackColor = True
         '
+        'PopulationSurveySplitContainer
+        '
+        Me.PopulationSurveySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PopulationSurveySplitContainer.Location = New System.Drawing.Point(3, 30)
+        Me.PopulationSurveySplitContainer.Name = "PopulationSurveySplitContainer"
+        '
+        'PopulationSurveySplitContainer.Panel1
+        '
+        Me.PopulationSurveySplitContainer.Panel1.Controls.Add(Me.PopulationEstimateGridEX)
+        '
+        'PopulationSurveySplitContainer.Panel2
+        '
+        Me.PopulationSurveySplitContainer.Panel2.AutoScroll = True
+        Me.PopulationSurveySplitContainer.Panel2.Controls.Add(Me.XrefPopulationCaribouGridEX)
+        Me.PopulationSurveySplitContainer.Size = New System.Drawing.Size(770, 299)
+        Me.PopulationSurveySplitContainer.SplitterDistance = 539
+        Me.PopulationSurveySplitContainer.TabIndex = 2
+        '
         'PopulationEstimateGridEX
         '
         Me.PopulationEstimateGridEX.DataSource = Me.PopulationEstimateBindingSource
@@ -216,15 +244,32 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.DesignTimeLayout = PopulationEstimateGridEX_DesignTimeLayout
         Me.PopulationEstimateGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PopulationEstimateGridEX.Hierarchical = True
-        Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(3, 30)
+        Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(0, 0)
         Me.PopulationEstimateGridEX.Name = "PopulationEstimateGridEX"
-        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(770, 299)
+        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(539, 299)
         Me.PopulationEstimateGridEX.TabIndex = 0
         '
         'PopulationEstimateBindingSource
         '
         Me.PopulationEstimateBindingSource.DataMember = "FK_PopulationEstimate_SurveyFlights"
         Me.PopulationEstimateBindingSource.DataSource = Me.SurveyFlightsBindingSource
+        '
+        'XrefPopulationCaribouGridEX
+        '
+        Me.XrefPopulationCaribouGridEX.DataSource = Me.XrefPopulationCaribouBindingSource1
+        XrefPopulationCaribouGridEX_DesignTimeLayout.LayoutString = resources.GetString("XrefPopulationCaribouGridEX_DesignTimeLayout.LayoutString")
+        Me.XrefPopulationCaribouGridEX.DesignTimeLayout = XrefPopulationCaribouGridEX_DesignTimeLayout
+        Me.XrefPopulationCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XrefPopulationCaribouGridEX.GroupByBoxVisible = False
+        Me.XrefPopulationCaribouGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.XrefPopulationCaribouGridEX.Name = "XrefPopulationCaribouGridEX"
+        Me.XrefPopulationCaribouGridEX.Size = New System.Drawing.Size(227, 299)
+        Me.XrefPopulationCaribouGridEX.TabIndex = 0
+        '
+        'XrefPopulationCaribouBindingSource1
+        '
+        Me.XrefPopulationCaribouBindingSource1.DataMember = "FK_xrefPopulationCaribou_PopulationEstimate"
+        Me.XrefPopulationCaribouBindingSource1.DataSource = Me.PopulationEstimateBindingSource
         '
         'PopulationToolStrip
         '
@@ -320,6 +365,8 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
+        Me.SurveyFlightsGridEX.RecordNavigator = True
+        Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
         Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(784, 238)
         Me.SurveyFlightsGridEX.TabIndex = 0
         '
@@ -540,8 +587,14 @@ Partial Class Form1
         CType(Me.SurveyFlightsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PopulationTabPage.ResumeLayout(False)
         Me.PopulationTabPage.PerformLayout()
+        Me.PopulationSurveySplitContainer.Panel1.ResumeLayout(False)
+        Me.PopulationSurveySplitContainer.Panel2.ResumeLayout(False)
+        CType(Me.PopulationSurveySplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PopulationSurveySplitContainer.ResumeLayout(False)
         CType(Me.PopulationEstimateGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PopulationEstimateBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrefPopulationCaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrefPopulationCaribouBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PopulationToolStrip.ResumeLayout(False)
         Me.PopulationToolStrip.PerformLayout()
         Me.RadiotrackingTabPage.ResumeLayout(False)
@@ -623,4 +676,7 @@ Partial Class Form1
     Friend WithEvents CompCountToolStrip As ToolStrip
     Friend WithEvents PopulationToolStrip As ToolStrip
     Friend WithEvents ImportWaypointsToolStripButton As ToolStripButton
+    Friend WithEvents PopulationSurveySplitContainer As SplitContainer
+    Friend WithEvents XrefPopulationCaribouGridEX As Janus.Windows.GridEX.GridEX
+    Friend WithEvents XrefPopulationCaribouBindingSource1 As BindingSource
 End Class
