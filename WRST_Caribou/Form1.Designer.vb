@@ -56,9 +56,11 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CampaignLabel = New System.Windows.Forms.Label()
         Me.SurveyFlightsSplitContainer = New System.Windows.Forms.SplitContainer()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.CampaignContextLabel = New System.Windows.Forms.Label()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.SurveysPanel = New System.Windows.Forms.Panel()
+        Me.DataPanel = New System.Windows.Forms.Panel()
+        Me.FlightContextLabel = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveChangesToDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,8 +90,10 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.DataPanel = New System.Windows.Forms.Panel()
-        Me.DataLabel = New System.Windows.Forms.Label()
+        Me.CampaignTabControl = New System.Windows.Forms.TabControl()
+        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
+        Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
+        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -122,6 +126,7 @@ Partial Class Form1
         Me.SurveyFlightsSplitContainer.Panel2.SuspendLayout()
         Me.SurveyFlightsSplitContainer.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DataPanel.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.MainTabControl.SuspendLayout()
@@ -133,7 +138,10 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.DataPanel.SuspendLayout()
+        Me.CampaignTabControl.SuspendLayout()
+        Me.ResultsTabPage.SuspendLayout()
+        Me.DataEditingTabPage.SuspendLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -145,6 +153,7 @@ Partial Class Form1
         CampaignsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CampaignsGridEX_DesignTimeLayout.LayoutString")
         Me.CampaignsGridEX.DesignTimeLayout = CampaignsGridEX_DesignTimeLayout
         Me.CampaignsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CampaignsGridEX.GroupByBoxVisible = False
         Me.CampaignsGridEX.Location = New System.Drawing.Point(0, 38)
         Me.CampaignsGridEX.Name = "CampaignsGridEX"
         Me.CampaignsGridEX.RecordNavigator = True
@@ -170,7 +179,7 @@ Partial Class Form1
         Me.SurveyDataTabControl.Location = New System.Drawing.Point(0, 38)
         Me.SurveyDataTabControl.Name = "SurveyDataTabControl"
         Me.SurveyDataTabControl.SelectedIndex = 0
-        Me.SurveyDataTabControl.Size = New System.Drawing.Size(784, 370)
+        Me.SurveyDataTabControl.Size = New System.Drawing.Size(770, 347)
         Me.SurveyDataTabControl.TabIndex = 4
         '
         'CompositionCountTabPage
@@ -191,6 +200,7 @@ Partial Class Form1
         CompositionCountsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CompositionCountsGridEX_DesignTimeLayout.LayoutString")
         Me.CompositionCountsGridEX.DesignTimeLayout = CompositionCountsGridEX_DesignTimeLayout
         Me.CompositionCountsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CompositionCountsGridEX.GroupByBoxVisible = False
         Me.CompositionCountsGridEX.Hierarchical = True
         Me.CompositionCountsGridEX.Location = New System.Drawing.Point(3, 30)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
@@ -235,7 +245,7 @@ Partial Class Form1
         Me.PopulationTabPage.Location = New System.Drawing.Point(4, 25)
         Me.PopulationTabPage.Name = "PopulationTabPage"
         Me.PopulationTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.PopulationTabPage.Size = New System.Drawing.Size(776, 354)
+        Me.PopulationTabPage.Size = New System.Drawing.Size(762, 318)
         Me.PopulationTabPage.TabIndex = 1
         Me.PopulationTabPage.Text = "Population"
         Me.PopulationTabPage.UseVisualStyleBackColor = True
@@ -254,8 +264,8 @@ Partial Class Form1
         '
         Me.PopulationSurveySplitContainer.Panel2.AutoScroll = True
         Me.PopulationSurveySplitContainer.Panel2.Controls.Add(Me.XrefPopulationCaribouGridEX)
-        Me.PopulationSurveySplitContainer.Size = New System.Drawing.Size(770, 321)
-        Me.PopulationSurveySplitContainer.SplitterDistance = 463
+        Me.PopulationSurveySplitContainer.Size = New System.Drawing.Size(756, 285)
+        Me.PopulationSurveySplitContainer.SplitterDistance = 454
         Me.PopulationSurveySplitContainer.TabIndex = 2
         '
         'PopulationEstimateGridEX
@@ -268,6 +278,7 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.DesignTimeLayout = PopulationEstimateGridEX_DesignTimeLayout
         Me.PopulationEstimateGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PopulationEstimateGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PopulationEstimateGridEX.GroupByBoxVisible = False
         Me.PopulationEstimateGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.PopulationEstimateGridEX.Hierarchical = True
         Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(0, 0)
@@ -275,7 +286,7 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.RecordNavigator = True
         Me.PopulationEstimateGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.PopulationEstimateGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
-        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(463, 321)
+        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(454, 285)
         Me.PopulationEstimateGridEX.TabIndex = 0
         Me.PopulationEstimateGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.PopulationEstimateGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -295,7 +306,7 @@ Partial Class Form1
         Me.XrefPopulationCaribouGridEX.GroupByBoxVisible = False
         Me.XrefPopulationCaribouGridEX.Location = New System.Drawing.Point(0, 0)
         Me.XrefPopulationCaribouGridEX.Name = "XrefPopulationCaribouGridEX"
-        Me.XrefPopulationCaribouGridEX.Size = New System.Drawing.Size(303, 321)
+        Me.XrefPopulationCaribouGridEX.Size = New System.Drawing.Size(298, 285)
         Me.XrefPopulationCaribouGridEX.TabIndex = 0
         '
         'XrefPopulationCaribouBindingSource1
@@ -309,7 +320,7 @@ Partial Class Form1
         Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationWaypointsToolStripButton})
         Me.PopulationToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.PopulationToolStrip.Name = "PopulationToolStrip"
-        Me.PopulationToolStrip.Size = New System.Drawing.Size(770, 27)
+        Me.PopulationToolStrip.Size = New System.Drawing.Size(756, 27)
         Me.PopulationToolStrip.TabIndex = 1
         Me.PopulationToolStrip.Text = "ToolStrip1"
         '
@@ -328,7 +339,7 @@ Partial Class Form1
         Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 25)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
         Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(776, 354)
+        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(776, 341)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
         Me.RadiotrackingTabPage.UseVisualStyleBackColor = True
@@ -339,10 +350,11 @@ Partial Class Form1
         RadioTrackingGridEX_DesignTimeLayout.LayoutString = resources.GetString("RadioTrackingGridEX_DesignTimeLayout.LayoutString")
         Me.RadioTrackingGridEX.DesignTimeLayout = RadioTrackingGridEX_DesignTimeLayout
         Me.RadioTrackingGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadioTrackingGridEX.GroupByBoxVisible = False
         Me.RadioTrackingGridEX.Hierarchical = True
         Me.RadioTrackingGridEX.Location = New System.Drawing.Point(3, 3)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(770, 348)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(770, 335)
         Me.RadioTrackingGridEX.TabIndex = 0
         '
         'RadioTrackingBindingSource
@@ -363,7 +375,7 @@ Partial Class Form1
         '
         'CampaignsSplitContainer.Panel2
         '
-        Me.CampaignsSplitContainer.Panel2.Controls.Add(Me.SurveyFlightsSplitContainer)
+        Me.CampaignsSplitContainer.Panel2.Controls.Add(Me.CampaignTabControl)
         Me.CampaignsSplitContainer.Size = New System.Drawing.Size(1181, 603)
         Me.CampaignsSplitContainer.SplitterDistance = 393
         Me.CampaignsSplitContainer.TabIndex = 2
@@ -390,13 +402,13 @@ Partial Class Form1
         'SurveyFlightsSplitContainer
         '
         Me.SurveyFlightsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SurveyFlightsSplitContainer.Location = New System.Drawing.Point(0, 0)
+        Me.SurveyFlightsSplitContainer.Location = New System.Drawing.Point(3, 3)
         Me.SurveyFlightsSplitContainer.Name = "SurveyFlightsSplitContainer"
         Me.SurveyFlightsSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SurveyFlightsSplitContainer.Panel1
         '
-        Me.SurveyFlightsSplitContainer.Panel1.Controls.Add(Me.Label1)
+        Me.SurveyFlightsSplitContainer.Panel1.Controls.Add(Me.CampaignContextLabel)
         Me.SurveyFlightsSplitContainer.Panel1.Controls.Add(Me.SurveyFlightsGridEX)
         Me.SurveyFlightsSplitContainer.Panel1.Controls.Add(Me.SurveysPanel)
         '
@@ -404,19 +416,19 @@ Partial Class Form1
         '
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.SurveyDataTabControl)
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.DataPanel)
-        Me.SurveyFlightsSplitContainer.Size = New System.Drawing.Size(784, 603)
-        Me.SurveyFlightsSplitContainer.SplitterDistance = 191
+        Me.SurveyFlightsSplitContainer.Size = New System.Drawing.Size(770, 568)
+        Me.SurveyFlightsSplitContainer.SplitterDistance = 179
         Me.SurveyFlightsSplitContainer.TabIndex = 5
         '
-        'Label1
+        'CampaignContextLabel
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(5, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Flights"
+        Me.CampaignContextLabel.AutoSize = True
+        Me.CampaignContextLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CampaignContextLabel.Location = New System.Drawing.Point(5, 9)
+        Me.CampaignContextLabel.Name = "CampaignContextLabel"
+        Me.CampaignContextLabel.Size = New System.Drawing.Size(74, 24)
+        Me.CampaignContextLabel.TabIndex = 0
+        Me.CampaignContextLabel.Text = "Flights"
         '
         'SurveyFlightsGridEX
         '
@@ -427,12 +439,13 @@ Partial Class Form1
         SurveyFlightsGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveyFlightsGridEX_DesignTimeLayout.LayoutString")
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 38)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(784, 153)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(770, 141)
         Me.SurveyFlightsGridEX.TabIndex = 0
         '
         'SurveysPanel
@@ -440,8 +453,27 @@ Partial Class Form1
         Me.SurveysPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.SurveysPanel.Location = New System.Drawing.Point(0, 0)
         Me.SurveysPanel.Name = "SurveysPanel"
-        Me.SurveysPanel.Size = New System.Drawing.Size(784, 38)
+        Me.SurveysPanel.Size = New System.Drawing.Size(770, 38)
         Me.SurveysPanel.TabIndex = 3
+        '
+        'DataPanel
+        '
+        Me.DataPanel.Controls.Add(Me.FlightContextLabel)
+        Me.DataPanel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.DataPanel.Location = New System.Drawing.Point(0, 0)
+        Me.DataPanel.Name = "DataPanel"
+        Me.DataPanel.Size = New System.Drawing.Size(770, 38)
+        Me.DataPanel.TabIndex = 5
+        '
+        'FlightContextLabel
+        '
+        Me.FlightContextLabel.AutoSize = True
+        Me.FlightContextLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FlightContextLabel.Location = New System.Drawing.Point(5, 9)
+        Me.FlightContextLabel.Name = "FlightContextLabel"
+        Me.FlightContextLabel.Size = New System.Drawing.Size(53, 24)
+        Me.FlightContextLabel.TabIndex = 0
+        Me.FlightContextLabel.Text = "Data"
         '
         'MenuStrip1
         '
@@ -638,24 +670,52 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
-        'DataPanel
+        'CampaignTabControl
         '
-        Me.DataPanel.Controls.Add(Me.DataLabel)
-        Me.DataPanel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.DataPanel.Location = New System.Drawing.Point(0, 0)
-        Me.DataPanel.Name = "DataPanel"
-        Me.DataPanel.Size = New System.Drawing.Size(784, 38)
-        Me.DataPanel.TabIndex = 5
+        Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
+        Me.CampaignTabControl.Controls.Add(Me.DataEditingTabPage)
+        Me.CampaignTabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CampaignTabControl.Location = New System.Drawing.Point(0, 0)
+        Me.CampaignTabControl.Name = "CampaignTabControl"
+        Me.CampaignTabControl.SelectedIndex = 0
+        Me.CampaignTabControl.Size = New System.Drawing.Size(784, 603)
+        Me.CampaignTabControl.TabIndex = 4
         '
-        'DataLabel
+        'ResultsTabPage
         '
-        Me.DataLabel.AutoSize = True
-        Me.DataLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataLabel.Location = New System.Drawing.Point(5, 9)
-        Me.DataLabel.Name = "DataLabel"
-        Me.DataLabel.Size = New System.Drawing.Size(53, 24)
-        Me.DataLabel.TabIndex = 0
-        Me.DataLabel.Text = "Data"
+        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
+        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.ResultsTabPage.Name = "ResultsTabPage"
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.ResultsTabPage.TabIndex = 0
+        Me.ResultsTabPage.Text = "Results"
+        Me.ResultsTabPage.UseVisualStyleBackColor = True
+        '
+        'DataEditingTabPage
+        '
+        Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
+        Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.DataEditingTabPage.Name = "DataEditingTabPage"
+        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.DataEditingTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.DataEditingTabPage.TabIndex = 1
+        Me.DataEditingTabPage.Text = "Data editing"
+        Me.DataEditingTabPage.UseVisualStyleBackColor = True
+        '
+        'ResultsDataGridView
+        '
+        Me.ResultsDataGridView.AllowUserToAddRows = False
+        Me.ResultsDataGridView.AllowUserToDeleteRows = False
+        Me.ResultsDataGridView.AllowUserToOrderColumns = True
+        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ResultsDataGridView.Name = "ResultsDataGridView"
+        Me.ResultsDataGridView.ReadOnly = True
+        Me.ResultsDataGridView.RowTemplate.Height = 24
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
+        Me.ResultsDataGridView.TabIndex = 0
         '
         'Form1
         '
@@ -706,6 +766,8 @@ Partial Class Form1
         CType(Me.SurveyFlightsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyFlightsSplitContainer.ResumeLayout(False)
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.DataPanel.ResumeLayout(False)
+        Me.DataPanel.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.MainToolStrip.ResumeLayout(False)
@@ -719,8 +781,10 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.DataPanel.ResumeLayout(False)
-        Me.DataPanel.PerformLayout()
+        Me.CampaignTabControl.ResumeLayout(False)
+        Me.ResultsTabPage.ResumeLayout(False)
+        Me.DataEditingTabPage.ResumeLayout(False)
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -781,8 +845,12 @@ Partial Class Form1
     Friend WithEvents ImportCompCountWaypointsToolStripButton As ToolStripButton
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CampaignLabel As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents CampaignContextLabel As Label
     Friend WithEvents SurveysPanel As Panel
     Friend WithEvents DataPanel As Panel
-    Friend WithEvents DataLabel As Label
+    Friend WithEvents FlightContextLabel As Label
+    Friend WithEvents CampaignTabControl As TabControl
+    Friend WithEvents ResultsTabPage As TabPage
+    Friend WithEvents DataEditingTabPage As TabPage
+    Friend WithEvents ResultsDataGridView As DataGridView
 End Class
