@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Janus.Windows.GridEX
 Public Class Form1
     Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
@@ -348,7 +349,70 @@ Public Class Form1
                     Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
             End Select
         End If
+
+
+        'load the survey results into the grid
+        LoadSurveyResults(GetCurrentCampaignID)
     End Sub
+
+    ''' <summary>
+    ''' Returns the CampaignID of the currently selected Campaign
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function GetCurrentCampaignID() As String
+        Dim CampaignID As String = ""
+        Try
+            'get the current row of the VS GridEX
+            If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
+                Dim CurrentRow As GridEXRow = Me.CampaignsGridEX.CurrentRow
+                'loop through the columns and look for the FilesDirectory columns
+                For i As Integer = 0 To CurrentRow.Cells.Count - 1
+                    If CurrentRow.Cells(i).Column.Key = "CampaignID" Then
+                        'if there is a value
+                        If Not IsDBNull(CurrentRow.Cells(i).Value) Then
+                            CampaignID = CurrentRow.Cells(i).Value
+                        End If
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return CampaignID
+    End Function
+
+    Private Sub LoadSurveyResults(CampaignID As String)
+        Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
+        Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+        Me.ResultsDataGridView.DataSource = ResultsDataTable
+    End Sub
+
+    Private Function GetDataTable(ConnectionString As String, Sql As String) As DataTable
+        'the DataTable to return
+        Dim MyDataTable As New DataTable
+
+        'make a SqlConnection using the supplied ConnectionString 
+        Dim MySqlConnection As New SqlConnection(ConnectionString)
+        Using MySqlConnection
+            'make a query using the supplied Sql
+            Dim MySqlCommand As SqlCommand = New SqlCommand(Sql, MySqlConnection)
+
+            'open the connection
+            MySqlConnection.Open()
+
+            'create a DataReader and execute the SqlCommand
+            Dim MyDataReader As SqlDataReader = MySqlCommand.ExecuteReader()
+
+            'load the reader into the datatable
+            MyDataTable.Load(MyDataReader)
+
+            'clean up
+            MyDataReader.Close()
+        End Using
+
+        'return the datatable
+        Return MyDataTable
+    End Function
 
     Private Sub ToggleGridEXTableCardView(GridEX As GridEX)
         If GridEX.View = View.TableView Then
@@ -664,6 +728,7 @@ Public Class Form1
         ImportCompositionCountDNRGarminWaypoints()
     End Sub
 
-
-
+    Private Sub ResultsByToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsByToolStripButton.Click
+        LoadSurveyResults(GetCurrentCampaignID)
+    End Sub
 End Class

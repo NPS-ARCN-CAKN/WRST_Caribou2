@@ -55,6 +55,13 @@ Partial Class Form1
         Me.CampaignsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CampaignLabel = New System.Windows.Forms.Label()
+        Me.CampaignTabControl = New System.Windows.Forms.TabControl()
+        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
+        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ResultsToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ResultsByToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
         Me.SurveyFlightsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CampaignContextLabel = New System.Windows.Forms.Label()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
@@ -90,10 +97,7 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.CampaignTabControl = New System.Windows.Forms.TabControl()
-        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
-        Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
-        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ResultsByToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -121,6 +125,11 @@ Partial Class Form1
         Me.CampaignsSplitContainer.Panel2.SuspendLayout()
         Me.CampaignsSplitContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.CampaignTabControl.SuspendLayout()
+        Me.ResultsTabPage.SuspendLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ResultsToolStrip.SuspendLayout()
+        Me.DataEditingTabPage.SuspendLayout()
         CType(Me.SurveyFlightsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyFlightsSplitContainer.Panel1.SuspendLayout()
         Me.SurveyFlightsSplitContainer.Panel2.SuspendLayout()
@@ -138,10 +147,6 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.CampaignTabControl.SuspendLayout()
-        Me.ResultsTabPage.SuspendLayout()
-        Me.DataEditingTabPage.SuspendLayout()
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -189,7 +194,7 @@ Partial Class Form1
         Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 25)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
         Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.CompositionCountTabPage.Size = New System.Drawing.Size(776, 341)
+        Me.CompositionCountTabPage.Size = New System.Drawing.Size(762, 318)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition count"
         Me.CompositionCountTabPage.UseVisualStyleBackColor = True
@@ -204,7 +209,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.Hierarchical = True
         Me.CompositionCountsGridEX.Location = New System.Drawing.Point(3, 30)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(770, 308)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(756, 285)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -224,7 +229,7 @@ Partial Class Form1
         Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton})
         Me.CompCountToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.CompCountToolStrip.Name = "CompCountToolStrip"
-        Me.CompCountToolStrip.Size = New System.Drawing.Size(770, 27)
+        Me.CompCountToolStrip.Size = New System.Drawing.Size(756, 27)
         Me.CompCountToolStrip.TabIndex = 1
         Me.CompCountToolStrip.Text = "ToolStrip1"
         '
@@ -339,7 +344,7 @@ Partial Class Form1
         Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 25)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
         Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(776, 341)
+        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(762, 318)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
         Me.RadiotrackingTabPage.UseVisualStyleBackColor = True
@@ -354,7 +359,7 @@ Partial Class Form1
         Me.RadioTrackingGridEX.Hierarchical = True
         Me.RadioTrackingGridEX.Location = New System.Drawing.Point(3, 3)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(770, 335)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(756, 312)
         Me.RadioTrackingGridEX.TabIndex = 0
         '
         'RadioTrackingBindingSource
@@ -398,6 +403,78 @@ Partial Class Form1
         Me.CampaignLabel.Size = New System.Drawing.Size(87, 24)
         Me.CampaignLabel.TabIndex = 0
         Me.CampaignLabel.Text = "Surveys"
+        '
+        'CampaignTabControl
+        '
+        Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
+        Me.CampaignTabControl.Controls.Add(Me.DataEditingTabPage)
+        Me.CampaignTabControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CampaignTabControl.Location = New System.Drawing.Point(0, 0)
+        Me.CampaignTabControl.Name = "CampaignTabControl"
+        Me.CampaignTabControl.SelectedIndex = 0
+        Me.CampaignTabControl.Size = New System.Drawing.Size(784, 603)
+        Me.CampaignTabControl.TabIndex = 4
+        '
+        'ResultsTabPage
+        '
+        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
+        Me.ResultsTabPage.Controls.Add(Me.ResultsToolStrip)
+        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.ResultsTabPage.Name = "ResultsTabPage"
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.ResultsTabPage.TabIndex = 0
+        Me.ResultsTabPage.Text = "Results"
+        Me.ResultsTabPage.UseVisualStyleBackColor = True
+        '
+        'ResultsDataGridView
+        '
+        Me.ResultsDataGridView.AllowUserToAddRows = False
+        Me.ResultsDataGridView.AllowUserToDeleteRows = False
+        Me.ResultsDataGridView.AllowUserToOrderColumns = True
+        Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 31)
+        Me.ResultsDataGridView.Name = "ResultsDataGridView"
+        Me.ResultsDataGridView.ReadOnly = True
+        Me.ResultsDataGridView.RowTemplate.Height = 24
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 540)
+        Me.ResultsDataGridView.TabIndex = 0
+        '
+        'ResultsToolStrip
+        '
+        Me.ResultsToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ResultsByToolStripComboBox, Me.ResultsByToolStripButton})
+        Me.ResultsToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.ResultsToolStrip.Name = "ResultsToolStrip"
+        Me.ResultsToolStrip.Size = New System.Drawing.Size(770, 28)
+        Me.ResultsToolStrip.TabIndex = 1
+        Me.ResultsToolStrip.Text = "ToolStrip1"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(78, 25)
+        Me.ToolStripLabel1.Text = "Results by:"
+        '
+        'ResultsByToolStripComboBox
+        '
+        Me.ResultsByToolStripComboBox.Items.AddRange(New Object() {"Entire survey"})
+        Me.ResultsByToolStripComboBox.Name = "ResultsByToolStripComboBox"
+        Me.ResultsByToolStripComboBox.Size = New System.Drawing.Size(221, 28)
+        Me.ResultsByToolStripComboBox.Text = "Entire survey"
+        '
+        'DataEditingTabPage
+        '
+        Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
+        Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.DataEditingTabPage.Name = "DataEditingTabPage"
+        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.DataEditingTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.DataEditingTabPage.TabIndex = 1
+        Me.DataEditingTabPage.Text = "Data editing"
+        Me.DataEditingTabPage.UseVisualStyleBackColor = True
         '
         'SurveyFlightsSplitContainer
         '
@@ -670,52 +747,14 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
-        'CampaignTabControl
+        'ResultsByToolStripButton
         '
-        Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
-        Me.CampaignTabControl.Controls.Add(Me.DataEditingTabPage)
-        Me.CampaignTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CampaignTabControl.Location = New System.Drawing.Point(0, 0)
-        Me.CampaignTabControl.Name = "CampaignTabControl"
-        Me.CampaignTabControl.SelectedIndex = 0
-        Me.CampaignTabControl.Size = New System.Drawing.Size(784, 603)
-        Me.CampaignTabControl.TabIndex = 4
-        '
-        'ResultsTabPage
-        '
-        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
-        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.ResultsTabPage.Name = "ResultsTabPage"
-        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
-        Me.ResultsTabPage.TabIndex = 0
-        Me.ResultsTabPage.Text = "Results"
-        Me.ResultsTabPage.UseVisualStyleBackColor = True
-        '
-        'DataEditingTabPage
-        '
-        Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
-        Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.DataEditingTabPage.Name = "DataEditingTabPage"
-        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataEditingTabPage.Size = New System.Drawing.Size(776, 574)
-        Me.DataEditingTabPage.TabIndex = 1
-        Me.DataEditingTabPage.Text = "Data editing"
-        Me.DataEditingTabPage.UseVisualStyleBackColor = True
-        '
-        'ResultsDataGridView
-        '
-        Me.ResultsDataGridView.AllowUserToAddRows = False
-        Me.ResultsDataGridView.AllowUserToDeleteRows = False
-        Me.ResultsDataGridView.AllowUserToOrderColumns = True
-        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
-        Me.ResultsDataGridView.Name = "ResultsDataGridView"
-        Me.ResultsDataGridView.ReadOnly = True
-        Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
-        Me.ResultsDataGridView.TabIndex = 0
+        Me.ResultsByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ResultsByToolStripButton.Image = CType(resources.GetObject("ResultsByToolStripButton.Image"), System.Drawing.Image)
+        Me.ResultsByToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ResultsByToolStripButton.Name = "ResultsByToolStripButton"
+        Me.ResultsByToolStripButton.Size = New System.Drawing.Size(60, 25)
+        Me.ResultsByToolStripButton.Text = "Submit"
         '
         'Form1
         '
@@ -760,6 +799,13 @@ Partial Class Form1
         Me.CampaignsSplitContainer.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.CampaignTabControl.ResumeLayout(False)
+        Me.ResultsTabPage.ResumeLayout(False)
+        Me.ResultsTabPage.PerformLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResultsToolStrip.ResumeLayout(False)
+        Me.ResultsToolStrip.PerformLayout()
+        Me.DataEditingTabPage.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.PerformLayout()
         Me.SurveyFlightsSplitContainer.Panel2.ResumeLayout(False)
@@ -781,10 +827,6 @@ Partial Class Form1
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefPopulationCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.CampaignTabControl.ResumeLayout(False)
-        Me.ResultsTabPage.ResumeLayout(False)
-        Me.DataEditingTabPage.ResumeLayout(False)
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -853,4 +895,8 @@ Partial Class Form1
     Friend WithEvents ResultsTabPage As TabPage
     Friend WithEvents DataEditingTabPage As TabPage
     Friend WithEvents ResultsDataGridView As DataGridView
+    Friend WithEvents ResultsToolStrip As ToolStrip
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ResultsByToolStripComboBox As ToolStripComboBox
+    Friend WithEvents ResultsByToolStripButton As ToolStripButton
 End Class
