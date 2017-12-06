@@ -58,6 +58,7 @@ Public Class Form1
 
         'maximize form
         Me.WindowState = FormWindowState.Maximized
+
     End Sub
 
     ''' <summary>
@@ -352,7 +353,7 @@ Public Class Form1
 
 
         'load the survey results into the grid
-        LoadSurveyResults(GetCurrentCampaignID)
+        'LoadSurveyResults(GetCurrentCampaignID)
     End Sub
 
     ''' <summary>
@@ -479,7 +480,7 @@ Public Class Form1
                                         Dim Ident As String = ""
                                         Dim Latitude As Double = 0
                                         Dim Longitude As Double = 0
-                                        Dim SightingDate As String
+                                        Dim SightingDate As String = ""
 
                                         If Not IsDBNull(Row.Item("IDENT")) Then Ident = Row.Item("IDENT")
                                         If Not IsDBNull(Row.Item("LAT")) Then Latitude = Row.Item("LAT")
