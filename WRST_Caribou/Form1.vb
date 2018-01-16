@@ -333,6 +333,7 @@ Public Class Form1
             End If
         End If
 
+        'set up the gridexes for consistency
         SetUpCampaignsGridEX()
 
         'set the survey type tab control to the current survey type
