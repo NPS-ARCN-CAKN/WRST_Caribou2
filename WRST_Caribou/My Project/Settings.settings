@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=INPYUGAMS08SQL\NUNA;Initial Catalog=WRST_Caribou;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="Animal_MovementConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=INPAKROVMAIS;Initial Catalog=Animal_Movement;Integrated Security=True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

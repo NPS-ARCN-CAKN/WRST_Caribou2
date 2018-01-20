@@ -16,6 +16,7 @@ Public Class Form1
                     Me.RadioTrackingBindingSource.EndEdit()
                     Me.SurveyFlightsBindingSource.EndEdit()
                     Me.CampaignsBindingSource.EndEdit()
+                    Me.XrefPopulationCaribouBindingSource.EndEdit()
                     Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
                 End If
             End If
@@ -25,21 +26,31 @@ Public Class Form1
 
     End Sub
 
+    Private Sub LoadDataset()
+        Try
+            'load the data
+            Me.CampaignsTableAdapter.Fill(Me.WRST_CaribouDataSet.Campaigns)
+            Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
+            Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
+            Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
+            Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
+            Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
+            Me.CaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.Caribou)
+
+            'load the dataset
+            Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
+            Me.PopulationEstimateTableAdapter.Fill(Me.WRST_CaribouDataSet.PopulationEstimate)
+            Me.CompositionCountsTableAdapter.Fill(Me.WRST_CaribouDataSet.CompositionCounts)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.xrefRadiotrackingCaribou' table. You can move, or remove it, as needed.
-        Me.CampaignsTableAdapter.Fill(Me.WRST_CaribouDataSet.Campaigns)
-        Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
-        Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
+        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.xrefPopulationCaribou' table. You can move, or remove it, as needed.
         Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
-        Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
-        Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
-        Me.CaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.Caribou)
-
-        'load the dataset
-        Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
-        Me.PopulationEstimateTableAdapter.Fill(Me.WRST_CaribouDataSet.PopulationEstimate)
-        Me.CompositionCountsTableAdapter.Fill(Me.WRST_CaribouDataSet.CompositionCounts)
-
+        'load the data from the WRST_Caribou Sql Server database
+        LoadDataset()
 
         'set up the GridEXs
         Dim Editable As InheritableBoolean = InheritableBoolean.True
@@ -72,6 +83,11 @@ Public Class Form1
         Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
         Grid.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
         Grid.RootTable.Columns("CertificationLevel").DefaultValue = "Provisional"
+
+        'set up xrefpopulationsurveys default values
+        'With Me.XrefPopulationCaribouGridEX
+        '    .RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou"
+        'End With
 
         'CrewNumber default value
         Dim MaxGroupNumber As Integer = 0
@@ -161,6 +177,7 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
+
 
     ''' <summary>
     ''' Loads distinct items from a DataTable's DataColumn into a GridEX GridEXColumn's DropDown ValueList
@@ -733,4 +750,106 @@ Public Class Form1
     Private Sub ResultsByToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsByToolStripButton.Click
         LoadSurveyResults(GetCurrentCampaignID)
     End Sub
+
+
+
+    ''' <summary>
+    ''' Queries the Animal_Movement database for deployed GPS collars during SightingDate and then loads the submitted GridEX's AnimalID column
+    ''' with available collared animals based on collar frequency.
+    ''' </summary>
+    ''' <param name="GridEx">Parent GridEX</param>
+    ''' <param name="ObservationDate">Results will be filtered by available GPS collars deployed on this date.</param>
+    Private Sub LoadCollaredCaribouDropdown(GridEx As GridEX, ObservationDate As Date)
+        'Caribou groups often contain GPS collared animals. 
+        'When this event fires the user wants to associate a collared caribou with a group of caribou seen during a population survey.
+        'The collar is detected by radio frequency.  We need to find out which collar was detected and which animal the collar was deployed on.
+        'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
+        ' the population survey group.
+
+        Try
+            'Ensure the GridEXColumn is configured for a DropDown
+            With GridEx.RootTable.Columns("AnimalID")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = False
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
+
+            'retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
+            Dim Sql As String = "SELECT   Collars.Frequency,      Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
+                          Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
+                         Collars.DisposalDate
+FROM            Animals INNER JOIN
+                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+WHERE        (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+ORDER BY Collars.Frequency"
+
+            'get the filtered data into a datatable
+            Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+
+            ''Add the distinct items from the DataView into the GridEXValueListItemCollection
+            If PossibleCollaredAnimalsDataTable.Rows.Count > 0 Then
+                For Each Row As DataRow In PossibleCollaredAnimalsDataTable.Rows
+                    If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
+                        Dim ValueItem As String = Row.Item("AnimalID")
+                        Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
+                        GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
+                    End If
+                Next
+            Else
+                MsgBox("No deployed collars are available for this date in the Animal_Movement database.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    Private Sub PopulationEstimateGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.SelectionChanged
+        'when the user clicks on a population survey caribou group, then load the xrefcariboupopulation gridex with available 
+        'gps collars to allow the user to associate a collared caribou with the observed group
+
+
+        'determine the EID, primary key of the caribou group record, and set the default value to the new xrefcariboupopulation record
+        Dim EID As String = ""
+        Dim SightingDate As Date
+
+        'get the sighting date to use later, and get the EID to relate to any new xrefcariboupopulation records
+        With PopulationEstimateGridEX
+            If Not .CurrentRow Is Nothing Then
+                'get the SightingDate
+                If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not .CurrentRow.Cells("SightingDate") Is Nothing Then
+                    If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
+                End If
+
+                'set up the EID primary key for syncing with the group
+                If Not .CurrentRow.Cells("EID") Is Nothing And Not .CurrentRow.Cells("EID") Is Nothing Then
+                    If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
+                        EID = .CurrentRow.Cells("EID").Value
+                    End If
+                    Me.XrefPopulationCaribouGridEX.RootTable.Columns("EID").DefaultValue = EID
+                End If
+            End If
+        End With
+
+        'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
+        If Not EID Is Nothing Then
+            If IsDate(SightingDate) And EID.Trim.Length > 0 Then
+                'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
+                LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub XrefPopulationCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.SelectionChanged
+        Dim Grid As GridEX = Me.XrefPopulationCaribouGridEX
+        Grid.RootTable.Columns("PCID").DefaultValue = Guid.NewGuid.ToString 'primary key
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+    End Sub
+
 End Class
