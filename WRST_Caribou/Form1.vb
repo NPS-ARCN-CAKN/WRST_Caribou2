@@ -36,19 +36,16 @@ Public Class Form1
             Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
             Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
             Me.CaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.Caribou)
-
-            'load the dataset
             Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
             Me.PopulationEstimateTableAdapter.Fill(Me.WRST_CaribouDataSet.PopulationEstimate)
             Me.CompositionCountsTableAdapter.Fill(Me.WRST_CaribouDataSet.CompositionCounts)
+             Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.xrefPopulationCaribou' table. You can move, or remove it, as needed.
-        Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
         'load the data from the WRST_Caribou Sql Server database
         LoadDataset()
 
@@ -59,7 +56,8 @@ Public Class Form1
         SetUpGridEX(Me.CompositionCountsGridEX, Editable)
         SetUpGridEX(Me.PopulationEstimateGridEX, Editable)
         SetUpGridEX(Me.RadioTrackingGridEX, Editable)
-
+        SetUpGridEX(Me.XrefPopulationCaribouGridEX, Editable)
+        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX, Editable)
 
         'Set up the Campaigns GridEX default values and dropdowns
         SetUpCampaignsGridEX()
@@ -222,6 +220,11 @@ Public Class Form1
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Standardizes the look, feel and function of a GridEX
+    ''' </summary>
+    ''' <param name="GridEX">The GridEX to set up</param>
+    ''' <param name="Editable">Boolean.  Whether to make the GridEX editable or read-only</param>
     Private Sub SetUpGridEX(GridEX As GridEX, Editable As InheritableBoolean)
         Try
             Dim MyFont As New Font("Sans Serif", 10, FontStyle.Regular)
@@ -286,36 +289,36 @@ Public Class Form1
     End Sub
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
-
-        'get the name of the survey flight to put it into the data header
-        Me.FlightContextLabel.Text = "Data"
-        Dim CurrentFlight As String = "Data"
-        Dim CrewNumber As Integer = 0
-        Dim TailNo As String = ""
-        Dim Pilot As String = ""
-        Dim Observer1 As String = ""
-        Dim TimeDepart As Date = "1/1/1111"
-        If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
-            If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart") Is Nothing Then
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value) Then CrewNumber = Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value) Then Pilot = Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value Else Pilot = ""
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
+        Try
+            'get some information about the survey flight to put in the header label so users know which survey flight they are editing
+            Me.FlightContextLabel.Text = "Data"
+            Dim CurrentFlight As String = "Data"
+            Dim CrewNumber As Integer = 0
+            Dim TailNo As String = ""
+            Dim Pilot As String = ""
+            Dim Observer1 As String = ""
+            Dim TimeDepart As Date = "1/1/1111"
+            If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
+                If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart") Is Nothing Then
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value) Then CrewNumber = Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value) Then Pilot = Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value Else Pilot = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
+                End If
+                CurrentFlight = "Data: " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
+                Me.FlightContextLabel.Text = CurrentFlight
             End If
-            CurrentFlight = "Data: " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
-            Me.FlightContextLabel.Text = CurrentFlight
-        End If
 
-        SetUpSurveysGridEX()
+            'set up the Survey Flight GridEX
+            SetUpSurveysGridEX()
 
-        'Set up default values
-        Dim Grid As GridEX = Me.SurveyFlightsGridEX
-        'Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
-        'Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-        Dim NewGuidString As String = Guid.NewGuid.ToString
-        Grid.RootTable.Columns("FlightID").DefaultValue = NewGuidString
-        Grid.RootTable.Columns("SOPNumber").DefaultValue = 0
+            'Set up default values
+            Me.SurveyFlightsGridEX.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
+            Me.SurveyFlightsGridEX.RootTable.Columns("SOPNumber").DefaultValue = 0
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub SaveDatasetToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveDatasetToolStripButton.Click
@@ -329,55 +332,62 @@ Public Class Form1
     End Sub
 
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
+        'user gets here when they select a campaign from the campaigns gridex
+        Try
+            'get the name of the survey campaign to put it into the survey flights header
+            Me.CampaignContextLabel.Text = "Flights"
+            Dim CurrentCampaign As String = "Flights"
+            If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
+                If Not Me.CampaignsGridEX.CurrentRow.Cells("Campaign") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Campaign").Value) Then
+                    CurrentCampaign = Me.CampaignsGridEX.CurrentRow.Cells("Campaign").Value
+                    Me.CampaignContextLabel.Text = "Flights: " & CurrentCampaign
+                Else
+                    Me.CampaignContextLabel.Text = CurrentCampaign
+                End If
 
-        'get the name of the survey campaign to put it into the survey flights header
-        Me.CampaignContextLabel.Text = "Flights"
-        Dim CurrentCampaign As String = "Flights"
-        If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
-            If Not Me.CampaignsGridEX.CurrentRow.Cells("Campaign") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Campaign").Value) Then
-                CurrentCampaign = Me.CampaignsGridEX.CurrentRow.Cells("Campaign").Value
-                Me.CampaignContextLabel.Text = "Flights: " & CurrentCampaign
-            Else
-                Me.CampaignContextLabel.Text = CurrentCampaign
+                'set up the flight gridex's 'herd' column default value
+                If Not Me.CampaignsGridEX.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value) Then
+                    Dim CampaignHerd As String = Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value
+                    Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                Else
+                    Me.CampaignContextLabel.Text = CurrentCampaign
+                End If
             End If
 
-            'set up the flight gridex's 'herd' column default value
-            If Not Me.CampaignsGridEX.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value) Then
-                Dim CampaignHerd As String = Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value
-                Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
-            Else
-                Me.CampaignContextLabel.Text = CurrentCampaign
+            'set up the gridexes for consistency
+            SetUpCampaignsGridEX()
+
+            'set the survey type tab control to the current survey type
+            Dim CurrentSurveyType As String = ""
+            If Not Me.CampaignsGridEX.CurrentRow.Cells("SurveyType") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value) Then
+                CurrentSurveyType = Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value
+
+                'clear the results datagridview
+                Me.ResultsDataGridView.DataSource = Nothing
+                Select Case CurrentSurveyType
+                    Case "Composition"
+                        Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                    Case "Population"
+                        Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
+                        'loads the results of the population survey into the Results GridEX
+                        LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
+                    Case "Radiotracking"
+                        Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
+                    Case Else
+                        Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                End Select
             End If
-        End If
-
-        'set up the gridexes for consistency
-        SetUpCampaignsGridEX()
-
-        'set the survey type tab control to the current survey type
-        Dim CurrentSurveyType As String = ""
-        If Not Me.CampaignsGridEX.CurrentRow.Cells("SurveyType") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value) Then
-            CurrentSurveyType = Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value
-            Select Case CurrentSurveyType
-                Case "Composition"
-                    Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
-                Case "Population"
-                    Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
-                Case "Radiotracking"
-                    Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
-                Case Else
-                    Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
-            End Select
-        End If
 
 
-        'load the survey results into the grid
-        'LoadSurveyResults(GetCurrentCampaignID)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     ''' <summary>
     ''' Returns the CampaignID of the currently selected Campaign
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>CampaignID. String.</returns>
     Private Function GetCurrentCampaignID() As String
         Dim CampaignID As String = ""
         Try
@@ -400,45 +410,72 @@ Public Class Form1
         Return CampaignID
     End Function
 
-    Private Sub LoadSurveyResults(CampaignID As String)
-        Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
-        Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        Me.ResultsDataGridView.DataSource = ResultsDataTable
+    ''' <summary>
+    ''' Runs the Sql Server view PE_ResultsByCampaign for the survey campaign and returns the results as a DataTable to the ResultsDataGridView
+    ''' </summary>
+    ''' <param name="CampaignID"></param>
+    Private Sub LoadPopulationEstimateSurveyResults(CampaignID As String)
+        Try
+            Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
+            Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.ResultsDataGridView.DataSource = ResultsDataTable
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
+    ''' <summary>
+    ''' Runs the query in Sql against the WRST_Caribou database using ConnectionString and returns the results as a DataTable
+    ''' </summary>
+    ''' <param name="ConnectionString"></param>
+    ''' <param name="Sql"></param>
+    ''' <returns>DataTable</returns>
     Private Function GetDataTable(ConnectionString As String, Sql As String) As DataTable
         'the DataTable to return
         Dim MyDataTable As New DataTable
 
-        'make a SqlConnection using the supplied ConnectionString 
-        Dim MySqlConnection As New SqlConnection(ConnectionString)
-        Using MySqlConnection
-            'make a query using the supplied Sql
-            Dim MySqlCommand As SqlCommand = New SqlCommand(Sql, MySqlConnection)
+        Try
+            'make a SqlConnection using the supplied ConnectionString 
+            Dim MySqlConnection As New SqlConnection(ConnectionString)
+            Using MySqlConnection
+                'make a query using the supplied Sql
+                Dim MySqlCommand As SqlCommand = New SqlCommand(Sql, MySqlConnection)
 
-            'open the connection
-            MySqlConnection.Open()
+                'open the connection
+                MySqlConnection.Open()
 
-            'create a DataReader and execute the SqlCommand
-            Dim MyDataReader As SqlDataReader = MySqlCommand.ExecuteReader()
+                'create a DataReader and execute the SqlCommand
+                Dim MyDataReader As SqlDataReader = MySqlCommand.ExecuteReader()
 
-            'load the reader into the datatable
-            MyDataTable.Load(MyDataReader)
+                'load the reader into the datatable
+                MyDataTable.Load(MyDataReader)
 
-            'clean up
-            MyDataReader.Close()
-        End Using
+                'clean up
+                MyDataReader.Close()
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+
 
         'return the datatable
         Return MyDataTable
     End Function
 
+    ''' <summary>
+    ''' Toggles GridEX between Card and TableView
+    ''' </summary>
+    ''' <param name="GridEX"></param>
     Private Sub ToggleGridEXTableCardView(GridEX As GridEX)
-        If GridEX.View = View.TableView Then
-            GridEX.View = View.CardView
-        Else
-            GridEX.View = View.TableView
-        End If
+        Try
+            If GridEX.View = View.TableView Then
+                GridEX.View = View.CardView
+            Else
+                GridEX.View = View.TableView
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub CampaignsGridEX_DoubleClick(sender As Object, e As EventArgs) Handles CampaignsGridEX.DoubleClick
@@ -472,7 +509,7 @@ Public Class Form1
                     End If
 
                     'get the excel file of waypoints
-                    Dim WaypointsImportFile As String = GetFile()
+                    Dim WaypointsImportFile As String = GetWaypointsFile()
 
                     'make sure the file exists
                     If My.Computer.FileSystem.FileExists(WaypointsImportFile) Then
@@ -607,7 +644,7 @@ Public Class Form1
                     End If
 
                     'get the excel file of waypoints
-                    Dim WaypointsImportFile As String = GetFile()
+                    Dim WaypointsImportFile As String = GetWaypointsFile()
 
                     'make sure the file exists
                     If My.Computer.FileSystem.FileExists(WaypointsImportFile) Then
@@ -721,25 +758,31 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub ImportWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportPopulationWaypointsToolStripButton.Click
-        ImportPopulationSurveyWaypoints()
-    End Sub
 
-    Private Function GetFile() As String
+
+    ''' <summary>
+    ''' Opens an OpenFileDialog to allow the user to select a DNRGPS waypoints file.
+    ''' </summary>
+    ''' <returns>The selected waypoints file. String</returns>
+    Private Function GetWaypointsFile() As String
         Dim ExcelFile As String = ""
-        Dim OFD As New OpenFileDialog
-        With OFD
-            .AddExtension = True
-            .CheckFileExists = True
-            .Filter = "DNRGPS file (Excel,DBF,CSV,TXT)|*.xlsx;*.xls;*.dbf;*.csv;*.txt"
-            .Multiselect = False
-            .Title = "Select an workbook to open"
-        End With
+        Try
+            Dim OFD As New OpenFileDialog
+            With OFD
+                .AddExtension = True
+                .CheckFileExists = True
+                .Filter = "DNRGPS file (Excel,DBF,CSV,TXT)|*.xlsx;*.xls;*.dbf;*.csv;*.txt"
+                .Multiselect = False
+                .Title = "Select an workbook to open"
+            End With
 
-        'show the ofd and get the filename and path
-        If OFD.ShowDialog = DialogResult.OK Then
-            ExcelFile = OFD.FileName
-        End If
+            'show the ofd and get the filename and path
+            If OFD.ShowDialog = DialogResult.OK Then
+                ExcelFile = OFD.FileName
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
         Return ExcelFile
     End Function
 
@@ -747,8 +790,9 @@ Public Class Form1
         ImportCompositionCountDNRGarminWaypoints()
     End Sub
 
-    Private Sub ResultsByToolStripButton_Click(sender As Object, e As EventArgs) Handles ResultsByToolStripButton.Click
-        LoadSurveyResults(GetCurrentCampaignID)
+    Private Sub ResultsByToolStripButton_Click(sender As Object, e As EventArgs)
+        'loads the results of the population survey into the Results GridEX
+        LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
     End Sub
 
 
@@ -778,19 +822,25 @@ Public Class Form1
             End With
 
             'retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
-            Dim Sql As String = "SELECT   Collars.Frequency,      Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
-                          Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
-                         Collars.DisposalDate
+            Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
 FROM            Animals INNER JOIN
                          CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
                          Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
 WHERE        (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
 ORDER BY Collars.Frequency"
+            '            Dim Sql As String = "SELECT   Collars.Frequency,      Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
+            '                          Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
+            '                         Collars.DisposalDate
+            'FROM            Animals INNER JOIN
+            '                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+            '                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+            'WHERE        (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+            'ORDER BY Collars.Frequency"
 
             'get the filtered data into a datatable
             Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
-            ''Add the distinct items from the DataView into the GridEXValueListItemCollection
+            'Add the animalids into the GridEXValueListItemCollection
             If PossibleCollaredAnimalsDataTable.Rows.Count > 0 Then
                 For Each Row As DataRow In PossibleCollaredAnimalsDataTable.Rows
                     If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
@@ -799,8 +849,6 @@ ORDER BY Collars.Frequency"
                         GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
                     End If
                 Next
-            Else
-                MsgBox("No deployed collars are available for this date in the Animal_Movement database.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
@@ -811,37 +859,39 @@ ORDER BY Collars.Frequency"
         'when the user clicks on a population survey caribou group, then load the xrefcariboupopulation gridex with available 
         'gps collars to allow the user to associate a collared caribou with the observed group
 
+        Try
+            'determine the EID, primary key of the caribou group record, and set the default value to the new xrefcariboupopulation record
+            Dim EID As String = ""
+            Dim SightingDate As Date
 
-        'determine the EID, primary key of the caribou group record, and set the default value to the new xrefcariboupopulation record
-        Dim EID As String = ""
-        Dim SightingDate As Date
-
-        'get the sighting date to use later, and get the EID to relate to any new xrefcariboupopulation records
-        With PopulationEstimateGridEX
-            If Not .CurrentRow Is Nothing Then
-                'get the SightingDate
-                If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not .CurrentRow.Cells("SightingDate") Is Nothing Then
-                    If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
-                End If
-
-                'set up the EID primary key for syncing with the group
-                If Not .CurrentRow.Cells("EID") Is Nothing And Not .CurrentRow.Cells("EID") Is Nothing Then
-                    If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
-                        EID = .CurrentRow.Cells("EID").Value
+            'get the sighting date to use later, and get the EID to relate to any new xrefcariboupopulation records
+            With PopulationEstimateGridEX
+                If Not .CurrentRow Is Nothing Then
+                    'get the SightingDate
+                    If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
                     End If
-                    Me.XrefPopulationCaribouGridEX.RootTable.Columns("EID").DefaultValue = EID
+
+                    'set up the EID primary key for syncing with the group
+                    If Not .CurrentRow.Cells("EID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("EID")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
+                            EID = .CurrentRow.Cells("EID").Value
+                        End If
+                        Me.XrefPopulationCaribouGridEX.RootTable.Columns("EID").DefaultValue = EID
+                    End If
                 End If
-            End If
-        End With
+            End With
 
-        'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
-        If Not EID Is Nothing Then
-            If IsDate(SightingDate) And EID.Trim.Length > 0 Then
-                'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
-                LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
-            End If
-        End If
-
+            'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
+            'If Not EID Is Nothing Then
+            '    If IsDate(SightingDate) And EID.Trim.Length > 0 Then
+            'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
+            LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
+            '    End If
+            'End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub XrefPopulationCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.SelectionChanged
@@ -851,5 +901,10 @@ ORDER BY Collars.Frequency"
         Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
         Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
     End Sub
+
+    Private Sub ImportPopulationWaypointsToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportPopulationWaypointsToolStripButton.Click
+        ImportPopulationSurveyWaypoints()
+    End Sub
+
 
 End Class
