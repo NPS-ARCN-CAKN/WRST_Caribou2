@@ -41,7 +41,8 @@ Public Class Form1
             Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
             Me.PopulationEstimateTableAdapter.Fill(Me.WRST_CaribouDataSet.PopulationEstimate)
             Me.CompositionCountsTableAdapter.Fill(Me.WRST_CaribouDataSet.CompositionCounts)
-             Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
+            Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
+            Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -530,15 +531,7 @@ Public Class Form1
                             If WaypointsImportDataTable.Rows.Count > 0 Then
 
                                 'GroupNumber should be an autonumber column.  it's possible that the user will import more waypoints after already having done so
-                                'get the max existing GroupNumber so we can increment by one
-                                Dim GroupNumber As Integer = 1
-                                'find out if there are existing waypoints, if so, set the groupnumber to the max value
-                                Dim CurrentDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate")
-                                Dim Filter As String = "FlightID='" & FlightID & "'"
-                                Dim MaxGroupNumberDataView As DataView = New DataView(CurrentDataTable, Filter, "", DataViewRowState.CurrentRows)
-                                If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
-                                    GroupNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
-                                End If
+                                Dim GroupNumber As Integer = GetMaximumGroupNumber(Me.WRST_CaribouDataSet.Tables("PopulationEstimate"), "FlightID='" & FlightID & "'")
 
 
                                 'loop through the records in the import file, extract values
@@ -635,6 +628,25 @@ Public Class Form1
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Returns the maximum GroupNumber from a DataTable based on Filter
+    ''' </summary>
+    ''' <param name="DataTableToQuery">A DataTable containing a column named GroupNumber. DataTable</param>
+    ''' <param name="Filter">A filter to apply. String.</param>
+    ''' <returns>Maximum GroupNumber. Integer.</returns>
+    Private Function GetMaximumGroupNumber(DataTableToQuery As DataTable, Filter As String) As Integer
+        'get the max existing GroupNumber for a flight so we can increment by one
+        Dim MaxNumber As Integer = 1
+        Try
+            Dim MaxGroupNumberDataView As DataView = New DataView(DataTableToQuery, Filter, "", DataViewRowState.CurrentRows)
+            If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
+                MaxNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return MaxNumber
+    End Function
 
 
     ''' <summary>
@@ -676,14 +688,16 @@ Public Class Form1
 
                                 'GroupNumber should be an autonumber column.  it's possible that the user will import more waypoints after already having done so
                                 'get the max existing GroupNumber so we can increment by one
-                                Dim GroupNumber As Integer = 1
-                                'find out if there are existing waypoints, if so, set the groupnumber to the max value
-                                Dim CurrentDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CompositionCounts")
-                                Dim Filter As String = "FlightID='" & FlightID & "'"
-                                Dim MaxGroupNumberDataView As DataView = New DataView(CurrentDataTable, Filter, "", DataViewRowState.CurrentRows)
-                                If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
-                                    GroupNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
-                                End If
+                                'GroupNumber should be an autonumber column.  it's possible that the user will import more waypoints after already having done so
+                                Dim GroupNumber As Integer = GetMaximumGroupNumber(Me.WRST_CaribouDataSet.Tables("CompositionCounts"), "FlightID='" & FlightID & "'")
+                                'Dim GroupNumber As Integer = 1
+                                ''find out if there are existing waypoints, if so, set the groupnumber to the max value
+                                'Dim CurrentDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CompositionCounts")
+                                'Dim Filter As String = "FlightID='" & FlightID & "'"
+                                'Dim MaxGroupNumberDataView As DataView = New DataView(CurrentDataTable, Filter, "", DataViewRowState.CurrentRows)
+                                'If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
+                                '    GroupNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
+                                'End If
 
                                 'loop through the records in the import file, extract values
                                 For Each Row As DataRow In WaypointsImportDataTable.Rows
@@ -899,18 +913,14 @@ ORDER BY Collars.Frequency"
                         If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
                             EID = .CurrentRow.Cells("EID").Value
                         End If
-                        Me.XrefPopulationCaribouGridEX.RootTable.Columns("EID").DefaultValue = EID
                     End If
+
                 End If
             End With
-
+            Me.XrefPopulationCaribouGridEX.RootTable.Columns("EID").DefaultValue = EID
             'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
-            'If Not EID Is Nothing Then
-            '    If IsDate(SightingDate) And EID.Trim.Length > 0 Then
             'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
             LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
-            '    End If
-            'End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -928,5 +938,55 @@ ORDER BY Collars.Frequency"
         ImportPopulationSurveyWaypoints()
     End Sub
 
+    Private Sub CompositionCountsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.SelectionChanged
+        'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
+        'gps collars to allow the user to associate a collared caribou with the observed group
+        'Try
+        'determine the CCID, primary key of the caribou group record, and set the default value to the new xrefcariboucomposition record
+        Dim CCID As String = ""
+        Dim SightingDate As Date
 
+        'get the sighting date to use later, and get the CCID to relate to any new xrefcariboucomposition records
+        With Me.CompositionCountsGridEX
+            If Not .CurrentRow Is Nothing Then
+                'get the SightingDate
+                If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
+                    If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
+                End If
+
+                'set up the CCID primary key for syncing with the group
+                'If Not .CurrentRow.Cells("CCID") Is Nothing And Not .CurrentRow.Cells("CCID").Value Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
+                '    'If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
+                '    CCID = .CurrentRow.Cells("CCID").Value
+                '    'End If
+                'End If
+                If Not .CurrentRow.Cells("CCID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID")) Then
+                    If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
+                        CCID = .CurrentRow.Cells("CCID").Value
+                    End If
+                End If
+            End If
+        End With
+
+        'set up default values
+        With Me.XrefCompCountCaribouGridEX.RootTable
+            .Columns("CCID").DefaultValue = CCID
+        End With
+
+        'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
+        'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
+        Debug.Print(CCID & " " & SightingDate)
+        LoadCollaredCaribouDropdown(Me.XrefCompCountCaribouGridEX, SightingDate)
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        'End Try
+    End Sub
+
+    Private Sub XrefCompCountCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefCompCountCaribouGridEX.SelectionChanged
+        Dim Grid As GridEX = Me.XrefCompCountCaribouGridEX
+        Grid.RootTable.Columns("CCCID").DefaultValue = Guid.NewGuid.ToString 'primary key
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+    End Sub
 End Class
