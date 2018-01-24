@@ -32,6 +32,7 @@ Partial Class Form1
         Dim XrefRadiotrackingCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim CaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim XrefCompCountCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.CampaignsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
@@ -60,6 +61,8 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CampaignLabel = New System.Windows.Forms.Label()
         Me.CampaignTabControl = New System.Windows.Forms.TabControl()
+        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
+        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
         Me.SurveyFlightsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CampaignContextLabel = New System.Windows.Forms.Label()
@@ -67,8 +70,6 @@ Partial Class Form1
         Me.SurveysPanel = New System.Windows.Forms.Panel()
         Me.DataPanel = New System.Windows.Forms.Panel()
         Me.FlightContextLabel = New System.Windows.Forms.Label()
-        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
-        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveChangesToDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -96,6 +97,8 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         Me.CaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CaribouTableAdapter()
         Me.CapturesTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
+        Me.XrefCompCountCaribouGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.CompCountSplitContainer = New System.Windows.Forms.SplitContainer()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,6 +133,8 @@ Partial Class Form1
         Me.CampaignsSplitContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.CampaignTabControl.SuspendLayout()
+        Me.ResultsTabPage.SuspendLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DataEditingTabPage.SuspendLayout()
         CType(Me.SurveyFlightsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyFlightsSplitContainer.Panel1.SuspendLayout()
@@ -137,8 +142,6 @@ Partial Class Form1
         Me.SurveyFlightsSplitContainer.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DataPanel.SuspendLayout()
-        Me.ResultsTabPage.SuspendLayout()
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.MainTabControl.SuspendLayout()
@@ -148,6 +151,11 @@ Partial Class Form1
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrefCompCountCaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CompCountSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CompCountSplitContainer.Panel1.SuspendLayout()
+        Me.CompCountSplitContainer.Panel2.SuspendLayout()
+        Me.CompCountSplitContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -190,7 +198,7 @@ Partial Class Form1
         '
         'CompositionCountTabPage
         '
-        Me.CompositionCountTabPage.Controls.Add(Me.CompositionCountsGridEX)
+        Me.CompositionCountTabPage.Controls.Add(Me.CompCountSplitContainer)
         Me.CompositionCountTabPage.Controls.Add(Me.CompCountToolStrip)
         Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 25)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
@@ -202,15 +210,13 @@ Partial Class Form1
         '
         'CompositionCountsGridEX
         '
-        Me.CompositionCountsGridEX.DataSource = Me.CompositionCountsBindingSource
         CompositionCountsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CompositionCountsGridEX_DesignTimeLayout.LayoutString")
         Me.CompositionCountsGridEX.DesignTimeLayout = CompositionCountsGridEX_DesignTimeLayout
         Me.CompositionCountsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CompositionCountsGridEX.GroupByBoxVisible = False
-        Me.CompositionCountsGridEX.Hierarchical = True
-        Me.CompositionCountsGridEX.Location = New System.Drawing.Point(3, 30)
+        Me.CompositionCountsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(756, 285)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(481, 285)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -456,6 +462,32 @@ Partial Class Form1
         Me.CampaignTabControl.Size = New System.Drawing.Size(784, 603)
         Me.CampaignTabControl.TabIndex = 4
         '
+        'ResultsTabPage
+        '
+        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
+        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.ResultsTabPage.Name = "ResultsTabPage"
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.ResultsTabPage.TabIndex = 0
+        Me.ResultsTabPage.Text = "Results"
+        Me.ResultsTabPage.UseVisualStyleBackColor = True
+        '
+        'ResultsDataGridView
+        '
+        Me.ResultsDataGridView.AllowUserToAddRows = False
+        Me.ResultsDataGridView.AllowUserToDeleteRows = False
+        Me.ResultsDataGridView.AllowUserToOrderColumns = True
+        Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ResultsDataGridView.Name = "ResultsDataGridView"
+        Me.ResultsDataGridView.ReadOnly = True
+        Me.ResultsDataGridView.RowTemplate.Height = 24
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
+        Me.ResultsDataGridView.TabIndex = 0
+        '
         'DataEditingTabPage
         '
         Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
@@ -542,32 +574,6 @@ Partial Class Form1
         Me.FlightContextLabel.Size = New System.Drawing.Size(53, 24)
         Me.FlightContextLabel.TabIndex = 0
         Me.FlightContextLabel.Text = "Data"
-        '
-        'ResultsTabPage
-        '
-        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
-        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.ResultsTabPage.Name = "ResultsTabPage"
-        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
-        Me.ResultsTabPage.TabIndex = 0
-        Me.ResultsTabPage.Text = "Results"
-        Me.ResultsTabPage.UseVisualStyleBackColor = True
-        '
-        'ResultsDataGridView
-        '
-        Me.ResultsDataGridView.AllowUserToAddRows = False
-        Me.ResultsDataGridView.AllowUserToDeleteRows = False
-        Me.ResultsDataGridView.AllowUserToOrderColumns = True
-        Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
-        Me.ResultsDataGridView.Name = "ResultsDataGridView"
-        Me.ResultsDataGridView.ReadOnly = True
-        Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
-        Me.ResultsDataGridView.TabIndex = 0
         '
         'MenuStrip1
         '
@@ -754,6 +760,40 @@ Partial Class Form1
         '
         Me.CapturesTableAdapter.ClearBeforeFill = True
         '
+        'XrefCompCountCaribouGridEX
+        '
+        Me.XrefCompCountCaribouGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.XrefCompCountCaribouGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.XrefCompCountCaribouGridEX.DataSource = Me.XrefCompCountCaribouBindingSource
+        XrefCompCountCaribouGridEX_DesignTimeLayout.LayoutString = resources.GetString("XrefCompCountCaribouGridEX_DesignTimeLayout.LayoutString")
+        Me.XrefCompCountCaribouGridEX.DesignTimeLayout = XrefCompCountCaribouGridEX_DesignTimeLayout
+        Me.XrefCompCountCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.XrefCompCountCaribouGridEX.GroupByBoxVisible = False
+        Me.XrefCompCountCaribouGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.XrefCompCountCaribouGridEX.Name = "XrefCompCountCaribouGridEX"
+        Me.XrefCompCountCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
+        Me.XrefCompCountCaribouGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(271, 285)
+        Me.XrefCompCountCaribouGridEX.TabIndex = 2
+        Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        '
+        'CompCountSplitContainer
+        '
+        Me.CompCountSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CompCountSplitContainer.Location = New System.Drawing.Point(3, 30)
+        Me.CompCountSplitContainer.Name = "CompCountSplitContainer"
+        '
+        'CompCountSplitContainer.Panel1
+        '
+        Me.CompCountSplitContainer.Panel1.Controls.Add(Me.CompositionCountsGridEX)
+        '
+        'CompCountSplitContainer.Panel2
+        '
+        Me.CompCountSplitContainer.Panel2.Controls.Add(Me.XrefCompCountCaribouGridEX)
+        Me.CompCountSplitContainer.Size = New System.Drawing.Size(756, 285)
+        Me.CompCountSplitContainer.SplitterDistance = 481
+        Me.CompCountSplitContainer.TabIndex = 3
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -804,6 +844,8 @@ Partial Class Form1
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.CampaignTabControl.ResumeLayout(False)
+        Me.ResultsTabPage.ResumeLayout(False)
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DataEditingTabPage.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.PerformLayout()
@@ -813,8 +855,6 @@ Partial Class Form1
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DataPanel.ResumeLayout(False)
         Me.DataPanel.PerformLayout()
-        Me.ResultsTabPage.ResumeLayout(False)
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.MainToolStrip.ResumeLayout(False)
@@ -826,6 +866,11 @@ Partial Class Form1
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefCompCountCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrefCompCountCaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CompCountSplitContainer.Panel1.ResumeLayout(False)
+        Me.CompCountSplitContainer.Panel2.ResumeLayout(False)
+        CType(Me.CompCountSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CompCountSplitContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -895,4 +940,6 @@ Partial Class Form1
     Friend WithEvents XrefPopulationCaribouBindingSource As BindingSource
     Friend WithEvents XrefPopulationCaribouTableAdapter As WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter
     Friend WithEvents XrefPopulationCaribouGridEX As Janus.Windows.GridEX.GridEX
+    Friend WithEvents CompCountSplitContainer As SplitContainer
+    Friend WithEvents XrefCompCountCaribouGridEX As Janus.Windows.GridEX.GridEX
 End Class

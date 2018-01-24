@@ -289,7 +289,11 @@ Public Class Form1
     End Sub
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
-        Try
+        'force save changes
+        SaveDataset()
+
+
+            Try
             'get some information about the survey flight to put in the header label so users know which survey flight they are editing
             Me.FlightContextLabel.Text = "Data"
             Dim CurrentFlight As String = "Data"
@@ -332,6 +336,9 @@ Public Class Form1
     End Sub
 
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
+        'force dataset save to database
+        SaveDataset()
+
         'user gets here when they select a campaign from the campaigns gridex
         Try
             'get the name of the survey campaign to put it into the survey flights header
