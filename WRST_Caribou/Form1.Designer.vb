@@ -210,12 +210,16 @@ Partial Class Form1
         '
         'CompositionCountsGridEX
         '
+        Me.CompositionCountsGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.CompositionCountsGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.CompositionCountsGridEX.DataSource = Me.CompositionCountsBindingSource
         CompositionCountsGridEX_DesignTimeLayout.LayoutString = resources.GetString("CompositionCountsGridEX_DesignTimeLayout.LayoutString")
         Me.CompositionCountsGridEX.DesignTimeLayout = CompositionCountsGridEX_DesignTimeLayout
         Me.CompositionCountsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CompositionCountsGridEX.GroupByBoxVisible = False
         Me.CompositionCountsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
+        Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.CompositionCountsGridEX.Size = New System.Drawing.Size(481, 285)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -712,8 +716,8 @@ Partial Class Form1
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.CampaignsTableAdapter = Me.CampaignsTableAdapter
-        Me.TableAdapterManager.CapturesTableAdapter = Nothing
-        Me.TableAdapterManager.CaribouTableAdapter = Nothing
+        Me.TableAdapterManager.CapturesTableAdapter = Me.CapturesTableAdapter
+        Me.TableAdapterManager.CaribouTableAdapter = Me.CaribouTableAdapter
         Me.TableAdapterManager.CompositionCountsTableAdapter = Me.CompositionCountsTableAdapter
         Me.TableAdapterManager.PopulationEstimateTableAdapter = Me.PopulationEstimateTableAdapter
         Me.TableAdapterManager.RadioTrackingTableAdapter = Me.RadioTrackingTableAdapter

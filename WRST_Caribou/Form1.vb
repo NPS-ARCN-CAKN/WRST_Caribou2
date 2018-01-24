@@ -17,6 +17,8 @@ Public Class Form1
                     Me.SurveyFlightsBindingSource.EndEdit()
                     Me.CampaignsBindingSource.EndEdit()
                     Me.XrefPopulationCaribouBindingSource.EndEdit()
+                    Me.XrefCompCountCaribouBindingSource.EndEdit()
+                    Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
                     Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
                 End If
             End If
@@ -56,6 +58,7 @@ Public Class Form1
         SetUpGridEX(Me.CompositionCountsGridEX, Editable)
         SetUpGridEX(Me.PopulationEstimateGridEX, Editable)
         SetUpGridEX(Me.RadioTrackingGridEX, Editable)
+        SetUpGridEX(Me.XrefCompCountCaribouGridEX, Editable)
         SetUpGridEX(Me.XrefPopulationCaribouGridEX, Editable)
         SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX, Editable)
 
@@ -289,11 +292,7 @@ Public Class Form1
     End Sub
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
-        'force save changes
-        SaveDataset()
-
-
-            Try
+        Try
             'get some information about the survey flight to put in the header label so users know which survey flight they are editing
             Me.FlightContextLabel.Text = "Data"
             Dim CurrentFlight As String = "Data"
@@ -336,9 +335,6 @@ Public Class Form1
     End Sub
 
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
-        'force dataset save to database
-        SaveDataset()
-
         'user gets here when they select a campaign from the campaigns gridex
         Try
             'get the name of the survey campaign to put it into the survey flights header
@@ -532,7 +528,17 @@ Public Class Form1
                         'Load the waypoints into a datatable
                         If Not WaypointsImportDataTable Is Nothing Then
                             If WaypointsImportDataTable.Rows.Count > 0 Then
+
+                                'GroupNumber should be an autonumber column.  it's possible that the user will import more waypoints after already having done so
+                                'get the max existing GroupNumber so we can increment by one
                                 Dim GroupNumber As Integer = 1
+                                'find out if there are existing waypoints, if so, set the groupnumber to the max value
+                                Dim CurrentDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("PopulationEstimate")
+                                Dim Filter As String = "FlightID='" & FlightID & "'"
+                                Dim MaxGroupNumberDataView As DataView = New DataView(CurrentDataTable, Filter, "", DataViewRowState.CurrentRows)
+                                If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
+                                    GroupNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
+                                End If
 
 
                                 'loop through the records in the import file, extract values
@@ -667,8 +673,17 @@ Public Class Form1
                         'Load the waypoints into a datatable
                         If Not WaypointsImportDataTable Is Nothing Then
                             If WaypointsImportDataTable.Rows.Count > 0 Then
-                                Dim GroupNumber As Integer = 1
 
+                                'GroupNumber should be an autonumber column.  it's possible that the user will import more waypoints after already having done so
+                                'get the max existing GroupNumber so we can increment by one
+                                Dim GroupNumber As Integer = 1
+                                'find out if there are existing waypoints, if so, set the groupnumber to the max value
+                                Dim CurrentDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("CompositionCounts")
+                                Dim Filter As String = "FlightID='" & FlightID & "'"
+                                Dim MaxGroupNumberDataView As DataView = New DataView(CurrentDataTable, Filter, "", DataViewRowState.CurrentRows)
+                                If MaxGroupNumberDataView.ToTable.Rows.Count > 0 Then
+                                    GroupNumber = MaxGroupNumberDataView.ToTable.Compute("Max(GroupNumber)", Filter) + 1
+                                End If
 
                                 'loop through the records in the import file, extract values
                                 For Each Row As DataRow In WaypointsImportDataTable.Rows
