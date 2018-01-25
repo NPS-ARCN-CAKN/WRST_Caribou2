@@ -119,6 +119,7 @@
     <Compile Include="SplashScreen1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utilites.vb" />
     <Compile Include="WaypointsPreviewForm.Designer.vb">
       <DependentUpon>WaypointsPreviewForm.vb</DependentUpon>
     </Compile>

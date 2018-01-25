@@ -28,7 +28,6 @@ Partial Class WaypointsPreviewForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SearchAreaComboBox = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.CorrectCheckBox = New System.Windows.Forms.CheckBox()
         Me.PreviewDataGridView = New System.Windows.Forms.DataGridView()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.WaypointsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -42,6 +41,7 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CorrectCheckBox = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PreviewDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -87,19 +87,6 @@ Partial Class WaypointsPreviewForm
         Me.Label1.Size = New System.Drawing.Size(913, 43)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = resources.GetString("Label1.Text")
-        '
-        'CorrectCheckBox
-        '
-        Me.CorrectCheckBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CorrectCheckBox.AutoSize = True
-        Me.CorrectCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CorrectCheckBox.Location = New System.Drawing.Point(390, 11)
-        Me.CorrectCheckBox.Name = "CorrectCheckBox"
-        Me.CorrectCheckBox.Size = New System.Drawing.Size(546, 21)
-        Me.CorrectCheckBox.TabIndex = 0
-        Me.CorrectCheckBox.Text = "This data is correct and ready for inporting. (Close the form to cancel)."
-        Me.CorrectCheckBox.UseVisualStyleBackColor = True
         '
         'PreviewDataGridView
         '
@@ -210,6 +197,19 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 27)
         '
+        'CorrectCheckBox
+        '
+        Me.CorrectCheckBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CorrectCheckBox.AutoSize = True
+        Me.CorrectCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CorrectCheckBox.Location = New System.Drawing.Point(390, 11)
+        Me.CorrectCheckBox.Name = "CorrectCheckBox"
+        Me.CorrectCheckBox.Size = New System.Drawing.Size(541, 21)
+        Me.CorrectCheckBox.TabIndex = 0
+        Me.CorrectCheckBox.Text = "This data is correctand ready for inporting. (Close the form to cancel)."
+        Me.CorrectCheckBox.UseVisualStyleBackColor = True
+        '
         'WaypointsPreviewForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -237,7 +237,6 @@ Partial Class WaypointsPreviewForm
 
     End Sub
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents CorrectCheckBox As CheckBox
     Friend WithEvents Label1 As Label
     Friend WithEvents PreviewDataGridView As DataGridView
     Friend WithEvents Panel2 As Panel
@@ -254,4 +253,5 @@ Partial Class WaypointsPreviewForm
     Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
     Friend WithEvents SearchAreaComboBox As ComboBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents CorrectCheckBox As CheckBox
 End Class

@@ -43,4 +43,16 @@ Public Class WaypointsPreviewForm
             row.Item("SearchArea") = Me.SearchAreaComboBox.Text
         Next
     End Sub
+
+    Private Sub WaypointsPreviewForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'this line loads the csv list of search areas from my.settings into a datatable
+        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+
+        'load in the searcharea items into the combobox
+        For Each Row As DataRow In SearchAreasDataTable.Rows
+            Me.SearchAreaComboBox.Items.Add(Row.Item("SearchArea"))
+        Next
+    End Sub
+
+
 End Class
