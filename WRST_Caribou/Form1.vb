@@ -20,6 +20,7 @@ Public Class Form1
                     Me.XrefCompCountCaribouBindingSource.EndEdit()
                     Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
                     Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+                    Me.WRST_CaribouDataSet.AcceptChanges()
                 End If
             End If
         Catch ex As Exception
@@ -49,6 +50,8 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.RadioTracking' table. You can move, or remove it, as needed.
+        Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
         'load the data from the WRST_Caribou Sql Server database
         LoadDataset()
 
@@ -69,10 +72,98 @@ Public Class Form1
         'Set up the SurveysGridEX default values and dropdowns
         SetUpSurveysGridEX()
 
+        'Set up the RadiotrackingGridEX default values and dropdowns
+        SetUpRadiotrackingGridEX()
+
+
         'maximize form
         Me.WindowState = FormWindowState.Maximized
 
     End Sub
+
+    ''' <summary>
+    ''' Sets up the RadiotrackingGridEX with default values and other settings
+    ''' </summary>
+    Private Sub SetUpRadiotrackingGridEX()
+        Try
+            'Set up default values
+            Dim Grid As GridEX = Me.RadioTrackingGridEX
+
+            'Herd dropdown
+            With Grid.RootTable.Columns("Herd")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysHerdList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Herd").ValueList
+            SurveysHerdList.Add("Chisana", "Chisana")
+            SurveysHerdList.Add("Mentasta", "Mentasta")
+
+            'Mode dropdown
+            With Grid.RootTable.Columns("Mode")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysModeList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Mode").ValueList
+            SurveysModeList.Add("A", "Automatic")
+            SurveysModeList.Add("M", "Manual")
+
+            'Accuracy dropdown
+            With Grid.RootTable.Columns("Accuracy")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysAccuracyList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Accuracy").ValueList
+            SurveysAccuracyList.Add(1, 1)
+            SurveysAccuracyList.Add(2, 2)
+            SurveysAccuracyList.Add(3, 3)
+
+            'load the radiotracking gridex search areas dropdown
+            With Grid.RootTable.Columns("SearchArea")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            'this line loads the csv list of search areas from my.settings into a datatable
+            Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+            'get a ref to the searchareas valuelist
+            Dim SearchAreasList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("SearchArea").ValueList
+            'load in the searcharea items into the combobox
+            For Each Row As DataRow In SearchAreasDataTable.Rows
+                Dim SearchArea As String = Row.Item("SearchArea")
+                SearchAreasList.Add(SearchArea, SearchArea)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Returns the list of SearchAreas in My.Settings.SearchAreas as a DataTable
+    ''' </summary>
+    ''' <returns>DataTable of search areas</returns>
+    Public Function GetSearchAreasDataTable() As DataTable
+        ' Create new DataTable instance.
+        Dim MyDataTable As New DataTable("SearchAreas")
+
+        ' Create four typed columns in the DataTable.
+        With MyDataTable
+            .Columns.Add("SearchArea", GetType(String))
+        End With
+
+        Try
+            ' Split string based on spaces and add them as rows to the datatable
+            Dim SearchAreas As String() = My.Settings.SearchAreas.Split(",")
+            For Each SearchArea In SearchAreas
+                MyDataTable.Rows.Add(SearchArea)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return MyDataTable
+    End Function
 
     ''' <summary>
     ''' Sets up the SurveysGridEX default values and DropDowns/Combos
@@ -86,19 +177,14 @@ Public Class Form1
         Grid.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
         Grid.RootTable.Columns("CertificationLevel").DefaultValue = "Provisional"
 
-        'set up xrefpopulationsurveys default values
-        'With Me.XrefPopulationCaribouGridEX
-        '    .RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou"
-        'End With
-
         'CrewNumber default value
-        Dim MaxGroupNumber As Integer = 0
+        Dim MaxCrewNumber As Integer = 0
         For Each row As GridEXRow In Grid.GetRows()
-            If row.Cells("CrewNumber").Value > MaxGroupNumber Then
-                MaxGroupNumber = row.Cells("CrewNumber").Value
+            If row.Cells("CrewNumber").Value > MaxCrewNumber Then
+                MaxCrewNumber = row.Cells("CrewNumber").Value
             End If
         Next
-        Grid.RootTable.Columns("CrewNumber").DefaultValue = MaxGroupNumber + 1
+        Grid.RootTable.Columns("CrewNumber").DefaultValue = MaxCrewNumber + 1
 
         'SOPVersion default value
         Dim MaxSOPVersion As Integer = 0
@@ -291,49 +377,7 @@ Public Class Form1
         MsgBox(AboutText)
     End Sub
 
-    Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
-        Try
-            'get some information about the survey flight to put in the header label so users know which survey flight they are editing
-            Me.FlightContextLabel.Text = "Data"
-            Dim CurrentFlight As String = "Data"
-            Dim CrewNumber As Integer = 0
-            Dim TailNo As String = ""
-            Dim Pilot As String = ""
-            Dim Observer1 As String = ""
-            Dim TimeDepart As Date = "1/1/1111"
-            If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
-                If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart") Is Nothing Then
-                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value) Then CrewNumber = Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value
-                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value) Then Pilot = Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value Else Pilot = ""
-                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
-                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
-                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
-                End If
-                CurrentFlight = "Data: " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
-                Me.FlightContextLabel.Text = CurrentFlight
-            End If
-
-            'set up the Survey Flight GridEX
-            SetUpSurveysGridEX()
-
-            'Set up default values
-            Me.SurveyFlightsGridEX.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
-            Me.SurveyFlightsGridEX.RootTable.Columns("SOPNumber").DefaultValue = 0
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-    End Sub
-
-    Private Sub SaveDatasetToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveDatasetToolStripButton.Click
-        SaveDataset()
-    End Sub
-
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If Me.WRST_CaribouDataSet.HasChanges Then
-            SaveDataset()
-        End If
-    End Sub
-
+#Region "GridEX_SelectionChanged"
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
         'user gets here when they select a campaign from the campaigns gridex
         Try
@@ -352,6 +396,9 @@ Public Class Form1
                 If Not Me.CampaignsGridEX.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value) Then
                     Dim CampaignHerd As String = Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value
                     Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+
+                    'while we're here set up the Herd column in the radiotracking gridex to match what's in the campaign
+                    Me.RadioTrackingGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
                 Else
                     Me.CampaignContextLabel.Text = CurrentCampaign
                 End If
@@ -376,8 +423,8 @@ Public Class Form1
                     Case "Population"
                         Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
                         DisableUnneededTabs("Population")
-                        'loads the results of the population survey into the Results GridEX
-                        LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
+                    'loads the results of the population survey into the Results GridEX
+                    'LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
                     Case "Radiotracking"
                         Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
                         DisableUnneededTabs("Radiotracking")
@@ -385,12 +432,76 @@ Public Class Form1
                         Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
                 End Select
             End If
-
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
+
+    Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
+        Try
+            'get some information about the survey flight to put in the header label so users know which survey flight they are editing
+            Me.FlightContextLabel.Text = "Data"
+            Dim CurrentFlight As String = "Data"
+            Dim CrewNumber As Integer = 0
+            Dim TailNo As String = ""
+            Dim Pilot As String = ""
+            Dim Observer1 As String = ""
+            Dim TimeDepart As Date = "1/1/1111"
+            Dim FlightID As String = ""
+            If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
+                If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart") Is Nothing Then
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID").Value) Then FlightID = Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID").Value
+                    'set up radiotrackingGridEX FlightID default value to match the current record
+                    Me.RadioTrackingGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
+
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value) Then CrewNumber = Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value) Then Pilot = Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value Else Pilot = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
+                End If
+                CurrentFlight = "Data: " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
+                Me.FlightContextLabel.Text = CurrentFlight
+            End If
+
+
+            'set up the Survey Flight GridEX
+            SetUpSurveysGridEX()
+
+            'Set up default values
+            Me.SurveyFlightsGridEX.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
+            Me.SurveyFlightsGridEX.RootTable.Columns("SOPNumber").DefaultValue = 0
+
+            'load the GPS collared animals into the RadiotrackingGridEX's AnimalID combobox
+            LoadCollaredCaribouDropdown(Me.RadioTrackingGridEX, TimeDepart)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    Private Sub XrefRadiotrackingCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.SelectionChanged
+        Dim Grid As GridEX = Me.XrefRadiotrackingCaribouGridEX
+        Grid.RootTable.Columns("RTCID").DefaultValue = Guid.NewGuid.ToString 'primary key
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+    End Sub
+
+#End Region
+
+
+
+    Private Sub SaveDatasetToolStripButton_Click(sender As Object, e As EventArgs) Handles SaveDatasetToolStripButton.Click
+        SaveDataset()
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If Me.WRST_CaribouDataSet.HasChanges Then
+            SaveDataset()
+        End If
+    End Sub
+
+
 
     ''' <summary>
     ''' Disables all tab pages in the SurveyDataTabControl except any matching the EnabledTabPageText string.
@@ -438,9 +549,9 @@ Public Class Form1
     ''' <param name="CampaignID"></param>
     Private Sub LoadPopulationEstimateSurveyResults(CampaignID As String)
         Try
-            Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
-            Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            Me.ResultsDataGridView.DataSource = ResultsDataTable
+            'Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
+            'Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            'Me.ResultsDataGridView.DataSource = ResultsDataTable
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -844,10 +955,7 @@ Public Class Form1
         ImportCompositionCountDNRGarminWaypoints()
     End Sub
 
-    Private Sub ResultsByToolStripButton_Click(sender As Object, e As EventArgs)
-        'loads the results of the population survey into the Results GridEX
-        LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
-    End Sub
+
 
 
 
@@ -964,33 +1072,33 @@ ORDER BY Collars.Frequency"
             Dim CCID As String = ""
             Dim SightingDate As Date
 
-        'get the sighting date to use later, and get the CCID to relate to any new xrefcariboucomposition records
-        With Me.CompositionCountsGridEX
-            If Not .CurrentRow Is Nothing Then
-                'get the SightingDate
-                If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
-                    If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
-                End If
+            'get the sighting date to use later, and get the CCID to relate to any new xrefcariboucomposition records
+            With Me.CompositionCountsGridEX
+                If Not .CurrentRow Is Nothing Then
+                    'get the SightingDate
+                    If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
+                    End If
 
-                'set up the CCID primary key for syncing with the group
-                If Not .CurrentRow.Cells("CCID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID")) Then
-                    If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
-                        CCID = .CurrentRow.Cells("CCID").Value
+                    'set up the CCID primary key for syncing with the group
+                    If Not .CurrentRow.Cells("CCID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
+                            CCID = .CurrentRow.Cells("CCID").Value
+                        End If
                     End If
                 End If
-            End If
-        End With
+            End With
 
-        'set up default values
-        With Me.XrefCompCountCaribouGridEX.RootTable
-            .Columns("CCID").DefaultValue = CCID
-        End With
+            'set up default values
+            With Me.XrefCompCountCaribouGridEX.RootTable
+                .Columns("CCID").DefaultValue = CCID
+            End With
 
-        'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
-        'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
-        LoadCollaredCaribouDropdown(Me.XrefCompCountCaribouGridEX, SightingDate)
+            'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
+            'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
+            LoadCollaredCaribouDropdown(Me.XrefCompCountCaribouGridEX, SightingDate)
         Catch ex As Exception
-        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
@@ -1005,8 +1113,22 @@ ORDER BY Collars.Frequency"
     Private Sub RadioTrackingGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.SelectionChanged
         'when the user clicks on a radiotracking survey caribou group, then load the xrefcaribouradiotracking gridex with available 
         'gps collars to allow the user to associate a collared caribou with the observed group
-
         Try
+            'GroupNumber default value
+            Dim MaxGroupNumber As Integer = 0
+            For Each Row As GridEXRow In Me.RadioTrackingGridEX.GetRows()
+                If Row.Cells("GroupNumber").Value > MaxGroupNumber Then
+                    MaxGroupNumber = Row.Cells("GroupNumber").Value
+                End If
+            Next
+            Me.RadioTrackingGridEX.RootTable.Columns("GroupNumber").DefaultValue = MaxGroupNumber + 1
+
+            'Set up default values
+            Dim Grid As GridEX = Me.RadioTrackingGridEX
+            Grid.RootTable.Columns("RTID").DefaultValue = Guid.NewGuid.ToString 'primary key
+            Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+
             'determine the RTID, primary key of the caribou group record, and set the default value to the new xrefcaribouRadiotracking record
             Dim RTID As String = ""
             Dim SightingDate As Date
@@ -1032,16 +1154,32 @@ ORDER BY Collars.Frequency"
             'if we have a valid observation date and an RTID then load the collar selector dropdown with available collars
             'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
             LoadCollaredCaribouDropdown(Me.XrefRadiotrackingCaribouGridEX, SightingDate)
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
-    Private Sub XrefRadiotrackingCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.SelectionChanged
-        Dim Grid As GridEX = Me.XrefRadiotrackingCaribouGridEX
-        Grid.RootTable.Columns("RTCID").DefaultValue = Guid.NewGuid.ToString 'primary key
-        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
-        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+#Region "GridEX_Validated"
+    Private Sub CampaignsGridEX_Validated(sender As Object, e As EventArgs) Handles CampaignsGridEX.Validated
+        Me.CampaignsBindingSource.EndEdit()
     End Sub
+
+    Private Sub SurveyFlightsGridEX_Validated(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.Validated
+        Me.SurveyFlightsBindingSource.EndEdit()
+    End Sub
+
+    Private Sub CompositionCountsGridEX_Validated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.Validated
+        Me.CompositionCountsBindingSource.EndEdit()
+    End Sub
+
+    Private Sub PopulationEstimateGridEX_Validated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.Validated
+        Me.PopulationEstimateBindingSource.EndEdit()
+    End Sub
+
+    Private Sub RadioTrackingGridEX_Validated(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.Validated
+        Me.RadioTrackingBindingSource.EndEdit()
+    End Sub
+#End Region
+
 End Class

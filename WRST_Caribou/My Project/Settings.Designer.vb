@@ -77,6 +77,18 @@ Namespace My
                 Me("Animal_MovementConnectionString") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon")>  _
+        Public Property SearchAreas() As String
+            Get
+                Return CType(Me("SearchAreas"),String)
+            End Get
+            Set
+                Me("SearchAreas") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

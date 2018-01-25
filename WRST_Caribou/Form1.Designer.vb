@@ -59,13 +59,13 @@ Partial Class Form1
         Me.RadioTrackingGridEX = New Janus.Windows.GridEX.GridEX()
         Me.RadioTrackingBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.XrefRadiotrackingCaribouBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.RadiotrackingToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.ImportRadiotrackingWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CampaignsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CampaignLabel = New System.Windows.Forms.Label()
         Me.CampaignTabControl = New System.Windows.Forms.TabControl()
-        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
-        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
         Me.SurveyFlightsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.CampaignContextLabel = New System.Windows.Forms.Label()
@@ -73,6 +73,8 @@ Partial Class Form1
         Me.SurveysPanel = New System.Windows.Forms.Panel()
         Me.DataPanel = New System.Windows.Forms.Panel()
         Me.FlightContextLabel = New System.Windows.Forms.Label()
+        Me.ResultsTabPage = New System.Windows.Forms.TabPage()
+        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveChangesToDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -86,6 +88,7 @@ Partial Class Form1
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CampaignsTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CampaignsTableAdapter()
@@ -132,15 +135,14 @@ Partial Class Form1
         CType(Me.RadioTrackingGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadioTrackingBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrefRadiotrackingCaribouBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RadiotrackingToolStrip.SuspendLayout()
         CType(Me.CampaignsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CampaignsSplitContainer.Panel1.SuspendLayout()
         Me.CampaignsSplitContainer.Panel2.SuspendLayout()
         Me.CampaignsSplitContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.CampaignTabControl.SuspendLayout()
-        Me.ResultsTabPage.SuspendLayout()
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DataEditingTabPage.SuspendLayout()
         CType(Me.SurveyFlightsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyFlightsSplitContainer.Panel1.SuspendLayout()
@@ -148,12 +150,15 @@ Partial Class Form1
         Me.SurveyFlightsSplitContainer.SuspendLayout()
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DataPanel.SuspendLayout()
+        Me.ResultsTabPage.SuspendLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.MainTabControl.SuspendLayout()
         Me.SurveysTabPage.SuspendLayout()
         Me.CaribouTabPage.SuspendLayout()
         CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -395,6 +400,7 @@ Partial Class Form1
         'RadiotrackingTabPage
         '
         Me.RadiotrackingTabPage.Controls.Add(Me.RadioTrackingSplitContainer)
+        Me.RadiotrackingTabPage.Controls.Add(Me.RadiotrackingToolStrip)
         Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 25)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
         Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
@@ -406,18 +412,19 @@ Partial Class Form1
         'RadioTrackingSplitContainer
         '
         Me.RadioTrackingSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadioTrackingSplitContainer.Location = New System.Drawing.Point(3, 3)
+        Me.RadioTrackingSplitContainer.Location = New System.Drawing.Point(3, 30)
         Me.RadioTrackingSplitContainer.Name = "RadioTrackingSplitContainer"
         '
         'RadioTrackingSplitContainer.Panel1
         '
+        Me.RadioTrackingSplitContainer.Panel1.AutoScroll = True
         Me.RadioTrackingSplitContainer.Panel1.Controls.Add(Me.RadioTrackingGridEX)
         '
         'RadioTrackingSplitContainer.Panel2
         '
         Me.RadioTrackingSplitContainer.Panel2.AutoScroll = True
         Me.RadioTrackingSplitContainer.Panel2.Controls.Add(Me.XrefRadiotrackingCaribouGridEX)
-        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(756, 312)
+        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(756, 285)
         Me.RadioTrackingSplitContainer.SplitterDistance = 398
         Me.RadioTrackingSplitContainer.TabIndex = 2
         '
@@ -430,11 +437,11 @@ Partial Class Form1
         Me.RadioTrackingGridEX.DesignTimeLayout = RadioTrackingGridEX_DesignTimeLayout
         Me.RadioTrackingGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadioTrackingGridEX.GroupByBoxVisible = False
+        Me.RadioTrackingGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.RadioTrackingGridEX.Location = New System.Drawing.Point(0, 0)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
         Me.RadioTrackingGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.RadioTrackingGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(398, 312)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(398, 285)
         Me.RadioTrackingGridEX.TabIndex = 0
         '
         'RadioTrackingBindingSource
@@ -446,6 +453,7 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouGridEX.AllowAddNew = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.XrefRadiotrackingCaribouGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.XrefRadiotrackingCaribouGridEX.DataSource = Me.XrefRadiotrackingCaribouBindingSource1
         XrefRadiotrackingCaribouGridEX_DesignTimeLayout.LayoutString = resources.GetString("XrefRadiotrackingCaribouGridEX_DesignTimeLayout.LayoutString")
         Me.XrefRadiotrackingCaribouGridEX.DesignTimeLayout = XrefRadiotrackingCaribouGridEX_DesignTimeLayout
         Me.XrefRadiotrackingCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
@@ -453,15 +461,32 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.Location = New System.Drawing.Point(0, 0)
         Me.XrefRadiotrackingCaribouGridEX.Name = "XrefRadiotrackingCaribouGridEX"
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefRadiotrackingCaribouGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(354, 312)
+        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(354, 285)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
-        Me.XrefRadiotrackingCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
-        'CaribouBindingSource
+        'XrefRadiotrackingCaribouBindingSource1
         '
-        Me.CaribouBindingSource.DataMember = "Caribou"
-        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
+        Me.XrefRadiotrackingCaribouBindingSource1.DataMember = "FK_xrefRadiotrackingCaribou_RadioTracking"
+        Me.XrefRadiotrackingCaribouBindingSource1.DataSource = Me.RadioTrackingBindingSource
+        '
+        'RadiotrackingToolStrip
+        '
+        Me.RadiotrackingToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportRadiotrackingWaypointsToolStripButton})
+        Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
+        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(756, 27)
+        Me.RadiotrackingToolStrip.TabIndex = 1
+        Me.RadiotrackingToolStrip.Text = "ToolStrip1"
+        '
+        'ImportRadiotrackingWaypointsToolStripButton
+        '
+        Me.ImportRadiotrackingWaypointsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ImportRadiotrackingWaypointsToolStripButton.Image = CType(resources.GetObject("ImportRadiotrackingWaypointsToolStripButton.Image"), System.Drawing.Image)
+        Me.ImportRadiotrackingWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportRadiotrackingWaypointsToolStripButton.Name = "ImportRadiotrackingWaypointsToolStripButton"
+        Me.ImportRadiotrackingWaypointsToolStripButton.Size = New System.Drawing.Size(230, 24)
+        Me.ImportRadiotrackingWaypointsToolStripButton.Text = "Import radiotracking waypoints..."
         '
         'CampaignsSplitContainer
         '
@@ -502,40 +527,14 @@ Partial Class Form1
         '
         'CampaignTabControl
         '
-        Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
         Me.CampaignTabControl.Controls.Add(Me.DataEditingTabPage)
+        Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
         Me.CampaignTabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CampaignTabControl.Location = New System.Drawing.Point(0, 0)
         Me.CampaignTabControl.Name = "CampaignTabControl"
         Me.CampaignTabControl.SelectedIndex = 0
         Me.CampaignTabControl.Size = New System.Drawing.Size(784, 603)
         Me.CampaignTabControl.TabIndex = 4
-        '
-        'ResultsTabPage
-        '
-        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
-        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
-        Me.ResultsTabPage.Name = "ResultsTabPage"
-        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
-        Me.ResultsTabPage.TabIndex = 0
-        Me.ResultsTabPage.Text = "Results"
-        Me.ResultsTabPage.UseVisualStyleBackColor = True
-        '
-        'ResultsDataGridView
-        '
-        Me.ResultsDataGridView.AllowUserToAddRows = False
-        Me.ResultsDataGridView.AllowUserToDeleteRows = False
-        Me.ResultsDataGridView.AllowUserToOrderColumns = True
-        Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
-        Me.ResultsDataGridView.Name = "ResultsDataGridView"
-        Me.ResultsDataGridView.ReadOnly = True
-        Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
-        Me.ResultsDataGridView.TabIndex = 0
         '
         'DataEditingTabPage
         '
@@ -623,6 +622,32 @@ Partial Class Form1
         Me.FlightContextLabel.Size = New System.Drawing.Size(53, 24)
         Me.FlightContextLabel.TabIndex = 0
         Me.FlightContextLabel.Text = "Data"
+        '
+        'ResultsTabPage
+        '
+        Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
+        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.ResultsTabPage.Name = "ResultsTabPage"
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 574)
+        Me.ResultsTabPage.TabIndex = 0
+        Me.ResultsTabPage.Text = "Results"
+        Me.ResultsTabPage.UseVisualStyleBackColor = True
+        '
+        'ResultsDataGridView
+        '
+        Me.ResultsDataGridView.AllowUserToAddRows = False
+        Me.ResultsDataGridView.AllowUserToDeleteRows = False
+        Me.ResultsDataGridView.AllowUserToOrderColumns = True
+        Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 3)
+        Me.ResultsDataGridView.Name = "ResultsDataGridView"
+        Me.ResultsDataGridView.ReadOnly = True
+        Me.ResultsDataGridView.RowTemplate.Height = 24
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 568)
+        Me.ResultsDataGridView.TabIndex = 0
         '
         'MenuStrip1
         '
@@ -738,6 +763,11 @@ Partial Class Form1
         Me.CaribouGridEX.Size = New System.Drawing.Size(1181, 603)
         Me.CaribouGridEX.TabIndex = 0
         '
+        'CaribouBindingSource
+        '
+        Me.CaribouBindingSource.DataMember = "Caribou"
+        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
         'CapturesBindingSource
         '
         Me.CapturesBindingSource.DataMember = "FK_Captures_Caribou"
@@ -845,6 +875,7 @@ Partial Class Form1
         Me.PopulationToolStrip.ResumeLayout(False)
         Me.PopulationToolStrip.PerformLayout()
         Me.RadiotrackingTabPage.ResumeLayout(False)
+        Me.RadiotrackingTabPage.PerformLayout()
         Me.RadioTrackingSplitContainer.Panel1.ResumeLayout(False)
         Me.RadioTrackingSplitContainer.Panel2.ResumeLayout(False)
         CType(Me.RadioTrackingSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
@@ -852,7 +883,9 @@ Partial Class Form1
         CType(Me.RadioTrackingGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadioTrackingBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrefRadiotrackingCaribouBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RadiotrackingToolStrip.ResumeLayout(False)
+        Me.RadiotrackingToolStrip.PerformLayout()
         Me.CampaignsSplitContainer.Panel1.ResumeLayout(False)
         Me.CampaignsSplitContainer.Panel2.ResumeLayout(False)
         CType(Me.CampaignsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
@@ -860,8 +893,6 @@ Partial Class Form1
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.CampaignTabControl.ResumeLayout(False)
-        Me.ResultsTabPage.ResumeLayout(False)
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DataEditingTabPage.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.ResumeLayout(False)
         Me.SurveyFlightsSplitContainer.Panel1.PerformLayout()
@@ -871,6 +902,8 @@ Partial Class Form1
         CType(Me.SurveyFlightsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DataPanel.ResumeLayout(False)
         Me.DataPanel.PerformLayout()
+        Me.ResultsTabPage.ResumeLayout(False)
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.MainToolStrip.ResumeLayout(False)
@@ -879,6 +912,7 @@ Partial Class Form1
         Me.SurveysTabPage.ResumeLayout(False)
         Me.CaribouTabPage.ResumeLayout(False)
         CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -905,9 +939,6 @@ Partial Class Form1
     Friend WithEvents PopulationEstimateTableAdapter As WRST_CaribouDataSetTableAdapters.PopulationEstimateTableAdapter
     Friend WithEvents PopulationEstimateGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents RadiotrackingTabPage As TabPage
-    Friend WithEvents RadioTrackingBindingSource As BindingSource
-    Friend WithEvents RadioTrackingTableAdapter As WRST_CaribouDataSetTableAdapters.RadioTrackingTableAdapter
-    Friend WithEvents RadioTrackingGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveChangesToDatabaseToolStripMenuItem As ToolStripMenuItem
@@ -944,7 +975,6 @@ Partial Class Form1
     Friend WithEvents DataEditingTabPage As TabPage
     Friend WithEvents ResultsDataGridView As DataGridView
     Friend WithEvents RadioTrackingSplitContainer As SplitContainer
-    Friend WithEvents XrefRadiotrackingCaribouGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents XrefPopulationCaribouBindingSource As BindingSource
     Friend WithEvents XrefPopulationCaribouTableAdapter As WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter
     Friend WithEvents XrefPopulationCaribouGridEX As Janus.Windows.GridEX.GridEX
@@ -952,4 +982,11 @@ Partial Class Form1
     Friend WithEvents XrefCompCountCaribouBindingSource As BindingSource
     Friend WithEvents XrefCompCountCaribouTableAdapter As WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter
     Friend WithEvents XrefCompCountCaribouGridEX As Janus.Windows.GridEX.GridEX
+    Friend WithEvents RadiotrackingToolStrip As ToolStrip
+    Friend WithEvents ImportRadiotrackingWaypointsToolStripButton As ToolStripButton
+    Friend WithEvents RadioTrackingBindingSource As BindingSource
+    Friend WithEvents RadioTrackingTableAdapter As WRST_CaribouDataSetTableAdapters.RadioTrackingTableAdapter
+    Friend WithEvents RadioTrackingGridEX As Janus.Windows.GridEX.GridEX
+    Friend WithEvents XrefRadiotrackingCaribouGridEX As Janus.Windows.GridEX.GridEX
+    Friend WithEvents XrefRadiotrackingCaribouBindingSource1 As BindingSource
 End Class

@@ -25,6 +25,8 @@ Partial Class WaypointsPreviewForm
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WaypointsPreviewForm))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.SearchAreaComboBox = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CorrectCheckBox = New System.Windows.Forms.CheckBox()
         Me.PreviewDataGridView = New System.Windows.Forms.DataGridView()
@@ -40,8 +42,6 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SearchAreaComboBox = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PreviewDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -60,6 +60,23 @@ Partial Class WaypointsPreviewForm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(948, 106)
         Me.Panel1.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(23, 58)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(141, 17)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Change search area:"
+        '
+        'SearchAreaComboBox
+        '
+        Me.SearchAreaComboBox.FormattingEnabled = True
+        Me.SearchAreaComboBox.Location = New System.Drawing.Point(170, 55)
+        Me.SearchAreaComboBox.Name = "SearchAreaComboBox"
+        Me.SearchAreaComboBox.Size = New System.Drawing.Size(241, 24)
+        Me.SearchAreaComboBox.TabIndex = 2
         '
         'Label1
         '
@@ -192,24 +209,6 @@ Partial Class WaypointsPreviewForm
         '
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 27)
-        '
-        'SearchAreaComboBox
-        '
-        Me.SearchAreaComboBox.FormattingEnabled = True
-        Me.SearchAreaComboBox.Items.AddRange(New Object() {"Alaska", "Copper River", "Mt. Drum", "Mt. Sanford", "Yukon"})
-        Me.SearchAreaComboBox.Location = New System.Drawing.Point(170, 55)
-        Me.SearchAreaComboBox.Name = "SearchAreaComboBox"
-        Me.SearchAreaComboBox.Size = New System.Drawing.Size(241, 24)
-        Me.SearchAreaComboBox.TabIndex = 2
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(23, 58)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(141, 17)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Change search area:"
         '
         'WaypointsPreviewForm
         '
