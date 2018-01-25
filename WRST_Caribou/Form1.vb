@@ -266,7 +266,6 @@ Public Class Form1
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         SaveDataset()
-        Me.Dispose()
         Me.Close()
     End Sub
 
@@ -368,15 +367,20 @@ Public Class Form1
 
                 'clear the results datagridview
                 Me.ResultsDataGridView.DataSource = Nothing
+
+                'bring forward the correct data entry tab based on the survey type
                 Select Case CurrentSurveyType
                     Case "Composition"
                         Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                        DisableUnneededTabs("Composition")
                     Case "Population"
                         Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
+                        DisableUnneededTabs("Population")
                         'loads the results of the population survey into the Results GridEX
                         LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
                     Case "Radiotracking"
                         Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
+                        DisableUnneededTabs("Radiotracking")
                     Case Else
                         Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
                 End Select
@@ -386,6 +390,20 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
+    End Sub
+
+    ''' <summary>
+    ''' Disables all tab pages in the SurveyDataTabControl except any matching the EnabledTabPageText string.
+    ''' </summary>
+    ''' <param name="EnabledTabPageText">Text of the tab page to enable.  Others disabled.  String.</param>
+    Private Sub DisableUnneededTabs(EnabledTabPageText As String)
+        For Each TabPage As TabPage In Me.SurveyDataTabControl.TabPages
+            If TabPage.Text = EnabledTabPageText Then
+                TabPage.Enabled = True
+            Else
+                TabPage.Enabled = False
+            End If
+        Next
     End Sub
 
     ''' <summary>
@@ -941,10 +959,10 @@ ORDER BY Collars.Frequency"
     Private Sub CompositionCountsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.SelectionChanged
         'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
         'gps collars to allow the user to associate a collared caribou with the observed group
-        'Try
-        'determine the CCID, primary key of the caribou group record, and set the default value to the new xrefcariboucomposition record
-        Dim CCID As String = ""
-        Dim SightingDate As Date
+        Try
+            'determine the CCID, primary key of the caribou group record, and set the default value to the new xrefcariboucomposition record
+            Dim CCID As String = ""
+            Dim SightingDate As Date
 
         'get the sighting date to use later, and get the CCID to relate to any new xrefcariboucomposition records
         With Me.CompositionCountsGridEX
@@ -955,11 +973,6 @@ ORDER BY Collars.Frequency"
                 End If
 
                 'set up the CCID primary key for syncing with the group
-                'If Not .CurrentRow.Cells("CCID") Is Nothing And Not .CurrentRow.Cells("CCID").Value Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
-                '    'If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
-                '    CCID = .CurrentRow.Cells("CCID").Value
-                '    'End If
-                'End If
                 If Not .CurrentRow.Cells("CCID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("CCID")) Then
                     If Not IsDBNull(.CurrentRow.Cells("CCID").Value) Then
                         CCID = .CurrentRow.Cells("CCID").Value
@@ -975,16 +988,58 @@ ORDER BY Collars.Frequency"
 
         'if we have a valid observation date and an EID then load the collar selector dropdown with available collars
         'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
-        Debug.Print(CCID & " " & SightingDate)
         LoadCollaredCaribouDropdown(Me.XrefCompCountCaribouGridEX, SightingDate)
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        'End Try
+        Catch ex As Exception
+        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
 
     Private Sub XrefCompCountCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefCompCountCaribouGridEX.SelectionChanged
         Dim Grid As GridEX = Me.XrefCompCountCaribouGridEX
         Grid.RootTable.Columns("CCCID").DefaultValue = Guid.NewGuid.ToString 'primary key
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+    End Sub
+
+    Private Sub RadioTrackingGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.SelectionChanged
+        'when the user clicks on a radiotracking survey caribou group, then load the xrefcaribouradiotracking gridex with available 
+        'gps collars to allow the user to associate a collared caribou with the observed group
+
+        Try
+            'determine the RTID, primary key of the caribou group record, and set the default value to the new xrefcaribouRadiotracking record
+            Dim RTID As String = ""
+            Dim SightingDate As Date
+
+            'get the sighting date to use later, and get the RTID to relate to any new xrefcaribouRadiotracking records
+            With Me.RadioTrackingGridEX
+                If Not .CurrentRow Is Nothing Then
+                    'get the SightingDate
+                    If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
+                    End If
+
+                    'set up the RTID primary key for syncing with the group
+                    If Not .CurrentRow.Cells("RTID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("RTID")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("RTID").Value) Then
+                            RTID = .CurrentRow.Cells("RTID").Value
+                        End If
+                    End If
+
+                End If
+            End With
+            Me.XrefRadiotrackingCaribouGridEX.RootTable.Columns("RTID").DefaultValue = RTID
+            'if we have a valid observation date and an RTID then load the collar selector dropdown with available collars
+            'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
+            LoadCollaredCaribouDropdown(Me.XrefRadiotrackingCaribouGridEX, SightingDate)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    Private Sub XrefRadiotrackingCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.SelectionChanged
+        Dim Grid As GridEX = Me.XrefRadiotrackingCaribouGridEX
+        Grid.RootTable.Columns("RTCID").DefaultValue = Guid.NewGuid.ToString 'primary key
         Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
         Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
         Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar

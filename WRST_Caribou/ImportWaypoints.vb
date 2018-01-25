@@ -17,7 +17,7 @@ Module ImportWaypoints
                     'load the file into the datatable
                     Dim Workbook As String = InputFileInfo.FullName 'the full path an name of the excel sheet
                     Dim Worksheet As String = InputFileInfo.Name.Replace(".xlsx", "").Replace(".xls", "") ' InputFileInfo.Name 'the name of the excel sheet
-                    Dim Sql As String = "SELECT * FROM [" & Worksheet & "$]" 'assumes the excel tab is named the same as the workbook
+                    Dim Sql As String = "SELECT * FROM [" & Worksheet & "$]"
                     Dim MyConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Workbook & ";Extended Properties='Excel 12.0 Xml;HDR=YES';"
                     Dim MyConnection As New OleDbConnection(MyConnectionString)
                     MyConnection.Open()
