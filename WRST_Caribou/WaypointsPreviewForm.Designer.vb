@@ -41,7 +41,7 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CorrectCheckBox = New System.Windows.Forms.CheckBox()
+        Me.ImportWaypointsButton = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.PreviewDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -104,7 +104,7 @@ Partial Class WaypointsPreviewForm
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.CorrectCheckBox)
+        Me.Panel2.Controls.Add(Me.ImportWaypointsButton)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 520)
         Me.Panel2.Name = "Panel2"
@@ -197,18 +197,14 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 27)
         '
-        'CorrectCheckBox
+        'ImportWaypointsButton
         '
-        Me.CorrectCheckBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CorrectCheckBox.AutoSize = True
-        Me.CorrectCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CorrectCheckBox.Location = New System.Drawing.Point(390, 11)
-        Me.CorrectCheckBox.Name = "CorrectCheckBox"
-        Me.CorrectCheckBox.Size = New System.Drawing.Size(541, 21)
-        Me.CorrectCheckBox.TabIndex = 0
-        Me.CorrectCheckBox.Text = "This data is correctand ready for inporting. (Close the form to cancel)."
-        Me.CorrectCheckBox.UseVisualStyleBackColor = True
+        Me.ImportWaypointsButton.Location = New System.Drawing.Point(791, 3)
+        Me.ImportWaypointsButton.Name = "ImportWaypointsButton"
+        Me.ImportWaypointsButton.Size = New System.Drawing.Size(145, 32)
+        Me.ImportWaypointsButton.TabIndex = 4
+        Me.ImportWaypointsButton.Text = "Import waypoints"
+        Me.ImportWaypointsButton.UseVisualStyleBackColor = True
         '
         'WaypointsPreviewForm
         '
@@ -227,7 +223,6 @@ Partial Class WaypointsPreviewForm
         Me.Panel1.PerformLayout()
         CType(Me.PreviewDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         CType(Me.WaypointsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WaypointsBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WaypointsBindingNavigator.ResumeLayout(False)
@@ -253,5 +248,5 @@ Partial Class WaypointsPreviewForm
     Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
     Friend WithEvents SearchAreaComboBox As ComboBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents CorrectCheckBox As CheckBox
+    Friend WithEvents ImportWaypointsButton As Button
 End Class
