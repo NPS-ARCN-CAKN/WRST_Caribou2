@@ -15656,548 +15656,480 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CompositionCounts] WHERE (([CCID] = @Original_CCID) AND ((@IsN"& _ 
-                "ull_TS = 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM CompositionCounts" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (CCID = @Original_CCID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CCID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CCID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CompositionCounts] ([SightingDate], [Herd], [GroupNumber], [Se"& _ 
-                "archArea], [SmallBull], [MediumBull], [LargeBull], [Cow], [Calf], [Indeterminate"& _ 
-                "], [Waypoint], [Frequencies], [FlightID], [CCID], [RecordInsertedDate], [RecordI"& _ 
-                "nsertedBy], [SourceFilename], [Comment], [Lat], [Lon]) VALUES (@SightingDate, @H"& _ 
-                "erd, @GroupNumber, @SearchArea, @SmallBull, @MediumBull, @LargeBull, @Cow, @Calf"& _ 
-                ", @Indeterminate, @Waypoint, @Frequencies, @FlightID, @CCID, @RecordInsertedDate"& _ 
-                ", @RecordInsertedBy, @SourceFilename, @Comment, @Lat, @Lon);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDat"& _ 
-                "e, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, I"& _ 
-                "ndeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordI"& _ 
-                "nsertedBy, TS, SourceFilename, Comment, Lat, Lon FROM CompositionCounts WHERE (C"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CompositionCounts] ([SightingDate], [Herd], [GroupNumber], [Se" &
+                "archArea], [SmallBull], [MediumBull], [LargeBull], [Cow], [Calf], [Indeterminate" &
+                "], [Waypoint], [Frequencies], [FlightID], [CCID], [RecordInsertedDate], [RecordI" &
+                "nsertedBy], [SourceFilename], [Comment], [Lat], [Lon]) VALUES (@SightingDate, @H" &
+                "erd, @GroupNumber, @SearchArea, @SmallBull, @MediumBull, @LargeBull, @Cow, @Calf" &
+                ", @Indeterminate, @Waypoint, @Frequencies, @FlightID, @CCID, @RecordInsertedDate" &
+                ", @RecordInsertedBy, @SourceFilename, @Comment, @Lat, @Lon);" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT SightingDat" &
+                "e, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, I" &
+                "ndeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordI" &
+                "nsertedBy, TS, SourceFilename, Comment, Lat, Lon FROM CompositionCounts WHERE (C" &
                 "CID = @CCID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Indeterminate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Indeterminate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequencies", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequencies", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CCID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Indeterminate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Indeterminate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequencies", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequencies", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CCID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[CompositionCounts] SET [SightingDate] = @SightingDate, [Herd] = @He"& _ 
-                "rd, [GroupNumber] = @GroupNumber, [SearchArea] = @SearchArea, [SmallBull] = @Sma"& _ 
-                "llBull, [MediumBull] = @MediumBull, [LargeBull] = @LargeBull, [Cow] = @Cow, [Cal"& _ 
-                "f] = @Calf, [Indeterminate] = @Indeterminate, [Waypoint] = @Waypoint, [Frequenci"& _ 
-                "es] = @Frequencies, [FlightID] = @FlightID, [CCID] = @CCID, [RecordInsertedDate]"& _ 
-                " = @RecordInsertedDate, [RecordInsertedBy] = @RecordInsertedBy, [SourceFilename]"& _ 
-                " = @SourceFilename, [Comment] = @Comment, [Lat] = @Lat, [Lon] = @Lon WHERE (([CC"& _ 
-                "ID] = @Original_CCID) AND ((@IsNull_TS = 1 AND [TS] IS NULL) OR ([TS] = @Origina"& _ 
-                "l_TS)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumB"& _ 
-                "ull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID,"& _ 
-                " RecordInsertedDate, RecordInsertedBy, TS, SourceFilename, Comment, Lat, Lon FRO"& _ 
-                "M CompositionCounts WHERE (CCID = @CCID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE CompositionCounts" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET          SightingDate = @SightingDate, Herd = @Herd" &
+                ", GroupNumber = @GroupNumber, SearchArea = @SearchArea, SmallBull = @SmallBull, " &
+                "MediumBull = @MediumBull, LargeBull = @LargeBull, Cow = @Cow, Calf = @Calf, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  " &
+                "                Indeterminate = @Indeterminate, Waypoint = @Waypoint, Frequencie" &
+                "s = @Frequencies, SourceFilename = @SourceFilename, Comment = @Comment, Lat = @L" &
+                "at, Lon = @Lon" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (CCID = @Original_CCID); " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT SightingDate, Herd, Gro" &
+                "upNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate" &
+                ", Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy, T" &
+                "S, SourceFilename, Comment, Lat, Lon FROM CompositionCounts WHERE (CCID = @CCID)" &
+                ""
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Indeterminate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Indeterminate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequencies", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequencies", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CCID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CCID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Indeterminate", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Indeterminate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequencies", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequencies", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CCID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CCID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CCID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
             Me._connection.ConnectionString = Global.WRST_Caribou.My.MySettings.Default.WRST_CaribouConnectionString
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeB"& _ 
-                "ull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInse"& _ 
-                "rtedDate, RecordInsertedBy, TS, SourceFilename, Comment, Lat, Lon FROM dbo.Compo"& _ 
+            Me._commandCollection(0).CommandText = "SELECT SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeB" &
+                "ull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInse" &
+                "rtedDate, RecordInsertedBy, TS, SourceFilename, Comment, Lat, Lon FROM dbo.Compo" &
                 "sitionCounts"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.CompositionCountsDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)>
+        Public Overridable Overloads Function Fill(ByVal dataTable As WRST_CaribouDataSet.CompositionCountsDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.CompositionCountsDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)>
+        Public Overridable Overloads Function GetData() As WRST_CaribouDataSet.CompositionCountsDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As WRST_CaribouDataSet.CompositionCountsDataTable = New WRST_CaribouDataSet.CompositionCountsDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.CompositionCountsDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataTable As WRST_CaribouDataSet.CompositionCountsDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "CompositionCounts")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_CCID As String, ByVal Original_TS() As Byte) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)>
+        Public Overridable Overloads Function Delete(ByVal Original_CCID As String) As Integer
             If (Original_CCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_CCID")
             Else
-                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_CCID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_CCID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert( _
-                    ByVal SightingDate As Date,  _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal Indeterminate As Integer,  _
-                    ByVal Waypoint As String,  _
-                    ByVal Frequencies As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal CCID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)>
+        Public Overridable Overloads Function Insert(
+                    ByVal SightingDate As Date,
+                    ByVal Herd As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal SearchArea As String,
+                    ByVal SmallBull As Integer,
+                    ByVal MediumBull As Integer,
+                    ByVal LargeBull As Integer,
+                    ByVal Cow As Integer,
+                    ByVal Calf As Integer,
+                    ByVal Indeterminate As Integer,
+                    ByVal Waypoint As String,
+                    ByVal Frequencies As String,
+                    ByVal FlightID As String,
+                    ByVal CCID As String,
+                    ByVal RecordInsertedDate As Date,
+                    ByVal RecordInsertedBy As String,
+                    ByVal SourceFilename As String,
+                    ByVal Comment As String,
+                    ByVal Lat As Decimal,
                     ByVal Lon As Decimal) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate,Date)
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(SightingDate, Date)
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Herd,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Herd, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(GroupNumber,Integer)
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(GroupNumber, Integer)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(SearchArea,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(SearchArea, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SmallBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(MediumBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(LargeBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(Cow,Integer)
-            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Calf,Integer)
-            Me.Adapter.InsertCommand.Parameters(9).Value = CType(Indeterminate,Integer)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SmallBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(MediumBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(LargeBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(Cow, Integer)
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Calf, Integer)
+            Me.Adapter.InsertCommand.Parameters(9).Value = CType(Indeterminate, Integer)
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(Waypoint,String)
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(Waypoint, String)
             End If
             If (Frequencies Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(Frequencies,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(Frequencies, String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(FlightID, String)
             End If
             If (CCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("CCID")
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(CCID,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(CCID, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(14).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(14).Value = CType(RecordInsertedDate, Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(RecordInsertedBy, String)
             End If
             If (SourceFilename Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(SourceFilename,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(SourceFilename, String)
             End If
             If (Comment Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(Comment,String)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(Comment, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(18).Value = CType(Lat,Decimal)
-            Me.Adapter.InsertCommand.Parameters(19).Value = CType(Lon,Decimal)
+            Me.Adapter.InsertCommand.Parameters(18).Value = CType(Lat, Decimal)
+            Me.Adapter.InsertCommand.Parameters(19).Value = CType(Lon, Decimal)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal SightingDate As Date,  _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal Indeterminate As Integer,  _
-                    ByVal Waypoint As String,  _
-                    ByVal Frequencies As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal CCID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Original_CCID As String,  _
-                    ByVal Original_TS() As Byte) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate,Date)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)>
+        Public Overridable Overloads Function Update(
+                    ByVal SightingDate As Date,
+                    ByVal Herd As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal SearchArea As String,
+                    ByVal SmallBull As Integer,
+                    ByVal MediumBull As Integer,
+                    ByVal LargeBull As Integer,
+                    ByVal Cow As Integer,
+                    ByVal Calf As Integer,
+                    ByVal Indeterminate As Integer,
+                    ByVal Waypoint As String,
+                    ByVal Frequencies As String,
+                    ByVal SourceFilename As String,
+                    ByVal Comment As String,
+                    ByVal Lat As Decimal,
+                    ByVal Lon As Decimal,
+                    ByVal Original_CCID As String,
+                    ByVal CCID As String) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(SightingDate, Date)
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Herd,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Herd, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(GroupNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(GroupNumber, Integer)
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(SearchArea,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(SearchArea, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SmallBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(MediumBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(LargeBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Cow,Integer)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Calf,Integer)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Indeterminate,Integer)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SmallBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(MediumBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(LargeBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Cow, Integer)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Calf, Integer)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Indeterminate, Integer)
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Waypoint,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Waypoint, String)
             End If
             If (Frequencies Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Frequencies,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Frequencies, String)
             End If
-            If (FlightID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("FlightID")
+            If (SourceFilename Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(SourceFilename, String)
+            End If
+            If (Comment Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Comment, String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Lat, Decimal)
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Lon, Decimal)
+            If (Original_CCID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_CCID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_CCID, String)
             End If
             If (CCID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("CCID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(CCID,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(RecordInsertedBy,String)
-            End If
-            If (SourceFilename Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(SourceFilename,String)
-            End If
-            If (Comment Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Comment,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Lat,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Lon,Decimal)
-            If (Original_CCID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_CCID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_CCID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_TS,Byte())
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(CCID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal SightingDate As Date,  _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal Indeterminate As Integer,  _
-                    ByVal Waypoint As String,  _
-                    ByVal Frequencies As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Original_CCID As String,  _
-                    ByVal Original_TS() As Byte) As Integer
-            Return Me.Update(SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, Original_CCID, RecordInsertedDate, RecordInsertedBy, SourceFilename, Comment, Lat, Lon, Original_CCID, Original_TS)
-        End Function
     End Class
-    
+
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
     '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),
+     Global.System.ComponentModel.ToolboxItem(True),
+     Global.System.ComponentModel.DataObjectAttribute(True),
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" &
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
     Partial Public Class PopulationEstimateTableAdapter
         Inherits Global.System.ComponentModel.Component
-        
+
         Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-        
+
         Private _connection As Global.System.Data.SqlClient.SqlConnection
-        
+
         Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-        
+
         Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-        
+
         Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Sub New()
             MyBase.New
-            Me.ClearBeforeFill = true
+            Me.ClearBeforeFill = True
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
+                    Me.InitAdapter()
                 End If
                 Return Me._adapter
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
             Get
                 If (Me._connection Is Nothing) Then
-                    Me.InitConnection
+                    Me.InitConnection()
                 End If
                 Return Me._connection
             End Get
             Set
-                Me._connection = value
+                Me._connection = Value
                 If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
-                    Me.Adapter.InsertCommand.Connection = value
+                    Me.Adapter.InsertCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
-                    Me.Adapter.DeleteCommand.Connection = value
+                    Me.Adapter.DeleteCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
-                    Me.Adapter.UpdateCommand.Connection = value
+                    Me.Adapter.UpdateCommand.Connection = Value
                 End If
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i), Global.System.Data.SqlClient.SqlCommand).Connection = Value
                     End If
                     i = (i + 1)
                 Loop
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
             Get
                 Return Me._transaction
             End Get
             Set
-                Me._transaction = value
+                Me._transaction = Value
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     Me.CommandCollection(i).Transaction = Me._transaction
                     i = (i + 1)
                 Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
                     Me.Adapter.DeleteCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
                     Me.Adapter.InsertCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
                     Me.Adapter.UpdateCommand.Transaction = Me._transaction
                 End If
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
+                    Me.InitCommandCollection()
                 End If
                 Return Me._commandCollection
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Property ClearBeforeFill() As Boolean
             Get
                 Return Me._clearBeforeFill
             End Get
             Set
-                Me._clearBeforeFill = value
+                Me._clearBeforeFill = Value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitAdapter()
             Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
@@ -16229,559 +16161,500 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[PopulationEstimate] WHERE (([EID] = @Original_EID) AND ((@IsNu"& _ 
-                "ll_TS = 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM PopulationEstimate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (EID = @Original_EID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (Herd, SearchArea, GroupNumber,"& _ 
-                " WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOu"& _ 
-                "t, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID"& _ 
-                ", EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  RecordInsertedDate, RecordInsertedBy)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Herd,"& _ 
-                "@SearchArea,@GroupNumber,@WaypointName,@SightingDate,@SmallBull,@MediumBull,@Lar"& _ 
-                "geBull,@Cow,@Calf,@InOrOut,@Seen,@Marked,@FrequenciesInGroup,@Lat,@Lon,@Comment,"& _ 
-                "@SourceFilename,@FlightID,@EID,@RecordInsertedDate,@RecordInsertedBy); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT "& _ 
-                "Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull"& _ 
-                ", LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Com"& _ 
-                "ment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy, TS FR"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO PopulationEstimate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  (Herd, SearchArea, GroupNumber," &
+                " WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOu" &
+                "t, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID" &
+                ", EID, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  RecordInsertedDate, RecordInsertedBy)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "VALUES (@Herd," &
+                "@SearchArea,@GroupNumber,@WaypointName,@SightingDate,@SmallBull,@MediumBull,@Lar" &
+                "geBull,@Cow,@Calf,@InOrOut,@Seen,@Marked,@FrequenciesInGroup,@Lat,@Lon,@Comment," &
+                "@SourceFilename,@FlightID,@EID,@RecordInsertedDate,@RecordInsertedBy); " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT " &
+                "Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull" &
+                ", LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Com" &
+                "ment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy, TS FR" &
                 "OM PopulationEstimate WHERE (EID = @EID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InOrOut", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "InOrOut", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InOrOut", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "InOrOut", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          Herd = @Herd, SearchArea = @SearchArea, G"& _ 
-                "roupNumber = @GroupNumber, WaypointName = @WaypointName, SightingDate = @Sightin"& _ 
-                "gDate, SmallBull = @SmallBull, MediumBull = @MediumBull, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Lar"& _ 
-                "geBull = @LargeBull, Cow = @Cow, Calf = @Calf, InOrOut = @InOrOut, Seen = @Seen,"& _ 
-                " Marked = @Marked, FrequenciesInGroup = @FrequenciesInGroup, Lat = @Lat, Lon = @"& _ 
-                "Lon, Comment = @Comment, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  SourceFilename = @SourceFilename, F"& _ 
-                "lightID = @FlightID, EID = @EID, RecordInsertedDate = @RecordInsertedDate, Recor"& _ 
-                "dInsertedBy = @RecordInsertedBy"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (EID = @Original_EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, Se"& _ 
-                "archArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull, LargeB"& _ 
-                "ull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, So"& _ 
-                "urceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy, TS FROM Popul"& _ 
-                "ationEstimate WHERE (EID = @EID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE PopulationEstimate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET          Herd = @Herd, SearchArea = @SearchArea, G" &
+                "roupNumber = @GroupNumber, WaypointName = @WaypointName, SightingDate = @Sightin" &
+                "gDate, SmallBull = @SmallBull, MediumBull = @MediumBull, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  Lar" &
+                "geBull = @LargeBull, Cow = @Cow, Calf = @Calf, InOrOut = @InOrOut, Seen = @Seen," &
+                " Marked = @Marked, FrequenciesInGroup = @FrequenciesInGroup, Lat = @Lat, Lon = @" &
+                "Lon, Comment = @Comment, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  SourceFilename = @SourceFilename" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "W" &
+                "HERE  (EID = @Original_EID);  " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT Herd, SearchArea, GroupNumber, WaypointNa" &
+                "me, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Ma" &
+                "rked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, EID, Reco" &
+                "rdInsertedDate, RecordInsertedBy, TS FROM PopulationEstimate WHERE (EID = @EID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InOrOut", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "InOrOut", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WaypointName", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "WaypointName", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SmallBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SmallBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MediumBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "MediumBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LargeBull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LargeBull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@InOrOut", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "InOrOut", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Marked", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Marked", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FrequenciesInGroup", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "FrequenciesInGroup", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
             Me._connection.ConnectionString = Global.WRST_Caribou.My.MySettings.Default.WRST_CaribouConnectionString
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, Medi"& _ 
-                "umBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lo"& _ 
-                "n, Comment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy,"& _ 
+            Me._commandCollection(0).CommandText = "SELECT Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, Medi" &
+                "umBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lo" &
+                "n, Comment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy," &
                 " TS FROM dbo.PopulationEstimate"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.PopulationEstimateDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)>
+        Public Overridable Overloads Function Fill(ByVal dataTable As WRST_CaribouDataSet.PopulationEstimateDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.PopulationEstimateDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)>
+        Public Overridable Overloads Function GetData() As WRST_CaribouDataSet.PopulationEstimateDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As WRST_CaribouDataSet.PopulationEstimateDataTable = New WRST_CaribouDataSet.PopulationEstimateDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.PopulationEstimateDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataTable As WRST_CaribouDataSet.PopulationEstimateDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "PopulationEstimate")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_EID As String, ByVal Original_TS() As Byte) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)>
+        Public Overridable Overloads Function Delete(ByVal Original_EID As String) As Integer
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
-                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert( _
-                    ByVal Herd As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal WaypointName As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal InOrOut As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Integer,  _
-                    ByVal Marked As Integer,  _
-                    ByVal FrequenciesInGroup As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Comment As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal EID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)>
+        Public Overridable Overloads Function Insert(
+                    ByVal Herd As String,
+                    ByVal SearchArea As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal WaypointName As String,
+                    ByVal SightingDate As Date,
+                    ByVal SmallBull As Integer,
+                    ByVal MediumBull As Integer,
+                    ByVal LargeBull As Integer,
+                    ByVal Cow As Integer,
+                    ByVal Calf As Integer,
+                    ByVal InOrOut As Global.System.Nullable(Of Integer),
+                    ByVal Seen As Integer,
+                    ByVal Marked As Integer,
+                    ByVal FrequenciesInGroup As String,
+                    ByVal Lat As Decimal,
+                    ByVal Lon As Decimal,
+                    ByVal Comment As String,
+                    ByVal SourceFilename As String,
+                    ByVal FlightID As String,
+                    ByVal EID As String,
+                    ByVal RecordInsertedDate As Date,
                     ByVal RecordInsertedBy As String) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Herd,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Herd, String)
             End If
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(SearchArea,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(SearchArea, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(GroupNumber,Integer)
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(GroupNumber, Integer)
             If (WaypointName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("WaypointName")
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(WaypointName,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(WaypointName, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SightingDate,Date)
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(SmallBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(MediumBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(LargeBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Cow,Integer)
-            Me.Adapter.InsertCommand.Parameters(9).Value = CType(Calf,Integer)
-            If (InOrOut.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(InOrOut.Value,Integer)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SightingDate, Date)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(SmallBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(MediumBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(LargeBull, Integer)
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Cow, Integer)
+            Me.Adapter.InsertCommand.Parameters(9).Value = CType(Calf, Integer)
+            If (InOrOut.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(InOrOut.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(11).Value = CType(Seen,Integer)
-            Me.Adapter.InsertCommand.Parameters(12).Value = CType(Marked,Integer)
+            Me.Adapter.InsertCommand.Parameters(11).Value = CType(Seen, Integer)
+            Me.Adapter.InsertCommand.Parameters(12).Value = CType(Marked, Integer)
             If (FrequenciesInGroup Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(FrequenciesInGroup,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(FrequenciesInGroup, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(14).Value = CType(Lat,Decimal)
-            Me.Adapter.InsertCommand.Parameters(15).Value = CType(Lon,Decimal)
+            Me.Adapter.InsertCommand.Parameters(14).Value = CType(Lat, Decimal)
+            Me.Adapter.InsertCommand.Parameters(15).Value = CType(Lon, Decimal)
             If (Comment Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Comment,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Comment, String)
             End If
             If (SourceFilename Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(SourceFilename,String)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(SourceFilename, String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(FlightID, String)
             End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(EID,String)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(EID, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(20).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(20).Value = CType(RecordInsertedDate, Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedBy, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal Herd As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal WaypointName As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal InOrOut As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Integer,  _
-                    ByVal Marked As Integer,  _
-                    ByVal FrequenciesInGroup As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Comment As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal EID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Original_EID As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)>
+        Public Overridable Overloads Function Update(
+                    ByVal Herd As String,
+                    ByVal SearchArea As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal WaypointName As String,
+                    ByVal SightingDate As Date,
+                    ByVal SmallBull As Integer,
+                    ByVal MediumBull As Integer,
+                    ByVal LargeBull As Integer,
+                    ByVal Cow As Integer,
+                    ByVal Calf As Integer,
+                    ByVal InOrOut As Global.System.Nullable(Of Integer),
+                    ByVal Seen As Integer,
+                    ByVal Marked As Integer,
+                    ByVal FrequenciesInGroup As String,
+                    ByVal Lat As Decimal,
+                    ByVal Lon As Decimal,
+                    ByVal Comment As String,
+                    ByVal SourceFilename As String,
+                    ByVal Original_EID As String,
+                    ByVal EID As String) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Herd,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Herd, String)
             End If
             If (SearchArea Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SearchArea")
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SearchArea,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SearchArea, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(GroupNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(GroupNumber, Integer)
             If (WaypointName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("WaypointName")
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(WaypointName,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(WaypointName, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SightingDate,Date)
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(SmallBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(MediumBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(LargeBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Cow,Integer)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Calf,Integer)
-            If (InOrOut.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(InOrOut.Value,Integer)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SightingDate, Date)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(SmallBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(MediumBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(LargeBull, Integer)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Cow, Integer)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Calf, Integer)
+            If (InOrOut.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(InOrOut.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Seen,Integer)
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Marked,Integer)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Seen, Integer)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Marked, Integer)
             If (FrequenciesInGroup Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(FrequenciesInGroup,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(FrequenciesInGroup, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Lat,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Lon,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Lat, Decimal)
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Lon, Decimal)
             If (Comment Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Comment,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Comment, String)
             End If
             If (SourceFilename Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SourceFilename,String)
-            End If
-            If (FlightID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("FlightID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(FlightID,String)
-            End If
-            If (EID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("EID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(EID,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SourceFilename, String)
             End If
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_EID,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_EID, String)
+            End If
+            If (EID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(EID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal Herd As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal WaypointName As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal InOrOut As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Integer,  _
-                    ByVal Marked As Integer,  _
-                    ByVal FrequenciesInGroup As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Comment As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Original_EID As String) As Integer
-            Return Me.Update(Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, Original_EID, RecordInsertedDate, RecordInsertedBy, Original_EID)
-        End Function
     End Class
-    
+
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
     '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),
+     Global.System.ComponentModel.ToolboxItem(True),
+     Global.System.ComponentModel.DataObjectAttribute(True),
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" &
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
     Partial Public Class RadioTrackingTableAdapter
         Inherits Global.System.ComponentModel.Component
-        
+
         Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-        
+
         Private _connection As Global.System.Data.SqlClient.SqlConnection
-        
+
         Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-        
+
         Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-        
+
         Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Sub New()
             MyBase.New
-            Me.ClearBeforeFill = true
+            Me.ClearBeforeFill = True
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
+                    Me.InitAdapter()
                 End If
                 Return Me._adapter
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
             Get
                 If (Me._connection Is Nothing) Then
-                    Me.InitConnection
+                    Me.InitConnection()
                 End If
                 Return Me._connection
             End Get
             Set
-                Me._connection = value
+                Me._connection = Value
                 If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
-                    Me.Adapter.InsertCommand.Connection = value
+                    Me.Adapter.InsertCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
-                    Me.Adapter.DeleteCommand.Connection = value
+                    Me.Adapter.DeleteCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
-                    Me.Adapter.UpdateCommand.Connection = value
+                    Me.Adapter.UpdateCommand.Connection = Value
                 End If
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i), Global.System.Data.SqlClient.SqlCommand).Connection = Value
                     End If
                     i = (i + 1)
                 Loop
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
             Get
                 Return Me._transaction
             End Get
             Set
-                Me._transaction = value
+                Me._transaction = Value
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     Me.CommandCollection(i).Transaction = Me._transaction
                     i = (i + 1)
                 Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
                     Me.Adapter.DeleteCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
                     Me.Adapter.InsertCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
                     Me.Adapter.UpdateCommand.Transaction = Me._transaction
                 End If
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
+                    Me.InitCommandCollection()
                 End If
                 Return Me._commandCollection
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Property ClearBeforeFill() As Boolean
             Get
                 Return Me._clearBeforeFill
             End Get
             Set
-                Me._clearBeforeFill = value
+                Me._clearBeforeFill = Value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitAdapter()
             Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
@@ -16819,723 +16692,647 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[RadioTracking] WHERE (([RTID] = @Original_RTID) AND ((@IsNull_"& _ 
-                "TS = 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM RadioTracking" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (RTID = @Original_RTID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RTID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RTID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[RadioTracking] ([Herd], [GroupNumber], [Frequency], [VisualCol"& _ 
-                "lar], [SightingDate], [Mode], [Accuracy], [Bull], [Cow], [Calf], [Adult], [Unkno"& _ 
-                "wn], [Waypoint], [RetainedAntler], [DistendedUdders], [CalvesAtHeel], [Seen], [F"& _ 
-                "lightID], [AnimalID], [ProjectID], [RTID], [RecordInsertedDate], [RecordInserted"& _ 
-                "By], [SearchArea], [SourceFilename], [Comment], [Lat], [Lon]) VALUES (@Herd, @Gr"& _ 
-                "oupNumber, @Frequency, @VisualCollar, @SightingDate, @Mode, @Accuracy, @Bull, @C"& _ 
-                "ow, @Calf, @Adult, @Unknown, @Waypoint, @RetainedAntler, @DistendedUdders, @Calv"& _ 
-                "esAtHeel, @Seen, @FlightID, @AnimalID, @ProjectID, @RTID, @RecordInsertedDate, @"& _ 
-                "RecordInsertedBy, @SearchArea, @SourceFilename, @Comment, @Lat, @Lon);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT H"& _ 
-                "erd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, C"& _ 
-                "ow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHee"& _ 
-                "l, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInserted"& _ 
-                "By, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM RadioTracking WHERE ("& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[RadioTracking] ([Herd], [GroupNumber], [Frequency], [VisualCol" &
+                "lar], [SightingDate], [Mode], [Accuracy], [Bull], [Cow], [Calf], [Adult], [Unkno" &
+                "wn], [Waypoint], [RetainedAntler], [DistendedUdders], [CalvesAtHeel], [Seen], [F" &
+                "lightID], [AnimalID], [ProjectID], [RTID], [RecordInsertedDate], [RecordInserted" &
+                "By], [SearchArea], [SourceFilename], [Comment], [Lat], [Lon]) VALUES (@Herd, @Gr" &
+                "oupNumber, @Frequency, @VisualCollar, @SightingDate, @Mode, @Accuracy, @Bull, @C" &
+                "ow, @Calf, @Adult, @Unknown, @Waypoint, @RetainedAntler, @DistendedUdders, @Calv" &
+                "esAtHeel, @Seen, @FlightID, @AnimalID, @ProjectID, @RTID, @RecordInsertedDate, @" &
+                "RecordInsertedBy, @SearchArea, @SourceFilename, @Comment, @Lat, @Lon);" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT H" &
+                "erd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, C" &
+                "ow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHee" &
+                "l, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInserted" &
+                "By, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM RadioTracking WHERE (" &
                 "RTID = @RTID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Unknown", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Unknown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RTID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequency", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Unknown", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Unknown", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RTID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[RadioTracking] SET [Herd] = @Herd, [GroupNumber] = @GroupNumber, [F"& _ 
-                "requency] = @Frequency, [VisualCollar] = @VisualCollar, [SightingDate] = @Sighti"& _ 
-                "ngDate, [Mode] = @Mode, [Accuracy] = @Accuracy, [Bull] = @Bull, [Cow] = @Cow, [C"& _ 
-                "alf] = @Calf, [Adult] = @Adult, [Unknown] = @Unknown, [Waypoint] = @Waypoint, [R"& _ 
-                "etainedAntler] = @RetainedAntler, [DistendedUdders] = @DistendedUdders, [CalvesA"& _ 
-                "tHeel] = @CalvesAtHeel, [Seen] = @Seen, [FlightID] = @FlightID, [AnimalID] = @An"& _ 
-                "imalID, [ProjectID] = @ProjectID, [RTID] = @RTID, [RecordInsertedDate] = @Record"& _ 
-                "InsertedDate, [RecordInsertedBy] = @RecordInsertedBy, [SearchArea] = @SearchArea"& _ 
-                ", [SourceFilename] = @SourceFilename, [Comment] = @Comment, [Lat] = @Lat, [Lon] "& _ 
-                "= @Lon WHERE (([RTID] = @Original_RTID) AND ((@IsNull_TS = 1 AND [TS] IS NULL) O"& _ 
-                "R ([TS] = @Original_TS)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, GroupNumber, Frequency, VisualCollar, S"& _ 
-                "ightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, Retained"& _ 
-                "Antler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID"& _ 
-                ", RecordInsertedDate, RecordInsertedBy, SearchArea, TS, SourceFilename, Comment,"& _ 
-                " Lat, Lon FROM RadioTracking WHERE (RTID = @RTID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE RadioTracking" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET          Herd = @Herd, GroupNumber = @GroupNumber, Freq" &
+                "uency = @Frequency, VisualCollar = @VisualCollar, SightingDate = @SightingDate, " &
+                "Mode = @Mode, Accuracy = @Accuracy, Bull = @Bull, Cow = @Cow, Calf = @Calf, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  " &
+                "                Adult = @Adult, Unknown = @Unknown, Waypoint = @Waypoint, Retain" &
+                "edAntler = @RetainedAntler, DistendedUdders = @DistendedUdders, CalvesAtHeel = @" &
+                "CalvesAtHeel, Seen = @Seen, AnimalID = @AnimalID, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  ProjectID " &
+                "= @ProjectID, SearchArea = @SearchArea, SourceFilename = @SourceFilename, Commen" &
+                "t = @Comment, Lat = @Lat, Lon = @Lon" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (RTID = @Original_RTID); " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT H" &
+                "erd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, C" &
+                "ow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHee" &
+                "l, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInserted" &
+                "By, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM RadioTracking WHERE (" &
+                "RTID = @RTID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequency", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Unknown", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Unknown", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RTID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RTID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Frequency", Global.System.Data.SqlDbType.Float, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Frequency", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VisualCollar", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "VisualCollar", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SightingDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "SightingDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Mode", Global.System.Data.SqlDbType.VarChar, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "Mode", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Accuracy", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Accuracy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Cow", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Cow", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Calf", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Calf", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Adult", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Adult", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Unknown", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Unknown", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Waypoint", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Waypoint", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RetainedAntler", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "RetainedAntler", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistendedUdders", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "DistendedUdders", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CalvesAtHeel", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CalvesAtHeel", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Seen", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Seen", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AnimalID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "AnimalID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectID", Global.System.Data.SqlDbType.VarChar, 16, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lat", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lat", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RTID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RTID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RTID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
             Me._connection.ConnectionString = Global.WRST_Caribou.My.MySettings.Default.WRST_CaribouConnectionString
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, "& _ 
-                "Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, Calv"& _ 
-                "esAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordI"& _ 
-                "nsertedBy, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM dbo.RadioTrack"& _ 
+            Me._commandCollection(0).CommandText = "SELECT Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, " &
+                "Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, Calv" &
+                "esAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordI" &
+                "nsertedBy, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM dbo.RadioTrack" &
                 "ing"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.RadioTrackingDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)>
+        Public Overridable Overloads Function Fill(ByVal dataTable As WRST_CaribouDataSet.RadioTrackingDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.RadioTrackingDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)>
+        Public Overridable Overloads Function GetData() As WRST_CaribouDataSet.RadioTrackingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As WRST_CaribouDataSet.RadioTrackingDataTable = New WRST_CaribouDataSet.RadioTrackingDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.RadioTrackingDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataTable As WRST_CaribouDataSet.RadioTrackingDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "RadioTracking")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_RTID As String, ByVal Original_TS() As Byte) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)>
+        Public Overridable Overloads Function Delete(ByVal Original_RTID As String) As Integer
             If (Original_RTID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_RTID")
             Else
-                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_RTID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_RTID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert( _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal Frequency As Global.System.Nullable(Of Double),  _
-                    ByVal VisualCollar As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal Mode As String,  _
-                    ByVal Accuracy As Global.System.Nullable(Of Integer),  _
-                    ByVal Bull As Global.System.Nullable(Of Integer),  _
-                    ByVal Cow As Global.System.Nullable(Of Integer),  _
-                    ByVal Calf As Global.System.Nullable(Of Integer),  _
-                    ByVal Adult As Global.System.Nullable(Of Integer),  _
-                    ByVal Unknown As Global.System.Nullable(Of Integer),  _
-                    ByVal Waypoint As String,  _
-                    ByVal RetainedAntler As Global.System.Nullable(Of Integer),  _
-                    ByVal DistendedUdders As Global.System.Nullable(Of Integer),  _
-                    ByVal CalvesAtHeel As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Global.System.Nullable(Of Integer),  _
-                    ByVal FlightID As String,  _
-                    ByVal AnimalID As String,  _
-                    ByVal ProjectID As String,  _
-                    ByVal RTID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)>
+        Public Overridable Overloads Function Insert(
+                    ByVal Herd As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal Frequency As Global.System.Nullable(Of Double),
+                    ByVal VisualCollar As String,
+                    ByVal SightingDate As Date,
+                    ByVal Mode As String,
+                    ByVal Accuracy As Global.System.Nullable(Of Integer),
+                    ByVal Bull As Global.System.Nullable(Of Integer),
+                    ByVal Cow As Global.System.Nullable(Of Integer),
+                    ByVal Calf As Global.System.Nullable(Of Integer),
+                    ByVal Adult As Global.System.Nullable(Of Integer),
+                    ByVal Unknown As Global.System.Nullable(Of Integer),
+                    ByVal Waypoint As String,
+                    ByVal RetainedAntler As Global.System.Nullable(Of Integer),
+                    ByVal DistendedUdders As Global.System.Nullable(Of Integer),
+                    ByVal CalvesAtHeel As Global.System.Nullable(Of Integer),
+                    ByVal Seen As Global.System.Nullable(Of Integer),
+                    ByVal FlightID As String,
+                    ByVal AnimalID As String,
+                    ByVal ProjectID As String,
+                    ByVal RTID As String,
+                    ByVal RecordInsertedDate As Date,
+                    ByVal RecordInsertedBy As String,
+                    ByVal SearchArea As String,
+                    ByVal SourceFilename As String,
+                    ByVal Comment As String,
+                    ByVal Lat As Decimal,
                     ByVal Lon As Decimal) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Herd,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(Herd, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(GroupNumber,Integer)
-            If (Frequency.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Frequency.Value,Double)
+            Me.Adapter.InsertCommand.Parameters(1).Value = CType(GroupNumber, Integer)
+            If (Frequency.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Frequency.Value, Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (VisualCollar Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(VisualCollar,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(VisualCollar, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SightingDate,Date)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SightingDate, Date)
             If (Mode Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(Mode,String)
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(Mode, String)
             End If
-            If (Accuracy.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Accuracy.Value,Integer)
+            If (Accuracy.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Accuracy.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Bull.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Bull.Value,Integer)
+            If (Bull.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Bull.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
-            If (Cow.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Cow.Value,Integer)
+            If (Cow.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Cow.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
-            If (Calf.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Calf.Value,Integer)
+            If (Calf.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Calf.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            If (Adult.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(Adult.Value,Integer)
+            If (Adult.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(Adult.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            If (Unknown.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(Unknown.Value,Integer)
+            If (Unknown.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(Unknown.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             End If
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(Waypoint,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(Waypoint, String)
             End If
-            If (RetainedAntler.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(RetainedAntler.Value,Integer)
+            If (RetainedAntler.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(RetainedAntler.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (DistendedUdders.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(DistendedUdders.Value,Integer)
+            If (DistendedUdders.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(DistendedUdders.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
-            If (CalvesAtHeel.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(CalvesAtHeel.Value,Integer)
+            If (CalvesAtHeel.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(CalvesAtHeel.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
-            If (Seen.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Seen.Value,Integer)
+            If (Seen.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Seen.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(FlightID, String)
             End If
             If (AnimalID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(AnimalID,String)
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(AnimalID, String)
             End If
             If (ProjectID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(ProjectID,String)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(ProjectID, String)
             End If
             If (RTID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RTID")
             Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(RTID,String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(RTID, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedDate, Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(RecordInsertedBy, String)
             End If
             If (SearchArea Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SearchArea,String)
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SearchArea, String)
             End If
             If (SourceFilename Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(24).Value = CType(SourceFilename,String)
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(SourceFilename, String)
             End If
             If (Comment Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(25).Value = CType(Comment,String)
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(Comment, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(26).Value = CType(Lat,Decimal)
-            Me.Adapter.InsertCommand.Parameters(27).Value = CType(Lon,Decimal)
+            Me.Adapter.InsertCommand.Parameters(26).Value = CType(Lat, Decimal)
+            Me.Adapter.InsertCommand.Parameters(27).Value = CType(Lon, Decimal)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal Frequency As Global.System.Nullable(Of Double),  _
-                    ByVal VisualCollar As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal Mode As String,  _
-                    ByVal Accuracy As Global.System.Nullable(Of Integer),  _
-                    ByVal Bull As Global.System.Nullable(Of Integer),  _
-                    ByVal Cow As Global.System.Nullable(Of Integer),  _
-                    ByVal Calf As Global.System.Nullable(Of Integer),  _
-                    ByVal Adult As Global.System.Nullable(Of Integer),  _
-                    ByVal Unknown As Global.System.Nullable(Of Integer),  _
-                    ByVal Waypoint As String,  _
-                    ByVal RetainedAntler As Global.System.Nullable(Of Integer),  _
-                    ByVal DistendedUdders As Global.System.Nullable(Of Integer),  _
-                    ByVal CalvesAtHeel As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Global.System.Nullable(Of Integer),  _
-                    ByVal FlightID As String,  _
-                    ByVal AnimalID As String,  _
-                    ByVal ProjectID As String,  _
-                    ByVal RTID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Original_RTID As String,  _
-                    ByVal Original_TS() As Byte) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)>
+        Public Overridable Overloads Function Update(
+                    ByVal Herd As String,
+                    ByVal GroupNumber As Integer,
+                    ByVal Frequency As Global.System.Nullable(Of Double),
+                    ByVal VisualCollar As String,
+                    ByVal SightingDate As Date,
+                    ByVal Mode As String,
+                    ByVal Accuracy As Global.System.Nullable(Of Integer),
+                    ByVal Bull As Global.System.Nullable(Of Integer),
+                    ByVal Cow As Global.System.Nullable(Of Integer),
+                    ByVal Calf As Global.System.Nullable(Of Integer),
+                    ByVal Adult As Global.System.Nullable(Of Integer),
+                    ByVal Unknown As Global.System.Nullable(Of Integer),
+                    ByVal Waypoint As String,
+                    ByVal RetainedAntler As Global.System.Nullable(Of Integer),
+                    ByVal DistendedUdders As Global.System.Nullable(Of Integer),
+                    ByVal CalvesAtHeel As Global.System.Nullable(Of Integer),
+                    ByVal Seen As Global.System.Nullable(Of Integer),
+                    ByVal AnimalID As String,
+                    ByVal ProjectID As String,
+                    ByVal SearchArea As String,
+                    ByVal SourceFilename As String,
+                    ByVal Comment As String,
+                    ByVal Lat As Decimal,
+                    ByVal Lon As Decimal,
+                    ByVal Original_RTID As String,
+                    ByVal RTID As String) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Herd,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Herd, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(GroupNumber,Integer)
-            If (Frequency.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Frequency.Value,Double)
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(GroupNumber, Integer)
+            If (Frequency.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Frequency.Value, Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (VisualCollar Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(VisualCollar,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(VisualCollar, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SightingDate,Date)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SightingDate, Date)
             If (Mode Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Mode,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Mode, String)
             End If
-            If (Accuracy.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Accuracy.Value,Integer)
+            If (Accuracy.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Accuracy.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Bull.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Bull.Value,Integer)
+            If (Bull.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Bull.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
-            If (Cow.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Cow.Value,Integer)
+            If (Cow.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Cow.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
-            If (Calf.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Calf.Value,Integer)
+            If (Calf.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Calf.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            If (Adult.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Adult.Value,Integer)
+            If (Adult.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Adult.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            If (Unknown.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Unknown.Value,Integer)
+            If (Unknown.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Unknown.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             End If
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Waypoint,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Waypoint, String)
             End If
-            If (RetainedAntler.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(RetainedAntler.Value,Integer)
+            If (RetainedAntler.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(RetainedAntler.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (DistendedUdders.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(DistendedUdders.Value,Integer)
+            If (DistendedUdders.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(DistendedUdders.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
-            If (CalvesAtHeel.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(CalvesAtHeel.Value,Integer)
+            If (CalvesAtHeel.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(CalvesAtHeel.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
-            If (Seen.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Seen.Value,Integer)
+            If (Seen.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Seen.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
-            If (FlightID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("FlightID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(FlightID,String)
-            End If
             If (AnimalID Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("AnimalID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(AnimalID,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(AnimalID, String)
             End If
             If (ProjectID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("ProjectID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(ProjectID, String)
+            End If
+            If (SearchArea Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(ProjectID,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(SearchArea, String)
+            End If
+            If (SourceFilename Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(SourceFilename, String)
+            End If
+            If (Comment Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Comment, String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Lat, Decimal)
+            Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Lon, Decimal)
+            If (Original_RTID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_RTID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_RTID, String)
             End If
             If (RTID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RTID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(RTID,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(21).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(RecordInsertedBy,String)
-            End If
-            If (SearchArea Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(SearchArea,String)
-            End If
-            If (SourceFilename Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(SourceFilename,String)
-            End If
-            If (Comment Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Comment,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Lat,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Lon,Decimal)
-            If (Original_RTID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_RTID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_RTID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(30).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_TS,Byte())
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(RTID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal Herd As String,  _
-                    ByVal GroupNumber As Integer,  _
-                    ByVal Frequency As Global.System.Nullable(Of Double),  _
-                    ByVal VisualCollar As String,  _
-                    ByVal SightingDate As Date,  _
-                    ByVal Mode As String,  _
-                    ByVal Accuracy As Global.System.Nullable(Of Integer),  _
-                    ByVal Bull As Global.System.Nullable(Of Integer),  _
-                    ByVal Cow As Global.System.Nullable(Of Integer),  _
-                    ByVal Calf As Global.System.Nullable(Of Integer),  _
-                    ByVal Adult As Global.System.Nullable(Of Integer),  _
-                    ByVal Unknown As Global.System.Nullable(Of Integer),  _
-                    ByVal Waypoint As String,  _
-                    ByVal RetainedAntler As Global.System.Nullable(Of Integer),  _
-                    ByVal DistendedUdders As Global.System.Nullable(Of Integer),  _
-                    ByVal CalvesAtHeel As Global.System.Nullable(Of Integer),  _
-                    ByVal Seen As Global.System.Nullable(Of Integer),  _
-                    ByVal FlightID As String,  _
-                    ByVal AnimalID As String,  _
-                    ByVal ProjectID As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal SearchArea As String,  _
-                    ByVal SourceFilename As String,  _
-                    ByVal Comment As String,  _
-                    ByVal Lat As Decimal,  _
-                    ByVal Lon As Decimal,  _
-                    ByVal Original_RTID As String,  _
-                    ByVal Original_TS() As Byte) As Integer
-            Return Me.Update(Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, Original_RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon, Original_RTID, Original_TS)
-        End Function
     End Class
-    
+
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
     '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),
+     Global.System.ComponentModel.ToolboxItem(True),
+     Global.System.ComponentModel.DataObjectAttribute(True),
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" &
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
     Partial Public Class SurveyFlightsTableAdapter
         Inherits Global.System.ComponentModel.Component
-        
+
         Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-        
+
         Private _connection As Global.System.Data.SqlClient.SqlConnection
-        
+
         Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-        
+
         Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-        
+
         Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Sub New()
             MyBase.New
-            Me.ClearBeforeFill = true
+            Me.ClearBeforeFill = True
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
+                    Me.InitAdapter()
                 End If
                 Return Me._adapter
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
             Get
                 If (Me._connection Is Nothing) Then
-                    Me.InitConnection
+                    Me.InitConnection()
                 End If
                 Return Me._connection
             End Get
             Set
-                Me._connection = value
+                Me._connection = Value
                 If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
-                    Me.Adapter.InsertCommand.Connection = value
+                    Me.Adapter.InsertCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
-                    Me.Adapter.DeleteCommand.Connection = value
+                    Me.Adapter.DeleteCommand.Connection = Value
                 End If
                 If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
-                    Me.Adapter.UpdateCommand.Connection = value
+                    Me.Adapter.UpdateCommand.Connection = Value
                 End If
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i), Global.System.Data.SqlClient.SqlCommand).Connection = Value
                     End If
                     i = (i + 1)
                 Loop
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
             Get
                 Return Me._transaction
             End Get
             Set
-                Me._transaction = value
+                Me._transaction = Value
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     Me.CommandCollection(i).Transaction = Me._transaction
                     i = (i + 1)
                 Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
                     Me.Adapter.DeleteCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
                     Me.Adapter.InsertCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
                     Me.Adapter.UpdateCommand.Transaction = Me._transaction
                 End If
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
+                    Me.InitCommandCollection()
                 End If
                 Return Me._commandCollection
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Public Property ClearBeforeFill() As Boolean
             Get
                 Return Me._clearBeforeFill
             End Get
             Set
-                Me._clearBeforeFill = value
+                Me._clearBeforeFill = Value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitAdapter()
             Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
@@ -17569,498 +17366,415 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SurveyFlights] WHERE (([FlightID] = @Original_FlightID) AND (("& _ 
-                "@IsNull_TS = 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyFlights" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (FlightID = @Original_FlightID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (CrewNumber, Pilot, Observer1, Obser"& _ 
-                "ver2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterP"& _ 
-                "laneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, RecordIns"& _ 
-                "ertedDate, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  RecordInsertedBy, Herd, SOPNumber, SOPVersion, Fl"& _ 
-                "ightID, CampaignID)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@CrewNumber,@Pilot,@Observer1,@Observer2,@AircraftT"& _ 
-                "ype,@TailNo,@TimeDepart,@TimeReturn,@SpotterPlaneTailNo,@SpotterPlaneType,@Spott"& _ 
-                "erPlanePilot,@WeatherConditions,@SnowConditions,@Notes,@RecordInsertedDate,@Reco"& _ 
-                "rdInsertedBy,@Herd,@SOPNumber,@SOPVersion,@FlightID,@CampaignID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewN"& _ 
-                "umber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn"& _ 
-                ", SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, Sn"& _ 
-                "owConditions, Notes, RecordInsertedDate, RecordInsertedBy, Herd, SOPNumber, SOPV"& _ 
-                "ersion, CertificationDate, CertifiedBy, CertificationLevel, FlightID, CampaignID"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO SurveyFlights" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  (CrewNumber, Pilot, Observer1, Obser" &
+                "ver2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterP" &
+                "laneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, RecordIns" &
+                "ertedDate, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  RecordInsertedBy, Herd, SOPNumber, SOPVersion, Fl" &
+                "ightID, CampaignID)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "VALUES (@CrewNumber,@Pilot,@Observer1,@Observer2,@AircraftT" &
+                "ype,@TailNo,@TimeDepart,@TimeReturn,@SpotterPlaneTailNo,@SpotterPlaneType,@Spott" &
+                "erPlanePilot,@WeatherConditions,@SnowConditions,@Notes,@RecordInsertedDate,@Reco" &
+                "rdInsertedBy,@Herd,@SOPNumber,@SOPVersion,@FlightID,@CampaignID); " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT CrewN" &
+                "umber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn" &
+                ", SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, Sn" &
+                "owConditions, Notes, RecordInsertedDate, RecordInsertedBy, Herd, SOPNumber, SOPV" &
+                "ersion, CertificationDate, CertifiedBy, CertificationLevel, FlightID, CampaignID" &
                 ", TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 40, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 40, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          CrewNumber = @CrewNumber, Pilot = @Pilot, Obse"& _ 
-                "rver1 = @Observer1, Observer2 = @Observer2, AircraftType = @AircraftType, TailNo"& _ 
-                " = @TailNo, TimeDepart = @TimeDepart, TimeReturn = @TimeReturn, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"              "& _ 
-                "    SpotterPlaneTailNo = @SpotterPlaneTailNo, SpotterPlaneType = @SpotterPlaneTy"& _ 
-                "pe, SpotterPlanePilot = @SpotterPlanePilot, WeatherConditions = @WeatherConditio"& _ 
-                "ns, SnowConditions = @SnowConditions, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Notes = @Notes, Record"& _ 
-                "InsertedDate = @RecordInsertedDate, RecordInsertedBy = @RecordInsertedBy, Herd ="& _ 
-                " @Herd, SOPNumber = @SOPNumber, SOPVersion = @SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Ce"& _ 
-                "rtificationDate = @CertificationDate, CertifiedBy = @CertifiedBy, CertificationL"& _ 
-                "evel = @CertificationLevel, FlightID = @FlightID, CampaignID = @CampaignID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHER"& _ 
-                "E  (FlightID = @Original_FlightID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewNumber, Pilot, Observer1, Obser"& _ 
-                "ver2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterP"& _ 
-                "laneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, RecordIns"& _ 
-                "ertedDate, RecordInsertedBy, Herd, SOPNumber, SOPVersion, CertificationDate, Cer"& _ 
-                "tifiedBy, CertificationLevel, FlightID, CampaignID, TS FROM SurveyFlights WHERE "& _ 
-                "(FlightID = @FlightID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE SurveyFlights" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET          CrewNumber = @CrewNumber, Pilot = @Pilot, Obse" &
+                "rver1 = @Observer1, Observer2 = @Observer2, AircraftType = @AircraftType, TailNo" &
+                " = @TailNo, TimeDepart = @TimeDepart, TimeReturn = @TimeReturn, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "              " &
+                "    SpotterPlaneTailNo = @SpotterPlaneTailNo, SpotterPlaneType = @SpotterPlaneTy" &
+                "pe, SpotterPlanePilot = @SpotterPlanePilot, WeatherConditions = @WeatherConditio" &
+                "ns, SnowConditions = @SnowConditions, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                  Notes = @Notes, Herd =" &
+                " @Herd, SOPNumber = @SOPNumber, SOPVersion = @SOPVersion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE  (FlightID = @Or" &
+                "iginal_FlightID);  " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftTyp" &
+                "e, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, Spotter" &
+                "PlanePilot, WeatherConditions, SnowConditions, Notes, RecordInsertedDate, Record" &
+                "InsertedBy, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, Certifi" &
+                "cationLevel, FlightID, CampaignID, TS FROM SurveyFlights WHERE (FlightID = @Flig" &
+                "htID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 40, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertifiedBy", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CertifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer1", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Observer2", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Observer2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AircraftType", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "AircraftType", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "TailNo", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeDepart", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeDepart", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TimeReturn", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "TimeReturn", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneTailNo", Global.System.Data.SqlDbType.VarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneTailNo", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlaneType", Global.System.Data.SqlDbType.VarChar, 30, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlaneType", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SpotterPlanePilot", Global.System.Data.SqlDbType.VarChar, 40, Global.System.Data.ParameterDirection.Input, 0, 0, "SpotterPlanePilot", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WeatherConditions", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "WeatherConditions", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SnowConditions", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SnowConditions", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 1000, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
             Me._connection.ConnectionString = Global.WRST_Caribou.My.MySettings.Default.WRST_CaribouConnectionString
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart,"& _ 
-                " TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherCon"& _ 
-                "ditions, SnowConditions, Notes, RecordInsertedDate, RecordInsertedBy, Herd, SOPN"& _ 
-                "umber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, FlightID,"& _ 
+            Me._commandCollection(0).CommandText = "SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart," &
+                " TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherCon" &
+                "ditions, SnowConditions, Notes, RecordInsertedDate, RecordInsertedBy, Herd, SOPN" &
+                "umber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, FlightID," &
                 " CampaignID, TS FROM dbo.SurveyFlights"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As WRST_CaribouDataSet.SurveyFlightsDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)>
+        Public Overridable Overloads Function Fill(ByVal dataTable As WRST_CaribouDataSet.SurveyFlightsDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As WRST_CaribouDataSet.SurveyFlightsDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)>
+        Public Overridable Overloads Function GetData() As WRST_CaribouDataSet.SurveyFlightsDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As WRST_CaribouDataSet.SurveyFlightsDataTable = New WRST_CaribouDataSet.SurveyFlightsDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As WRST_CaribouDataSet.SurveyFlightsDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataTable As WRST_CaribouDataSet.SurveyFlightsDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataSet As WRST_CaribouDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "SurveyFlights")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_FlightID As String, ByVal Original_TS() As Byte) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)>
+        Public Overridable Overloads Function Delete(ByVal Original_FlightID As String) As Integer
             If (Original_FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_FlightID")
             Else
-                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_FlightID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
+                Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_FlightID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert( _
-                    ByVal CrewNumber As Integer,  _
-                    ByVal Pilot As String,  _
-                    ByVal Observer1 As String,  _
-                    ByVal Observer2 As String,  _
-                    ByVal AircraftType As String,  _
-                    ByVal TailNo As String,  _
-                    ByVal TimeDepart As Date,  _
-                    ByVal TimeReturn As Date,  _
-                    ByVal SpotterPlaneTailNo As String,  _
-                    ByVal SpotterPlaneType As String,  _
-                    ByVal SpotterPlanePilot As String,  _
-                    ByVal WeatherConditions As String,  _
-                    ByVal SnowConditions As String,  _
-                    ByVal Notes As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Herd As String,  _
-                    ByVal SOPNumber As Integer,  _
-                    ByVal SOPVersion As Decimal,  _
-                    ByVal FlightID As String,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)>
+        Public Overridable Overloads Function Insert(
+                    ByVal CrewNumber As Integer,
+                    ByVal Pilot As String,
+                    ByVal Observer1 As String,
+                    ByVal Observer2 As String,
+                    ByVal AircraftType As String,
+                    ByVal TailNo As String,
+                    ByVal TimeDepart As Date,
+                    ByVal TimeReturn As Date,
+                    ByVal SpotterPlaneTailNo As String,
+                    ByVal SpotterPlaneType As String,
+                    ByVal SpotterPlanePilot As String,
+                    ByVal WeatherConditions As String,
+                    ByVal SnowConditions As String,
+                    ByVal Notes As String,
+                    ByVal RecordInsertedDate As Date,
+                    ByVal RecordInsertedBy As String,
+                    ByVal Herd As String,
+                    ByVal SOPNumber As Integer,
+                    ByVal SOPVersion As Decimal,
+                    ByVal FlightID As String,
                     ByVal CampaignID As String) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(CrewNumber,Integer)
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(CrewNumber, Integer)
             If (Pilot Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Pilot")
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Pilot,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Pilot, String)
             End If
             If (Observer1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Observer1,String)
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Observer1, String)
             End If
             If (Observer2 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Observer2,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Observer2, String)
             End If
             If (AircraftType Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(AircraftType,String)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(AircraftType, String)
             End If
             If (TailNo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("TailNo")
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TailNo,String)
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TailNo, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(TimeDepart,Date)
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(TimeReturn,Date)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(TimeDepart, Date)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(TimeReturn, Date)
             If (SpotterPlaneTailNo Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(SpotterPlaneTailNo,String)
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(SpotterPlaneTailNo, String)
             End If
             If (SpotterPlaneType Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(SpotterPlaneType,String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(SpotterPlaneType, String)
             End If
             If (SpotterPlanePilot Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(SpotterPlanePilot,String)
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(SpotterPlanePilot, String)
             End If
             If (WeatherConditions Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(WeatherConditions,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(WeatherConditions, String)
             End If
             If (SnowConditions Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(SnowConditions,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(SnowConditions, String)
             End If
             If (Notes Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(Notes,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(Notes, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(14).Value = CType(RecordInsertedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(14).Value = CType(RecordInsertedDate, Date)
             If (RecordInsertedBy Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("RecordInsertedBy")
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(RecordInsertedBy, String)
             End If
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Herd,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Herd, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(17).Value = CType(SOPNumber,Integer)
-            Me.Adapter.InsertCommand.Parameters(18).Value = CType(SOPVersion,Decimal)
+            Me.Adapter.InsertCommand.Parameters(17).Value = CType(SOPNumber, Integer)
+            Me.Adapter.InsertCommand.Parameters(18).Value = CType(SOPVersion, Decimal)
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(FlightID,String)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(FlightID, String)
             End If
             If (CampaignID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("CampaignID")
             Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(CampaignID,String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(CampaignID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal CrewNumber As Integer,  _
-                    ByVal Pilot As String,  _
-                    ByVal Observer1 As String,  _
-                    ByVal Observer2 As String,  _
-                    ByVal AircraftType As String,  _
-                    ByVal TailNo As String,  _
-                    ByVal TimeDepart As Date,  _
-                    ByVal TimeReturn As Date,  _
-                    ByVal SpotterPlaneTailNo As String,  _
-                    ByVal SpotterPlaneType As String,  _
-                    ByVal SpotterPlanePilot As String,  _
-                    ByVal WeatherConditions As String,  _
-                    ByVal SnowConditions As String,  _
-                    ByVal Notes As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Herd As String,  _
-                    ByVal SOPNumber As Integer,  _
-                    ByVal SOPVersion As Decimal,  _
-                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal CertifiedBy As String,  _
-                    ByVal CertificationLevel As String,  _
-                    ByVal FlightID As String,  _
-                    ByVal CampaignID As String,  _
-                    ByVal Original_FlightID As String) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(CrewNumber,Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)>
+        Public Overridable Overloads Function Update(
+                    ByVal CrewNumber As Integer,
+                    ByVal Pilot As String,
+                    ByVal Observer1 As String,
+                    ByVal Observer2 As String,
+                    ByVal AircraftType As String,
+                    ByVal TailNo As String,
+                    ByVal TimeDepart As Date,
+                    ByVal TimeReturn As Date,
+                    ByVal SpotterPlaneTailNo As String,
+                    ByVal SpotterPlaneType As String,
+                    ByVal SpotterPlanePilot As String,
+                    ByVal WeatherConditions As String,
+                    ByVal SnowConditions As String,
+                    ByVal Notes As String,
+                    ByVal Herd As String,
+                    ByVal SOPNumber As Integer,
+                    ByVal SOPVersion As Decimal,
+                    ByVal Original_FlightID As String,
+                    ByVal FlightID As String) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(CrewNumber, Integer)
             If (Pilot Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Pilot")
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Pilot,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Pilot, String)
             End If
             If (Observer1 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Observer1,String)
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Observer1, String)
             End If
             If (Observer2 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Observer2,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Observer2, String)
             End If
             If (AircraftType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(AircraftType,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(AircraftType, String)
             End If
             If (TailNo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("TailNo")
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(TailNo,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(TailNo, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(TimeDepart,Date)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(TimeReturn,Date)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(TimeDepart, Date)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(TimeReturn, Date)
             If (SpotterPlaneTailNo Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(SpotterPlaneTailNo,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(SpotterPlaneTailNo, String)
             End If
             If (SpotterPlaneType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(SpotterPlaneType,String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(SpotterPlaneType, String)
             End If
             If (SpotterPlanePilot Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(SpotterPlanePilot,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(SpotterPlanePilot, String)
             End If
             If (WeatherConditions Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(WeatherConditions,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(WeatherConditions, String)
             End If
             If (SnowConditions Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(SnowConditions,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(SnowConditions, String)
             End If
             If (Notes Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Notes,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Notes, String)
             End If
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Herd,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Herd, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SOPNumber,Integer)
-            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(SOPVersion,Decimal)
-            If (CertificationDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(CertificationDate.Value,Date)
+            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(SOPNumber, Integer)
+            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(SOPVersion, Decimal)
+            If (Original_FlightID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
-            End If
-            If (CertifiedBy Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(CertifiedBy,String)
-            End If
-            If (CertificationLevel Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("CertificationLevel")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(CertificationLevel,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_FlightID, String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(FlightID,String)
-            End If
-            If (CampaignID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("CampaignID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(CampaignID,String)
-            End If
-            If (Original_FlightID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_FlightID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(FlightID, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal CrewNumber As Integer,  _
-                    ByVal Pilot As String,  _
-                    ByVal Observer1 As String,  _
-                    ByVal Observer2 As String,  _
-                    ByVal AircraftType As String,  _
-                    ByVal TailNo As String,  _
-                    ByVal TimeDepart As Date,  _
-                    ByVal TimeReturn As Date,  _
-                    ByVal SpotterPlaneTailNo As String,  _
-                    ByVal SpotterPlaneType As String,  _
-                    ByVal SpotterPlanePilot As String,  _
-                    ByVal WeatherConditions As String,  _
-                    ByVal SnowConditions As String,  _
-                    ByVal Notes As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal Herd As String,  _
-                    ByVal SOPNumber As Integer,  _
-                    ByVal SOPVersion As Decimal,  _
-                    ByVal CertificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal CertifiedBy As String,  _
-                    ByVal CertificationLevel As String,  _
-                    ByVal CampaignID As String,  _
-                    ByVal Original_FlightID As String) As Integer
-            Return Me.Update(CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot, WeatherConditions, SnowConditions, Notes, RecordInsertedDate, RecordInsertedBy, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel, Original_FlightID, CampaignID, Original_FlightID)
         End Function
     End Class
     

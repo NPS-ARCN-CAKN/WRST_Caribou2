@@ -2,6 +2,9 @@
 Imports System.IO
 Imports Janus.Windows.GridEX
 Public Class Form1
+
+
+
     Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         SaveDataset()
     End Sub
@@ -34,9 +37,6 @@ Public Class Form1
             'load the data
             Me.CampaignsTableAdapter.Fill(Me.WRST_CaribouDataSet.Campaigns)
             Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
-            Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
-            Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
-            Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
             Me.CapturesTableAdapter.Fill(Me.WRST_CaribouDataSet.Captures)
             Me.CaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.Caribou)
             Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
@@ -44,6 +44,7 @@ Public Class Form1
             Me.CompositionCountsTableAdapter.Fill(Me.WRST_CaribouDataSet.CompositionCounts)
             Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
             Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
+            Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
 
             'update the campaign header with info about the current campaign
             Me.CampaignContextLabel.Text = GetCurrentCampaignHeader()
@@ -53,8 +54,10 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'WRST_CaribouDataSet.RadioTracking' table. You can move, or remove it, as needed.
-        Me.RadioTrackingTableAdapter.Fill(Me.WRST_CaribouDataSet.RadioTracking)
+        'set up the form
+        Me.DatabaseViewNameToolStripLabel.Text = ""
+
+
         'load the data from the WRST_Caribou Sql Server database
         LoadDataset()
 
@@ -412,17 +415,25 @@ Public Class Form1
                     Case "Composition"
                         Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
                         DisableUnneededTabs("Composition")
+
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentCampaignID, "CC_ResultsByCampaign")
                     Case "Population"
                         Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
                         DisableUnneededTabs("Population")
-                    'loads the results of the population survey into the Results GridEX
-                    'LoadPopulationEstimateSurveyResults(GetCurrentCampaignID)
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentCampaignID, "PE_ResultsByCampaign")
                     Case "Radiotracking"
                         Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
                         DisableUnneededTabs("Radiotracking")
+
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentCampaignID, "RT_ResultsByCampaign")
                     Case Else
                         Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
                 End Select
+
+
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -539,15 +550,18 @@ Public Class Form1
     ''' Runs the Sql Server view PE_ResultsByCampaign for the survey campaign and returns the results as a DataTable to the ResultsDataGridView
     ''' </summary>
     ''' <param name="CampaignID"></param>
-    Private Sub LoadPopulationEstimateSurveyResults(CampaignID As String)
+    Private Sub LoadCampaignResults(CampaignID As String, ViewName As String)
         Try
-            'Dim Sql As String = "SELECT *  FROM PE_ResultsByCampaign WHERE CampaignID = '" & CampaignID & "';"
-            'Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            'Me.ResultsDataGridView.DataSource = ResultsDataTable
+            'refresh the global database view name so we can access it from other tools like the refresh button
+            Me.DatabaseViewNameToolStripLabel.Text = ViewName
+            Dim Sql As String = "SELECT *  FROM " & ViewName & " WHERE CampaignID = '" & CampaignID & "';"
+            Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Me.ResultsDataGridView.DataSource = ResultsDataTable
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
 
     ''' <summary>
     ''' Runs the query in Sql against the WRST_Caribou database using ConnectionString and returns the results as a DataTable
@@ -1214,5 +1228,7 @@ ORDER BY Collars.Frequency"
         OpenWaypointsFile("Radiotracking")
     End Sub
 
-
+    Private Sub RefreshResultsToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshResultsToolStripButton.Click
+        LoadCampaignResults(GetCurrentCampaignID, Me.DatabaseViewNameToolStripLabel.Text)
+    End Sub
 End Class
