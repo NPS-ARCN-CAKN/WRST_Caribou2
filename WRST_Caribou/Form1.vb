@@ -81,6 +81,8 @@ Public Class Form1
         'Set up the RadiotrackingGridEX default values and dropdowns
         SetUpRadiotrackingGridEX()
 
+        'Load the Campaign header 
+        LoadCampaignHeader()
 
         'maximize form
         Me.WindowState = FormWindowState.Maximized
@@ -376,9 +378,7 @@ Public Class Form1
         Return CurrentCampaign
     End Function
 
-#Region "GridEX_SelectionChanged"
-    Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
-        'user gets here when they select a campaign from the campaigns gridex
+    Private Sub LoadCampaignHeader()
         Try
             'get the name of the survey campaign to put it into the survey flights header
             Me.CampaignHeaderLabel.Text = "Flights"
@@ -398,6 +398,17 @@ Public Class Form1
                     Me.CampaignHeaderLabel.Text = CurrentCampaign
                 End If
             End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+#Region "GridEX_SelectionChanged"
+    Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
+        'user gets here when they select a campaign from the campaigns gridex
+        Try
+            'load the campaign header
+            LoadCampaignHeader()
 
             'set up the gridexes for consistency
             SetUpCampaignsGridEX()

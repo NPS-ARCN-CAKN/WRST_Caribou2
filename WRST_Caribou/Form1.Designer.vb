@@ -742,6 +742,8 @@ Partial Class Form1
         '
         'CampaignHeaderLabel
         '
+        Me.CampaignHeaderLabel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CampaignHeaderLabel.AutoSize = True
         Me.CampaignHeaderLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CampaignHeaderLabel.Location = New System.Drawing.Point(12, 9)
