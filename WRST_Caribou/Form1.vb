@@ -47,7 +47,7 @@ Public Class Form1
             Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
 
             'update the campaign header with info about the current campaign
-            Me.CampaignContextLabel.Text = GetCurrentCampaignHeader()
+            Me.CampaignHeaderLabel.Text = GetCurrentCampaignHeader()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -101,6 +101,8 @@ Public Class Form1
                 .LimitToList = True
                 .ValueList.Clear()
             End With
+
+            'Herd dropdown
             Dim SurveysHerdList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Herd").ValueList
             SurveysHerdList.Add("Chisana", "Chisana")
             SurveysHerdList.Add("Mentasta", "Mentasta")
@@ -186,8 +188,6 @@ Public Class Form1
         LoadGridEXDropDown(Me.SurveyFlightsGridEX, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
         LoadGridEXDropDown(Me.SurveyFlightsGridEX, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
         LoadGridEXDropDown(Me.SurveyFlightsGridEX, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
-
-        'Set up non-database dropdowns
 
         'Herd dropdown
         With Grid.RootTable.Columns("Herd")
@@ -381,11 +381,11 @@ Public Class Form1
         'user gets here when they select a campaign from the campaigns gridex
         Try
             'get the name of the survey campaign to put it into the survey flights header
-            Me.CampaignContextLabel.Text = "Flights"
+            Me.CampaignHeaderLabel.Text = "Flights"
             Dim CurrentCampaign As String = "Flights"
             If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
                 'update the campaign header with info about the current campaign
-                Me.CampaignContextLabel.Text = GetCurrentCampaignHeader()
+                Me.CampaignHeaderLabel.Text = GetCurrentCampaignHeader()
 
                 'set up the flight gridex's 'herd' column default value
                 If Not Me.CampaignsGridEX.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value) Then
@@ -395,7 +395,7 @@ Public Class Form1
                     'while we're here set up the Herd column in the radiotracking gridex to match what's in the campaign
                     Me.RadioTrackingGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
                 Else
-                    Me.CampaignContextLabel.Text = CurrentCampaign
+                    Me.CampaignHeaderLabel.Text = CurrentCampaign
                 End If
             End If
 
@@ -1195,6 +1195,8 @@ ORDER BY Collars.Frequency"
             'load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
             LoadCollaredCaribouDropdown(Me.XrefRadiotrackingCaribouGridEX, SightingDate)
 
+
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1231,4 +1233,5 @@ ORDER BY Collars.Frequency"
     Private Sub RefreshResultsToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshResultsToolStripButton.Click
         LoadCampaignResults(GetCurrentCampaignID, Me.DatabaseViewNameToolStripLabel.Text)
     End Sub
+
 End Class
