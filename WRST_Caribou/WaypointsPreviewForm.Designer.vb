@@ -30,6 +30,7 @@ Partial Class WaypointsPreviewForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PreviewDataGridView = New System.Windows.Forms.DataGridView()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ImportWaypointsButton = New System.Windows.Forms.Button()
         Me.WaypointsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WaypointsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
@@ -41,7 +42,8 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ImportWaypointsButton = New System.Windows.Forms.Button()
+        Me.DateColumnNameComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PreviewDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -52,13 +54,15 @@ Partial Class WaypointsPreviewForm
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.DateColumnNameComboBox)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.SearchAreaComboBox)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(948, 106)
+        Me.Panel1.Size = New System.Drawing.Size(1117, 138)
         Me.Panel1.TabIndex = 1
         '
         'Label2
@@ -82,9 +86,9 @@ Partial Class WaypointsPreviewForm
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.Location = New System.Drawing.Point(23, 9)
+        Me.Label1.Location = New System.Drawing.Point(23, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(913, 43)
+        Me.Label1.Size = New System.Drawing.Size(1082, 43)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = resources.GetString("Label1.Text")
         '
@@ -95,11 +99,11 @@ Partial Class WaypointsPreviewForm
         Me.PreviewDataGridView.AllowUserToOrderColumns = True
         Me.PreviewDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.PreviewDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PreviewDataGridView.Location = New System.Drawing.Point(0, 106)
+        Me.PreviewDataGridView.Location = New System.Drawing.Point(0, 138)
         Me.PreviewDataGridView.Name = "PreviewDataGridView"
         Me.PreviewDataGridView.ReadOnly = True
         Me.PreviewDataGridView.RowTemplate.Height = 24
-        Me.PreviewDataGridView.Size = New System.Drawing.Size(948, 387)
+        Me.PreviewDataGridView.Size = New System.Drawing.Size(1117, 355)
         Me.PreviewDataGridView.TabIndex = 0
         '
         'Panel2
@@ -108,8 +112,17 @@ Partial Class WaypointsPreviewForm
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 520)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(948, 44)
+        Me.Panel2.Size = New System.Drawing.Size(1117, 44)
         Me.Panel2.TabIndex = 2
+        '
+        'ImportWaypointsButton
+        '
+        Me.ImportWaypointsButton.Location = New System.Drawing.Point(791, 3)
+        Me.ImportWaypointsButton.Name = "ImportWaypointsButton"
+        Me.ImportWaypointsButton.Size = New System.Drawing.Size(145, 32)
+        Me.ImportWaypointsButton.TabIndex = 4
+        Me.ImportWaypointsButton.Text = "Import waypoints"
+        Me.ImportWaypointsButton.UseVisualStyleBackColor = True
         '
         'WaypointsBindingNavigator
         '
@@ -126,7 +139,7 @@ Partial Class WaypointsPreviewForm
         Me.WaypointsBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
         Me.WaypointsBindingNavigator.Name = "WaypointsBindingNavigator"
         Me.WaypointsBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.WaypointsBindingNavigator.Size = New System.Drawing.Size(948, 27)
+        Me.WaypointsBindingNavigator.Size = New System.Drawing.Size(1117, 27)
         Me.WaypointsBindingNavigator.TabIndex = 3
         Me.WaypointsBindingNavigator.Text = "BindingNavigator1"
         '
@@ -197,20 +210,29 @@ Partial Class WaypointsPreviewForm
         Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
         Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 27)
         '
-        'ImportWaypointsButton
+        'DateColumnNameComboBox
         '
-        Me.ImportWaypointsButton.Location = New System.Drawing.Point(791, 3)
-        Me.ImportWaypointsButton.Name = "ImportWaypointsButton"
-        Me.ImportWaypointsButton.Size = New System.Drawing.Size(145, 32)
-        Me.ImportWaypointsButton.TabIndex = 4
-        Me.ImportWaypointsButton.Text = "Import waypoints"
-        Me.ImportWaypointsButton.UseVisualStyleBackColor = True
+        Me.DateColumnNameComboBox.FormattingEnabled = True
+        Me.DateColumnNameComboBox.Location = New System.Drawing.Point(384, 91)
+        Me.DateColumnNameComboBox.Name = "DateColumnNameComboBox"
+        Me.DateColumnNameComboBox.Size = New System.Drawing.Size(211, 24)
+        Me.DateColumnNameComboBox.TabIndex = 4
+        Me.DateColumnNameComboBox.Text = "LTIME"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(23, 91)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(355, 17)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Column containing the date the waypoint was collected:"
         '
         'WaypointsPreviewForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(948, 564)
+        Me.ClientSize = New System.Drawing.Size(1117, 564)
         Me.Controls.Add(Me.PreviewDataGridView)
         Me.Controls.Add(Me.WaypointsBindingNavigator)
         Me.Controls.Add(Me.Panel1)
@@ -249,4 +271,6 @@ Partial Class WaypointsPreviewForm
     Friend WithEvents SearchAreaComboBox As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents ImportWaypointsButton As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents DateColumnNameComboBox As ComboBox
 End Class

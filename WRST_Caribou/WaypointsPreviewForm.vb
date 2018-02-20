@@ -64,6 +64,19 @@ Public Class WaypointsPreviewForm
         End Set
     End Property
 
+    '''' <summary>
+    '''' The name of the column containing the date the waypoint was collected.
+    '''' </summary>
+    'Private _DateColumnName As String
+    'Public Property DateColumnName() As String
+    '    Get
+    '        Return _DateColumnName
+    '    End Get
+    '    Set(ByVal value As String)
+    '        _DateColumnName = value
+    '    End Set
+    'End Property
+
     Private Sub SearchAreaComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SearchAreaComboBox.SelectedIndexChanged
         'this checkbox allows the user to change the SearchArea field based on the value of the selected item in the SearchAreaCombobox
         'loop through the waypoint rows and set the searcharea column to the combobox value

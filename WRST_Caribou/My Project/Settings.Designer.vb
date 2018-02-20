@@ -89,6 +89,18 @@ Namespace My
                 Me("SearchAreas") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1989")>  _
+        Public Property MinimumDNRGPSWaypointYear() As String
+            Get
+                Return CType(Me("MinimumDNRGPSWaypointYear"),String)
+            End Get
+            Set
+                Me("MinimumDNRGPSWaypointYear") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

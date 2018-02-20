@@ -2,6 +2,11 @@
 Imports System.IO
 
 Module ImportWaypoints
+    ''' <summary>
+    ''' Imports a DNRGPS waypoints file and converts it to a DataTable
+    ''' </summary>
+    ''' <param name="WaypointFile"></param>
+    ''' <returns>DataTable of waypoints.</returns>
     Public Function WaypointFileToDataTable(WaypointFile As String) As DataTable
         Dim InputDataTable As New DataTable()
         InputDataTable.Clear()

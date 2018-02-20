@@ -16,5 +16,8 @@
     <Setting Name="SearchAreas" Type="System.String" Scope="User">
       <Value Profile="(Default)">Alaska,Copper River,Mt. Drum,Mt. Sanford,Yukon</Value>
     </Setting>
+    <Setting Name="MinimumDNRGPSWaypointYear" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1989</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
