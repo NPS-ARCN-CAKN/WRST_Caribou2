@@ -67,9 +67,9 @@ Partial Class Form1
         Me.CampaignLabel = New System.Windows.Forms.Label()
         Me.CampaignTabControl = New System.Windows.Forms.TabControl()
         Me.ResultsTabPage = New System.Windows.Forms.TabPage()
+        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.ResultsPanel = New System.Windows.Forms.Panel()
         Me.ResultsLabel = New System.Windows.Forms.Label()
-        Me.ResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.ResultsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.DatabaseViewLabel = New System.Windows.Forms.ToolStripLabel()
         Me.DatabaseViewNameToolStripLabel = New System.Windows.Forms.ToolStripLabel()
@@ -112,6 +112,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
+        Me.HelpProvider = New System.Windows.Forms.HelpProvider()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,8 +155,8 @@ Partial Class Form1
         Me.Panel1.SuspendLayout()
         Me.CampaignTabControl.SuspendLayout()
         Me.ResultsTabPage.SuspendLayout()
-        Me.ResultsPanel.SuspendLayout()
         CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ResultsPanel.SuspendLayout()
         Me.ResultsToolStrip.SuspendLayout()
         Me.DataEditingTabPage.SuspendLayout()
         CType(Me.SurveyFlightsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -187,10 +188,13 @@ Partial Class Form1
         Me.CampaignsGridEX.DesignTimeLayout = CampaignsGridEX_DesignTimeLayout
         Me.CampaignsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CampaignsGridEX.GroupByBoxVisible = False
-        Me.CampaignsGridEX.Location = New System.Drawing.Point(0, 38)
+        Me.HelpProvider.SetHelpKeyword(Me.CampaignsGridEX, "Introduction")
+        Me.CampaignsGridEX.Location = New System.Drawing.Point(0, 31)
+        Me.CampaignsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CampaignsGridEX.Name = "CampaignsGridEX"
         Me.CampaignsGridEX.RecordNavigator = True
-        Me.CampaignsGridEX.Size = New System.Drawing.Size(393, 565)
+        Me.HelpProvider.SetShowHelp(Me.CampaignsGridEX, True)
+        Me.CampaignsGridEX.Size = New System.Drawing.Size(294, 451)
         Me.CampaignsGridEX.TabIndex = 1
         '
         'CampaignsBindingSource
@@ -209,20 +213,22 @@ Partial Class Form1
         Me.SurveyDataTabControl.Controls.Add(Me.PopulationTabPage)
         Me.SurveyDataTabControl.Controls.Add(Me.RadiotrackingTabPage)
         Me.SurveyDataTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SurveyDataTabControl.Location = New System.Drawing.Point(0, 38)
+        Me.SurveyDataTabControl.Location = New System.Drawing.Point(0, 31)
+        Me.SurveyDataTabControl.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveyDataTabControl.Name = "SurveyDataTabControl"
         Me.SurveyDataTabControl.SelectedIndex = 0
-        Me.SurveyDataTabControl.Size = New System.Drawing.Size(770, 321)
+        Me.SurveyDataTabControl.Size = New System.Drawing.Size(575, 255)
         Me.SurveyDataTabControl.TabIndex = 4
         '
         'CompositionCountTabPage
         '
         Me.CompositionCountTabPage.Controls.Add(Me.CompCountSplitContainer)
         Me.CompositionCountTabPage.Controls.Add(Me.CompCountToolStrip)
-        Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.CompositionCountTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
-        Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.CompositionCountTabPage.Size = New System.Drawing.Size(762, 292)
+        Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.CompositionCountTabPage.Size = New System.Drawing.Size(567, 229)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition"
         Me.CompositionCountTabPage.UseVisualStyleBackColor = True
@@ -230,7 +236,8 @@ Partial Class Form1
         'CompCountSplitContainer
         '
         Me.CompCountSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CompCountSplitContainer.Location = New System.Drawing.Point(3, 30)
+        Me.CompCountSplitContainer.Location = New System.Drawing.Point(2, 27)
+        Me.CompCountSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.CompCountSplitContainer.Name = "CompCountSplitContainer"
         '
         'CompCountSplitContainer.Panel1
@@ -241,8 +248,9 @@ Partial Class Form1
         '
         Me.CompCountSplitContainer.Panel2.AutoScroll = True
         Me.CompCountSplitContainer.Panel2.Controls.Add(Me.XrefCompCountCaribouGridEX)
-        Me.CompCountSplitContainer.Size = New System.Drawing.Size(756, 259)
-        Me.CompCountSplitContainer.SplitterDistance = 339
+        Me.CompCountSplitContainer.Size = New System.Drawing.Size(563, 200)
+        Me.CompCountSplitContainer.SplitterDistance = 252
+        Me.CompCountSplitContainer.SplitterWidth = 3
         Me.CompCountSplitContainer.TabIndex = 3
         '
         'CompositionCountsGridEX
@@ -256,9 +264,10 @@ Partial Class Form1
         Me.CompositionCountsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompositionCountsGridEX.GroupByBoxVisible = False
         Me.CompositionCountsGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.CompositionCountsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
         Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(339, 259)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(252, 200)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -284,9 +293,10 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XrefCompCountCaribouGridEX.GroupByBoxVisible = False
         Me.XrefCompCountCaribouGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.XrefCompCountCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefCompCountCaribouGridEX.Name = "XrefCompCountCaribouGridEX"
         Me.XrefCompCountCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(413, 259)
+        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(308, 200)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -299,9 +309,9 @@ Partial Class Form1
         '
         Me.CompCountToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton})
-        Me.CompCountToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.CompCountToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.CompCountToolStrip.Name = "CompCountToolStrip"
-        Me.CompCountToolStrip.Size = New System.Drawing.Size(756, 27)
+        Me.CompCountToolStrip.Size = New System.Drawing.Size(563, 25)
         Me.CompCountToolStrip.TabIndex = 1
         Me.CompCountToolStrip.Text = "ToolStrip1"
         '
@@ -311,7 +321,7 @@ Partial Class Form1
         Me.ImportCompCountWaypointsToolStripButton.Image = CType(resources.GetObject("ImportCompCountWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportCompCountWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportCompCountWaypointsToolStripButton.Name = "ImportCompCountWaypointsToolStripButton"
-        Me.ImportCompCountWaypointsToolStripButton.Size = New System.Drawing.Size(138, 24)
+        Me.ImportCompCountWaypointsToolStripButton.Size = New System.Drawing.Size(113, 22)
         Me.ImportCompCountWaypointsToolStripButton.Text = "Import waypoints..."
         '
         'PopulationTabPage
@@ -319,10 +329,11 @@ Partial Class Form1
         Me.PopulationTabPage.AutoScroll = True
         Me.PopulationTabPage.Controls.Add(Me.PopulationSurveySplitContainer)
         Me.PopulationTabPage.Controls.Add(Me.PopulationToolStrip)
-        Me.PopulationTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.PopulationTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.PopulationTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.PopulationTabPage.Name = "PopulationTabPage"
-        Me.PopulationTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.PopulationTabPage.Size = New System.Drawing.Size(762, 292)
+        Me.PopulationTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.PopulationTabPage.Size = New System.Drawing.Size(567, 229)
         Me.PopulationTabPage.TabIndex = 1
         Me.PopulationTabPage.Text = "Population"
         Me.PopulationTabPage.UseVisualStyleBackColor = True
@@ -330,7 +341,8 @@ Partial Class Form1
         'PopulationSurveySplitContainer
         '
         Me.PopulationSurveySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PopulationSurveySplitContainer.Location = New System.Drawing.Point(3, 30)
+        Me.PopulationSurveySplitContainer.Location = New System.Drawing.Point(2, 27)
+        Me.PopulationSurveySplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.PopulationSurveySplitContainer.Name = "PopulationSurveySplitContainer"
         '
         'PopulationSurveySplitContainer.Panel1
@@ -341,8 +353,9 @@ Partial Class Form1
         '
         Me.PopulationSurveySplitContainer.Panel2.AutoScroll = True
         Me.PopulationSurveySplitContainer.Panel2.Controls.Add(Me.XrefPopulationCaribouGridEX)
-        Me.PopulationSurveySplitContainer.Size = New System.Drawing.Size(756, 259)
-        Me.PopulationSurveySplitContainer.SplitterDistance = 400
+        Me.PopulationSurveySplitContainer.Size = New System.Drawing.Size(563, 200)
+        Me.PopulationSurveySplitContainer.SplitterDistance = 297
+        Me.PopulationSurveySplitContainer.SplitterWidth = 3
         Me.PopulationSurveySplitContainer.TabIndex = 2
         '
         'PopulationEstimateGridEX
@@ -358,11 +371,12 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.GroupByBoxVisible = False
         Me.PopulationEstimateGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.PopulationEstimateGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.PopulationEstimateGridEX.Name = "PopulationEstimateGridEX"
         Me.PopulationEstimateGridEX.RecordNavigator = True
         Me.PopulationEstimateGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.PopulationEstimateGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
-        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(400, 259)
+        Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(297, 200)
         Me.PopulationEstimateGridEX.TabIndex = 0
         Me.PopulationEstimateGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.PopulationEstimateGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -383,10 +397,11 @@ Partial Class Form1
         Me.XrefPopulationCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XrefPopulationCaribouGridEX.GroupByBoxVisible = False
         Me.XrefPopulationCaribouGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.XrefPopulationCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefPopulationCaribouGridEX.Name = "XrefPopulationCaribouGridEX"
         Me.XrefPopulationCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.XrefPopulationCaribouGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.XrefPopulationCaribouGridEX.Size = New System.Drawing.Size(352, 259)
+        Me.XrefPopulationCaribouGridEX.Size = New System.Drawing.Size(263, 200)
         Me.XrefPopulationCaribouGridEX.TabIndex = 0
         Me.XrefPopulationCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -399,9 +414,9 @@ Partial Class Form1
         '
         Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationWaypointsToolStripButton})
-        Me.PopulationToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.PopulationToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.PopulationToolStrip.Name = "PopulationToolStrip"
-        Me.PopulationToolStrip.Size = New System.Drawing.Size(756, 27)
+        Me.PopulationToolStrip.Size = New System.Drawing.Size(563, 25)
         Me.PopulationToolStrip.TabIndex = 1
         Me.PopulationToolStrip.Text = "ToolStrip1"
         '
@@ -411,17 +426,18 @@ Partial Class Form1
         Me.ImportPopulationWaypointsToolStripButton.Image = CType(resources.GetObject("ImportPopulationWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportPopulationWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportPopulationWaypointsToolStripButton.Name = "ImportPopulationWaypointsToolStripButton"
-        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(138, 24)
+        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(113, 22)
         Me.ImportPopulationWaypointsToolStripButton.Text = "Import waypoints..."
         '
         'RadiotrackingTabPage
         '
         Me.RadiotrackingTabPage.Controls.Add(Me.RadioTrackingSplitContainer)
         Me.RadiotrackingTabPage.Controls.Add(Me.RadiotrackingToolStrip)
-        Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.RadiotrackingTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
-        Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(762, 292)
+        Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(567, 229)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
         Me.RadiotrackingTabPage.UseVisualStyleBackColor = True
@@ -429,7 +445,8 @@ Partial Class Form1
         'RadioTrackingSplitContainer
         '
         Me.RadioTrackingSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadioTrackingSplitContainer.Location = New System.Drawing.Point(3, 30)
+        Me.RadioTrackingSplitContainer.Location = New System.Drawing.Point(2, 27)
+        Me.RadioTrackingSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTrackingSplitContainer.Name = "RadioTrackingSplitContainer"
         '
         'RadioTrackingSplitContainer.Panel1
@@ -441,8 +458,9 @@ Partial Class Form1
         '
         Me.RadioTrackingSplitContainer.Panel2.AutoScroll = True
         Me.RadioTrackingSplitContainer.Panel2.Controls.Add(Me.XrefRadiotrackingCaribouGridEX)
-        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(756, 259)
-        Me.RadioTrackingSplitContainer.SplitterDistance = 398
+        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(563, 200)
+        Me.RadioTrackingSplitContainer.SplitterDistance = 295
+        Me.RadioTrackingSplitContainer.SplitterWidth = 3
         Me.RadioTrackingSplitContainer.TabIndex = 2
         '
         'RadioTrackingGridEX
@@ -456,9 +474,10 @@ Partial Class Form1
         Me.RadioTrackingGridEX.GroupByBoxVisible = False
         Me.RadioTrackingGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.RadioTrackingGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.RadioTrackingGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
         Me.RadioTrackingGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(398, 259)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(295, 200)
         Me.RadioTrackingGridEX.TabIndex = 0
         Me.RadioTrackingGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.RadioTrackingGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -478,9 +497,10 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XrefRadiotrackingCaribouGridEX.GroupByBoxVisible = False
         Me.XrefRadiotrackingCaribouGridEX.Location = New System.Drawing.Point(0, 0)
+        Me.XrefRadiotrackingCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefRadiotrackingCaribouGridEX.Name = "XrefRadiotrackingCaribouGridEX"
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(354, 259)
+        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(265, 200)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
         '
         'XrefRadiotrackingCaribouBindingSource1
@@ -492,9 +512,9 @@ Partial Class Form1
         '
         Me.RadiotrackingToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportRadiotrackingWaypointsToolStripButton})
-        Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
-        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(756, 27)
+        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(563, 25)
         Me.RadiotrackingToolStrip.TabIndex = 1
         Me.RadiotrackingToolStrip.Text = "ToolStrip1"
         '
@@ -504,13 +524,14 @@ Partial Class Form1
         Me.ImportRadiotrackingWaypointsToolStripButton.Image = CType(resources.GetObject("ImportRadiotrackingWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportRadiotrackingWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportRadiotrackingWaypointsToolStripButton.Name = "ImportRadiotrackingWaypointsToolStripButton"
-        Me.ImportRadiotrackingWaypointsToolStripButton.Size = New System.Drawing.Size(230, 24)
+        Me.ImportRadiotrackingWaypointsToolStripButton.Size = New System.Drawing.Size(186, 22)
         Me.ImportRadiotrackingWaypointsToolStripButton.Text = "Import radiotracking waypoints..."
         '
         'CampaignsSplitContainer
         '
         Me.CampaignsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CampaignsSplitContainer.Location = New System.Drawing.Point(3, 3)
+        Me.CampaignsSplitContainer.Location = New System.Drawing.Point(2, 2)
+        Me.CampaignsSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.CampaignsSplitContainer.Name = "CampaignsSplitContainer"
         '
         'CampaignsSplitContainer.Panel1
@@ -522,8 +543,9 @@ Partial Class Form1
         '
         Me.CampaignsSplitContainer.Panel2.Controls.Add(Me.CampaignTabControl)
         Me.CampaignsSplitContainer.Panel2.Controls.Add(Me.SurveysPanel)
-        Me.CampaignsSplitContainer.Size = New System.Drawing.Size(1181, 603)
-        Me.CampaignsSplitContainer.SplitterDistance = 393
+        Me.CampaignsSplitContainer.Size = New System.Drawing.Size(884, 482)
+        Me.CampaignsSplitContainer.SplitterDistance = 294
+        Me.CampaignsSplitContainer.SplitterWidth = 3
         Me.CampaignsSplitContainer.TabIndex = 2
         '
         'Panel1
@@ -531,17 +553,19 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.CampaignLabel)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(393, 38)
+        Me.Panel1.Size = New System.Drawing.Size(294, 31)
         Me.Panel1.TabIndex = 2
         '
         'CampaignLabel
         '
         Me.CampaignLabel.AutoSize = True
         Me.CampaignLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CampaignLabel.Location = New System.Drawing.Point(5, 9)
+        Me.CampaignLabel.Location = New System.Drawing.Point(4, 7)
+        Me.CampaignLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.CampaignLabel.Name = "CampaignLabel"
-        Me.CampaignLabel.Size = New System.Drawing.Size(87, 24)
+        Me.CampaignLabel.Size = New System.Drawing.Size(72, 19)
         Me.CampaignLabel.TabIndex = 0
         Me.CampaignLabel.Text = "Surveys"
         '
@@ -550,10 +574,11 @@ Partial Class Form1
         Me.CampaignTabControl.Controls.Add(Me.ResultsTabPage)
         Me.CampaignTabControl.Controls.Add(Me.DataEditingTabPage)
         Me.CampaignTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CampaignTabControl.Location = New System.Drawing.Point(0, 38)
+        Me.CampaignTabControl.Location = New System.Drawing.Point(0, 31)
+        Me.CampaignTabControl.Margin = New System.Windows.Forms.Padding(2)
         Me.CampaignTabControl.Name = "CampaignTabControl"
         Me.CampaignTabControl.SelectedIndex = 0
-        Me.CampaignTabControl.Size = New System.Drawing.Size(784, 565)
+        Me.CampaignTabControl.Size = New System.Drawing.Size(587, 451)
         Me.CampaignTabControl.TabIndex = 4
         '
         'ResultsTabPage
@@ -561,32 +586,14 @@ Partial Class Form1
         Me.ResultsTabPage.Controls.Add(Me.ResultsDataGridView)
         Me.ResultsTabPage.Controls.Add(Me.ResultsPanel)
         Me.ResultsTabPage.Controls.Add(Me.ResultsToolStrip)
-        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.ResultsTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.ResultsTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.ResultsTabPage.Name = "ResultsTabPage"
-        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(776, 536)
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(579, 425)
         Me.ResultsTabPage.TabIndex = 0
         Me.ResultsTabPage.Text = "Results"
         Me.ResultsTabPage.UseVisualStyleBackColor = True
-        '
-        'ResultsPanel
-        '
-        Me.ResultsPanel.Controls.Add(Me.ResultsLabel)
-        Me.ResultsPanel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.ResultsPanel.Location = New System.Drawing.Point(3, 3)
-        Me.ResultsPanel.Name = "ResultsPanel"
-        Me.ResultsPanel.Size = New System.Drawing.Size(770, 43)
-        Me.ResultsPanel.TabIndex = 6
-        '
-        'ResultsLabel
-        '
-        Me.ResultsLabel.AutoSize = True
-        Me.ResultsLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ResultsLabel.Location = New System.Drawing.Point(12, 9)
-        Me.ResultsLabel.Name = "ResultsLabel"
-        Me.ResultsLabel.Size = New System.Drawing.Size(81, 24)
-        Me.ResultsLabel.TabIndex = 0
-        Me.ResultsLabel.Text = "Results"
         '
         'ResultsDataGridView
         '
@@ -596,34 +603,56 @@ Partial Class Form1
         Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ResultsDataGridView.Location = New System.Drawing.Point(3, 46)
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(2, 37)
+        Me.ResultsDataGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.ResultsDataGridView.Name = "ResultsDataGridView"
         Me.ResultsDataGridView.ReadOnly = True
         Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(770, 460)
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(575, 359)
         Me.ResultsDataGridView.TabIndex = 0
+        '
+        'ResultsPanel
+        '
+        Me.ResultsPanel.Controls.Add(Me.ResultsLabel)
+        Me.ResultsPanel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ResultsPanel.Location = New System.Drawing.Point(2, 2)
+        Me.ResultsPanel.Margin = New System.Windows.Forms.Padding(2)
+        Me.ResultsPanel.Name = "ResultsPanel"
+        Me.ResultsPanel.Size = New System.Drawing.Size(575, 35)
+        Me.ResultsPanel.TabIndex = 6
+        '
+        'ResultsLabel
+        '
+        Me.ResultsLabel.AutoSize = True
+        Me.ResultsLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ResultsLabel.Location = New System.Drawing.Point(9, 7)
+        Me.ResultsLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.ResultsLabel.Name = "ResultsLabel"
+        Me.ResultsLabel.Size = New System.Drawing.Size(67, 19)
+        Me.ResultsLabel.TabIndex = 0
+        Me.ResultsLabel.Text = "Results"
         '
         'ResultsToolStrip
         '
         Me.ResultsToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ResultsToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseViewLabel, Me.DatabaseViewNameToolStripLabel, Me.ToolStripSeparator2, Me.RefreshResultsToolStripButton, Me.ToolStripSeparator1})
-        Me.ResultsToolStrip.Location = New System.Drawing.Point(3, 506)
+        Me.ResultsToolStrip.Location = New System.Drawing.Point(2, 396)
         Me.ResultsToolStrip.Name = "ResultsToolStrip"
-        Me.ResultsToolStrip.Size = New System.Drawing.Size(770, 27)
+        Me.ResultsToolStrip.Size = New System.Drawing.Size(575, 27)
         Me.ResultsToolStrip.TabIndex = 1
         Me.ResultsToolStrip.Text = "ToolStrip1"
         '
         'DatabaseViewLabel
         '
         Me.DatabaseViewLabel.Name = "DatabaseViewLabel"
-        Me.DatabaseViewLabel.Size = New System.Drawing.Size(250, 24)
+        Me.DatabaseViewLabel.Size = New System.Drawing.Size(199, 24)
         Me.DatabaseViewLabel.Text = "Showing results from database view:"
         '
         'DatabaseViewNameToolStripLabel
         '
         Me.DatabaseViewNameToolStripLabel.Name = "DatabaseViewNameToolStripLabel"
-        Me.DatabaseViewNameToolStripLabel.Size = New System.Drawing.Size(147, 24)
+        Me.DatabaseViewNameToolStripLabel.Size = New System.Drawing.Size(115, 24)
         Me.DatabaseViewNameToolStripLabel.Text = "Database view name"
         '
         'ToolStripSeparator2
@@ -636,7 +665,7 @@ Partial Class Form1
         Me.RefreshResultsToolStripButton.Image = CType(resources.GetObject("RefreshResultsToolStripButton.Image"), System.Drawing.Image)
         Me.RefreshResultsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.RefreshResultsToolStripButton.Name = "RefreshResultsToolStripButton"
-        Me.RefreshResultsToolStripButton.Size = New System.Drawing.Size(183, 24)
+        Me.RefreshResultsToolStripButton.Size = New System.Drawing.Size(149, 24)
         Me.RefreshResultsToolStripButton.Text = "Refresh from database"
         '
         'ToolStripSeparator1
@@ -647,10 +676,11 @@ Partial Class Form1
         'DataEditingTabPage
         '
         Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
-        Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.DataEditingTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.DataEditingTabPage.Name = "DataEditingTabPage"
-        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataEditingTabPage.Size = New System.Drawing.Size(776, 536)
+        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.DataEditingTabPage.Size = New System.Drawing.Size(579, 425)
         Me.DataEditingTabPage.TabIndex = 1
         Me.DataEditingTabPage.Text = "Data editing"
         Me.DataEditingTabPage.UseVisualStyleBackColor = True
@@ -658,7 +688,8 @@ Partial Class Form1
         'SurveyFlightsSplitContainer
         '
         Me.SurveyFlightsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SurveyFlightsSplitContainer.Location = New System.Drawing.Point(3, 3)
+        Me.SurveyFlightsSplitContainer.Location = New System.Drawing.Point(2, 2)
+        Me.SurveyFlightsSplitContainer.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveyFlightsSplitContainer.Name = "SurveyFlightsSplitContainer"
         Me.SurveyFlightsSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -671,8 +702,9 @@ Partial Class Form1
         '
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.SurveyDataTabControl)
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.DataPanel)
-        Me.SurveyFlightsSplitContainer.Size = New System.Drawing.Size(770, 530)
-        Me.SurveyFlightsSplitContainer.SplitterDistance = 167
+        Me.SurveyFlightsSplitContainer.Size = New System.Drawing.Size(575, 421)
+        Me.SurveyFlightsSplitContainer.SplitterDistance = 132
+        Me.SurveyFlightsSplitContainer.SplitterWidth = 3
         Me.SurveyFlightsSplitContainer.TabIndex = 5
         '
         'SurveyFlightsGridEX
@@ -685,12 +717,13 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
-        Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 38)
+        Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 31)
+        Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveyFlightsGridEX.Name = "SurveyFlightsGridEX"
         Me.SurveyFlightsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(770, 129)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(575, 101)
         Me.SurveyFlightsGridEX.TabIndex = 0
         '
         'Panel2
@@ -698,17 +731,19 @@ Partial Class Form1
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(770, 38)
+        Me.Panel2.Size = New System.Drawing.Size(575, 31)
         Me.Panel2.TabIndex = 5
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Location = New System.Drawing.Point(9, 7)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 24)
+        Me.Label1.Size = New System.Drawing.Size(61, 19)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Flights"
         '
@@ -717,27 +752,30 @@ Partial Class Form1
         Me.DataPanel.Controls.Add(Me.FlightContextLabel)
         Me.DataPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.DataPanel.Location = New System.Drawing.Point(0, 0)
+        Me.DataPanel.Margin = New System.Windows.Forms.Padding(2)
         Me.DataPanel.Name = "DataPanel"
-        Me.DataPanel.Size = New System.Drawing.Size(770, 38)
+        Me.DataPanel.Size = New System.Drawing.Size(575, 31)
         Me.DataPanel.TabIndex = 5
         '
         'FlightContextLabel
         '
         Me.FlightContextLabel.AutoSize = True
         Me.FlightContextLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FlightContextLabel.Location = New System.Drawing.Point(5, 9)
+        Me.FlightContextLabel.Location = New System.Drawing.Point(4, 7)
+        Me.FlightContextLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.FlightContextLabel.Name = "FlightContextLabel"
-        Me.FlightContextLabel.Size = New System.Drawing.Size(53, 24)
+        Me.FlightContextLabel.Size = New System.Drawing.Size(76, 19)
         Me.FlightContextLabel.TabIndex = 0
-        Me.FlightContextLabel.Text = "Data"
+        Me.FlightContextLabel.Text = "Groups: "
         '
         'SurveysPanel
         '
         Me.SurveysPanel.Controls.Add(Me.CampaignHeaderLabel)
         Me.SurveysPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.SurveysPanel.Location = New System.Drawing.Point(0, 0)
+        Me.SurveysPanel.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveysPanel.Name = "SurveysPanel"
-        Me.SurveysPanel.Size = New System.Drawing.Size(784, 38)
+        Me.SurveysPanel.Size = New System.Drawing.Size(587, 31)
         Me.SurveysPanel.TabIndex = 4
         '
         'CampaignHeaderLabel
@@ -746,9 +784,10 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CampaignHeaderLabel.AutoSize = True
         Me.CampaignHeaderLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CampaignHeaderLabel.Location = New System.Drawing.Point(12, 9)
+        Me.CampaignHeaderLabel.Location = New System.Drawing.Point(9, 7)
+        Me.CampaignHeaderLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.CampaignHeaderLabel.Name = "CampaignHeaderLabel"
-        Me.CampaignHeaderLabel.Size = New System.Drawing.Size(171, 24)
+        Me.CampaignHeaderLabel.Size = New System.Drawing.Size(142, 19)
         Me.CampaignHeaderLabel.TabIndex = 0
         Me.CampaignHeaderLabel.Text = "CampaignHeader"
         '
@@ -758,7 +797,8 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem, Me.DatabaseToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1195, 28)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(896, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -766,49 +806,49 @@ Partial Class Form1
         '
         Me.SaveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveChangesToDatabaseToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(83, 24)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
         Me.SaveToolStripMenuItem.Text = "Functions"
         '
         'SaveChangesToDatabaseToolStripMenuItem
         '
         Me.SaveChangesToDatabaseToolStripMenuItem.Image = CType(resources.GetObject("SaveChangesToDatabaseToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SaveChangesToDatabaseToolStripMenuItem.Name = "SaveChangesToDatabaseToolStripMenuItem"
-        Me.SaveChangesToDatabaseToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.SaveChangesToDatabaseToolStripMenuItem.Size = New System.Drawing.Size(213, 26)
         Me.SaveChangesToDatabaseToolStripMenuItem.Text = "Save changes to database"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(256, 26)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(213, 26)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'DatabaseToolStripMenuItem
         '
         Me.DatabaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditDatabaseConnectionToolStripMenuItem})
         Me.DatabaseToolStripMenuItem.Name = "DatabaseToolStripMenuItem"
-        Me.DatabaseToolStripMenuItem.Size = New System.Drawing.Size(84, 24)
+        Me.DatabaseToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.DatabaseToolStripMenuItem.Text = "Database"
         '
         'EditDatabaseConnectionToolStripMenuItem
         '
         Me.EditDatabaseConnectionToolStripMenuItem.Image = CType(resources.GetObject("EditDatabaseConnectionToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EditDatabaseConnectionToolStripMenuItem.Name = "EditDatabaseConnectionToolStripMenuItem"
-        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(261, 26)
+        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(220, 26)
         Me.EditDatabaseConnectionToolStripMenuItem.Text = "Edit database connection..."
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(62, 24)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'MainToolStrip
         '
         Me.MainToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MainToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveDatasetToolStripButton})
-        Me.MainToolStrip.Location = New System.Drawing.Point(0, 28)
+        Me.MainToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.MainToolStrip.Name = "MainToolStrip"
-        Me.MainToolStrip.Size = New System.Drawing.Size(1195, 27)
+        Me.MainToolStrip.Size = New System.Drawing.Size(896, 27)
         Me.MainToolStrip.TabIndex = 5
         Me.MainToolStrip.Text = "Tools"
         '
@@ -817,7 +857,7 @@ Partial Class Form1
         Me.SaveDatasetToolStripButton.Image = CType(resources.GetObject("SaveDatasetToolStripButton.Image"), System.Drawing.Image)
         Me.SaveDatasetToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveDatasetToolStripButton.Name = "SaveDatasetToolStripButton"
-        Me.SaveDatasetToolStripButton.Size = New System.Drawing.Size(147, 24)
+        Me.SaveDatasetToolStripButton.Size = New System.Drawing.Size(119, 24)
         Me.SaveDatasetToolStripButton.Text = "Save to database"
         '
         'MainTabControl
@@ -825,19 +865,21 @@ Partial Class Form1
         Me.MainTabControl.Controls.Add(Me.SurveysTabPage)
         Me.MainTabControl.Controls.Add(Me.CaribouTabPage)
         Me.MainTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MainTabControl.Location = New System.Drawing.Point(0, 55)
+        Me.MainTabControl.Location = New System.Drawing.Point(0, 51)
+        Me.MainTabControl.Margin = New System.Windows.Forms.Padding(2)
         Me.MainTabControl.Name = "MainTabControl"
         Me.MainTabControl.SelectedIndex = 0
-        Me.MainTabControl.Size = New System.Drawing.Size(1195, 638)
+        Me.MainTabControl.Size = New System.Drawing.Size(896, 512)
         Me.MainTabControl.TabIndex = 6
         '
         'SurveysTabPage
         '
         Me.SurveysTabPage.Controls.Add(Me.CampaignsSplitContainer)
-        Me.SurveysTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.SurveysTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.SurveysTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.SurveysTabPage.Name = "SurveysTabPage"
-        Me.SurveysTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.SurveysTabPage.Size = New System.Drawing.Size(1187, 609)
+        Me.SurveysTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.SurveysTabPage.Size = New System.Drawing.Size(888, 486)
         Me.SurveysTabPage.TabIndex = 0
         Me.SurveysTabPage.Text = "Surveys"
         Me.SurveysTabPage.UseVisualStyleBackColor = True
@@ -846,10 +888,11 @@ Partial Class Form1
         '
         Me.CaribouTabPage.AutoScroll = True
         Me.CaribouTabPage.Controls.Add(Me.CaribouGridEX)
-        Me.CaribouTabPage.Location = New System.Drawing.Point(4, 25)
+        Me.CaribouTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.CaribouTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouTabPage.Name = "CaribouTabPage"
-        Me.CaribouTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.CaribouTabPage.Size = New System.Drawing.Size(1187, 609)
+        Me.CaribouTabPage.Padding = New System.Windows.Forms.Padding(2)
+        Me.CaribouTabPage.Size = New System.Drawing.Size(888, 486)
         Me.CaribouTabPage.TabIndex = 1
         Me.CaribouTabPage.Text = "Caribou"
         Me.CaribouTabPage.UseVisualStyleBackColor = True
@@ -861,9 +904,10 @@ Partial Class Form1
         Me.CaribouGridEX.DesignTimeLayout = CaribouGridEX_DesignTimeLayout
         Me.CaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CaribouGridEX.Hierarchical = True
-        Me.CaribouGridEX.Location = New System.Drawing.Point(3, 3)
+        Me.CaribouGridEX.Location = New System.Drawing.Point(2, 2)
+        Me.CaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouGridEX.Name = "CaribouGridEX"
-        Me.CaribouGridEX.Size = New System.Drawing.Size(1181, 603)
+        Me.CaribouGridEX.Size = New System.Drawing.Size(884, 482)
         Me.CaribouGridEX.TabIndex = 0
         '
         'CaribouBindingSource
@@ -937,16 +981,25 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
+        'HelpProvider
+        '
+        Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
+    " Database Application.chm"
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1195, 693)
+        Me.ClientSize = New System.Drawing.Size(896, 563)
         Me.Controls.Add(Me.MainTabControl)
         Me.Controls.Add(Me.MainToolStrip)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.HelpButton = True
+        Me.HelpProvider.SetHelpKeyword(Me, "Introduction")
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Form1"
+        Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Wrangell St. Elias National Park & Preserve Caribou Monitoring Program"
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -998,9 +1051,9 @@ Partial Class Form1
         Me.CampaignTabControl.ResumeLayout(False)
         Me.ResultsTabPage.ResumeLayout(False)
         Me.ResultsTabPage.PerformLayout()
+        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResultsPanel.ResumeLayout(False)
         Me.ResultsPanel.PerformLayout()
-        CType(Me.ResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResultsToolStrip.ResumeLayout(False)
         Me.ResultsToolStrip.PerformLayout()
         Me.DataEditingTabPage.ResumeLayout(False)
@@ -1110,4 +1163,5 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents ResultsPanel As Panel
     Friend WithEvents ResultsLabel As Label
+    Friend WithEvents HelpProvider As HelpProvider
 End Class
