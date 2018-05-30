@@ -1,6 +1,9 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Janus.Windows.GridEX
+
+Imports SkeeterDataTablesTranslator
+
 Public Class Form1
 
 
@@ -1255,4 +1258,16 @@ ORDER BY Collars.Frequency"
         LoadCampaignResults(GetCurrentCampaignID, Me.DatabaseViewNameToolStripLabel.Text)
     End Sub
 
+
+    Private Sub ImportCompCountXYFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportCompCountXYFromFileToolStripButton.Click
+        Dim SourceFileInfo As New FileInfo("C:\temp\zWaypointFiles\2010-05-25_739_GPS296_Waypoints.csv")
+        Dim InputDataTable As DataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+
+        Dim DestinationFileInfo As New FileInfo("C:\temp\ASFT1_SoilTemperature_2016-2017.csv")
+        Dim TransformedDataTable As DataTable = GetDataTableFromDelimitedTextFile(DestinationFileInfo, ",")
+
+        Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, TransformedDataTable)
+        TranslatorForm.ShowDialog()
+        Me.CompositionCountsGridEX.DataSource = TranslatorForm.TransformedDataTable
+    End Sub
 End Class

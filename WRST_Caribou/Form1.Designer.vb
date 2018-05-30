@@ -113,6 +113,7 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
+        Me.ImportCompCountXYFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,7 +309,7 @@ Partial Class Form1
         'CompCountToolStrip
         '
         Me.CompCountToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton})
+        Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton, Me.ImportCompCountXYFromFileToolStripButton})
         Me.CompCountToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.CompCountToolStrip.Name = "CompCountToolStrip"
         Me.CompCountToolStrip.Size = New System.Drawing.Size(563, 25)
@@ -986,6 +987,15 @@ Partial Class Form1
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
     " Database Application.chm"
         '
+        'ImportCompCountXYFromFileToolStripButton
+        '
+        Me.ImportCompCountXYFromFileToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ImportCompCountXYFromFileToolStripButton.Image = CType(resources.GetObject("ImportCompCountXYFromFileToolStripButton.Image"), System.Drawing.Image)
+        Me.ImportCompCountXYFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportCompCountXYFromFileToolStripButton.Name = "ImportCompCountXYFromFileToolStripButton"
+        Me.ImportCompCountXYFromFileToolStripButton.Size = New System.Drawing.Size(100, 22)
+        Me.ImportCompCountXYFromFileToolStripButton.Text = "Import XY points"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1164,4 +1174,5 @@ Partial Class Form1
     Friend WithEvents ResultsPanel As Panel
     Friend WithEvents ResultsLabel As Label
     Friend WithEvents HelpProvider As HelpProvider
+    Friend WithEvents ImportCompCountXYFromFileToolStripButton As ToolStripButton
 End Class

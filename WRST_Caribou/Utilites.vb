@@ -1,4 +1,5 @@
-﻿Module Utilites
+﻿Imports System.IO
+Module Utilites
     ''' <summary>
     ''' Returns the list of SearchAreas in My.Settings.SearchAreas as a DataTable
     ''' </summary>
@@ -22,5 +23,26 @@
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
         Return MyDataTable
+    End Function
+
+    ''' <summary>
+    ''' Converts a tab delimited text file to a DataTable
+    ''' </summary>
+    ''' <param name="DelimitedTextFileInfo">Tab delimited text file. FileInfo.</param>
+    ''' <returns>DataTable</returns>
+    Public Function GetDataTableFromDelimitedTextFile(DelimitedTextFileInfo As FileInfo, Delimiter As String) As DataTable
+        Dim TDVDataTable As New DataTable(DelimitedTextFileInfo.Name)
+        Try
+            Dim MyTextFileParser As New FileIO.TextFieldParser(DelimitedTextFileInfo.FullName)
+            MyTextFileParser.Delimiters = New String() {Delimiter}
+            TDVDataTable.Columns.AddRange(Array.ConvertAll(MyTextFileParser.ReadFields, Function(s) New DataColumn With {.Caption = s, .ColumnName = s}))
+            Do While Not MyTextFileParser.EndOfData
+                TDVDataTable.Rows.Add(MyTextFileParser.ReadFields)
+            Loop
+            MyTextFileParser.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message & "  " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return TDVDataTable
     End Function
 End Module
