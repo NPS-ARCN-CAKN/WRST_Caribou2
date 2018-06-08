@@ -46,7 +46,9 @@ Partial Class Form1
         Me.XrefCompCountCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CompCountToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportCompCountWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ImportCompCountXYFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.PopulationTabPage = New System.Windows.Forms.TabPage()
         Me.PopulationSurveySplitContainer = New System.Windows.Forms.SplitContainer()
         Me.PopulationEstimateGridEX = New Janus.Windows.GridEX.GridEX()
@@ -55,6 +57,9 @@ Partial Class Form1
         Me.XrefPopulationCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PopulationToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportPopulationWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.RadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.RadioTrackingSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.RadioTrackingGridEX = New Janus.Windows.GridEX.GridEX()
@@ -63,6 +68,9 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.RadiotrackingToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportRadiotrackingWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.CampaignsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CampaignLabel = New System.Windows.Forms.Label()
@@ -95,6 +103,8 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SaveDatasetToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RefreshDataToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
@@ -114,8 +124,6 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.RefreshDataToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -311,7 +319,7 @@ Partial Class Form1
         'CompCountToolStrip
         '
         Me.CompCountToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton, Me.ImportCompCountXYFromFileToolStripButton})
+        Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton, Me.ToolStripSeparator7, Me.ImportCompCountXYFromFileToolStripButton, Me.ToolStripSeparator6})
         Me.CompCountToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.CompCountToolStrip.Name = "CompCountToolStrip"
         Me.CompCountToolStrip.Size = New System.Drawing.Size(603, 25)
@@ -324,8 +332,13 @@ Partial Class Form1
         Me.ImportCompCountWaypointsToolStripButton.Image = CType(resources.GetObject("ImportCompCountWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportCompCountWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportCompCountWaypointsToolStripButton.Name = "ImportCompCountWaypointsToolStripButton"
-        Me.ImportCompCountWaypointsToolStripButton.Size = New System.Drawing.Size(113, 22)
-        Me.ImportCompCountWaypointsToolStripButton.Text = "Import waypoints..."
+        Me.ImportCompCountWaypointsToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportCompCountWaypointsToolStripButton.Text = "Import DNRGPS waypoints..."
+        '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
         'ImportCompCountXYFromFileToolStripButton
         '
@@ -333,8 +346,13 @@ Partial Class Form1
         Me.ImportCompCountXYFromFileToolStripButton.Image = CType(resources.GetObject("ImportCompCountXYFromFileToolStripButton.Image"), System.Drawing.Image)
         Me.ImportCompCountXYFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportCompCountXYFromFileToolStripButton.Name = "ImportCompCountXYFromFileToolStripButton"
-        Me.ImportCompCountXYFromFileToolStripButton.Size = New System.Drawing.Size(100, 22)
-        Me.ImportCompCountXYFromFileToolStripButton.Text = "Import XY points"
+        Me.ImportCompCountXYFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportCompCountXYFromFileToolStripButton.Text = "Import waypoints from file..."
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 25)
         '
         'PopulationTabPage
         '
@@ -425,7 +443,7 @@ Partial Class Form1
         'PopulationToolStrip
         '
         Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationWaypointsToolStripButton})
+        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationWaypointsToolStripButton, Me.ToolStripSeparator4, Me.ImportPopulationSurveyWaypointsFromFileToolStripButton, Me.ToolStripSeparator8})
         Me.PopulationToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.PopulationToolStrip.Name = "PopulationToolStrip"
         Me.PopulationToolStrip.Size = New System.Drawing.Size(603, 25)
@@ -438,8 +456,27 @@ Partial Class Form1
         Me.ImportPopulationWaypointsToolStripButton.Image = CType(resources.GetObject("ImportPopulationWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportPopulationWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportPopulationWaypointsToolStripButton.Name = "ImportPopulationWaypointsToolStripButton"
-        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(113, 22)
-        Me.ImportPopulationWaypointsToolStripButton.Text = "Import waypoints..."
+        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportPopulationWaypointsToolStripButton.Text = "Import DNRGPS waypoints..."
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'ImportPopulationSurveyWaypointsFromFileToolStripButton
+        '
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Image = CType(resources.GetObject("ImportPopulationSurveyWaypointsFromFileToolStripButton.Image"), System.Drawing.Image)
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Name = "ImportPopulationSurveyWaypointsFromFileToolStripButton"
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Text = "Import waypoints from file..."
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
         '
         'RadiotrackingTabPage
         '
@@ -523,7 +560,7 @@ Partial Class Form1
         'RadiotrackingToolStrip
         '
         Me.RadiotrackingToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportRadiotrackingWaypointsToolStripButton})
+        Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportRadiotrackingWaypointsToolStripButton, Me.ToolStripSeparator5, Me.ImportRadiotrackingWaypointsFromFileToolStripButton, Me.ToolStripSeparator9})
         Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
         Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(603, 25)
@@ -536,8 +573,27 @@ Partial Class Form1
         Me.ImportRadiotrackingWaypointsToolStripButton.Image = CType(resources.GetObject("ImportRadiotrackingWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportRadiotrackingWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportRadiotrackingWaypointsToolStripButton.Name = "ImportRadiotrackingWaypointsToolStripButton"
-        Me.ImportRadiotrackingWaypointsToolStripButton.Size = New System.Drawing.Size(186, 22)
-        Me.ImportRadiotrackingWaypointsToolStripButton.Text = "Import radiotracking waypoints..."
+        Me.ImportRadiotrackingWaypointsToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportRadiotrackingWaypointsToolStripButton.Text = "Import DNRGPS waypoints..."
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 25)
+        '
+        'ImportRadiotrackingWaypointsFromFileToolStripButton
+        '
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Image = CType(resources.GetObject("ImportRadiotrackingWaypointsFromFileToolStripButton.Image"), System.Drawing.Image)
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Name = "ImportRadiotrackingWaypointsFromFileToolStripButton"
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Text = "Import waypoints from file..."
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 25)
         '
         'CampaignsSplitContainer
         '
@@ -872,6 +928,19 @@ Partial Class Form1
         Me.SaveDatasetToolStripButton.Size = New System.Drawing.Size(119, 24)
         Me.SaveDatasetToolStripButton.Text = "Save to database"
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 27)
+        '
+        'RefreshDataToolStripButton
+        '
+        Me.RefreshDataToolStripButton.Image = CType(resources.GetObject("RefreshDataToolStripButton.Image"), System.Drawing.Image)
+        Me.RefreshDataToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.RefreshDataToolStripButton.Name = "RefreshDataToolStripButton"
+        Me.RefreshDataToolStripButton.Size = New System.Drawing.Size(96, 24)
+        Me.RefreshDataToolStripButton.Text = "Refresh data"
+        '
         'MainTabControl
         '
         Me.MainTabControl.Controls.Add(Me.SurveysTabPage)
@@ -997,19 +1066,6 @@ Partial Class Form1
         '
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
     " Database Application.chm"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 27)
-        '
-        'RefreshDataToolStripButton
-        '
-        Me.RefreshDataToolStripButton.Image = CType(resources.GetObject("RefreshDataToolStripButton.Image"), System.Drawing.Image)
-        Me.RefreshDataToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.RefreshDataToolStripButton.Name = "RefreshDataToolStripButton"
-        Me.RefreshDataToolStripButton.Size = New System.Drawing.Size(96, 24)
-        Me.RefreshDataToolStripButton.Text = "Refresh data"
         '
         'Form1
         '
@@ -1192,4 +1248,12 @@ Partial Class Form1
     Friend WithEvents ImportCompCountXYFromFileToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents RefreshDataToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents ImportPopulationSurveyWaypointsFromFileToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents ImportRadiotrackingWaypointsFromFileToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
 End Class

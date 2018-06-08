@@ -13,7 +13,7 @@ Public Class Form1
     End Sub
 
     ''' <summary>
-    ''' Save the in-memory Dataset back to the database, if there are any changes.
+    ''' Save any pending changes in the in-memory Dataset, with confirmation, back to the database.
     ''' </summary>
     Private Sub SaveDataset()
         Try
@@ -649,43 +649,7 @@ Public Class Form1
     End Sub
 
 
-    ''' <summary>
-    ''' Runs the query in Sql against the WRST_Caribou database using ConnectionString and returns the results as a DataTable
-    ''' </summary>
-    ''' <param name="ConnectionString"></param>
-    ''' <param name="Sql"></param>
-    ''' <returns>DataTable</returns>
-    Private Function GetDataTable(ConnectionString As String, Sql As String) As DataTable
-        'the DataTable to return
-        Dim MyDataTable As New DataTable
 
-        Try
-            'make a SqlConnection using the supplied ConnectionString 
-            Dim MySqlConnection As New SqlConnection(ConnectionString)
-            Using MySqlConnection
-                'make a query using the supplied Sql
-                Dim MySqlCommand As SqlCommand = New SqlCommand(Sql, MySqlConnection)
-
-                'open the connection
-                MySqlConnection.Open()
-
-                'create a DataReader and execute the SqlCommand
-                Dim MyDataReader As SqlDataReader = MySqlCommand.ExecuteReader()
-
-                'load the reader into the datatable
-                MyDataTable.Load(MyDataReader)
-
-                'clean up
-                MyDataReader.Close()
-            End Using
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-
-
-        'return the datatable
-        Return MyDataTable
-    End Function
 
     ''' <summary>
     ''' Toggles GridEX between Card and TableView
@@ -807,11 +771,11 @@ Public Class Form1
                     If IsDate(LTIME) = True And DatePart(DateInterval.Year, LTIME) > My.Settings.MinimumDNRGPSWaypointYear Then
                         SightingDate = LTIME.ToString
                         'ElseIf IsDate(DESC) = True Then
-                        '    SightingDate = DESC
+                        ' SightingDate = DESC
                     End If
 
                     'For Each Col As DataColumn In WaypointsPreviewDataTable.Columns
-                    '    Debug.Print("NewRow.Item(""" & Col.ColumnName & """) = " & Col.ColumnName & "")
+                    ' Debug.Print("NewRow.Item(""" & Col.ColumnName & """) = " & Col.ColumnName & "")
                     'Next
 
                     'create a new row and add data to it
@@ -877,7 +841,7 @@ Public Class Form1
                     'dnrgps always *cks up the date.  sometimes it's in the LTIME column, other times in the DESC
                     'Dim LTIME As DateTime
                     'If Not IsDBNull(Row.Item("LTIME")) And IsDate(Row.Item("LTIME")) Then
-                    '    LTIME = Row.Item("LTIME")
+                    ' LTIME = Row.Item("LTIME")
                     'End If
 
                     'determine if ltime is better than desc for a waypoint collection date
@@ -891,8 +855,8 @@ Public Class Form1
                         SightingDate = Row.Item("TIME").replace("-", " ")
                     End If
 
-                        'create a new row and add data to it
-                        Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
+                    'create a new row and add data to it
+                    Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
                     NewRow.Item("Waypoint") = Ident
                     NewRow.Item("Lat") = Latitude
                     NewRow.Item("Lon") = Longitude
@@ -968,14 +932,14 @@ Public Class Form1
 
                     'Dim DESC As DateTime
                     'If Not IsDBNull(Row.Item("DESC")) And IsDate(Row.Item("DESC")) Then
-                    '    DESC = Row.Item("DESC")
+                    ' DESC = Row.Item("DESC")
                     'End If
 
                     'determine if ltime is better than desc for a waypoint collection date
                     If IsDate(LTIME) = True And DatePart(DateInterval.Year, LTIME) > My.Settings.MinimumDNRGPSWaypointYear Then
                         SightingDate = LTIME.ToString
                         'ElseIf IsDate(DESC) = True Then
-                        '    SightingDate = DESC
+                        ' SightingDate = DESC
                     End If
 
                     'create a new row and add data to it
@@ -1070,7 +1034,7 @@ Public Class Form1
                 .CheckFileExists = True
                 .Filter = "DNRGPS file (Excel,DBF,CSV,TXT)|*.xlsx;*.xls;*.dbf;*.csv;*.txt"
                 .Multiselect = False
-                .Title = "Select an workbook to open"
+                .Title = "Select a workbook to open"
             End With
 
             'show the ofd and get the filename and path
@@ -1117,18 +1081,18 @@ Public Class Form1
 
             'retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
             Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
-FROM            Animals INNER JOIN
-                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-WHERE        (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+FROM   Animals INNER JOIN
+       CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+       Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
 ORDER BY Collars.Frequency"
-            '            Dim Sql As String = "SELECT   Collars.Frequency,      Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
-            '                          Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
-            '                         Collars.DisposalDate
-            'FROM            Animals INNER JOIN
-            '                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-            '                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-            'WHERE        (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+            '   Dim Sql As String = "SELECT   Collars.Frequency,   Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
+            '        Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
+            '       Collars.DisposalDate
+            'FROM   Animals INNER JOIN
+            '       CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+            '       Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+            'WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
             'ORDER BY Collars.Frequency"
 
             'get the filtered data into a datatable
@@ -1338,60 +1302,164 @@ ORDER BY Collars.Frequency"
         LoadCampaignResults(GetCurrentCampaignID, Me.DatabaseViewNameToolStripLabel.Text)
     End Sub
 
+#Region "Import waypoints from an arbitrary file"
 
+    'import arbitrary waypoints to comp count
     Private Sub ImportCompCountXYFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportCompCountXYFromFileToolStripButton.Click
-        'allow user to open an openfiledialog to select a csv file
-        Dim SourceFile As String = ""
+        'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+        Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
+        Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.CompositionCount)
+    End Sub
+
+    'import arbitrary waypoints to population
+    Private Sub ImportPopulationSurveyWaypointsFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportPopulationSurveyWaypointsFromFileToolStripButton.Click
+        'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+        Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate]        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
+        Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.PopulationEstimate)
+    End Sub
+
+    'import arbitrary waypoints to radiotracking
+    Private Sub ImportRadiotrackingWaypointsFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportRadiotrackingWaypointsFromFileToolStripButton.Click
+        'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
+        Dim Sql As String = "SELECT        TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
+        Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.Radiotracking)
+    End Sub
+
+    ''' <summary>
+    ''' Survey types
+    ''' </summary>
+    Public Enum SurveyType
+        CompositionCount
+        PopulationEstimate
+        Radiotracking
+    End Enum
+
+    ''' <summary>
+    ''' Loads a source file of waypoints and an intended destination DataTable, then opens a translator form to map the source columns into the destination datatable schema.
+    ''' Finally, loads the transformed data into the DestinationDataTable.
+    ''' </summary>
+    ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
+    Private Sub ImportCompCountWaypointsFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType)
         Try
-            Dim OFD As New OpenFileDialog
-            With OFD
-                .AddExtension = True
-                .CheckFileExists = True
-                .Filter = "Comma separated values file (.csv)|*.csv"
-                .Multiselect = False
-                .Title = "Select a CSV file to open"
+            'get the data file with comp count waypoints to import
+            Dim SourceFileInfo As New FileInfo(GetFile("Select a GPS waypoints file to open", "Waypoints file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
+
+            'convert the file into a datatable
+            Dim InputDataTable As DataTable = Nothing
+            'determine if the input file is csv or excel
+            If SourceFileInfo.Extension = ".csv" Then
+                'convert the data file into a datatable
+                InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+            ElseIf SourceFileInfo.Extension = ".xlsx" Then
+                'convert the excel sheet into a datatable
+                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES"";"
+                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                InputDataTable = ExcelDataset.Tables(0)
+            ElseIf SourceFileInfo.Extension = ".xls" Then
+                'convert the excel sheet into a datatable
+                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES"";"
+                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                InputDataTable = ExcelDataset.Tables(0)
+            End If
+
+            'make a list of desired default values to pass into the data tables translator form
+            'these items will show up in the mappings datagridview's default values column to make things a little easier
+            Dim DefaultValuesList As New List(Of String)
+            With DefaultValuesList
+                'add the search areas from my.settings to the default values
+                For Each Item In My.Settings.SearchAreas.Split(",")
+                    .Add(Item)
+                Next
+
+                'add radiotracking special default values
+                If SurveyType = SurveyType.Radiotracking Then
+                    .Add("WRST_Caribou")
+                    .Add("Manual")
+                    .Add("Automatic")
+                End If
+
+                'common default values
+                .Add(GetCurrentFlightID) 'the primary key of the currently selected flight
+                .Add(GetCurrentHerd) 'the currently selected herd in the campaigns table
+                .Add(SourceFileInfo.Name) 'the import file name
+                .Add(0) 'useful for filling in required but null animal counts.
             End With
 
-            'show the ofd and get the filename and path
-            If OFD.ShowDialog = DialogResult.OK Then
-                SourceFile = OFD.FileName
+            'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
+            Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import composition count survey waypoints", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+            TranslatorForm.ShowDialog()
 
-                Dim SourceFileInfo As New FileInfo(SourceFile)
-                Dim InputDataTable As DataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+            'at this point we have transformed the csv into a clone of the destination datatable
+            Dim WaypointsDataTable As DataTable = TranslatorForm.DestinationDataTable
 
-                Dim Sql As String = "SELECT    TOP (100) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,                          SourceFilename, Comment, Lat, Lon FROM            CompositionCounts"
-                Dim TransformedDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql) 'Me.WRST_CaribouDataSet.Tables("CompositionCounts") '.Clone ' GetDataTableFromDelimitedTextFile(DestinationFileInfo, ",")
 
-                'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
-                Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, TransformedDataTable)
-                TranslatorForm.ShowDialog()
+            'the next step is to get the transformed data into the correct table
+            'loop through the waypoints datatable and try to insert them into the datatable
+            Dim TableName As String = SurveyType.ToString
+            For Each Row As DataRow In WaypointsDataTable.Rows
 
-                'at this point we have transformed the csv into a clone of the destination datatable
-                'loop through the csv datatable and copy the data from the columns into the new row
-                Dim CSVDataTable As DataTable = TranslatorForm.DestinationDataTable
-                For Each Row As DataRow In CSVDataTable.Rows
-                    'now make a new row
-                    Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables("CompositionCounts").NewRow
-                    For Each Column As DataColumn In CSVDataTable.Columns
-                        'If Not IsDBNull(Row.Item(Column.ColumnName)) Then
-                        NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
-                        'End If
-                    Next
-                    NewRow.Item("FlightID") = GetCurrentFlightID()
-                    NewRow.Item("RecordInsertedDate") = Now
-                        NewRow.Item("RecordInsertedBy") = My.User.Name
-                        NewRow.Item("CCID") = Guid.NewGuid.ToString
-                        Me.WRST_CaribouDataSet.Tables("CompositionCounts").Rows.Add(NewRow)
-                    Me.CompositionCountsBindingSource.EndEdit()
+                'make a new row
+                Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables(TableName).NewRow
+                For Each Column As DataColumn In WaypointsDataTable.Columns
+                    NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
                 Next
-            End If
+
+                'override any selections made on the translator form
+                NewRow.Item("FlightID") = GetCurrentFlightID()
+                NewRow.Item("RecordInsertedDate") = Now
+                NewRow.Item("RecordInsertedBy") = My.User.Name
+                NewRow.Item("Herd") = GetCurrentHerd()
+
+                Select Case SurveyType
+                    Case SurveyType.CompositionCount
+                        NewRow.Item("CCID") = Guid.NewGuid.ToString
+                    Case SurveyType.PopulationEstimate
+                        NewRow.Item("EID") = Guid.NewGuid.ToString
+                    Case SurveyType.Radiotracking
+                        NewRow.Item("RTID") = Guid.NewGuid.ToString
+                End Select
+
+                'add the row
+                Me.WRST_CaribouDataSet.Tables(TableName).Rows.Add(NewRow)
+
+                'end the edit
+                Select Case SurveyType
+                    Case SurveyType.CompositionCount
+                        Me.CompositionCountsBindingSource.EndEdit()
+                    Case SurveyType.PopulationEstimate
+                        Me.PopulationEstimateBindingSource.EndEdit()
+                    Case SurveyType.Radiotracking
+                        Me.RadioTrackingBindingSource.EndEdit()
+                End Select
+
+            Next
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
+    '''' <summary>
+    '''' Loads imported waypoints from ImportCompCountWaypointsFromFile into the CompositionCounts DataTable
+    '''' </summary>
+    '''' <param name="WaypointsDataTable"></param>
+    'Private Sub LoadImportedWaypointsToCompCountTable(WaypointsDataTable As DataTable)
+    ' Try
+
+    '  Next
+    ' Catch ex As Exception
+    '  MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    ' End Try
+    'End Sub
+#End Region
+
     Private Sub RefreshDataToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshDataToolStripButton.Click
+        SaveDataset()
         LoadDataset()
     End Sub
+
+
 End Class
