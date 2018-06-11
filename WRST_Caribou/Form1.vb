@@ -372,7 +372,6 @@ Public Class Form1
             AboutText = AboutText & .Title & vbNewLine
             AboutText = AboutText & .Version.Major & " minor versino " & .Version.Minor & vbNewLine
             AboutText = AboutText & My.Settings.WRST_CaribouConnectionString & vbNewLine
-
         End With
         MsgBox(AboutText)
     End Sub
