@@ -774,10 +774,6 @@ Public Class Form1
                         ' SightingDate = DESC
                     End If
 
-                    'For Each Col As DataColumn In WaypointsPreviewDataTable.Columns
-                    ' Debug.Print("NewRow.Item(""" & Col.ColumnName & """) = " & Col.ColumnName & "")
-                    'Next
-
                     'create a new row and add data to it
                     Dim NewRow As DataRow = WaypointsPreviewDataTable.NewRow
                     NewRow.Item("Herd") = Herd
@@ -1086,14 +1082,6 @@ FROM   Animals INNER JOIN
        Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
 WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
 ORDER BY Collars.Frequency"
-            '   Dim Sql As String = "SELECT   Collars.Frequency,   Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, Animals.GroupName, Animals.Description, CollarDeployments.CollarId, CollarDeployments.CollarManufacturer, 
-            '        Collars.CollarModel, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, Collars.Notes, 
-            '       Collars.DisposalDate
-            'FROM   Animals INNER JOIN
-            '       CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-            '       Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-            'WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
-            'ORDER BY Collars.Frequency"
 
             'get the filtered data into a datatable
             Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
@@ -1104,6 +1092,7 @@ ORDER BY Collars.Frequency"
                     If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
                         Dim ValueItem As String = Row.Item("AnimalID")
                         Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
+
                         GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
                     End If
                 Next
