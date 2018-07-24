@@ -472,8 +472,8 @@ Public Class Form1
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
         Try
             'get some information about the survey flight to put in the header label so users know which survey flight they are editing
-            Me.FlightContextLabel.Text = "Groups: "
-            Dim CurrentFlight As String = "Data"
+            Me.FlightContextLabel.Text = "Caribou: "
+            Dim CurrentFlight As String = "Caribou: "
             Dim CrewNumber As Integer = 0
             Dim TailNo As String = ""
             Dim Pilot As String = ""
@@ -498,7 +498,7 @@ Public Class Form1
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
-                        CurrentFlight = "Data: " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
+                        CurrentFlight = "Caribou: Crew " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
                         Me.FlightContextLabel.Text = CurrentFlight
                     End If
                 End If

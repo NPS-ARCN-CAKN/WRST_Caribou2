@@ -3697,6 +3697,8 @@ Partial Public Class WRST_CaribouDataSet
         
         Private columnTS As Global.System.Data.DataColumn
         
+        Private columnBull As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -3917,6 +3919,14 @@ Partial Public Class WRST_CaribouDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BullColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBull
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3976,9 +3986,10 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal EID As String,  _
                     ByVal RecordInsertedDate As Date,  _
                     ByVal RecordInsertedBy As String,  _
-                    ByVal TS() As Byte) As PopulationEstimateRow
+                    ByVal TS() As Byte,  _
+                    ByVal Bull As Integer) As PopulationEstimateRow
             Dim rowPopulationEstimateRow As PopulationEstimateRow = CType(Me.NewRow,PopulationEstimateRow)
-            Dim columnValuesArray() As Object = New Object() {Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, Nothing, EID, RecordInsertedDate, RecordInsertedBy, TS}
+            Dim columnValuesArray() As Object = New Object() {Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, Nothing, EID, RecordInsertedDate, RecordInsertedBy, TS, Bull}
             If (Not (parentSurveyFlightsRowByFK_PopulationEstimate_SurveyFlights) Is Nothing) Then
                 columnValuesArray(18) = parentSurveyFlightsRowByFK_PopulationEstimate_SurveyFlights(22)
             End If
@@ -4033,6 +4044,7 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedDate = MyBase.Columns("RecordInsertedDate")
             Me.columnRecordInsertedBy = MyBase.Columns("RecordInsertedBy")
             Me.columnTS = MyBase.Columns("TS")
+            Me.columnBull = MyBase.Columns("Bull")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4084,6 +4096,8 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnRecordInsertedBy)
             Me.columnTS = New Global.System.Data.DataColumn("TS", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTS)
+            Me.columnBull = New Global.System.Data.DataColumn("Bull", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBull)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEID}, true))
             Me.columnHerd.AllowDBNull = false
             Me.columnHerd.MaxLength = 8
@@ -4114,6 +4128,8 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnRecordInsertedBy.AllowDBNull = false
             Me.columnRecordInsertedBy.MaxLength = 50
             Me.columnTS.ReadOnly = true
+            Me.columnBull.AllowDBNull = false
+            Me.columnBull.DefaultValue = CType(0,Integer)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10379,6 +10395,17 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Bull() As Integer
+            Get
+                Return CType(Me(Me.tablePopulationEstimate.BullColumn),Integer)
+            End Get
+            Set
+                Me(Me.tablePopulationEstimate.BullColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SurveyFlightsRow() As SurveyFlightsRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("FK_PopulationEstimate_SurveyFlights")),SurveyFlightsRow)
@@ -16158,25 +16185,29 @@ Namespace WRST_CaribouDataSetTableAdapters
             tableMapping.ColumnMappings.Add("RecordInsertedDate", "RecordInsertedDate")
             tableMapping.ColumnMappings.Add("RecordInsertedBy", "RecordInsertedBy")
             tableMapping.ColumnMappings.Add("TS", "TS")
+            tableMapping.ColumnMappings.Add("Bull", "Bull")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (EID = @Original_EID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [PopulationEstimate] WHERE (([EID] = @Original_EID) AND ((@IsNull_TS "& _ 
+                "= 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  (Herd, SearchArea, GroupNumber,"& _ 
-                " WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOu"& _ 
-                "t, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID"& _ 
-                ", EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  RecordInsertedDate, RecordInsertedBy)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES (@Herd,"& _ 
-                "@SearchArea,@GroupNumber,@WaypointName,@SightingDate,@SmallBull,@MediumBull,@Lar"& _ 
-                "geBull,@Cow,@Calf,@InOrOut,@Seen,@Marked,@FrequenciesInGroup,@Lat,@Lon,@Comment,"& _ 
-                "@SourceFilename,@FlightID,@EID,@RecordInsertedDate,@RecordInsertedBy); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT "& _ 
-                "Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, MediumBull"& _ 
-                ", LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Com"& _ 
-                "ment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy, TS FR"& _ 
-                "OM PopulationEstimate WHERE (EID = @EID)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (Herd, SearchArea, Group"& _ 
+                "Number, WaypointName, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf,"& _ 
+                " InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, F"& _ 
+                "lightID, EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         RecordInsertedDate, RecordInsertedBy, B"& _ 
+                "ull)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@Herd,@SearchArea,@GroupNumber,@WaypointName,@SightingDate,"& _ 
+                "@SmallBull,@MediumBull,@LargeBull,@Cow,@Calf,@InOrOut,@Seen,@Marked,@Frequencies"& _ 
+                "InGroup,@Lat,@Lon,@Comment,@SourceFilename,@FlightID,@EID,@RecordInsertedDate,@R"& _ 
+                "ecordInsertedBy,@Bull);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, SearchArea, GroupNumber, WaypointName, "& _ 
+                "SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked"& _ 
+                ", FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, EID, RecordIn"& _ 
+                "sertedDate, RecordInsertedBy, TS FROM PopulationEstimate WHERE (EID = @EID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -16200,18 +16231,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          Herd = @Herd, SearchArea = @SearchArea, G"& _ 
-                "roupNumber = @GroupNumber, WaypointName = @WaypointName, SightingDate = @Sightin"& _ 
-                "gDate, SmallBull = @SmallBull, MediumBull = @MediumBull, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  Lar"& _ 
-                "geBull = @LargeBull, Cow = @Cow, Calf = @Calf, InOrOut = @InOrOut, Seen = @Seen,"& _ 
-                " Marked = @Marked, FrequenciesInGroup = @FrequenciesInGroup, Lat = @Lat, Lon = @"& _ 
-                "Lon, Comment = @Comment, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  SourceFilename = @SourceFilename"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"W"& _ 
-                "HERE  (EID = @Original_EID);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, SearchArea, GroupNumber, WaypointNa"& _ 
-                "me, SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Ma"& _ 
-                "rked, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, EID, Reco"& _ 
-                "rdInsertedDate, RecordInsertedBy, TS FROM PopulationEstimate WHERE (EID = @EID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Herd = @Herd, SearchArea = @S"& _ 
+                "earchArea, GroupNumber = @GroupNumber, WaypointName = @WaypointName, SightingDat"& _ 
+                "e = @SightingDate, SmallBull = @SmallBull, MediumBull = @MediumBull, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"         "& _ 
+                "                LargeBull = @LargeBull, Cow = @Cow, Calf = @Calf, InOrOut = @InO"& _ 
+                "rOut, Seen = @Seen, Marked = @Marked, FrequenciesInGroup = @FrequenciesInGroup, "& _ 
+                "Lat = @Lat, Lon = @Lon, Comment = @Comment, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SourceFil"& _ 
+                "ename = @SourceFilename, Bull = @Bull"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (EID = @Original_EID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SEL"& _ 
+                "ECT Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, Medium"& _ 
+                "Bull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lon,"& _ 
+                " Comment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy, T"& _ 
+                "S FROM PopulationEstimate WHERE (EID = @EID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -16231,6 +16264,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Comment", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Comment", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Bull", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Bull", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
@@ -16248,10 +16282,10 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Herd, SearchArea, GroupNumber, WaypointName, SightingDate, SmallBull, Medi"& _ 
-                "umBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInGroup, Lat, Lo"& _ 
-                "n, Comment, SourceFilename, FlightID, EID, RecordInsertedDate, RecordInsertedBy,"& _ 
-                " TS FROM dbo.PopulationEstimate"
+            Me._commandCollection(0).CommandText = "SELECT        Herd, SearchArea, GroupNumber, WaypointName, SightingDate, Bull, Sm"& _ 
+                "allBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marked, FrequenciesInG"& _ 
+                "roup, Lat, Lon, Comment, SourceFilename, FlightID, EID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      "& _ 
+                "   RecordInsertedDate, RecordInsertedBy, TS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            PopulationEstimate"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -16311,11 +16345,18 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_EID As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_EID As String, ByVal Original_TS() As Byte) As Integer
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EID,String)
+            End If
+            If (Original_TS Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -16358,7 +16399,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal FlightID As String,  _
                     ByVal EID As String,  _
                     ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String) As Integer
+                    ByVal RecordInsertedBy As String,  _
+                    ByVal Bull As Integer) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
@@ -16421,6 +16463,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(21).Value = CType(RecordInsertedBy,String)
             End If
+            Me.Adapter.InsertCommand.Parameters(22).Value = CType(Bull,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -16459,6 +16502,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Lon As Decimal,  _
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
+                    ByVal Bull As Integer,  _
                     ByVal Original_EID As String,  _
                     ByVal EID As String) As Integer
             If (Herd Is Nothing) Then
@@ -16507,15 +16551,16 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SourceFilename,String)
             End If
+            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Bull,Integer)
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_EID,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_EID,String)
             End If
             If (EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(EID,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(EID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
