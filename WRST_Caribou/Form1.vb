@@ -6,7 +6,7 @@ Imports SkeeterDataTablesTranslator
 
 Public Class Form1
 
-
+    Dim ResultsDataTable As DataTable 'This reusable datatable will contain the data to be displayed in the Me.SurveyResultsDataGridView of the Results tab
 
     Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         SaveDataset()
@@ -1438,34 +1438,55 @@ ORDER BY Collars.Frequency"
     End Sub
 
     Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectSurveyTypeToolStripComboBox.SelectedIndexChanged
-        Select Case Me.SelectSurveyTypeToolStripComboBox.Text
-            Case "Composition count"
-                Dim Sql As String = "SELECT * FROM CC_Results_NoLocation"
-                LoadSurveyResultsGrid(Sql)
-            Case "Population"
-                Dim Sql As String = "SELECT  * FROM PE_Results_NoLocation"
-                LoadSurveyResultsGrid(Sql)
-            Case "Radiotracking"
-                Dim Sql As String = "SELECT  * FROM RT_Results_NoLocation"
-                LoadSurveyResultsGrid(Sql)
-        End Select
+        LoadSurveyResultsGrid()
     End Sub
+
 
     ''' <summary>
     ''' Fetches the data from the submitted query and loads it into the SurveyResultsDataGridView
     ''' </summary>
-    ''' <param name="Query"></param>
-    Private Sub LoadSurveyResultsGrid(Query As String)
+    Private Sub LoadSurveyResultsGrid()
         Try
-            Dim Grid As DataGridView = Me.SurveyResultsDataGridView
-            Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Query)
-            Grid.DataSource = ResultsDataTable
+            Dim Sql As String = ""
+            Select Case Me.SelectSurveyTypeToolStripComboBox.Text
+                Case "Composition count"
+                    Sql = "SELECT * FROM CC_Results_NoLocation"
+                Case "Population"
+                    Sql = "SELECT  * FROM PE_Results_NoLocation"
+                Case "Radiotracking"
+                    Sql = "SELECT  * FROM RT_Results_NoLocation"
+                Case Else
+                    Me.SurveyResultsBindingSource.DataSource = Nothing
+            End Select
+
+            If Sql.Trim.Length > 0 Then
+                ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Else
+                ResultsDataTable = Nothing
+            End If
+
+            Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
+            Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
     Private Sub ExportResultsToCSVToolStripButton_Click(sender As Object, e As EventArgs) Handles ExportResultsToCSVToolStripButton.Click
+        Dim SFD As New SaveFileDialog()
+        With SFD
+            .AddExtension = True
+            .DefaultExt = ".csv"
+            .FileName = "WRST_Caribou_Export.csv"
+            .Filter = "Comma separated values text file|*.csv"
+            .OverwritePrompt = True
+            .Title = "Save data"
+        End With
+        If SFD.ShowDialog = DialogResult.OK Then
+            Dim CSVFile As String = SFD.FileName
+            My.Computer.FileSystem.WriteAllText(CSVFile, DataTableToCSV(ResultsDataTable, ","), False)
+            Process.Start(CSVFile)
+        End If
 
     End Sub
 End Class
