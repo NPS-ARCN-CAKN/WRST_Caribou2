@@ -1430,18 +1430,6 @@ ORDER BY Collars.Frequency"
         End Try
     End Sub
 
-    '''' <summary>
-    '''' Loads imported waypoints from ImportCompCountWaypointsFromFile into the CompositionCounts DataTable
-    '''' </summary>
-    '''' <param name="WaypointsDataTable"></param>
-    'Private Sub LoadImportedWaypointsToCompCountTable(WaypointsDataTable As DataTable)
-    ' Try
-
-    '  Next
-    ' Catch ex As Exception
-    '  MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-    ' End Try
-    'End Sub
 #End Region
 
     Private Sub RefreshDataToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshDataToolStripButton.Click
@@ -1449,5 +1437,35 @@ ORDER BY Collars.Frequency"
         LoadDataset()
     End Sub
 
+    Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectSurveyTypeToolStripComboBox.SelectedIndexChanged
+        Select Case Me.SelectSurveyTypeToolStripComboBox.Text
+            Case "Composition count"
+                Dim Sql As String = "SELECT * FROM CC_Results_NoLocation"
+                LoadSurveyResultsGrid(Sql)
+            Case "Population"
+                Dim Sql As String = "SELECT  * FROM PE_Results_NoLocation"
+                LoadSurveyResultsGrid(Sql)
+            Case "Radiotracking"
+                Dim Sql As String = "SELECT  * FROM RT_Results_NoLocation"
+                LoadSurveyResultsGrid(Sql)
+        End Select
+    End Sub
 
+    ''' <summary>
+    ''' Fetches the data from the submitted query and loads it into the SurveyResultsDataGridView
+    ''' </summary>
+    ''' <param name="Query"></param>
+    Private Sub LoadSurveyResultsGrid(Query As String)
+        Try
+            Dim Grid As DataGridView = Me.SurveyResultsDataGridView
+            Dim ResultsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Query)
+            Grid.DataSource = ResultsDataTable
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub ExportResultsToCSVToolStripButton_Click(sender As Object, e As EventArgs) Handles ExportResultsToCSVToolStripButton.Click
+
+    End Sub
 End Class

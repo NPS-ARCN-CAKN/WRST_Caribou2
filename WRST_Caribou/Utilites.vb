@@ -51,6 +51,36 @@ Module Utilites
 
 
     ''' <summary>
+    ''' Converts a DataTable to a string of delimited values such as CSV
+    ''' </summary>
+    ''' <param name="DataTable">DataTable to convert. DataTable</param>
+    ''' <param name="Delimiter">Values separator</param>
+    ''' <returns>String</returns>
+    ''' <remarks></remarks>
+    Public Function DataTableToCSV(DataTable As DataTable, Delimiter As String) As String
+        Dim CSV As String = ""
+        Try
+            'output the headers
+            For Each Column As DataColumn In DataTable.Columns
+                CSV = CSV & Column.ColumnName & Delimiter
+            Next
+            CSV = CSV.Substring(0, CSV.Trim.Length - 1) & vbNewLine
+
+            'output the rows
+            For Each Row As DataRow In DataTable.Rows
+                For Each Column As DataColumn In DataTable.Columns
+                    CSV = CSV & Row.Item(Column.ColumnName) & Delimiter
+                Next
+                CSV = CSV.Substring(0, CSV.Trim.Length - 1) & vbNewLine
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & "  " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return CSV
+    End Function
+
+
+    ''' <summary>
     ''' Runs the query in Sql against a database using ConnectionString and returns the results as a DataTable
     ''' </summary>
     ''' <param name="ConnectionString"></param>
