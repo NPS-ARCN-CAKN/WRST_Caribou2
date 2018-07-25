@@ -124,6 +124,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyDataTabControl.SuspendLayout()
         Me.CompositionCountTabPage.SuspendLayout()
@@ -781,9 +782,9 @@ Partial Class Form1
         Me.ResultsLabel.Location = New System.Drawing.Point(9, 7)
         Me.ResultsLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.ResultsLabel.Name = "ResultsLabel"
-        Me.ResultsLabel.Size = New System.Drawing.Size(67, 19)
+        Me.ResultsLabel.Size = New System.Drawing.Size(143, 19)
         Me.ResultsLabel.TabIndex = 0
-        Me.ResultsLabel.Text = "Results"
+        Me.ResultsLabel.Text = "Campaign results"
         '
         'ResultsToolStrip
         '
@@ -935,6 +936,7 @@ Partial Class Form1
         '
         Me.MainTabControl.Controls.Add(Me.SurveysTabPage)
         Me.MainTabControl.Controls.Add(Me.CaribouTabPage)
+        Me.MainTabControl.Controls.Add(Me.TabPage1)
         Me.MainTabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainTabControl.Location = New System.Drawing.Point(0, 51)
         Me.MainTabControl.Margin = New System.Windows.Forms.Padding(2)
@@ -1066,6 +1068,16 @@ Partial Class Form1
         'XrefRadiotrackingCaribouTableAdapter
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(1176, 908)
+        Me.TabPage1.TabIndex = 2
+        Me.TabPage1.Text = "Results"
+        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1257,4 +1269,5 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents ImportRadiotrackingWaypointsFromFileToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
+    Friend WithEvents TabPage1 As TabPage
 End Class
