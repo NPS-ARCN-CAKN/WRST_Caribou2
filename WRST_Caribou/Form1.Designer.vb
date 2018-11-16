@@ -107,6 +107,25 @@ Partial Class Form1
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.ResultsTabPage2 = New System.Windows.Forms.TabPage()
+        Me.SurveyResultsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.SurveyResultsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.SurveyResultsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExportResultsToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.SurveyResultsToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.SelectSurveyTypeToolStripLabel = New System.Windows.Forms.ToolStripLabel()
+        Me.SelectSurveyTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
@@ -124,24 +143,6 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.ResultsTabPage2 = New System.Windows.Forms.TabPage()
-        Me.SurveyResultsDataGridView = New System.Windows.Forms.DataGridView()
-        Me.SurveyResultsToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.SelectSurveyTypeToolStripLabel = New System.Windows.Forms.ToolStripLabel()
-        Me.SelectSurveyTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
-        Me.SurveyResultsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SurveyResultsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
-        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ExportResultsToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyDataTabControl.SuspendLayout()
         Me.CompositionCountTabPage.SuspendLayout()
@@ -200,17 +201,17 @@ Partial Class Form1
         Me.SurveysTabPage.SuspendLayout()
         Me.CaribouTabPage.SuspendLayout()
         CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ResultsTabPage2.SuspendLayout()
+        CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SurveyResultsBindingNavigator.SuspendLayout()
+        CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SurveyResultsToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ResultsTabPage2.SuspendLayout()
-        CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SurveyResultsToolStrip.SuspendLayout()
-        CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SurveyResultsBindingNavigator.SuspendLayout()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -1006,6 +1007,165 @@ Partial Class Form1
         Me.CaribouGridEX.Size = New System.Drawing.Size(1172, 904)
         Me.CaribouGridEX.TabIndex = 0
         '
+        'ResultsTabPage2
+        '
+        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsDataGridView)
+        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsBindingNavigator)
+        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsToolStrip)
+        Me.ResultsTabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.ResultsTabPage2.Name = "ResultsTabPage2"
+        Me.ResultsTabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.ResultsTabPage2.Size = New System.Drawing.Size(1176, 908)
+        Me.ResultsTabPage2.TabIndex = 2
+        Me.ResultsTabPage2.Text = "Results"
+        Me.ResultsTabPage2.UseVisualStyleBackColor = True
+        '
+        'SurveyResultsDataGridView
+        '
+        Me.SurveyResultsDataGridView.AllowUserToAddRows = False
+        Me.SurveyResultsDataGridView.AllowUserToDeleteRows = False
+        Me.SurveyResultsDataGridView.AllowUserToOrderColumns = True
+        Me.SurveyResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.SurveyResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SurveyResultsDataGridView.Location = New System.Drawing.Point(3, 28)
+        Me.SurveyResultsDataGridView.Name = "SurveyResultsDataGridView"
+        Me.SurveyResultsDataGridView.ReadOnly = True
+        Me.SurveyResultsDataGridView.Size = New System.Drawing.Size(1170, 852)
+        Me.SurveyResultsDataGridView.TabIndex = 0
+        '
+        'SurveyResultsBindingNavigator
+        '
+        Me.SurveyResultsBindingNavigator.AddNewItem = Nothing
+        Me.SurveyResultsBindingNavigator.BindingSource = Me.SurveyResultsBindingSource
+        Me.SurveyResultsBindingNavigator.CountItem = Me.BindingNavigatorCountItem
+        Me.SurveyResultsBindingNavigator.DeleteItem = Nothing
+        Me.SurveyResultsBindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.SurveyResultsBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.ExportResultsToCSVToolStripButton})
+        Me.SurveyResultsBindingNavigator.Location = New System.Drawing.Point(3, 880)
+        Me.SurveyResultsBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+        Me.SurveyResultsBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
+        Me.SurveyResultsBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
+        Me.SurveyResultsBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+        Me.SurveyResultsBindingNavigator.Name = "SurveyResultsBindingNavigator"
+        Me.SurveyResultsBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
+        Me.SurveyResultsBindingNavigator.Size = New System.Drawing.Size(1170, 25)
+        Me.SurveyResultsBindingNavigator.TabIndex = 2
+        Me.SurveyResultsBindingNavigator.Text = "BindingNavigator1"
+        '
+        'SurveyResultsBindingSource
+        '
+        Me.SurveyResultsBindingSource.AllowNew = False
+        '
+        'BindingNavigatorCountItem
+        '
+        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
+        Me.BindingNavigatorCountItem.Text = "of {0}"
+        Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveFirstItem.Text = "Move first"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
+        '
+        'BindingNavigatorSeparator
+        '
+        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
+        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorPositionItem
+        '
+        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
+        Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
+        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
+        Me.BindingNavigatorPositionItem.Text = "0"
+        Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
+        '
+        'BindingNavigatorSeparator1
+        '
+        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
+        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveNextItem.Text = "Move next"
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveLastItem.Text = "Move last"
+        '
+        'BindingNavigatorSeparator2
+        '
+        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
+        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'ExportResultsToCSVToolStripButton
+        '
+        Me.ExportResultsToCSVToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ExportResultsToCSVToolStripButton.Image = CType(resources.GetObject("ExportResultsToCSVToolStripButton.Image"), System.Drawing.Image)
+        Me.ExportResultsToCSVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ExportResultsToCSVToolStripButton.Name = "ExportResultsToCSVToolStripButton"
+        Me.ExportResultsToCSVToolStripButton.Size = New System.Drawing.Size(79, 22)
+        Me.ExportResultsToCSVToolStripButton.Text = "Export data..."
+        '
+        'SurveyResultsToolStrip
+        '
+        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.SelectSurveyTypeToolStripComboBox, Me.ToolStripSeparator10, Me.RefreshToolStripButton})
+        Me.SurveyResultsToolStrip.Location = New System.Drawing.Point(3, 3)
+        Me.SurveyResultsToolStrip.Name = "SurveyResultsToolStrip"
+        Me.SurveyResultsToolStrip.Size = New System.Drawing.Size(1170, 25)
+        Me.SurveyResultsToolStrip.TabIndex = 1
+        Me.SurveyResultsToolStrip.Text = "ToolStrip1"
+        '
+        'SelectSurveyTypeToolStripLabel
+        '
+        Me.SelectSurveyTypeToolStripLabel.Name = "SelectSurveyTypeToolStripLabel"
+        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(104, 22)
+        Me.SelectSurveyTypeToolStripLabel.Text = "Select survey type:"
+        '
+        'SelectSurveyTypeToolStripComboBox
+        '
+        Me.SelectSurveyTypeToolStripComboBox.Items.AddRange(New Object() {"", "Composition count", "Population", "Radiotracking"})
+        Me.SelectSurveyTypeToolStripComboBox.Name = "SelectSurveyTypeToolStripComboBox"
+        Me.SelectSurveyTypeToolStripComboBox.Size = New System.Drawing.Size(200, 25)
+        '
+        'ToolStripSeparator10
+        '
+        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 25)
+        '
+        'RefreshToolStripButton
+        '
+        Me.RefreshToolStripButton.Image = CType(resources.GetObject("RefreshToolStripButton.Image"), System.Drawing.Image)
+        Me.RefreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.RefreshToolStripButton.Name = "RefreshToolStripButton"
+        Me.RefreshToolStripButton.Size = New System.Drawing.Size(145, 22)
+        Me.RefreshToolStripButton.Text = "Refresh from database"
+        '
         'CapturesBindingSource
         '
         Me.CapturesBindingSource.DataMember = "FK_Captures_Caribou"
@@ -1091,157 +1251,6 @@ Partial Class Form1
         'XrefRadiotrackingCaribouTableAdapter
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
-        '
-        'ResultsTabPage2
-        '
-        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsDataGridView)
-        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsBindingNavigator)
-        Me.ResultsTabPage2.Controls.Add(Me.SurveyResultsToolStrip)
-        Me.ResultsTabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.ResultsTabPage2.Name = "ResultsTabPage2"
-        Me.ResultsTabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage2.Size = New System.Drawing.Size(1176, 908)
-        Me.ResultsTabPage2.TabIndex = 2
-        Me.ResultsTabPage2.Text = "Results"
-        Me.ResultsTabPage2.UseVisualStyleBackColor = True
-        '
-        'SurveyResultsDataGridView
-        '
-        Me.SurveyResultsDataGridView.AllowUserToAddRows = False
-        Me.SurveyResultsDataGridView.AllowUserToDeleteRows = False
-        Me.SurveyResultsDataGridView.AllowUserToOrderColumns = True
-        Me.SurveyResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.SurveyResultsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SurveyResultsDataGridView.Location = New System.Drawing.Point(3, 28)
-        Me.SurveyResultsDataGridView.Name = "SurveyResultsDataGridView"
-        Me.SurveyResultsDataGridView.ReadOnly = True
-        Me.SurveyResultsDataGridView.Size = New System.Drawing.Size(1170, 852)
-        Me.SurveyResultsDataGridView.TabIndex = 0
-        '
-        'SurveyResultsToolStrip
-        '
-        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.SelectSurveyTypeToolStripComboBox, Me.ToolStripSeparator10})
-        Me.SurveyResultsToolStrip.Location = New System.Drawing.Point(3, 3)
-        Me.SurveyResultsToolStrip.Name = "SurveyResultsToolStrip"
-        Me.SurveyResultsToolStrip.Size = New System.Drawing.Size(1170, 25)
-        Me.SurveyResultsToolStrip.TabIndex = 1
-        Me.SurveyResultsToolStrip.Text = "ToolStrip1"
-        '
-        'SelectSurveyTypeToolStripLabel
-        '
-        Me.SelectSurveyTypeToolStripLabel.Name = "SelectSurveyTypeToolStripLabel"
-        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(104, 22)
-        Me.SelectSurveyTypeToolStripLabel.Text = "Select survey type:"
-        '
-        'SelectSurveyTypeToolStripComboBox
-        '
-        Me.SelectSurveyTypeToolStripComboBox.Items.AddRange(New Object() {"", "Composition count", "Population", "Radiotracking"})
-        Me.SelectSurveyTypeToolStripComboBox.Name = "SelectSurveyTypeToolStripComboBox"
-        Me.SelectSurveyTypeToolStripComboBox.Size = New System.Drawing.Size(200, 25)
-        '
-        'SurveyResultsBindingSource
-        '
-        Me.SurveyResultsBindingSource.AllowNew = False
-        '
-        'SurveyResultsBindingNavigator
-        '
-        Me.SurveyResultsBindingNavigator.AddNewItem = Nothing
-        Me.SurveyResultsBindingNavigator.BindingSource = Me.SurveyResultsBindingSource
-        Me.SurveyResultsBindingNavigator.CountItem = Me.BindingNavigatorCountItem
-        Me.SurveyResultsBindingNavigator.DeleteItem = Nothing
-        Me.SurveyResultsBindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.SurveyResultsBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.ExportResultsToCSVToolStripButton})
-        Me.SurveyResultsBindingNavigator.Location = New System.Drawing.Point(3, 880)
-        Me.SurveyResultsBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
-        Me.SurveyResultsBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
-        Me.SurveyResultsBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
-        Me.SurveyResultsBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
-        Me.SurveyResultsBindingNavigator.Name = "SurveyResultsBindingNavigator"
-        Me.SurveyResultsBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-        Me.SurveyResultsBindingNavigator.Size = New System.Drawing.Size(1170, 25)
-        Me.SurveyResultsBindingNavigator.TabIndex = 2
-        Me.SurveyResultsBindingNavigator.Text = "BindingNavigator1"
-        '
-        'BindingNavigatorMoveFirstItem
-        '
-        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveFirstItem.Text = "Move first"
-        '
-        'BindingNavigatorMovePreviousItem
-        '
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
-        '
-        'BindingNavigatorSeparator
-        '
-        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'BindingNavigatorPositionItem
-        '
-        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
-        Me.BindingNavigatorPositionItem.AutoSize = False
-        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
-        Me.BindingNavigatorPositionItem.Text = "0"
-        Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
-        '
-        'BindingNavigatorCountItem
-        '
-        Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
-        Me.BindingNavigatorCountItem.Text = "of {0}"
-        Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
-        '
-        'BindingNavigatorSeparator1
-        '
-        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'BindingNavigatorMoveNextItem
-        '
-        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveNextItem.Text = "Move next"
-        '
-        'BindingNavigatorMoveLastItem
-        '
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveLastItem.Text = "Move last"
-        '
-        'BindingNavigatorSeparator2
-        '
-        Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ExportResultsToCSVToolStripButton
-        '
-        Me.ExportResultsToCSVToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ExportResultsToCSVToolStripButton.Image = CType(resources.GetObject("ExportResultsToCSVToolStripButton.Image"), System.Drawing.Image)
-        Me.ExportResultsToCSVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ExportResultsToCSVToolStripButton.Name = "ExportResultsToCSVToolStripButton"
-        Me.ExportResultsToCSVToolStripButton.Size = New System.Drawing.Size(79, 22)
-        Me.ExportResultsToCSVToolStripButton.Text = "Export data..."
-        '
-        'ToolStripSeparator10
-        '
-        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 25)
         '
         'Form1
         '
@@ -1332,20 +1341,20 @@ Partial Class Form1
         Me.SurveysTabPage.ResumeLayout(False)
         Me.CaribouTabPage.ResumeLayout(False)
         CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResultsTabPage2.ResumeLayout(False)
+        Me.ResultsTabPage2.PerformLayout()
+        CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SurveyResultsBindingNavigator.ResumeLayout(False)
+        Me.SurveyResultsBindingNavigator.PerformLayout()
+        CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SurveyResultsToolStrip.ResumeLayout(False)
+        Me.SurveyResultsToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResultsTabPage2.ResumeLayout(False)
-        Me.ResultsTabPage2.PerformLayout()
-        CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SurveyResultsToolStrip.ResumeLayout(False)
-        Me.SurveyResultsToolStrip.PerformLayout()
-        CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SurveyResultsBindingNavigator.ResumeLayout(False)
-        Me.SurveyResultsBindingNavigator.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1460,4 +1469,5 @@ Partial Class Form1
     Friend WithEvents ExportResultsToCSVToolStripButton As ToolStripButton
     Friend WithEvents SurveyResultsBindingSource As BindingSource
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
+    Friend WithEvents RefreshToolStripButton As ToolStripButton
 End Class

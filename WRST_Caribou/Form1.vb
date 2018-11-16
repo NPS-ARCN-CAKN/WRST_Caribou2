@@ -1489,4 +1489,8 @@ ORDER BY Collars.Frequency"
         End If
 
     End Sub
+
+    Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
+        LoadSurveyResultsGrid()
+    End Sub
 End Class
