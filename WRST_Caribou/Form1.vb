@@ -1102,6 +1102,9 @@ ORDER BY Collars.Frequency"
     End Sub
 
     Private Sub PopulationEstimateGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.SelectionChanged
+        'set default values for the new population record
+        SetPopulationGridDefaultValues()
+
         'when the user clicks on a population survey caribou group, then load the xrefcariboupopulation gridex with available 
         'gps collars to allow the user to associate a collared caribou with the observed group
 
@@ -1133,6 +1136,17 @@ ORDER BY Collars.Frequency"
             LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub SetPopulationGridDefaultValues()
+        Try
+            Dim GridEX As GridEX = Me.PopulationEstimateGridEX
+            GridEX.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+            GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
     End Sub
 
