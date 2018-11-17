@@ -1,7 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿'todo animal_movement connectivity
+
+Imports System.Data.SqlClient
 Imports System.IO
 Imports Janus.Windows.GridEX
-
 Imports SkeeterDataTablesTranslator
 
 Public Class Form1
@@ -38,6 +39,8 @@ Public Class Form1
 
     End Sub
 
+
+
     Private Sub LoadDataset()
         Try
             'load the data
@@ -51,6 +54,7 @@ Public Class Form1
             Me.XrefPopulationCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefPopulationCaribou)
             Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
             Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
+
 
             'update the campaign header with info about the current campaign
             Me.CampaignHeaderLabel.Text = GetCurrentCampaignHeader()
@@ -86,6 +90,9 @@ Public Class Form1
 
         'Set up the RadiotrackingGridEX default values and dropdowns
         SetUpRadiotrackingGridEX()
+
+        'Set up the population surveys grid default values and dropdowns
+        SetUpPopulationEstimateGridEX()
 
         'Load the Campaign header 
         LoadCampaignHeader()
@@ -221,6 +228,50 @@ Public Class Form1
         CertificationLevelList.Add("Provisional", "Provisional")
         CertificationLevelList.Add("Accepted", "Accepted")
         CertificationLevelList.Add("Certified", "Certified")
+    End Sub
+
+    ''' <summary>
+    ''' Sets up the SurveysGridEX default values and DropDowns/Combos
+    ''' </summary>
+    Private Sub SetUpPopulationEstimateGridEX()
+
+        'Set up default values
+        Dim Grid As GridEX = Me.PopulationEstimateGridEX
+        Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+
+        'Herd dropdown
+        With Grid.RootTable.Columns("Herd")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+        Dim HerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
+        HerdList.Add("Chisana", "Chisana")
+        HerdList.Add("Mentasta", "Mentasta")
+
+        'search areas dropdown
+        'this line loads the csv list of search areas from my.settings into a datatable
+        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+
+        'set up the search area column to accept a dropdown
+        With Grid.RootTable.Columns("SearchArea")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+
+        'get a ref to the searchareas valuelist
+        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
+        'load in the searcharea items into the combobox
+        For Each Row As DataRow In SearchAreasDataTable.Rows
+            Dim SearchArea As String = Row.Item("SearchArea")
+            SearchAreasList.Add(SearchArea, SearchArea)
+        Next
+
     End Sub
 
     ''' <summary>
