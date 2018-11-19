@@ -264,7 +264,7 @@ Partial Class Form1
         Me.CompositionCountTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
         Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.CompositionCountTabPage.Size = New System.Drawing.Size(813, 519)
+        Me.CompositionCountTabPage.Size = New System.Drawing.Size(813, 366)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition"
         Me.CompositionCountTabPage.UseVisualStyleBackColor = True
@@ -284,7 +284,7 @@ Partial Class Form1
         '
         Me.CompCountSplitContainer.Panel2.AutoScroll = True
         Me.CompCountSplitContainer.Panel2.Controls.Add(Me.XrefCompCountCaribouGridEX)
-        Me.CompCountSplitContainer.Size = New System.Drawing.Size(809, 490)
+        Me.CompCountSplitContainer.Size = New System.Drawing.Size(809, 337)
         Me.CompCountSplitContainer.SplitterDistance = 469
         Me.CompCountSplitContainer.SplitterWidth = 3
         Me.CompCountSplitContainer.TabIndex = 3
@@ -303,7 +303,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
         Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(469, 490)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(469, 337)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -332,7 +332,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefCompCountCaribouGridEX.Name = "XrefCompCountCaribouGridEX"
         Me.XrefCompCountCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(337, 490)
+        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(337, 337)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -371,8 +371,8 @@ Partial Class Form1
         Me.ImportCompCountXYFromFileToolStripButton.Image = CType(resources.GetObject("ImportCompCountXYFromFileToolStripButton.Image"), System.Drawing.Image)
         Me.ImportCompCountXYFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportCompCountXYFromFileToolStripButton.Name = "ImportCompCountXYFromFileToolStripButton"
-        Me.ImportCompCountXYFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
-        Me.ImportCompCountXYFromFileToolStripButton.Text = "Import waypoints from file..."
+        Me.ImportCompCountXYFromFileToolStripButton.Size = New System.Drawing.Size(238, 22)
+        Me.ImportCompCountXYFromFileToolStripButton.Text = "Import comp. count survey data from file..."
         '
         'ToolStripSeparator6
         '
@@ -495,8 +495,8 @@ Partial Class Form1
         Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Image = CType(resources.GetObject("ImportPopulationSurveyWaypointsFromFileToolStripButton.Image"), System.Drawing.Image)
         Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Name = "ImportPopulationSurveyWaypointsFromFileToolStripButton"
-        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
-        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Text = "Import waypoints from file..."
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(228, 22)
+        Me.ImportPopulationSurveyWaypointsFromFileToolStripButton.Text = "Import population survey data from file..."
         '
         'ToolStripSeparator8
         '
@@ -511,7 +511,7 @@ Partial Class Form1
         Me.RadiotrackingTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
         Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(813, 519)
+        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(813, 366)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
         Me.RadiotrackingTabPage.UseVisualStyleBackColor = True
@@ -532,7 +532,7 @@ Partial Class Form1
         '
         Me.RadioTrackingSplitContainer.Panel2.AutoScroll = True
         Me.RadioTrackingSplitContainer.Panel2.Controls.Add(Me.XrefRadiotrackingCaribouGridEX)
-        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(809, 490)
+        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(809, 337)
         Me.RadioTrackingSplitContainer.SplitterDistance = 422
         Me.RadioTrackingSplitContainer.SplitterWidth = 3
         Me.RadioTrackingSplitContainer.TabIndex = 2
@@ -551,7 +551,7 @@ Partial Class Form1
         Me.RadioTrackingGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
         Me.RadioTrackingGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(422, 490)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(422, 337)
         Me.RadioTrackingGridEX.TabIndex = 0
         Me.RadioTrackingGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.RadioTrackingGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -574,7 +574,7 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefRadiotrackingCaribouGridEX.Name = "XrefRadiotrackingCaribouGridEX"
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(384, 490)
+        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(384, 337)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
         '
         'XrefRadiotrackingCaribouBindingSource1
@@ -612,8 +612,8 @@ Partial Class Form1
         Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Image = CType(resources.GetObject("ImportRadiotrackingWaypointsFromFileToolStripButton.Image"), System.Drawing.Image)
         Me.ImportRadiotrackingWaypointsFromFileToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Name = "ImportRadiotrackingWaypointsFromFileToolStripButton"
-        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(161, 22)
-        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Text = "Import waypoints from file..."
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Size = New System.Drawing.Size(240, 22)
+        Me.ImportRadiotrackingWaypointsFromFileToolStripButton.Text = "Import radiotracking survey data from file..."
         '
         'ToolStripSeparator9
         '
@@ -778,7 +778,7 @@ Partial Class Form1
         Me.ResultsTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.ResultsTabPage.Name = "ResultsTabPage"
         Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(825, 847)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(825, 623)
         Me.ResultsTabPage.TabIndex = 0
         Me.ResultsTabPage.Text = "Results"
         Me.ResultsTabPage.UseVisualStyleBackColor = True
@@ -796,7 +796,7 @@ Partial Class Form1
         Me.ResultsDataGridView.Name = "ResultsDataGridView"
         Me.ResultsDataGridView.ReadOnly = True
         Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(821, 781)
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(821, 557)
         Me.ResultsDataGridView.TabIndex = 0
         '
         'ResultsPanel
@@ -825,7 +825,7 @@ Partial Class Form1
         Me.ResultsToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ResultsToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseViewLabel, Me.DatabaseViewNameToolStripLabel, Me.ToolStripSeparator2, Me.RefreshResultsToolStripButton, Me.ToolStripSeparator1})
-        Me.ResultsToolStrip.Location = New System.Drawing.Point(2, 818)
+        Me.ResultsToolStrip.Location = New System.Drawing.Point(2, 594)
         Me.ResultsToolStrip.Name = "ResultsToolStrip"
         Me.ResultsToolStrip.Size = New System.Drawing.Size(821, 27)
         Me.ResultsToolStrip.TabIndex = 1
@@ -999,7 +999,7 @@ Partial Class Form1
         Me.CaribouTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouTabPage.Name = "CaribouTabPage"
         Me.CaribouTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.CaribouTabPage.Size = New System.Drawing.Size(1176, 908)
+        Me.CaribouTabPage.Size = New System.Drawing.Size(1176, 684)
         Me.CaribouTabPage.TabIndex = 1
         Me.CaribouTabPage.Text = "Caribou"
         Me.CaribouTabPage.UseVisualStyleBackColor = True
@@ -1014,7 +1014,7 @@ Partial Class Form1
         Me.CaribouGridEX.Location = New System.Drawing.Point(2, 2)
         Me.CaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouGridEX.Name = "CaribouGridEX"
-        Me.CaribouGridEX.Size = New System.Drawing.Size(1172, 904)
+        Me.CaribouGridEX.Size = New System.Drawing.Size(1172, 680)
         Me.CaribouGridEX.TabIndex = 0
         '
         'CaribouBindingSource
@@ -1030,7 +1030,7 @@ Partial Class Form1
         Me.ResultsTabPage2.Location = New System.Drawing.Point(4, 22)
         Me.ResultsTabPage2.Name = "ResultsTabPage2"
         Me.ResultsTabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.ResultsTabPage2.Size = New System.Drawing.Size(1176, 908)
+        Me.ResultsTabPage2.Size = New System.Drawing.Size(1176, 684)
         Me.ResultsTabPage2.TabIndex = 2
         Me.ResultsTabPage2.Text = "Results"
         Me.ResultsTabPage2.UseVisualStyleBackColor = True
@@ -1045,7 +1045,7 @@ Partial Class Form1
         Me.SurveyResultsDataGridView.Location = New System.Drawing.Point(3, 28)
         Me.SurveyResultsDataGridView.Name = "SurveyResultsDataGridView"
         Me.SurveyResultsDataGridView.ReadOnly = True
-        Me.SurveyResultsDataGridView.Size = New System.Drawing.Size(1170, 852)
+        Me.SurveyResultsDataGridView.Size = New System.Drawing.Size(1170, 628)
         Me.SurveyResultsDataGridView.TabIndex = 0
         '
         'SurveyResultsBindingNavigator
@@ -1056,7 +1056,7 @@ Partial Class Form1
         Me.SurveyResultsBindingNavigator.DeleteItem = Nothing
         Me.SurveyResultsBindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.SurveyResultsBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.ExportResultsToCSVToolStripButton})
-        Me.SurveyResultsBindingNavigator.Location = New System.Drawing.Point(3, 880)
+        Me.SurveyResultsBindingNavigator.Location = New System.Drawing.Point(3, 656)
         Me.SurveyResultsBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.SurveyResultsBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.SurveyResultsBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
