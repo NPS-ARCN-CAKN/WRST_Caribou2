@@ -1397,11 +1397,12 @@ ORDER BY Collars.Frequency"
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
     Private Sub ImportCompCountWaypointsFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType)
         Try
-            'get the data file with comp count waypoints to import
-            Dim SourceFileInfo As New FileInfo(GetFile("Select a GPS waypoints file to open", "Waypoints file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
+            'get the data fileinfo to import
+            Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
 
-            'convert the file into a datatable
+            'convert the file into a datatable so we can work with it
             Dim InputDataTable As DataTable = Nothing
+
             'determine if the input file is csv or excel
             If SourceFileInfo.Extension = ".csv" Then
                 'convert the data file into a datatable
@@ -1410,12 +1411,12 @@ ORDER BY Collars.Frequency"
                 'convert the excel sheet into a datatable
                 Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES"";"
                 Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-                InputDataTable = ExcelDataset.Tables(0)
+                InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
             ElseIf SourceFileInfo.Extension = ".xls" Then
                 'convert the excel sheet into a datatable
                 Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES"";"
                 Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-                InputDataTable = ExcelDataset.Tables(0)
+                InputDataTable = ExcelDataset.Tables(0) 'first worksheet
             End If
 
             'make a list of desired default values to pass into the data tables translator form
@@ -1442,7 +1443,7 @@ ORDER BY Collars.Frequency"
             End With
 
             'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
-            Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import composition count survey waypoints", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+            Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
             TranslatorForm.ShowDialog()
 
             'at this point we have transformed the csv into a clone of the destination datatable
