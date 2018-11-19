@@ -229,6 +229,7 @@ Partial Class Form1
         Me.CampaignsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CampaignsGridEX.Name = "CampaignsGridEX"
         Me.CampaignsGridEX.RecordNavigator = True
+        Me.CampaignsGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
         Me.HelpProvider.SetShowHelp(Me.CampaignsGridEX, True)
         Me.CampaignsGridEX.Size = New System.Drawing.Size(336, 649)
         Me.CampaignsGridEX.TabIndex = 1
