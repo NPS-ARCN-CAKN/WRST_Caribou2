@@ -12826,32 +12826,9 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Campaigns] WHERE (([CampaignID] = @Original_CampaignID) AND (["& _ 
-                "Campaign] = @Original_Campaign) AND ([Year] = @Original_Year) AND ([SurveyType] "& _ 
-                "= @Original_SurveyType) AND ([Herd] = @Original_Herd) AND ((@IsNull_StartDate = "& _ 
-                "1 AND [StartDate] IS NULL) OR ([StartDate] = @Original_StartDate)) AND ((@IsNull"& _ 
-                "_EndDate = 1 AND [EndDate] IS NULL) OR ([EndDate] = @Original_EndDate)) AND ((@I"& _ 
-                "sNull_Personnel = 1 AND [Personnel] IS NULL) OR ([Personnel] = @Original_Personn"& _ 
-                "el)) AND ([RecordInsertedDate] = @Original_RecordInsertedDate) AND ([RecordInser"& _ 
-                "tedBy] = @Original_RecordInsertedBy) AND ((@IsNull_ProtocolIRMAReference = 1 AND"& _ 
-                " [ProtocolIRMAReference] IS NULL) OR ([ProtocolIRMAReference] = @Original_Protoc"& _ 
-                "olIRMAReference)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM Campaigns"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (CampaignID = @Original_CampaignID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CampaignID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Campaign", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Campaign", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Year", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_StartDate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_StartDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_EndDate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EndDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Personnel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Personnel", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Campaigns] ([CampaignID], [Campaign], [Year], [SurveyType], [H"& _ 
@@ -12878,52 +12855,27 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Campaigns] SET [CampaignID] = @CampaignID, [Campaign] = @Campaign, "& _ 
-                "[Year] = @Year, [SurveyType] = @SurveyType, [Herd] = @Herd, [StartDate] = @Start"& _ 
-                "Date, [EndDate] = @EndDate, [Description] = @Description, [Personnel] = @Personn"& _ 
-                "el, [Notes] = @Notes, [RecordInsertedDate] = @RecordInsertedDate, [RecordInserte"& _ 
-                "dBy] = @RecordInsertedBy, [ProtocolIRMAReference] = @ProtocolIRMAReference WHERE"& _ 
-                " (([CampaignID] = @Original_CampaignID) AND ([Campaign] = @Original_Campaign) AN"& _ 
-                "D ([Year] = @Original_Year) AND ([SurveyType] = @Original_SurveyType) AND ([Herd"& _ 
-                "] = @Original_Herd) AND ((@IsNull_StartDate = 1 AND [StartDate] IS NULL) OR ([St"& _ 
-                "artDate] = @Original_StartDate)) AND ((@IsNull_EndDate = 1 AND [EndDate] IS NULL"& _ 
-                ") OR ([EndDate] = @Original_EndDate)) AND ((@IsNull_Personnel = 1 AND [Personnel"& _ 
-                "] IS NULL) OR ([Personnel] = @Original_Personnel)) AND ([RecordInsertedDate] = @"& _ 
-                "Original_RecordInsertedDate) AND ([RecordInsertedBy] = @Original_RecordInsertedB"& _ 
-                "y) AND ((@IsNull_ProtocolIRMAReference = 1 AND [ProtocolIRMAReference] IS NULL) "& _ 
-                "OR ([ProtocolIRMAReference] = @Original_ProtocolIRMAReference)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Campai"& _ 
-                "gnID, Campaign, Year, SurveyType, Herd, StartDate, EndDate, Description, Personn"& _ 
-                "el, Notes, RecordInsertedDate, RecordInsertedBy, ProtocolIRMAReference FROM Camp"& _ 
-                "aigns WHERE (CampaignID = @CampaignID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       Campaigns"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Campaign = @Campaign, Year = @Year, Su"& _ 
+                "rveyType = @SurveyType, Herd = @Herd, StartDate = @StartDate, EndDate = @EndDate"& _ 
+                ", Description = @Description, Personnel = @Personnel, Notes = @Notes, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
+                "                 ProtocolIRMAReference = @ProtocolIRMAReference"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (C"& _ 
+                "ampaignID = @Original_CampaignID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CampaignID, Campaign, Year, SurveyTy"& _ 
+                "pe, Herd, StartDate, EndDate, Description, Personnel, Notes, RecordInsertedDate,"& _ 
+                " RecordInsertedBy, ProtocolIRMAReference FROM Campaigns WHERE (CampaignID = @Cam"& _ 
+                "paignID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CampaignID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Campaign", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Campaign", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Description", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Description", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Personnel", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CampaignID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Campaign", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Campaign", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Year", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SurveyType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Herd", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_StartDate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_StartDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_EndDate", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EndDate", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Personnel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Personnel", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RecordInsertedDate", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedDate", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_RecordInsertedBy", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RecordInsertedBy", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Campaign", Global.System.Data.SqlDbType.VarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "Campaign", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Year", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "Year", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SurveyType", Global.System.Data.SqlDbType.VarChar, 17, Global.System.Data.ParameterDirection.Input, 0, 0, "SurveyType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Description", Global.System.Data.SqlDbType.VarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, "Description", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Personnel", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "Personnel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Notes", Global.System.Data.SqlDbType.VarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProtocolIRMAReference", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ProtocolIRMAReference", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CampaignID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CampaignID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13001,61 +12953,11 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_CampaignID As String, ByVal Original_Campaign As String, ByVal Original_Year As Integer, ByVal Original_SurveyType As String, ByVal Original_Herd As String, ByVal Original_StartDate As Global.System.Nullable(Of Date), ByVal Original_EndDate As Global.System.Nullable(Of Date), ByVal Original_Personnel As String, ByVal Original_RecordInsertedDate As Date, ByVal Original_RecordInsertedBy As String, ByVal Original_ProtocolIRMAReference As Global.System.Nullable(Of Integer)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_CampaignID As String) As Integer
             If (Original_CampaignID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_CampaignID")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_CampaignID,String)
-            End If
-            If (Original_Campaign Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_Campaign")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_Campaign,String)
-            End If
-            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_Year,Integer)
-            If (Original_SurveyType Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_SurveyType")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_SurveyType,String)
-            End If
-            If (Original_Herd Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_Herd")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Herd,String)
-            End If
-            If (Original_StartDate.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_StartDate.Value,Date)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
-            End If
-            If (Original_EndDate.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_EndDate.Value,Date)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
-            End If
-            If (Original_Personnel Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Personnel,String)
-            End If
-            Me.Adapter.DeleteCommand.Parameters(11).Value = CType(Original_RecordInsertedDate,Date)
-            If (Original_RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_RecordInsertedBy")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_RecordInsertedBy,String)
-            End If
-            If (Original_ProtocolIRMAReference.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_ProtocolIRMAReference.Value,Integer)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -13153,142 +13055,62 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal CampaignID As String,  _
-                    ByVal Campaign As String,  _
-                    ByVal Year As Integer,  _
-                    ByVal SurveyType As String,  _
-                    ByVal Herd As String,  _
-                    ByVal StartDate As Global.System.Nullable(Of Date),  _
-                    ByVal EndDate As Global.System.Nullable(Of Date),  _
-                    ByVal Description As String,  _
-                    ByVal Personnel As String,  _
-                    ByVal Notes As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_CampaignID As String,  _
-                    ByVal Original_Campaign As String,  _
-                    ByVal Original_Year As Integer,  _
-                    ByVal Original_SurveyType As String,  _
-                    ByVal Original_Herd As String,  _
-                    ByVal Original_StartDate As Global.System.Nullable(Of Date),  _
-                    ByVal Original_EndDate As Global.System.Nullable(Of Date),  _
-                    ByVal Original_Personnel As String,  _
-                    ByVal Original_RecordInsertedDate As Date,  _
-                    ByVal Original_RecordInsertedBy As String,  _
-                    ByVal Original_ProtocolIRMAReference As Global.System.Nullable(Of Integer)) As Integer
-            If (CampaignID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("CampaignID")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(CampaignID,String)
-            End If
+        Public Overloads Overridable Function Update(ByVal Campaign As String, ByVal Year As Integer, ByVal SurveyType As String, ByVal Herd As String, ByVal StartDate As String, ByVal EndDate As String, ByVal Description As String, ByVal Personnel As String, ByVal Notes As String, ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer), ByVal Original_CampaignID As String, ByVal CampaignID As String) As Integer
             If (Campaign Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Campaign")
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Campaign,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(Campaign,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Year,Integer)
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Year,Integer)
             If (SurveyType Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SurveyType")
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(SurveyType,String)
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(SurveyType,String)
             End If
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Herd,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Herd,String)
             End If
-            If (StartDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(StartDate.Value,Date)
+            If (StartDate Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(StartDate,String)
+            End If
+            If (EndDate Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
-            End If
-            If (EndDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(EndDate.Value,Date)
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(EndDate,String)
             End If
             If (Description Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Description,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Description,String)
             End If
             If (Personnel Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Personnel,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Personnel,String)
             End If
             If (Notes Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Notes,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(RecordInsertedDate,Date)
-            If (RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(RecordInsertedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Notes,String)
             End If
             If (ProtocolIRMAReference.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(ProtocolIRMAReference.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(ProtocolIRMAReference.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
             If (Original_CampaignID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_CampaignID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_CampaignID,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_CampaignID,String)
             End If
-            If (Original_Campaign Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_Campaign")
+            If (CampaignID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("CampaignID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_Campaign,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Year,Integer)
-            If (Original_SurveyType Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_SurveyType")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_SurveyType,String)
-            End If
-            If (Original_Herd Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_Herd")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_Herd,String)
-            End If
-            If (Original_StartDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_StartDate.Value,Date)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
-            End If
-            If (Original_EndDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_EndDate.Value,Date)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
-            End If
-            If (Original_Personnel Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Personnel,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_RecordInsertedDate,Date)
-            If (Original_RecordInsertedBy Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_RecordInsertedBy")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_RecordInsertedBy,String)
-            End If
-            If (Original_ProtocolIRMAReference.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_ProtocolIRMAReference.Value,Integer)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(CampaignID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -13303,37 +13125,6 @@ Namespace WRST_CaribouDataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal Campaign As String,  _
-                    ByVal Year As Integer,  _
-                    ByVal SurveyType As String,  _
-                    ByVal Herd As String,  _
-                    ByVal StartDate As Global.System.Nullable(Of Date),  _
-                    ByVal EndDate As Global.System.Nullable(Of Date),  _
-                    ByVal Description As String,  _
-                    ByVal Personnel As String,  _
-                    ByVal Notes As String,  _
-                    ByVal RecordInsertedDate As Date,  _
-                    ByVal RecordInsertedBy As String,  _
-                    ByVal ProtocolIRMAReference As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_CampaignID As String,  _
-                    ByVal Original_Campaign As String,  _
-                    ByVal Original_Year As Integer,  _
-                    ByVal Original_SurveyType As String,  _
-                    ByVal Original_Herd As String,  _
-                    ByVal Original_StartDate As Global.System.Nullable(Of Date),  _
-                    ByVal Original_EndDate As Global.System.Nullable(Of Date),  _
-                    ByVal Original_Personnel As String,  _
-                    ByVal Original_RecordInsertedDate As Date,  _
-                    ByVal Original_RecordInsertedBy As String,  _
-                    ByVal Original_ProtocolIRMAReference As Global.System.Nullable(Of Integer)) As Integer
-            Return Me.Update(Original_CampaignID, Campaign, Year, SurveyType, Herd, StartDate, EndDate, Description, Personnel, Notes, RecordInsertedDate, RecordInsertedBy, ProtocolIRMAReference, Original_CampaignID, Original_Campaign, Original_Year, Original_SurveyType, Original_Herd, Original_StartDate, Original_EndDate, Original_Personnel, Original_RecordInsertedDate, Original_RecordInsertedBy, Original_ProtocolIRMAReference)
         End Function
     End Class
     
@@ -16306,12 +16097,9 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [PopulationEstimate] WHERE (([EID] = @Original_EID) AND ((@IsNull_TS "& _ 
-                "= 1 AND [TS] IS NULL) OR ([TS] = @Original_TS)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (EID = @Original_EID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TS", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TS", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO PopulationEstimate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (Herd, SearchArea, Group"& _ 
@@ -16462,18 +16250,11 @@ Namespace WRST_CaribouDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_EID As String, ByVal Original_TS() As Byte) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_EID As String) As Integer
             If (Original_EID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EID")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EID,String)
-            End If
-            If (Original_TS Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TS,Byte())
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -16952,19 +16733,19 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Lon", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 13, 9, "Lon", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE RadioTracking"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          Herd = @Herd, GroupNumber = @GroupNumber, Freq"& _ 
-                "uency = @Frequency, VisualCollar = @VisualCollar, SightingDate = @SightingDate, "& _ 
-                "Mode = @Mode, Accuracy = @Accuracy, Bull = @Bull, Cow = @Cow, Calf = @Calf, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  "& _ 
-                "                Adult = @Adult, Unknown = @Unknown, Waypoint = @Waypoint, Retain"& _ 
-                "edAntler = @RetainedAntler, DistendedUdders = @DistendedUdders, CalvesAtHeel = @"& _ 
-                "CalvesAtHeel, Seen = @Seen, AnimalID = @AnimalID, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                  ProjectID "& _ 
-                "= @ProjectID, SearchArea = @SearchArea, SourceFilename = @SourceFilename, Commen"& _ 
-                "t = @Comment, Lat = @Lat, Lon = @Lon"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (RTID = @Original_RTID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT H"& _ 
-                "erd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, C"& _ 
-                "ow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHee"& _ 
-                "l, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInserted"& _ 
-                "By, SearchArea, TS, SourceFilename, Comment, Lat, Lon FROM RadioTracking WHERE ("& _ 
-                "RTID = @RTID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE       RadioTracking"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Herd = @Herd, GroupNumber = @Group"& _ 
+                "Number, Frequency = @Frequency, VisualCollar = @VisualCollar, SightingDate = @Si"& _ 
+                "ghtingDate, Mode = @Mode, Accuracy = @Accuracy, Bull = @Bull, Cow = @Cow, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
+                "                     Calf = @Calf, Adult = @Adult, Unknown = @Unknown, Waypoint "& _ 
+                "= @Waypoint, RetainedAntler = @RetainedAntler, DistendedUdders = @DistendedUdder"& _ 
+                "s, CalvesAtHeel = @CalvesAtHeel, Seen = @Seen, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Animal"& _ 
+                "ID = @AnimalID, ProjectID = @ProjectID, SearchArea = @SearchArea, SourceFilename"& _ 
+                " = @SourceFilename, Comment = @Comment, Lat = @Lat, Lon = @Lon"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (RT"& _ 
+                "ID = @Original_RTID);  "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, GroupNumber, Frequency, VisualCollar, Sigh"& _ 
+                "tingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAnt"& _ 
+                "ler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, R"& _ 
+                "ecordInsertedDate, RecordInsertedBy, SearchArea, TS, SourceFilename, Comment, La"& _ 
+                "t, Lon FROM RadioTracking WHERE (RTID = @RTID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroupNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "GroupNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -17629,11 +17410,11 @@ Namespace WRST_CaribouDataSetTableAdapters
                 " = @WeatherConditions, SnowConditions = @SnowConditions, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
                 "    Notes = @Notes, Herd = @Herd, SOPNumber = @SOPNumber, SOPVersion = @SOPVersi"& _ 
                 "on, IsFollowUpFlight = @IsFollowUpFlight"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (FlightID = @Original_Fli"& _ 
-                "ghtID);   "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo"& _ 
-                ", TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilo"& _ 
-                "t, WeatherConditions, SnowConditions, Notes, RecordInsertedDate, RecordInsertedB"& _ 
-                "y, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLev"& _ 
-                "el, FlightID, CampaignID, TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
+                "ghtID);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailN"& _ 
+                "o, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePil"& _ 
+                "ot, WeatherConditions, SnowConditions, Notes, RecordInsertedDate, RecordInserted"& _ 
+                "By, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLe"& _ 
+                "vel, FlightID, CampaignID, TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
