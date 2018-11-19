@@ -188,7 +188,7 @@
     <value>670, 189</value>
   </metadata>
   <data name="XrefPopulationCaribouGridEX_DesignTimeLayout.LayoutString" xml:space="preserve">
-    <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;IBindingList&lt;/Key&gt;&lt;Caption&gt;GPS collared caribou detected in this group:&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="AnimalID"&gt;&lt;Caption&gt;AnimalID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;AnimalID&lt;/DataMember&gt;&lt;EditType&gt;Combo&lt;/EditType&gt;&lt;Key&gt;AnimalID&lt;/Key&gt;&lt;MaxLength&gt;300&lt;/MaxLength&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;Width&gt;191&lt;/Width&gt;&lt;/Column0&gt;&lt;Column1 ID="ProjectID"&gt;&lt;Caption&gt;Project&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;ProjectID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;ProjectID&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;/Column1&gt;&lt;Column2 ID="EID"&gt;&lt;Caption&gt;EID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;EID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;EID&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;/Column2&gt;&lt;Column3 ID="PCID"&gt;&lt;Caption&gt;PCID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;PCID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;PCID&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;/Column3&gt;&lt;Column4 ID="RecordInsertedBy"&gt;&lt;Caption&gt;Record Inserted By&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedBy&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;RecordInsertedBy&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;/Column4&gt;&lt;Column5 ID="RecordInsertedDate"&gt;&lt;Caption&gt;Record Inserted Date&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedDate&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;FormatString&gt;d&lt;/FormatString&gt;&lt;Key&gt;RecordInsertedDate&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;/Column5&gt;&lt;/Columns&gt;&lt;SortKeys Collection="true" ElementName="SortKey"&gt;&lt;SortKey0 ID="SortKey0"&gt;&lt;ColIndex&gt;0&lt;/ColIndex&gt;&lt;/SortKey0&gt;&lt;/SortKeys&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
+    <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;IBindingList&lt;/Key&gt;&lt;Caption&gt;GPS collared caribou detected in this group:&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="AnimalID"&gt;&lt;Caption&gt;AnimalID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;AnimalID&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;AnimalID&lt;/Key&gt;&lt;MaxLength&gt;300&lt;/MaxLength&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;Width&gt;191&lt;/Width&gt;&lt;/Column0&gt;&lt;Column1 ID="ProjectID"&gt;&lt;Caption&gt;Project&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;ProjectID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;ProjectID&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;DefaultValue&gt;WRST_Caribou&lt;/DefaultValue&gt;&lt;/Column1&gt;&lt;Column2 ID="EID"&gt;&lt;Caption&gt;EID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;EID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;EID&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;/Column2&gt;&lt;Column3 ID="PCID"&gt;&lt;Caption&gt;PCID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;PCID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;PCID&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;/Column3&gt;&lt;Column4 ID="RecordInsertedBy"&gt;&lt;Caption&gt;Record Inserted By&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedBy&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;RecordInsertedBy&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;/Column4&gt;&lt;Column5 ID="RecordInsertedDate"&gt;&lt;Caption&gt;Record Inserted Date&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedDate&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;FormatString&gt;d&lt;/FormatString&gt;&lt;Key&gt;RecordInsertedDate&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;/Column5&gt;&lt;/Columns&gt;&lt;SortKeys Collection="true" ElementName="SortKey"&gt;&lt;SortKey0 ID="SortKey0"&gt;&lt;ColIndex&gt;0&lt;/ColIndex&gt;&lt;/SortKey0&gt;&lt;/SortKeys&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
   </data>
   <metadata name="PopulationToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>320, 232</value>
@@ -355,19 +355,19 @@
   <data name="RefreshDataToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <metadata name="CaribouBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -443,19 +443,19 @@
   <data name="RefreshToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALTSURBVDhPlZLtS1NhGMYP+UH60F8gVJZWGmoWhdCXIAwK
-        CbRmOVu+zMxUWpJSGmRpVGQaE18wlbnZWNtsuk02p+LG9INZ0zm2teWU6QeVQ4r4ujH16pynoWREdMED
-        5zz3uX7Pue77oVjpdLrQ3t5eDrNUer3eqVarA8yev7u726LVauUajeaSQqEIIR/vVX9/f7TBYBi3Wq2Y
-        n5/HysoKtra2sLm5iYWFBXi9XpjNZnR0dAzK5fKwoG1XjNk4PT2N7e1t/E2BQABjY2N4ZBB4OQrO73/C
-        AGifz/dPAE3TKOzkB/harilo/SUmM72xsQE2gsfjITH8fj++/bDjneUlBCY+CvozcVfPQ4W5FE8HSpAm
-        vWoI2imqq6uLXl9fx8zMDCwWC4aGhqAb0aJyqBQttjpovivR6f6ITy4pFE4JZA4RirsLkVSf6NkBrK2t
-        YXFxEbOzswQksjahcawGarcClYNlyOq8gVvyFDzWC1CsLUBSXWIfMbNiAaurqyQj28zJyUmUmYuQ18ND
-        jpaLErUARqORgHnNqYHLdRfN5eXUvoTqhP07AHZ0c3NzxOx2u8noJiYmSBx9jx59fX0EzqtP9/0xBZVK
-        RS8vL5MTXC4XHA4HaSb7bDKZwFwkPBAXEGhDQwMdtO2KuSD00tISpqamYLfbYbPZyOk2+zgGjAPIac4A
-        t/46qVdVVdEJT06Zz5TEIFYQhejcSC/V3t5Os0U2BjEGAU6nE/ltOciXZ+POBx7OPzuLc2XxuNmYjOrh
-        CvDF6YjIDm+ipFLpFWatjo6OkqvLNpSdStr7ZOTJMtFoqUbdlzcQjrxCzecXeDv8nOxHZB3+eigj7AKJ
-        IZFIwtva2lpFItGSWCyGUqmETCZD6usU3G5NBbfpGuKKonGy4BiO5x7FkeyDph3zXrW0tBxgmhVfW1sb
-        JxQKQ08/jDHF3o+yBcv/Lw6HCjlxL1IRfN0jivoJNYhNI4rrP3IAAAAASUVORK5CYII=
+        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
 </value>
   </data>
   <metadata name="CapturesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

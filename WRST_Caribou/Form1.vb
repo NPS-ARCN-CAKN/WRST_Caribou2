@@ -1362,15 +1362,15 @@ ORDER BY Collars.Frequency"
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.CompositionCount)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCount)
     End Sub
 
     'import arbitrary waypoints to population
     Private Sub ImportPopulationSurveyWaypointsFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportPopulationSurveyWaypointsFromFileToolStripButton.Click
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-        Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate]        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
+        Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate], Bull        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.PopulationEstimate)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate)
     End Sub
 
     'import arbitrary waypoints to radiotracking
@@ -1378,7 +1378,7 @@ ORDER BY Collars.Frequency"
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT        TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportCompCountWaypointsFromFile(DestinationDataTable, SurveyType.Radiotracking)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking)
     End Sub
 
     ''' <summary>
@@ -1395,7 +1395,7 @@ ORDER BY Collars.Frequency"
     ''' Finally, loads the transformed data into the DestinationDataTable.
     ''' </summary>
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
-    Private Sub ImportCompCountWaypointsFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType)
+    Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType)
         Try
             'get the data fileinfo to import
             Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
@@ -1447,17 +1447,17 @@ ORDER BY Collars.Frequency"
             TranslatorForm.ShowDialog()
 
             'at this point we have transformed the csv into a clone of the destination datatable
-            Dim WaypointsDataTable As DataTable = TranslatorForm.DestinationDataTable
+            Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
 
 
             'the next step is to get the transformed data into the correct table
             'loop through the waypoints datatable and try to insert them into the datatable
             Dim TableName As String = SurveyType.ToString
-            For Each Row As DataRow In WaypointsDataTable.Rows
+            For Each Row As DataRow In ImportDataTable.Rows
 
                 'make a new row
                 Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables(TableName).NewRow
-                For Each Column As DataColumn In WaypointsDataTable.Columns
+                For Each Column As DataColumn In ImportDataTable.Columns
                     NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
                 Next
 
@@ -1558,5 +1558,28 @@ ORDER BY Collars.Frequency"
 
     Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
         LoadSurveyResultsGrid()
+    End Sub
+
+    Private Sub XrefPopulationCaribouGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles XrefPopulationCaribouGridEX.DropDown
+        LoadXrefPopulationCaribouGridEX_DropDown()
+    End Sub
+
+    Private Sub LoadXrefPopulationCaribouGridEX_DropDown()
+        Try
+            'query the animal movement database for a list of collared animals
+            Dim AnimalsQuery As String = "SELECT Convert(Varchar(20),Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, Collars.Frequency, Animals.AnimalId, Animals.MortalityDate, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Collars.HasGps, CollarDeployments.CollarId, Animals.ProjectId  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
+            Dim AnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, AnimalsQuery)
+
+            'get a ref to the animalid valuelist
+            Dim List As GridEXValueListItemCollection = Me.XrefPopulationCaribouGridEX.RootTable.Columns("AnimalID").ValueList
+            'load in the items into the dropdown
+            For Each Row As DataRow In AnimalsDataTable.Rows
+                Dim AnimalID As String = Row.Item("AnimalID")
+                Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
+                List.Add(AnimalID, CollaredCaribou)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 End Class
