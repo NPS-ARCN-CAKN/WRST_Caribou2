@@ -55,6 +55,8 @@ Public Class Form1
             Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
             Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
 
+            'load the animals inventory grid from animal_movement database
+            LoadAnimalMovementsAnimalsGrid()
 
             'update the campaign header with info about the current campaign
             Me.CampaignHeaderLabel.Text = GetCurrentCampaignHeader()
@@ -1567,8 +1569,8 @@ ORDER BY Collars.Frequency"
     Private Sub LoadXrefPopulationCaribouGridEX_DropDown()
         Try
             'query the animal movement database for a list of collared animals
-            Dim AnimalsQuery As String = "SELECT Convert(Varchar(20),Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, Collars.Frequency, Animals.AnimalId, Animals.MortalityDate, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Collars.HasGps, CollarDeployments.CollarId, Animals.ProjectId  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
-            Dim AnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, AnimalsQuery)
+            'Dim AnimalsQuery As String = "SELECT Convert(Varchar(20),Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, Collars.Frequency, Animals.AnimalId, Animals.MortalityDate, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Collars.HasGps, CollarDeployments.CollarId, Animals.ProjectId  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
+            Dim AnimalsDataTable As DataTable = GetAM_AnimalsDataTable()
 
             'get a ref to the animalid valuelist
             Dim List As GridEXValueListItemCollection = Me.XrefPopulationCaribouGridEX.RootTable.Columns("AnimalID").ValueList
@@ -1582,4 +1584,23 @@ ORDER BY Collars.Frequency"
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+    Private Sub RefreshAMAnimalsInventoryToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshAMAnimalsInventoryToolStripButton.Click
+        LoadAnimalMovementsAnimalsGrid()
+    End Sub
+
+    Private Sub LoadAnimalMovementsAnimalsGrid()
+        Try
+            'load the animals from animal_movement into the grid
+            'Me.AnimalsBindingSource.DataSource = GetAM_AnimalsDataTable()
+            Dim AnimalsDataTable As DataTable = GetAM_AnimalsDataTable()
+            For Each row As DataRow In AnimalsDataTable.Rows
+                Debug.Print(row.Item("AnimalID"))
+            Next
+            Me.AnimalsDataGridView.DataSource = AnimalsDataTable
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
 End Class

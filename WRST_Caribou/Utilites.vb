@@ -168,6 +168,12 @@ Module Utilites
 #End Region
 
 
+    ''' <summary>
+    ''' Returns the path to a file.
+    ''' </summary>
+    ''' <param name="Title">Title.</param>
+    ''' <param name="Filter">File filter. See documentation for OpenFileDialog.</param>
+    ''' <returns>String. Path to the selected file.</returns>
     Public Function GetFile(Title As String, Filter As String) As String
         'allow user to open an openfiledialog to select a csv file
         Dim File As String = ""
@@ -187,5 +193,19 @@ Module Utilites
         Return File
     End Function
 
+    ''' <summary>
+    ''' Retrieves a list of Animals and their collars and other attributes from the Animal_Movement database. DataTable
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetAM_AnimalsDataTable() As DataTable
+        Dim AnimalsDataTable As New DataTable
+        Try
+            Dim Sql As String = "SELECT Animals.AnimalId, Collars.Frequency, CollarDeployments.DeploymentDate, Animals.MortalityDate,                            CollarDeployments.RetrievalDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender,                            Animals.GroupName, Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId,       CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
+            AnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return AnimalsDataTable
+    End Function
 
 End Module
