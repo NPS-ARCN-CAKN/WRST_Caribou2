@@ -8,9 +8,59 @@ Imports SkeeterDataTablesTranslator
 Public Class Form1
 
     Dim ResultsDataTable As DataTable 'This reusable datatable will contain the data to be displayed in the Me.SurveyResultsDataGridView of the Results tab
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'set up the form
+        Me.DatabaseViewNameToolStripLabel.Text = ""
 
-    Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
-        SaveDataset()
+
+        'load the data from the WRST_Caribou Sql Server database
+        LoadDataset()
+
+        'set up the GridEXs
+        Dim Editable As InheritableBoolean = InheritableBoolean.True
+        SetUpGridEX(Me.CampaignsGridEX, Editable)
+        SetUpGridEX(Me.SurveyFlightsGridEX, Editable)
+        SetUpGridEX(Me.CompositionCountsGridEX, Editable)
+        SetUpGridEX(Me.PopulationEstimateGridEX, Editable)
+        SetUpGridEX(Me.RadioTrackingGridEX, Editable)
+        SetUpGridEX(Me.XrefCompCountCaribouGridEX, Editable)
+        SetUpGridEX(Me.XrefPopulationCaribouGridEX, Editable)
+        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX, Editable)
+
+        'Set up the Campaigns GridEX default values and dropdowns
+        SetUpCampaignsGridEX()
+
+        'Set up the SurveysGridEX default values and dropdowns
+        SetUpSurveysGridEX()
+
+        'Set up the RadiotrackingGridEX default values and dropdowns
+        SetUpRadiotrackingGridEX()
+
+        'Set up the population surveys grid default values and dropdowns
+        SetUpPopulationEstimateGridEX()
+
+        'Load the Campaign header 
+        LoadCampaignHeader()
+
+        'maximize form
+        Me.WindowState = FormWindowState.Maximized
+
+        'load the Animal_Movement database grids
+        LoadAMGrids()
+    End Sub
+
+
+    Private Sub LoadAMGrids()
+        'load the animals inventory grid from animal_movement database
+        Dim AMDataset As DataSet = GetAnimal_MovementDataset()
+
+        'bind the animals grid to the amdataset using a bindingsource
+        Dim AnimalsBindingSource As New BindingSource(AMDataset, "Animals")
+        AnimalsDataGridView.DataSource = AnimalsBindingSource
+
+        'bind the collardeployments grid to the amdataset using a bindingsource
+        Dim CollarDeploymentsBindingSource As New BindingSource(AnimalsBindingSource, "Animals_CollarDeploymentsDataRelation") 'NOTE: Bound to the DataRelation of the AnimalsBindingSource, not the CollarDeploymentsDataTable
+        CollarDeploymentsDataGridView.DataSource = CollarDeploymentsBindingSource
     End Sub
 
     ''' <summary>
@@ -55,8 +105,7 @@ Public Class Form1
             Me.XrefCompCountCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefCompCountCaribou)
             Me.XrefRadiotrackingCaribouTableAdapter.Fill(Me.WRST_CaribouDataSet.xrefRadiotrackingCaribou)
 
-            'load the animals inventory grid from animal_movement database
-            LoadAnimalMovementsAnimalsGrid()
+
 
             'update the campaign header with info about the current campaign
             Me.CampaignHeaderLabel.Text = GetCurrentCampaignHeader()
@@ -65,44 +114,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'set up the form
-        Me.DatabaseViewNameToolStripLabel.Text = ""
 
-
-        'load the data from the WRST_Caribou Sql Server database
-        LoadDataset()
-
-        'set up the GridEXs
-        Dim Editable As InheritableBoolean = InheritableBoolean.True
-        SetUpGridEX(Me.CampaignsGridEX, Editable)
-        SetUpGridEX(Me.SurveyFlightsGridEX, Editable)
-        SetUpGridEX(Me.CompositionCountsGridEX, Editable)
-        SetUpGridEX(Me.PopulationEstimateGridEX, Editable)
-        SetUpGridEX(Me.RadioTrackingGridEX, Editable)
-        SetUpGridEX(Me.XrefCompCountCaribouGridEX, Editable)
-        SetUpGridEX(Me.XrefPopulationCaribouGridEX, Editable)
-        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX, Editable)
-
-        'Set up the Campaigns GridEX default values and dropdowns
-        SetUpCampaignsGridEX()
-
-        'Set up the SurveysGridEX default values and dropdowns
-        SetUpSurveysGridEX()
-
-        'Set up the RadiotrackingGridEX default values and dropdowns
-        SetUpRadiotrackingGridEX()
-
-        'Set up the population surveys grid default values and dropdowns
-        SetUpPopulationEstimateGridEX()
-
-        'Load the Campaign header 
-        LoadCampaignHeader()
-
-        'maximize form
-        Me.WindowState = FormWindowState.Maximized
-
-    End Sub
 
     ''' <summary>
     ''' Sets up the RadiotrackingGridEX with default values and other settings
@@ -1570,7 +1582,7 @@ ORDER BY Collars.Frequency"
         Try
             'query the animal movement database for a list of collared animals
             'Dim AnimalsQuery As String = "SELECT Convert(Varchar(20),Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou, Collars.Frequency, Animals.AnimalId, Animals.MortalityDate, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Collars.HasGps, CollarDeployments.CollarId, Animals.ProjectId  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
-            Dim AnimalsDataTable As DataTable = GetAM_AnimalsDataTable()
+            Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
 
             'get a ref to the animalid valuelist
             Dim List As GridEXValueListItemCollection = Me.XrefPopulationCaribouGridEX.RootTable.Columns("AnimalID").ValueList
@@ -1585,22 +1597,9 @@ ORDER BY Collars.Frequency"
         End Try
     End Sub
 
-    Private Sub RefreshAMAnimalsInventoryToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshAMAnimalsInventoryToolStripButton.Click
-        LoadAnimalMovementsAnimalsGrid()
-    End Sub
 
-    Private Sub LoadAnimalMovementsAnimalsGrid()
-        Try
-            'load the animals from animal_movement into the grid
-            'Me.AnimalsBindingSource.DataSource = GetAM_AnimalsDataTable()
-            Dim AnimalsDataTable As DataTable = GetAM_AnimalsDataTable()
-            For Each row As DataRow In AnimalsDataTable.Rows
-                Debug.Print(row.Item("AnimalID"))
-            Next
-            Me.AnimalsDataGridView.DataSource = AnimalsDataTable
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+    Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
+        SaveDataset()
     End Sub
 
 End Class

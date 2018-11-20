@@ -32,8 +32,9 @@ Partial Class Form1
         Dim RadioTrackingGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim XrefRadiotrackingCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
-        Dim CaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.CampaignsGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
         Me.SurveyDataTabControl = New System.Windows.Forms.TabControl()
         Me.CompositionCountTabPage = New System.Windows.Forms.TabPage()
         Me.CompCountSplitContainer = New System.Windows.Forms.SplitContainer()
@@ -105,7 +106,7 @@ Partial Class Form1
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
-        Me.CaribouGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ResultsTabPage2 = New System.Windows.Forms.TabPage()
         Me.SurveyResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.SurveyResultsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -128,9 +129,6 @@ Partial Class Form1
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
-        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
-        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CampaignsTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CampaignsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
@@ -142,15 +140,12 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.AnimalsDataGridView = New System.Windows.Forms.DataGridView()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.RefreshAMAnimalsInventoryToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.CollarDeploymentsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.AnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyDataTabControl.SuspendLayout()
         Me.CompositionCountTabPage.SuspendLayout()
         CType(Me.CompCountSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -206,7 +201,7 @@ Partial Class Form1
         Me.MainTabControl.SuspendLayout()
         Me.SurveysTabPage.SuspendLayout()
         Me.CaribouTabPage.SuspendLayout()
-        CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ResultsTabPage2.SuspendLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -215,16 +210,12 @@ Partial Class Form1
         Me.SurveyResultsToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
         CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip1.SuspendLayout()
-        Me.ToolStrip2.SuspendLayout()
+        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.AnimalsSplitContainer.Panel1.SuspendLayout()
+        Me.AnimalsSplitContainer.Panel2.SuspendLayout()
+        Me.AnimalsSplitContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -246,6 +237,16 @@ Partial Class Form1
         Me.HelpProvider.SetShowHelp(Me.CampaignsGridEX, True)
         Me.CampaignsGridEX.Size = New System.Drawing.Size(336, 649)
         Me.CampaignsGridEX.TabIndex = 1
+        '
+        'CampaignsBindingSource
+        '
+        Me.CampaignsBindingSource.DataMember = "Campaigns"
+        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'SurveyDataTabControl
         '
@@ -925,7 +926,7 @@ Partial Class Form1
         '
         Me.EditDatabaseConnectionToolStripMenuItem.Image = CType(resources.GetObject("EditDatabaseConnectionToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EditDatabaseConnectionToolStripMenuItem.Name = "EditDatabaseConnectionToolStripMenuItem"
-        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(220, 26)
+        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.EditDatabaseConnectionToolStripMenuItem.Text = "Edit database connection..."
         '
         'AboutToolStripMenuItem
@@ -993,7 +994,7 @@ Partial Class Form1
         'CaribouTabPage
         '
         Me.CaribouTabPage.AutoScroll = True
-        Me.CaribouTabPage.Controls.Add(Me.SplitContainer1)
+        Me.CaribouTabPage.Controls.Add(Me.AnimalsSplitContainer)
         Me.CaribouTabPage.Location = New System.Drawing.Point(4, 22)
         Me.CaribouTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouTabPage.Name = "CaribouTabPage"
@@ -1003,20 +1004,10 @@ Partial Class Form1
         Me.CaribouTabPage.Text = "Caribou"
         Me.CaribouTabPage.UseVisualStyleBackColor = True
         '
-        'CaribouGridEX
+        'CaribouBindingSource
         '
-        Me.CaribouGridEX.DataSource = Me.CaribouBindingSource
-        CaribouGridEX_DesignTimeLayout.LayoutString = resources.GetString("CaribouGridEX_DesignTimeLayout.LayoutString")
-        Me.CaribouGridEX.DesignTimeLayout = CaribouGridEX_DesignTimeLayout
-        Me.CaribouGridEX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CaribouGridEX.GroupByBoxVisible = False
-        Me.CaribouGridEX.Hierarchical = True
-        Me.CaribouGridEX.Location = New System.Drawing.Point(0, 25)
-        Me.CaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
-        Me.CaribouGridEX.Name = "CaribouGridEX"
-        Me.CaribouGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
-        Me.CaribouGridEX.Size = New System.Drawing.Size(575, 655)
-        Me.CaribouGridEX.TabIndex = 0
+        Me.CaribouBindingSource.DataMember = "Caribou"
+        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
         '
         'ResultsTabPage2
         '
@@ -1192,21 +1183,6 @@ Partial Class Form1
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
     " Database Application.chm"
         '
-        'CampaignsBindingSource
-        '
-        Me.CampaignsBindingSource.DataMember = "Campaigns"
-        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'CaribouBindingSource
-        '
-        Me.CaribouBindingSource.DataMember = "Caribou"
-        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
         'CampaignsTableAdapter
         '
         Me.CampaignsTableAdapter.ClearBeforeFill = True
@@ -1263,78 +1239,48 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(2, 2)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.CaribouGridEX)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.ToolStrip1)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.AnimalsDataGridView)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.ToolStrip2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1172, 680)
-        Me.SplitContainer1.SplitterDistance = 575
-        Me.SplitContainer1.TabIndex = 1
-        '
         'AnimalsDataGridView
         '
+        Me.AnimalsDataGridView.AllowUserToAddRows = False
+        Me.AnimalsDataGridView.AllowUserToDeleteRows = False
         Me.AnimalsDataGridView.AllowUserToOrderColumns = True
         Me.AnimalsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AnimalsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsDataGridView.Location = New System.Drawing.Point(0, 25)
+        Me.AnimalsDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.AnimalsDataGridView.Name = "AnimalsDataGridView"
-        Me.AnimalsDataGridView.Size = New System.Drawing.Size(593, 655)
+        Me.AnimalsDataGridView.ReadOnly = True
+        Me.AnimalsDataGridView.Size = New System.Drawing.Size(654, 680)
         Me.AnimalsDataGridView.TabIndex = 0
         '
-        'ToolStrip1
+        'CollarDeploymentsDataGridView
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(575, 25)
-        Me.ToolStrip1.TabIndex = 1
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.CollarDeploymentsDataGridView.AllowUserToAddRows = False
+        Me.CollarDeploymentsDataGridView.AllowUserToDeleteRows = False
+        Me.CollarDeploymentsDataGridView.AllowUserToOrderColumns = True
+        Me.CollarDeploymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CollarDeploymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CollarDeploymentsDataGridView.Location = New System.Drawing.Point(0, 0)
+        Me.CollarDeploymentsDataGridView.Name = "CollarDeploymentsDataGridView"
+        Me.CollarDeploymentsDataGridView.ReadOnly = True
+        Me.CollarDeploymentsDataGridView.Size = New System.Drawing.Size(514, 680)
+        Me.CollarDeploymentsDataGridView.TabIndex = 1
         '
-        'ToolStrip2
+        'AnimalsSplitContainer
         '
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripSeparator11, Me.RefreshAMAnimalsInventoryToolStripButton})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(593, 25)
-        Me.ToolStrip2.TabIndex = 1
-        Me.ToolStrip2.Text = "ToolStrip2"
+        Me.AnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalsSplitContainer.Location = New System.Drawing.Point(2, 2)
+        Me.AnimalsSplitContainer.Name = "AnimalsSplitContainer"
         '
-        'ToolStripLabel1
+        'AnimalsSplitContainer.Panel1
         '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(241, 22)
-        Me.ToolStripLabel1.Text = "Caribou inventory (WRST_Caribou database)"
+        Me.AnimalsSplitContainer.Panel1.Controls.Add(Me.AnimalsDataGridView)
         '
-        'ToolStripLabel2
+        'AnimalsSplitContainer.Panel2
         '
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(264, 22)
-        Me.ToolStripLabel2.Text = "Caribou inventory (Animal_Movement database)"
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(6, 25)
-        '
-        'RefreshAMAnimalsInventoryToolStripButton
-        '
-        Me.RefreshAMAnimalsInventoryToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.RefreshAMAnimalsInventoryToolStripButton.Image = CType(resources.GetObject("RefreshAMAnimalsInventoryToolStripButton.Image"), System.Drawing.Image)
-        Me.RefreshAMAnimalsInventoryToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.RefreshAMAnimalsInventoryToolStripButton.Name = "RefreshAMAnimalsInventoryToolStripButton"
-        Me.RefreshAMAnimalsInventoryToolStripButton.Size = New System.Drawing.Size(50, 22)
-        Me.RefreshAMAnimalsInventoryToolStripButton.Text = "Refresh"
+        Me.AnimalsSplitContainer.Panel2.Controls.Add(Me.CollarDeploymentsDataGridView)
+        Me.AnimalsSplitContainer.Size = New System.Drawing.Size(1172, 680)
+        Me.AnimalsSplitContainer.SplitterDistance = 654
+        Me.AnimalsSplitContainer.TabIndex = 2
         '
         'Form1
         '
@@ -1353,6 +1299,8 @@ Partial Class Form1
         Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Wrangell St. Elias National Park & Preserve Caribou Monitoring Program"
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyDataTabControl.ResumeLayout(False)
         Me.CompositionCountTabPage.ResumeLayout(False)
         Me.CompositionCountTabPage.PerformLayout()
@@ -1423,7 +1371,7 @@ Partial Class Form1
         Me.MainTabControl.ResumeLayout(False)
         Me.SurveysTabPage.ResumeLayout(False)
         Me.CaribouTabPage.ResumeLayout(False)
-        CType(Me.CaribouGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResultsTabPage2.ResumeLayout(False)
         Me.ResultsTabPage2.PerformLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1435,20 +1383,12 @@ Partial Class Form1
         Me.SurveyResultsToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel1.PerformLayout()
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.PerformLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
         CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
-        Me.ToolStrip2.ResumeLayout(False)
-        Me.ToolStrip2.PerformLayout()
+        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsSplitContainer.Panel1.ResumeLayout(False)
+        Me.AnimalsSplitContainer.Panel2.ResumeLayout(False)
+        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsSplitContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1488,7 +1428,6 @@ Partial Class Form1
     Friend WithEvents CaribouTabPage As TabPage
     Friend WithEvents CaribouBindingSource As BindingSource
     Friend WithEvents CaribouTableAdapter As WRST_CaribouDataSetTableAdapters.CaribouTableAdapter
-    Friend WithEvents CaribouGridEX As Janus.Windows.GridEX.GridEX
     Friend WithEvents CapturesBindingSource As BindingSource
     Friend WithEvents CapturesTableAdapter As WRST_CaribouDataSetTableAdapters.CapturesTableAdapter
     Friend WithEvents XrefRadiotrackingCaribouBindingSource As BindingSource
@@ -1498,7 +1437,6 @@ Partial Class Form1
     Friend WithEvents ImportPopulationWaypointsToolStripButton As ToolStripButton
     Friend WithEvents PopulationSurveySplitContainer As SplitContainer
     Friend WithEvents ImportCompCountWaypointsToolStripButton As ToolStripButton
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents CampaignLabel As Label
     Friend WithEvents DataPanel As Panel
     Friend WithEvents FlightContextLabel As Label
@@ -1528,7 +1466,6 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents SurveysPanel As Panel
     Friend WithEvents CampaignHeaderLabel As Label
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents ResultsPanel As Panel
     Friend WithEvents ResultsLabel As Label
@@ -1563,12 +1500,9 @@ Partial Class Form1
     Friend WithEvents SurveyResultsBindingSource As BindingSource
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
     Friend WithEvents RefreshToolStripButton As ToolStripButton
-    Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
     Friend WithEvents AnimalsDataGridView As DataGridView
-    Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents ToolStrip2 As ToolStrip
-    Friend WithEvents ToolStripLabel2 As ToolStripLabel
-    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
-    Friend WithEvents RefreshAMAnimalsInventoryToolStripButton As ToolStripButton
+    Friend WithEvents CollarDeploymentsDataGridView As DataGridView
+    Friend WithEvents AnimalsSplitContainer As SplitContainer
 End Class

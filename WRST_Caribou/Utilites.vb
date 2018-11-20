@@ -194,18 +194,85 @@ Module Utilites
     End Function
 
     ''' <summary>
-    ''' Retrieves a list of Animals and their collars and other attributes from the Animal_Movement database. DataTable
+    ''' Returns a DataTable of the WRST caribou collar deployments from the Animal_Movement database
     ''' </summary>
     ''' <returns>DataTable</returns>
-    Public Function GetAM_AnimalsDataTable() As DataTable
-        Dim AnimalsDataTable As New DataTable
+    Public Function GetCollarDeploymentsDataTable() As DataTable
+        Dim CollarDeploymentsDataTable As New DataTable
         Try
-            Dim Sql As String = "SELECT Animals.AnimalId, Collars.Frequency, CollarDeployments.DeploymentDate, Animals.MortalityDate,                            CollarDeployments.RetrievalDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender,                            Animals.GroupName, Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId,       CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
+            Dim Sql As String = "SELECT Collars.Frequency, CollarDeployments.DeploymentDate, Animals.MortalityDate, CollarDeployments.RetrievalDate, Collars.DisposalDate, Collars.HasGps, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Animals.Species, Animals.Gender,                            Animals.GroupName, Animals.Description, Collars.Manager, Collars.Owner, Collars.Notes AS CollarNotes, CollarDeployments.CollarId, Animals.ProjectId, CollarDeployments.DeploymentId,Animals.AnimalId,        CONVERT(Varchar(20), Collars.Frequency) + ' - ' + Animals.AnimalId AS CollaredCaribou  FROM            Animals INNER JOIN                           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN                           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId  WHERE        (Animals.ProjectId = 'WRST_Caribou')  ORDER BY Collars.Frequency, Animals.AnimalId"
+            CollarDeploymentsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            CollarDeploymentsDataTable.TableName = "CollarDeployments"
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return CollarDeploymentsDataTable
+    End Function
+
+
+    ''' <summary>
+    ''' Returns a DataTable of the WRST caribou animals from the Animal_Movement database
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetAnimalsDataTable() As DataTable
+        Dim AnimalsDataTable As New DataTable()
+        Try
+            'query the database and build the table
+            Dim Sql As String = "SELECT AnimalId, Species, Gender, MortalityDate, GroupName, Description,        ProjectId FROM            Animals WHERE        (ProjectId = 'WRST_Caribou')"
             AnimalsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            AnimalsDataTable.TableName = "Animals"
+
+            'set up the primary key(s)
+            Dim PrimaryKeyColumn(1) As DataColumn
+            PrimaryKeyColumn(0) = AnimalsDataTable.Columns("AnimalID")
+            AnimalsDataTable.PrimaryKey = PrimaryKeyColumn
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
         Return AnimalsDataTable
     End Function
 
+    ''' <summary>
+    ''' Returns a DataTable of the WRST caribou collars inventory from the Animal_Movement database.
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetCollarsDataTable() As DataTable
+        Dim CollarsDataTable As New DataTable()
+        Try
+            Dim Sql As String = "SELECT    distinct    Collars.Frequency, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Collars.CollarId, Collars.Manager, Collars.Owner, Collars.HasGps, Collars.DisposalDate, Collars.Notes, 
+                         CollarDeployments.ProjectId
+                FROM            CollarDeployments INNER JOIN
+                                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+                WHERE        (CollarDeployments.ProjectId = 'WRST_Caribou')
+                ORDER BY Collars.Frequency"
+            CollarsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            CollarsDataTable.TableName = "Collars"
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return CollarsDataTable
+    End Function
+
+    Public Function GetAnimal_MovementDataset() As DataSet
+        Dim AMDataset As New DataSet("Animal_Movement")
+        Try
+            'build the datatables from the database
+            Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
+            Dim CollarsDatatable As DataTable = GetCollarsDataTable()
+            Dim CollarDeploymentsDataTable As DataTable = GetCollarDeploymentsDataTable()
+
+            With AMDataset
+                .Tables.Add(GetCollarsDataTable)
+                .Tables.Add(GetAnimalsDataTable)
+                .Tables.Add(GetCollarDeploymentsDataTable)
+            End With
+
+            'set up relationships
+            Dim AnimalsToCollarDeploymentsDataRelation As New DataRelation("Animals_CollarDeploymentsDataRelation", AMDataset.Tables("Animals").Columns("AnimalID"), AMDataset.Tables("CollarDeployments").Columns("AnimalID"))
+            AMDataset.Relations.Add(AnimalsToCollarDeploymentsDataRelation)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return AMDataset
+    End Function
 End Module
