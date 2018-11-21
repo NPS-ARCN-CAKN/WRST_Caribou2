@@ -698,7 +698,7 @@ Public Class Form1
     ''' Returns the Herd of the currently selected Flight
     ''' </summary>
     ''' <returns>String</returns>
-    Private Function GetCurrentHerd() As String
+    Private Function GetCurrentCampaignHerd() As String
         Dim Herd As String = ""
         Try
             'get the current row of the VS GridEX
@@ -1234,6 +1234,7 @@ Public Class Form1
             GridEX.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
             GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -1258,7 +1259,7 @@ Public Class Form1
                 .Columns("CCID").DefaultValue = Guid.NewGuid.ToString
                 .Columns("RecordInsertedDate").DefaultValue = Now
                 .Columns("RecordInsertedBy").DefaultValue = My.User.Name
-                .Columns("Herd").DefaultValue = GetCurrentHerd()
+                .Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
             End With
 
             'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
@@ -1475,7 +1476,7 @@ Public Class Form1
 
                 'common default values
                 .Add(GetCurrentFlightID) 'the primary key of the currently selected flight
-                .Add(GetCurrentHerd) 'the currently selected herd in the campaigns table
+                .Add(GetCurrentCampaignHerd) 'the currently selected herd in the campaigns table
                 .Add(SourceFileInfo.Name) 'the import file name
                 .Add(0) 'useful for filling in required but null animal counts.
             End With
@@ -1503,7 +1504,7 @@ Public Class Form1
                 NewRow.Item("FlightID") = GetCurrentFlightID()
                 NewRow.Item("RecordInsertedDate") = Now
                 NewRow.Item("RecordInsertedBy") = My.User.Name
-                NewRow.Item("Herd") = GetCurrentHerd()
+                NewRow.Item("Herd") = GetCurrentCampaignHerd()
 
                 Select Case SurveyType
                     Case SurveyType.CompositionCount
