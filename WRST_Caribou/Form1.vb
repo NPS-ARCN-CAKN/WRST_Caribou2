@@ -21,27 +21,34 @@ Public Class Form1
         LoadDataset()
 
         'set up the GridEXs
-        Dim Editable As InheritableBoolean = InheritableBoolean.True
-        SetUpGridEX(Me.CampaignsGridEX, Editable)
-        SetUpGridEX(Me.SurveyFlightsGridEX, Editable)
-        SetUpGridEX(Me.CompositionCountsGridEX, Editable)
-        SetUpGridEX(Me.PopulationEstimateGridEX, Editable)
-        SetUpGridEX(Me.RadioTrackingGridEX, Editable)
-        SetUpGridEX(Me.XrefCompCountCaribouGridEX, Editable)
-        SetUpGridEX(Me.XrefPopulationCaribouGridEX, Editable)
-        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX, Editable)
+        Dim Editable As InheritableBoolean = InheritableBoolean.False
+        SetUpGridEX(Me.CampaignsGridEX)
+        SetUpGridEX(Me.SurveyFlightsGridEX)
+        SetUpGridEX(Me.CompositionCountsGridEX)
+        SetUpGridEX(Me.PopulationEstimateGridEX)
+        SetUpGridEX(Me.RadioTrackingGridEX)
+        SetUpGridEX(Me.XrefCompCountCaribouGridEX)
+        SetUpGridEX(Me.XrefPopulationCaribouGridEX)
+        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX)
 
         'Set up the Campaigns GridEX default values and dropdowns
         SetUpCampaignsGridEX()
+        GridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
 
         'Set up the SurveysGridEX default values and dropdowns
         SetUpSurveysGridEX()
+        GridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
 
         'Set up the RadiotrackingGridEX default values and dropdowns
         SetUpRadiotrackingGridEX()
+        GridEXReadOnly(Me.RadioTrackingGridEX, InheritableBoolean.False)
 
         'Set up the population surveys grid default values and dropdowns
         SetUpPopulationEstimateGridEX()
+        GridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
+
+        'set up comp. count gridex
+        GridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
 
         'Load the Campaign header 
         LoadCampaignHeader()
@@ -55,8 +62,6 @@ Public Class Form1
 
 
     Private Sub LoadAMGrids()
-
-
         'bind the animals grid to the amdataset using a bindingsource
         Dim AnimalsBindingSource As New BindingSource(AMDataset, "Animals")
         AnimalsDataGridView.DataSource = AnimalsBindingSource
@@ -383,13 +388,10 @@ Public Class Form1
     ''' </summary>
     ''' <param name="GridEX">The GridEX to set up</param>
     ''' <param name="Editable">Boolean.  Whether to make the GridEX editable or read-only</param>
-    Private Sub SetUpGridEX(GridEX As GridEX, Editable As InheritableBoolean)
+    Private Sub SetUpGridEX(GridEX As GridEX)
         Try
             Dim MyFont As New Font("Sans Serif", 10, FontStyle.Regular)
             With GridEX
-                .AllowAddNew = Editable
-                .AllowEdit = Editable
-                .AllowDelete = Editable
                 .AlternatingColors = True
                 .AutoEdit = False
                 .AutomaticSort = True
@@ -442,6 +444,18 @@ Public Class Form1
             AboutText = AboutText & My.Settings.WRST_CaribouConnectionString & vbNewLine
         End With
         MsgBox(AboutText)
+    End Sub
+
+    Private Sub GridEXReadOnly(GridEX As GridEX, AllowEdits As InheritableBoolean)
+        Try
+            With GridEX.RootTable
+                .AllowAddNew = AllowEdits
+                .AllowEdit = AllowEdits
+                .AllowDelete = AllowEdits
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
 
@@ -1609,4 +1623,10 @@ Public Class Form1
         SaveDataset()
     End Sub
 
+    Private Sub EditCampaignsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles EditCampaignsCheckBox.CheckedChanged
+        'for some bizarre reason the checkbox does not return true or false, maybe because inheritableboolean? anyway, convert
+        Dim Checked As InheritableBoolean = InheritableBoolean.False
+        If Me.EditCampaignsCheckBox.Checked = True Then Checked = InheritableBoolean.True Else Checked = InheritableBoolean.False
+        GridEXReadOnly(Me.CampaignsGridEX, Checked)
+    End Sub
 End Class
