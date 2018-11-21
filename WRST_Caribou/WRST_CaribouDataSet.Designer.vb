@@ -15961,10 +15961,10 @@ Namespace WRST_CaribouDataSetTableAdapters
                 "ull)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (@Herd,@SearchArea,@GroupNumber,@WaypointName,@SightingDate,"& _ 
                 "@SmallBull,@MediumBull,@LargeBull,@Cow,@Calf,@InOrOut,@Seen,@Marked,@Frequencies"& _ 
                 "InGroup,@Lat,@Lon,@Comment,@SourceFilename,@FlightID,@EID,@RecordInsertedDate,@R"& _ 
-                "ecordInsertedBy,@Bull);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, SearchArea, GroupNumber, WaypointName,"& _ 
-                " SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Marke"& _ 
-                "d, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, EID, RecordI"& _ 
-                "nsertedDate, RecordInsertedBy, TS FROM PopulationEstimate WHERE (EID = @EID)"
+                "ecordInsertedBy,@Bull);     "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Herd, SearchArea, GroupNumber, WaypointName"& _ 
+                ", SightingDate, SmallBull, MediumBull, LargeBull, Cow, Calf, InOrOut, Seen, Mark"& _ 
+                "ed, FrequenciesInGroup, Lat, Lon, Comment, SourceFilename, FlightID, EID, Record"& _ 
+                "InsertedDate, RecordInsertedBy, TS FROM PopulationEstimate WHERE (EID = @EID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Herd", Global.System.Data.SqlDbType.VarChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "Herd", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SearchArea", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "SearchArea", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -16024,6 +16024,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SourceFilename", Global.System.Data.SqlDbType.VarChar, 255, Global.System.Data.ParameterDirection.Input, 0, 0, "SourceFilename", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "EID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -16278,7 +16279,8 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Comment As String,  _
                     ByVal SourceFilename As String,  _
                     ByVal Original_EID As String,  _
-                    ByVal EID As String) As Integer
+                    ByVal EID As String,  _
+                    ByVal FlightID As String) As Integer
             If (Herd Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Herd")
             Else
@@ -16359,6 +16361,11 @@ Namespace WRST_CaribouDataSetTableAdapters
                 Throw New Global.System.ArgumentNullException("EID")
             Else
                 Me.Adapter.UpdateCommand.Parameters(20).Value = CType(EID,String)
+            End If
+            If (FlightID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("FlightID")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

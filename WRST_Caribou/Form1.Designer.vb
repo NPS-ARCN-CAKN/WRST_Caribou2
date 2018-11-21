@@ -71,6 +71,7 @@ Partial Class Form1
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.CampaignsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.EditCampaignsCheckBox = New System.Windows.Forms.CheckBox()
         Me.CampaignLabel = New System.Windows.Forms.Label()
         Me.CampaignTabControl = New System.Windows.Forms.TabControl()
         Me.DataEditingTabPage = New System.Windows.Forms.TabPage()
@@ -106,7 +107,9 @@ Partial Class Form1
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
-        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.AnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
+        Me.AnimalsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.CollarDeploymentsDataGridView = New System.Windows.Forms.DataGridView()
         Me.ResultsTabPage2 = New System.Windows.Forms.TabPage()
         Me.SurveyResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.SurveyResultsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -126,6 +129,7 @@ Partial Class Form1
         Me.SelectSurveyTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
@@ -140,10 +144,6 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.AnimalsDataGridView = New System.Windows.Forms.DataGridView()
-        Me.CollarDeploymentsDataGridView = New System.Windows.Forms.DataGridView()
-        Me.AnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
-        Me.EditCampaignsCheckBox = New System.Windows.Forms.CheckBox()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -202,21 +202,21 @@ Partial Class Form1
         Me.MainTabControl.SuspendLayout()
         Me.SurveysTabPage.SuspendLayout()
         Me.CaribouTabPage.SuspendLayout()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.AnimalsSplitContainer.Panel1.SuspendLayout()
+        Me.AnimalsSplitContainer.Panel2.SuspendLayout()
+        Me.AnimalsSplitContainer.SuspendLayout()
+        CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ResultsTabPage2.SuspendLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyResultsBindingNavigator.SuspendLayout()
         CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyResultsToolStrip.SuspendLayout()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.AnimalsSplitContainer.Panel1.SuspendLayout()
-        Me.AnimalsSplitContainer.Panel2.SuspendLayout()
-        Me.AnimalsSplitContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -270,7 +270,7 @@ Partial Class Form1
         Me.CompositionCountTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
         Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.CompositionCountTabPage.Size = New System.Drawing.Size(813, 366)
+        Me.CompositionCountTabPage.Size = New System.Drawing.Size(932, 366)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition"
         Me.CompositionCountTabPage.UseVisualStyleBackColor = True
@@ -290,8 +290,8 @@ Partial Class Form1
         '
         Me.CompCountSplitContainer.Panel2.AutoScroll = True
         Me.CompCountSplitContainer.Panel2.Controls.Add(Me.XrefCompCountCaribouGridEX)
-        Me.CompCountSplitContainer.Size = New System.Drawing.Size(809, 337)
-        Me.CompCountSplitContainer.SplitterDistance = 469
+        Me.CompCountSplitContainer.Size = New System.Drawing.Size(928, 337)
+        Me.CompCountSplitContainer.SplitterDistance = 537
         Me.CompCountSplitContainer.SplitterWidth = 3
         Me.CompCountSplitContainer.TabIndex = 3
         '
@@ -309,7 +309,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
         Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(469, 337)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(537, 337)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -339,7 +339,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefCompCountCaribouGridEX.Name = "XrefCompCountCaribouGridEX"
         Me.XrefCompCountCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(337, 337)
+        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(388, 337)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -354,7 +354,7 @@ Partial Class Form1
         Me.CompCountToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportCompCountWaypointsToolStripButton, Me.ToolStripSeparator7, Me.ImportCompCountXYFromFileToolStripButton, Me.ToolStripSeparator6})
         Me.CompCountToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.CompCountToolStrip.Name = "CompCountToolStrip"
-        Me.CompCountToolStrip.Size = New System.Drawing.Size(809, 25)
+        Me.CompCountToolStrip.Size = New System.Drawing.Size(928, 25)
         Me.CompCountToolStrip.TabIndex = 1
         Me.CompCountToolStrip.Text = "ToolStrip1"
         '
@@ -519,7 +519,7 @@ Partial Class Form1
         Me.RadiotrackingTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
         Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(813, 366)
+        Me.RadiotrackingTabPage.Size = New System.Drawing.Size(932, 366)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
         Me.RadiotrackingTabPage.UseVisualStyleBackColor = True
@@ -540,8 +540,8 @@ Partial Class Form1
         '
         Me.RadioTrackingSplitContainer.Panel2.AutoScroll = True
         Me.RadioTrackingSplitContainer.Panel2.Controls.Add(Me.XrefRadiotrackingCaribouGridEX)
-        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(809, 337)
-        Me.RadioTrackingSplitContainer.SplitterDistance = 422
+        Me.RadioTrackingSplitContainer.Size = New System.Drawing.Size(928, 337)
+        Me.RadioTrackingSplitContainer.SplitterDistance = 484
         Me.RadioTrackingSplitContainer.SplitterWidth = 3
         Me.RadioTrackingSplitContainer.TabIndex = 2
         '
@@ -559,7 +559,7 @@ Partial Class Form1
         Me.RadioTrackingGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
         Me.RadioTrackingGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(422, 337)
+        Me.RadioTrackingGridEX.Size = New System.Drawing.Size(484, 337)
         Me.RadioTrackingGridEX.TabIndex = 0
         Me.RadioTrackingGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.RadioTrackingGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -581,7 +581,7 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.XrefRadiotrackingCaribouGridEX.Name = "XrefRadiotrackingCaribouGridEX"
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(384, 337)
+        Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(441, 337)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
         '
         'RadiotrackingToolStrip
@@ -590,7 +590,7 @@ Partial Class Form1
         Me.RadiotrackingToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportRadiotrackingWaypointsToolStripButton, Me.ToolStripSeparator5, Me.ImportRadiotrackingWaypointsFromFileToolStripButton, Me.ToolStripSeparator9})
         Me.RadiotrackingToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.RadiotrackingToolStrip.Name = "RadiotrackingToolStrip"
-        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(809, 25)
+        Me.RadiotrackingToolStrip.Size = New System.Drawing.Size(928, 25)
         Me.RadiotrackingToolStrip.TabIndex = 1
         Me.RadiotrackingToolStrip.Text = "ToolStrip1"
         '
@@ -653,6 +653,17 @@ Partial Class Form1
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(217, 31)
         Me.Panel1.TabIndex = 2
+        '
+        'EditCampaignsCheckBox
+        '
+        Me.EditCampaignsCheckBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.EditCampaignsCheckBox.AutoSize = True
+        Me.EditCampaignsCheckBox.Location = New System.Drawing.Point(138, 7)
+        Me.EditCampaignsCheckBox.Name = "EditCampaignsCheckBox"
+        Me.EditCampaignsCheckBox.Size = New System.Drawing.Size(76, 17)
+        Me.EditCampaignsCheckBox.TabIndex = 1
+        Me.EditCampaignsCheckBox.Text = "Allow edits"
+        Me.EditCampaignsCheckBox.UseVisualStyleBackColor = True
         '
         'CampaignLabel
         '
@@ -782,7 +793,7 @@ Partial Class Form1
         Me.ResultsTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.ResultsTabPage.Name = "ResultsTabPage"
         Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(2)
-        Me.ResultsTabPage.Size = New System.Drawing.Size(825, 623)
+        Me.ResultsTabPage.Size = New System.Drawing.Size(944, 623)
         Me.ResultsTabPage.TabIndex = 0
         Me.ResultsTabPage.Text = "Results"
         Me.ResultsTabPage.UseVisualStyleBackColor = True
@@ -800,7 +811,7 @@ Partial Class Form1
         Me.ResultsDataGridView.Name = "ResultsDataGridView"
         Me.ResultsDataGridView.ReadOnly = True
         Me.ResultsDataGridView.RowTemplate.Height = 24
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(821, 557)
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(940, 557)
         Me.ResultsDataGridView.TabIndex = 0
         '
         'ResultsPanel
@@ -810,7 +821,7 @@ Partial Class Form1
         Me.ResultsPanel.Location = New System.Drawing.Point(2, 2)
         Me.ResultsPanel.Margin = New System.Windows.Forms.Padding(2)
         Me.ResultsPanel.Name = "ResultsPanel"
-        Me.ResultsPanel.Size = New System.Drawing.Size(821, 35)
+        Me.ResultsPanel.Size = New System.Drawing.Size(940, 35)
         Me.ResultsPanel.TabIndex = 6
         '
         'ResultsLabel
@@ -831,7 +842,7 @@ Partial Class Form1
         Me.ResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseViewLabel, Me.DatabaseViewNameToolStripLabel, Me.ToolStripSeparator2, Me.RefreshResultsToolStripButton, Me.ToolStripSeparator1})
         Me.ResultsToolStrip.Location = New System.Drawing.Point(2, 594)
         Me.ResultsToolStrip.Name = "ResultsToolStrip"
-        Me.ResultsToolStrip.Size = New System.Drawing.Size(821, 27)
+        Me.ResultsToolStrip.Size = New System.Drawing.Size(940, 27)
         Me.ResultsToolStrip.TabIndex = 1
         Me.ResultsToolStrip.Text = "ToolStrip1"
         '
@@ -930,7 +941,7 @@ Partial Class Form1
         '
         Me.EditDatabaseConnectionToolStripMenuItem.Image = CType(resources.GetObject("EditDatabaseConnectionToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EditDatabaseConnectionToolStripMenuItem.Name = "EditDatabaseConnectionToolStripMenuItem"
-        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(220, 26)
+        Me.EditDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(216, 22)
         Me.EditDatabaseConnectionToolStripMenuItem.Text = "Edit database connection..."
         '
         'AboutToolStripMenuItem
@@ -1008,10 +1019,48 @@ Partial Class Form1
         Me.CaribouTabPage.Text = "Caribou"
         Me.CaribouTabPage.UseVisualStyleBackColor = True
         '
-        'CaribouBindingSource
+        'AnimalsSplitContainer
         '
-        Me.CaribouBindingSource.DataMember = "Caribou"
-        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
+        Me.AnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalsSplitContainer.Location = New System.Drawing.Point(2, 2)
+        Me.AnimalsSplitContainer.Name = "AnimalsSplitContainer"
+        '
+        'AnimalsSplitContainer.Panel1
+        '
+        Me.AnimalsSplitContainer.Panel1.Controls.Add(Me.AnimalsDataGridView)
+        '
+        'AnimalsSplitContainer.Panel2
+        '
+        Me.AnimalsSplitContainer.Panel2.Controls.Add(Me.CollarDeploymentsDataGridView)
+        Me.AnimalsSplitContainer.Size = New System.Drawing.Size(1172, 680)
+        Me.AnimalsSplitContainer.SplitterDistance = 654
+        Me.AnimalsSplitContainer.TabIndex = 2
+        '
+        'AnimalsDataGridView
+        '
+        Me.AnimalsDataGridView.AllowUserToAddRows = False
+        Me.AnimalsDataGridView.AllowUserToDeleteRows = False
+        Me.AnimalsDataGridView.AllowUserToOrderColumns = True
+        Me.AnimalsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.AnimalsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.AnimalsDataGridView.Location = New System.Drawing.Point(0, 0)
+        Me.AnimalsDataGridView.Name = "AnimalsDataGridView"
+        Me.AnimalsDataGridView.ReadOnly = True
+        Me.AnimalsDataGridView.Size = New System.Drawing.Size(654, 680)
+        Me.AnimalsDataGridView.TabIndex = 0
+        '
+        'CollarDeploymentsDataGridView
+        '
+        Me.CollarDeploymentsDataGridView.AllowUserToAddRows = False
+        Me.CollarDeploymentsDataGridView.AllowUserToDeleteRows = False
+        Me.CollarDeploymentsDataGridView.AllowUserToOrderColumns = True
+        Me.CollarDeploymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CollarDeploymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CollarDeploymentsDataGridView.Location = New System.Drawing.Point(0, 0)
+        Me.CollarDeploymentsDataGridView.Name = "CollarDeploymentsDataGridView"
+        Me.CollarDeploymentsDataGridView.ReadOnly = True
+        Me.CollarDeploymentsDataGridView.Size = New System.Drawing.Size(514, 680)
+        Me.CollarDeploymentsDataGridView.TabIndex = 1
         '
         'ResultsTabPage2
         '
@@ -1172,6 +1221,11 @@ Partial Class Form1
         Me.RefreshToolStripButton.Size = New System.Drawing.Size(145, 22)
         Me.RefreshToolStripButton.Text = "Refresh from database"
         '
+        'CaribouBindingSource
+        '
+        Me.CaribouBindingSource.DataMember = "Caribou"
+        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
         'CapturesBindingSource
         '
         Me.CapturesBindingSource.DataMember = "FK_Captures_Caribou"
@@ -1242,60 +1296,6 @@ Partial Class Form1
         'XrefRadiotrackingCaribouTableAdapter
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
-        '
-        'AnimalsDataGridView
-        '
-        Me.AnimalsDataGridView.AllowUserToAddRows = False
-        Me.AnimalsDataGridView.AllowUserToDeleteRows = False
-        Me.AnimalsDataGridView.AllowUserToOrderColumns = True
-        Me.AnimalsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AnimalsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsDataGridView.Location = New System.Drawing.Point(0, 0)
-        Me.AnimalsDataGridView.Name = "AnimalsDataGridView"
-        Me.AnimalsDataGridView.ReadOnly = True
-        Me.AnimalsDataGridView.Size = New System.Drawing.Size(654, 680)
-        Me.AnimalsDataGridView.TabIndex = 0
-        '
-        'CollarDeploymentsDataGridView
-        '
-        Me.CollarDeploymentsDataGridView.AllowUserToAddRows = False
-        Me.CollarDeploymentsDataGridView.AllowUserToDeleteRows = False
-        Me.CollarDeploymentsDataGridView.AllowUserToOrderColumns = True
-        Me.CollarDeploymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.CollarDeploymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CollarDeploymentsDataGridView.Location = New System.Drawing.Point(0, 0)
-        Me.CollarDeploymentsDataGridView.Name = "CollarDeploymentsDataGridView"
-        Me.CollarDeploymentsDataGridView.ReadOnly = True
-        Me.CollarDeploymentsDataGridView.Size = New System.Drawing.Size(514, 680)
-        Me.CollarDeploymentsDataGridView.TabIndex = 1
-        '
-        'AnimalsSplitContainer
-        '
-        Me.AnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsSplitContainer.Location = New System.Drawing.Point(2, 2)
-        Me.AnimalsSplitContainer.Name = "AnimalsSplitContainer"
-        '
-        'AnimalsSplitContainer.Panel1
-        '
-        Me.AnimalsSplitContainer.Panel1.Controls.Add(Me.AnimalsDataGridView)
-        '
-        'AnimalsSplitContainer.Panel2
-        '
-        Me.AnimalsSplitContainer.Panel2.Controls.Add(Me.CollarDeploymentsDataGridView)
-        Me.AnimalsSplitContainer.Size = New System.Drawing.Size(1172, 680)
-        Me.AnimalsSplitContainer.SplitterDistance = 654
-        Me.AnimalsSplitContainer.TabIndex = 2
-        '
-        'EditCampaignsCheckBox
-        '
-        Me.EditCampaignsCheckBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.EditCampaignsCheckBox.AutoSize = True
-        Me.EditCampaignsCheckBox.Location = New System.Drawing.Point(138, 7)
-        Me.EditCampaignsCheckBox.Name = "EditCampaignsCheckBox"
-        Me.EditCampaignsCheckBox.Size = New System.Drawing.Size(76, 17)
-        Me.EditCampaignsCheckBox.TabIndex = 1
-        Me.EditCampaignsCheckBox.Text = "Allow edits"
-        Me.EditCampaignsCheckBox.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1386,7 +1386,12 @@ Partial Class Form1
         Me.MainTabControl.ResumeLayout(False)
         Me.SurveysTabPage.ResumeLayout(False)
         Me.CaribouTabPage.ResumeLayout(False)
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsSplitContainer.Panel1.ResumeLayout(False)
+        Me.AnimalsSplitContainer.Panel2.ResumeLayout(False)
+        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsSplitContainer.ResumeLayout(False)
+        CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResultsTabPage2.ResumeLayout(False)
         Me.ResultsTabPage2.PerformLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1396,14 +1401,9 @@ Partial Class Form1
         CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyResultsToolStrip.ResumeLayout(False)
         Me.SurveyResultsToolStrip.PerformLayout()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AnimalsSplitContainer.Panel1.ResumeLayout(False)
-        Me.AnimalsSplitContainer.Panel2.ResumeLayout(False)
-        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AnimalsSplitContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

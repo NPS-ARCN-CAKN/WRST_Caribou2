@@ -33,22 +33,22 @@ Public Class Form1
 
         'Set up the Campaigns GridEX default values and dropdowns
         SetUpCampaignsGridEX()
-        GridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
+        ToggleGridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
 
         'Set up the SurveysGridEX default values and dropdowns
         SetUpSurveysGridEX()
-        GridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
+        ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
 
         'Set up the RadiotrackingGridEX default values and dropdowns
         SetUpRadiotrackingGridEX()
-        GridEXReadOnly(Me.RadioTrackingGridEX, InheritableBoolean.False)
+        ToggleGridEXReadOnly(Me.RadioTrackingGridEX, InheritableBoolean.False)
 
         'Set up the population surveys grid default values and dropdowns
         SetUpPopulationEstimateGridEX()
-        GridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
+        ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
 
         'set up comp. count gridex
-        GridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
+        ToggleGridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
 
         'Load the Campaign header 
         LoadCampaignHeader()
@@ -77,19 +77,21 @@ Public Class Form1
     Private Sub SaveDataset()
         Try
             If Me.WRST_CaribouDataSet.HasChanges = True Then
-                If MsgBox("Save all changes to the database?", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes Then
-                    Me.Validate()
-                    Me.CompositionCountsBindingSource.EndEdit()
-                    Me.PopulationEstimateBindingSource.EndEdit()
-                    Me.RadioTrackingBindingSource.EndEdit()
-                    Me.SurveyFlightsBindingSource.EndEdit()
-                    Me.CampaignsBindingSource.EndEdit()
-                    Me.XrefPopulationCaribouBindingSource.EndEdit()
-                    Me.XrefCompCountCaribouBindingSource.EndEdit()
-                    Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
-                    Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
-                    Me.WRST_CaribouDataSet.AcceptChanges()
-                End If
+                'If MsgBox("Save all changes to the database?", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes Then
+                Me.Validate()
+                Me.CompositionCountsBindingSource.EndEdit()
+                Me.PopulationEstimateBindingSource.EndEdit()
+                Me.RadioTrackingBindingSource.EndEdit()
+                Me.SurveyFlightsBindingSource.EndEdit()
+                Me.CampaignsBindingSource.EndEdit()
+                Me.XrefPopulationCaribouBindingSource.EndEdit()
+                Me.XrefCompCountCaribouBindingSource.EndEdit()
+                Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
+                Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
+                Me.WRST_CaribouDataSet.AcceptChanges()
+
+
+                'End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -392,6 +394,11 @@ Public Class Form1
         Try
             Dim MyFont As New Font("Sans Serif", 10, FontStyle.Regular)
             With GridEX
+                'by default make grids readonly; toggle editability using ToggleGridEXReadOnly function
+                .AllowAddNew = InheritableBoolean.False
+                .AllowDelete = InheritableBoolean.False
+                .AllowEdit = InheritableBoolean.False
+
                 .AlternatingColors = True
                 .AutoEdit = False
                 .AutomaticSort = True
@@ -446,7 +453,7 @@ Public Class Form1
         MsgBox(AboutText)
     End Sub
 
-    Private Sub GridEXReadOnly(GridEX As GridEX, AllowEdits As InheritableBoolean)
+    Private Sub ToggleGridEXReadOnly(GridEX As GridEX, AllowEdits As InheritableBoolean)
         Try
             With GridEX.RootTable
                 .AllowAddNew = AllowEdits
@@ -1354,25 +1361,25 @@ Public Class Form1
     End Sub
 
 #Region "GridEX_Validated"
-    Private Sub CampaignsGridEX_Validated(sender As Object, e As EventArgs) Handles CampaignsGridEX.Validated
-        Me.CampaignsBindingSource.EndEdit()
-    End Sub
+    'Private Sub CampaignsGridEX_Validated(sender As Object, e As EventArgs) Handles CampaignsGridEX.Validated
+    '    Me.CampaignsBindingSource.EndEdit()
+    'End Sub
 
-    Private Sub SurveyFlightsGridEX_Validated(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.Validated
-        Me.SurveyFlightsBindingSource.EndEdit()
-    End Sub
+    'Private Sub SurveyFlightsGridEX_Validated(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.Validated
+    '    Me.SurveyFlightsBindingSource.EndEdit()
+    'End Sub
 
-    Private Sub CompositionCountsGridEX_Validated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.Validated
-        Me.CompositionCountsBindingSource.EndEdit()
-    End Sub
+    'Private Sub CompositionCountsGridEX_Validated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.Validated
+    '    Me.CompositionCountsBindingSource.EndEdit()
+    'End Sub
 
-    Private Sub PopulationEstimateGridEX_Validated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.Validated
-        Me.PopulationEstimateBindingSource.EndEdit()
-    End Sub
+    'Private Sub PopulationEstimateGridEX_Validated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.Validated
+    '    Me.PopulationEstimateBindingSource.EndEdit()
+    'End Sub
 
-    Private Sub RadioTrackingGridEX_Validated(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.Validated
-        Me.RadioTrackingBindingSource.EndEdit()
-    End Sub
+    'Private Sub RadioTrackingGridEX_Validated(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.Validated
+    '    Me.RadioTrackingBindingSource.EndEdit()
+    'End Sub
 
 
 #End Region
@@ -1627,6 +1634,16 @@ Public Class Form1
         'for some bizarre reason the checkbox does not return true or false, maybe because inheritableboolean? anyway, convert
         Dim Checked As InheritableBoolean = InheritableBoolean.False
         If Me.EditCampaignsCheckBox.Checked = True Then Checked = InheritableBoolean.True Else Checked = InheritableBoolean.False
-        GridEXReadOnly(Me.CampaignsGridEX, Checked)
+        ToggleGridEXReadOnly(Me.CampaignsGridEX, Checked)
+        ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, Checked)
+        ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, Checked)
+        ToggleGridEXReadOnly(Me.CompositionCountsGridEX, Checked)
+        ToggleGridEXReadOnly(Me.RadioTrackingGridEX, Checked)
+        ToggleGridEXReadOnly(Me.XrefPopulationCaribouGridEX, Checked)
+        ToggleGridEXReadOnly(Me.XrefCompCountCaribouGridEX, Checked)
+        ToggleGridEXReadOnly(Me.XrefRadiotrackingCaribouGridEX, Checked)
     End Sub
+
+
+
 End Class
