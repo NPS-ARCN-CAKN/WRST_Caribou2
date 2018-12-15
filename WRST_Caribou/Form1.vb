@@ -561,8 +561,8 @@ Public Class Form1
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
         Try
             'get some information about the survey flight to put in the header label so users know which survey flight they are editing
-            Me.FlightContextLabel.Text = "Caribou: "
-            Dim CurrentFlight As String = "Caribou: "
+            Me.FlightContextLabel.Text = "Caribou groups seen: "
+            Dim CurrentFlight As String = "Caribou groups seen: "
             Dim CrewNumber As Integer = 0
             Dim TailNo As String = ""
             Dim Pilot As String = ""
@@ -587,7 +587,7 @@ Public Class Form1
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
                         If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
-                        CurrentFlight = "Caribou: Crew " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
+                        CurrentFlight = "Caribou groups seen: Crew " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
                         Me.FlightContextLabel.Text = CurrentFlight
                     End If
                 End If
@@ -948,11 +948,11 @@ Public Class Form1
                     NewRow.Item("SearchArea") = "Alaska"
                     NewRow.Item("GroupNumber") = GroupNumber
                     NewRow.Item("SightingDate") = SightingDate
-                    NewRow.Item("SmallBull") = 0
-                    NewRow.Item("MediumBull") = 0
-                    NewRow.Item("LargeBull") = 0
-                    NewRow.Item("Cow") = 0
-                    NewRow.Item("Calf") = 0
+                    'NewRow.Item("SmallBull") = 0
+                    'NewRow.Item("MediumBull") = 0
+                    'NewRow.Item("LargeBull") = 0
+                    'NewRow.Item("Cow") = 0
+                    'NewRow.Item("Calf") = 0
                     NewRow.Item("Indeterminate") = 0
                     NewRow.Item("Lat") = Latitude
                     NewRow.Item("Lon") = Longitude
@@ -1036,11 +1036,17 @@ Public Class Form1
                     NewRow.Item("GroupNumber") = GroupNumber
                     NewRow.Item("WaypointName") = Ident
                     NewRow.Item("SightingDate") = SightingDate
-                    NewRow.Item("SmallBull") = 0
-                    NewRow.Item("MediumBull") = 0
-                    NewRow.Item("LargeBull") = 0
-                    NewRow.Item("Cow") = 0
-                    NewRow.Item("Calf") = 0
+
+                    'better to leave the animal count columns null
+                    'If Herd = "Mentasta" Then
+                    '    NewRow.Item("Bull") = 0
+                    'ElseIf Herd = "Chisana" Then
+                    '    NewRow.Item("SmallBull") = 0
+                    '    NewRow.Item("MediumBull") = 0
+                    '    NewRow.Item("LargeBull") = 0D
+                    'End If
+                    'NewRow.Item("Cow") = 0
+                    'NewRow.Item("Calf") = 0
                     NewRow.Item("InOrOut") = 0
                     NewRow.Item("Seen") = 0
                     NewRow.Item("Marked") = 0
@@ -1646,5 +1652,21 @@ Public Class Form1
     End Sub
 
 
+    ''' <summary>
+    ''' Updates the SurveyTime_Min column of the Flights GridEX with the survey effort in minutes by caculating TimeReturn - TimeDepart.
+    ''' </summary>
+    Private Sub CalculateSearchEffortColumn()
+        '   HAD TO ABANDON THIS IDEA BECAUSE THE .BEGINEDIT COMMAND ON THE ROW INTERFERED WITH THE BINDINGSOURCE AND NO EDITS GOT SENT BACK TO THE DATABASE.
+
+        'loop through the flights grid and calculate the survey effort in minutes and put the result in the SurveyTime_Min cell
+        'Dim Grid As GridEX = Me.SurveyFlightsGridEX
+        'For Each Row As GridEXRow In Grid.GetRows()
+        '    If Not IsDBNull(Row.Cells("TimeDepart").Value) And Not IsDBNull(Row.Cells("TimeReturn").Value) Then
+        '        Row.BeginEdit()
+        '        Row.Cells("SurveyTime_Min").Value = DateDiff(DateInterval.Minute, Row.Cells("TimeDepart").Value, Row.Cells("TimeReturn").Value)
+        '        Row.EndEdit()
+        '    End If
+        'Next
+    End Sub
 
 End Class
