@@ -78,7 +78,7 @@ Partial Class Form1
         Me.SurveyFlightsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.SurveyFlightsGridEX = New Janus.Windows.GridEX.GridEX()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.FlightHeaderLabel = New System.Windows.Forms.Label()
         Me.DataPanel = New System.Windows.Forms.Panel()
         Me.FlightContextLabel = New System.Windows.Forms.Label()
         Me.ResultsTabPage = New System.Windows.Forms.TabPage()
@@ -750,7 +750,7 @@ Partial Class Form1
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.FlightHeaderLabel)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
@@ -758,16 +758,16 @@ Partial Class Form1
         Me.Panel2.Size = New System.Drawing.Size(940, 31)
         Me.Panel2.TabIndex = 5
         '
-        'Label1
+        'FlightHeaderLabel
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 7)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(61, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Flights"
+        Me.FlightHeaderLabel.AutoSize = True
+        Me.FlightHeaderLabel.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FlightHeaderLabel.Location = New System.Drawing.Point(9, 7)
+        Me.FlightHeaderLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.FlightHeaderLabel.Name = "FlightHeaderLabel"
+        Me.FlightHeaderLabel.Size = New System.Drawing.Size(61, 19)
+        Me.FlightHeaderLabel.TabIndex = 0
+        Me.FlightHeaderLabel.Text = "Flights"
         '
         'DataPanel
         '
@@ -1487,7 +1487,7 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents SurveysPanel As Panel
     Friend WithEvents CampaignHeaderLabel As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents FlightHeaderLabel As Label
     Friend WithEvents ResultsPanel As Panel
     Friend WithEvents ResultsLabel As Label
     Friend WithEvents HelpProvider As HelpProvider
