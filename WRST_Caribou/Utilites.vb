@@ -239,12 +239,7 @@ Module Utilites
     Public Function GetCollarsDataTable() As DataTable
         Dim CollarsDataTable As New DataTable()
         Try
-            Dim Sql As String = "SELECT    distinct    Collars.Frequency, CollarDeployments.CollarManufacturer, Collars.CollarModel, Collars.SerialNumber, Collars.CollarId, Collars.Manager, Collars.Owner, Collars.HasGps, Collars.DisposalDate, Collars.Notes, 
-                         CollarDeployments.ProjectId
-                FROM            CollarDeployments INNER JOIN
-                                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-                WHERE        (CollarDeployments.ProjectId = 'WRST_Caribou')
-                ORDER BY Collars.Frequency"
+            Dim Sql As String = "SELECT * FROM Collars ORDER BY Collars.Frequency"
             CollarsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
             CollarsDataTable.TableName = "Collars"
         Catch ex As Exception
@@ -261,13 +256,14 @@ Module Utilites
             Dim CollarsDatatable As DataTable = GetCollarsDataTable()
             Dim CollarDeploymentsDataTable As DataTable = GetCollarDeploymentsDataTable()
 
+            'load the datatables into the animal movement dataset
             With AMDataset
                 .Tables.Add(GetCollarsDataTable)
                 .Tables.Add(GetAnimalsDataTable)
                 .Tables.Add(GetCollarDeploymentsDataTable)
             End With
 
-            'set up relationships
+            'set up relationships to show the history of collar deployments per animal
             Dim AnimalsToCollarDeploymentsDataRelation As New DataRelation("Animals_CollarDeploymentsDataRelation", AMDataset.Tables("Animals").Columns("AnimalID"), AMDataset.Tables("CollarDeployments").Columns("AnimalID"))
             AMDataset.Relations.Add(AnimalsToCollarDeploymentsDataRelation)
         Catch ex As Exception
