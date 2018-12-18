@@ -20,29 +20,6 @@ Public Class Form1
         'load the data from the WRST_Caribou Sql Server database
         LoadDataset()
 
-        'set up campaigns gridex
-        SetUpGridEX(Me.CampaignsGridEX) 'consistent look and feel
-        SetCampaignsGridEXDefaultValues() 'set up default values
-        SetCampaignsGridEXDropDowns() 'set up dropdowns
-        LoadCampaignHeader() 'load the survey campaign header with context information
-
-        'on startup set the flights and data gridexes are invisible so user needs to explicitly select a campaign
-        'if the campaign header is "" then set the tabcontrol invisible until a campaign is selected
-        Me.CampaignTabControl.Visible = Not Me.CampaignHeaderLabel.Text = ""
-
-        'set up flights gridex
-        SetUpGridEX(Me.SurveyFlightsGridEX) 'consistent look and feel
-        SetFlightsGridExDefaultValues() 'set up default values
-        SetFlightsGridEXDropDowns 'set up dropdowns
-        LoadFlightHeader() 'load the flight header with context information
-
-        SetUpGridEX(Me.CompositionCountsGridEX) 'consistent look and feel
-        SetUpGridEX(Me.PopulationEstimateGridEX) 'consistent look and feel
-        SetUpGridEX(Me.RadioTrackingGridEX) 'consistent look and feel
-        SetUpGridEX(Me.XrefCompCountCaribouGridEX) 'consistent look and feel
-        SetUpGridEX(Me.XrefPopulationCaribouGridEX) 'consistent look and feel
-        SetUpGridEX(Me.XrefRadiotrackingCaribouGridEX) 'consistent look and feel
-
         'make all gridexes read-only to start with. this is changed by the user clicking Me.EditCampaignsCheckBox
         ToggleGridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
         ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
@@ -50,14 +27,47 @@ Public Class Form1
         ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
         ToggleGridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
 
+        'set up campaigns gridex
+        FormatGridEX(Me.CampaignsGridEX) 'consistent look and feel
+        SetCampaignsGridEXDefaultValues() 'set up default values
+        SetCampaignsGridEXDropDowns() 'set up dropdowns
+
+
+        'set up flights gridex
+        FormatGridEX(Me.SurveyFlightsGridEX) 'consistent look and feel
+        SetFlightsGridExDefaultValues() 'set up default values
+        SetFlightsGridEXDropDowns 'set up dropdowns
+        LoadFlightHeader() 'load the flight header with context information
+
+        'set up population survey data gridex
+        FormatGridEX(Me.PopulationEstimateGridEX) 'consistent look and feel
+        SetPopulationGridEXDefaultValues()
+        SetUpPopulationEstimateGridEXDropDowns()
+
+        'set up comp count survey data gridex
+        FormatGridEX(Me.CompositionCountsGridEX) 'consistent look and feel
+        SetCompCountGridEXDefaultValues()
+        SetUpCompCountGridEXDropDowns()
+
+        'set up radiotracking survey data gridex
+        FormatGridEX(Me.RadioTrackingGridEX) 'consistent look and feel
+        SetRadioTrackingGridEXDefaultValues()
+        SetUpRadiotrackingGridEXDropDowns()
+
+        'set up the caribou groups/caribou cross reference gridexes
+        FormatGridEX(Me.XrefCompCountCaribouGridEX) 'consistent look and feel
+        FormatGridEX(Me.XrefPopulationCaribouGridEX) 'consistent look and feel
+        FormatGridEX(Me.XrefRadiotrackingCaribouGridEX) 'consistent look and feel
+
 
         'Set up the various gridexes with default values and dropdowns
 
-        SetUpRadiotrackingGridEX()
-        SetUpPopulationEstimateGridEX()
-
         'Load the Campaign header 
         LoadCampaignHeader()
+
+        'on startup set the flights and data gridexes are invisible so user needs to explicitly select a campaign
+        'if the campaign header is "" then set the tabcontrol invisible until a campaign is selected
+        Me.CampaignTabControl.Visible = Not Me.CampaignHeaderLabel.Text = ""
 
         'maximize form
         Me.WindowState = FormWindowState.Maximized
@@ -66,7 +76,25 @@ Public Class Form1
         LoadAnimalMovementGrids()
 
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Region "Set up headers"
+    ''' <summary>
+    ''' Loads information into the Survey campaign's header label so the user can see which survey is currently selected
+    ''' </summary>
     Private Sub LoadCampaignHeader()
         Try
             'get the name of the survey campaign to put it into the survey flights header
@@ -118,20 +146,14 @@ Public Class Form1
                 End If
             End If
         End If
-
-
-
-
-
-
     End Sub
 
     ''' <summary>
     ''' Loads information into the Caption of the XrefPopulationEstimateCaribou GridEX for context on which caribou group is current
     ''' </summary>
     Private Sub LoadXrefPopulationEstimateCaribouHeader()
-
-        Dim Grid As GridEX = Me.PopulationEstimateGridEX
+        Try
+            Dim Grid As GridEX = Me.PopulationEstimateGridEX
 
             'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
             'gps collars to allow the user to associate a collared caribou with the observed group
@@ -165,23 +187,41 @@ Public Class Form1
                         End If
                     End If
 
-                'get the Waypoint
-                If Not .CurrentRow.Cells("WaypointName") Is Nothing And Not IsDBNull(.CurrentRow.Cells("WaypointName")) Then
-                    If Not IsDBNull(.CurrentRow.Cells("WaypointName").Value) Then
-                        Waypoint = .CurrentRow.Cells("WaypointName").Value
+                    'get the Waypoint
+                    If Not .CurrentRow.Cells("WaypointName") Is Nothing And Not IsDBNull(.CurrentRow.Cells("WaypointName")) Then
+                        If Not IsDBNull(.CurrentRow.Cells("WaypointName").Value) Then
+                            Waypoint = .CurrentRow.Cells("WaypointName").Value
+                        End If
                     End If
                 End If
-            End If
             End With
 
             'modify the header
             Me.XrefPopulationCaribouGridEX.RootTable.Caption = "GPS collared caribou in group number " & GroupNumber & " (Waypoint " & Waypoint & ")"
-        Try
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 #End Region
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Region "Set up GridEX default values"
@@ -197,16 +237,19 @@ Public Class Form1
         Grid.RootTable.Columns("CampaignID").DefaultValue = Guid.NewGuid.ToString
 
         'set up the flight gridex's 'herd' column default value based on the Herd column of the survey campaigns grid current row
-        If Not Grid.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Grid.CurrentRow.Cells("Herd").Value) Then
-            Dim CampaignHerd As String = Grid.CurrentRow.Cells("Herd").Value
-            Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+        If Not Grid.CurrentRow Is Nothing Then
+            If Not Grid.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Grid.CurrentRow.Cells("Herd").Value) Then
+                Dim CampaignHerd As String = Grid.CurrentRow.Cells("Herd").Value
+                Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
 
-            'while we're here set up the Herd column in the other gridexes to match 
-            Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
-            Me.RadioTrackingGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
-            Me.PopulationEstimateGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
-            Me.CompositionCountsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                'while we're here set up the Herd column in the other gridexes to match 
+                Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                Me.RadioTrackingGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                Me.PopulationEstimateGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                Me.CompositionCountsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+            End If
         End If
+
     End Sub
 
     Private Sub SetFlightsGridExDefaultValues()
@@ -248,26 +291,6 @@ Public Class Form1
                 Me.RadioTrackingGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
                 Me.CompositionCountsGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
                 Me.PopulationEstimateGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
-
-                'set up the flight header to show the user which flight is being edited
-                'get some information about the survey flight to put in the header label so users know which survey flight they are editing
-                'Me.FlightContextLabel.Text = "Caribou groups seen: "
-                'Dim CurrentFlight As String = "Caribou groups seen: "
-                'Dim CrewNumber As Integer = 0
-                'Dim TailNo As String = ""
-                'Dim Pilot As String = ""
-                'Dim Observer1 As String = ""
-                'Dim TimeDepart As Date = "1/1/1111"
-
-                'If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart") Is Nothing Then
-                '    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value) Then CrewNumber = Me.SurveyFlightsGridEX.CurrentRow.Cells("CrewNumber").Value
-                '    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value) Then Pilot = Me.SurveyFlightsGridEX.CurrentRow.Cells("Pilot").Value Else Pilot = ""
-                '    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value) Then TailNo = Me.SurveyFlightsGridEX.CurrentRow.Cells("TailNo").Value Else TailNo = ""
-                '    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value) Then Observer1 = Me.SurveyFlightsGridEX.CurrentRow.Cells("Observer1").Value Else Observer1 = ""
-                '    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value) Then TimeDepart = Me.SurveyFlightsGridEX.CurrentRow.Cells("TimeDepart").Value
-                '    CurrentFlight = "Caribou groups seen: Crew " & CrewNumber & " " & TailNo & " " & Pilot & " & " & Observer1 & " " & TimeDepart
-                '    Me.FlightContextLabel.Text = CurrentFlight
-                'End If
             End If
         End If
     End Sub
@@ -285,22 +308,79 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub SetXrefPopulationEstimateCaribouGridEXDefaultValues()
-        'Dim Grid As GridEX = Me.PopulationEstimateGridEX
-        ''default values
-        'With Grid.RootTable
-        '    .Columns("EID").DefaultValue = Guid.NewGuid.ToString
-        '    .Columns("RecordInsertedDate").DefaultValue = Now
-        '    .Columns("RecordInsertedBy").DefaultValue = My.User.Name
-        '    .Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
-        'End With
+    Private Sub SetCompCountGridEXDefaultValues()
+        Try
+            Dim GridEX As GridEX = Me.CompositionCountsGridEX
+            GridEX.RootTable.Columns("CCID").DefaultValue = Guid.NewGuid.ToString
+            GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
     End Sub
+
+    Private Sub SetRadioTrackingGridEXDefaultValues()
+        Try
+            Dim GridEX As GridEX = Me.RadioTrackingGridEX
+            GridEX.RootTable.Columns("RTID").DefaultValue = Guid.NewGuid.ToString
+            GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+            GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+        End Try
+    End Sub
+
+    Private Sub SetXrefPopulationEstimateCaribouGridEXDefaultValues()
+
+    End Sub
+
+    Private Sub SetXrefCompCountCaribouGridEXDefaultValues()
+
+    End Sub
+
+    Private Sub SetXrefRadioTrackingCaribouGridEXDefaultValues()
+
+    End Sub
+
 #End Region
+
+
+
+
+
+
+
+
+
 
 #Region "Set up GridEX dropdowns"
 
 
 #End Region
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Region "GridEX_SelectionChanged"
     Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
@@ -316,7 +396,6 @@ Public Class Form1
             'set the survey type tab control to the current survey type
             Dim CurrentSurveyType As String = ""
             If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
-
                 If Not Me.CampaignsGridEX.CurrentRow.Cells("SurveyType") Is Nothing Then
                     If Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value) Then
                         CurrentSurveyType = Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value
@@ -380,6 +459,273 @@ Public Class Form1
     End Sub
 
 #End Region
+
+#Region "Set up GridEX DropDowns"
+
+    ''' <summary>
+    ''' Set up the CampaignsGridEX dropdowns
+    ''' </summary>
+    Private Sub SetCampaignsGridEXDropDowns()
+        Try
+            'Herd dropdown values
+            With Me.CampaignsGridEX.RootTable.Columns("Herd")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim HerdList As GridEXValueListItemCollection = Me.CampaignsGridEX.RootTable.Columns("Herd").ValueList
+            HerdList.Add("Chisana", "Chisana")
+            HerdList.Add("Mentasta", "Mentasta")
+
+            'Survey type dropdown values
+            With Me.CampaignsGridEX.RootTable.Columns("SurveyType")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveyTypeList As GridEXValueListItemCollection = Me.CampaignsGridEX.RootTable.Columns("SurveyType").ValueList
+            SurveyTypeList.Add("Composition", "Composition")
+            SurveyTypeList.Add("Population", "Population")
+            SurveyTypeList.Add("Radiotracking", "Radiotracking")
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub SetFlightsGridEXDropDowns()
+        Dim Grid As GridEX = Me.SurveyFlightsGridEX
+        'Set up dropdowns
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "TailNo", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "AircraftType", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer1", "Observer1", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
+
+        'Herd dropdown
+        With Grid.RootTable.Columns("Herd")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+        End With
+        Dim SurveysHerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
+        SurveysHerdList.Add("Chisana", "Chisana")
+        SurveysHerdList.Add("Mentasta", "Mentasta")
+
+        'CertificationLevel dropdown
+        With Grid.RootTable.Columns("CertificationLevel")
+            .EditType = EditType.DropDownList
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+        End With
+        Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
+        CertificationLevelList.Add("Raw", "Raw")
+        CertificationLevelList.Add("Provisional", "Provisional")
+        CertificationLevelList.Add("Accepted", "Accepted")
+        CertificationLevelList.Add("Certified", "Certified")
+    End Sub
+
+    ''' <summary>
+    ''' Sets up the RadiotrackingGridEX with default values and other settings
+    ''' </summary>
+    Private Sub SetUpRadiotrackingGridEXDropDowns()
+        Try
+            'Set up default values
+            Dim Grid As GridEX = Me.RadioTrackingGridEX
+
+            'Herd dropdown
+            With Grid.RootTable.Columns("Herd")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+
+            'Herd dropdown
+            Dim SurveysHerdList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Herd").ValueList
+            SurveysHerdList.Add("Chisana", "Chisana")
+            SurveysHerdList.Add("Mentasta", "Mentasta")
+
+            'Mode dropdown
+            With Grid.RootTable.Columns("Mode")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysModeList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Mode").ValueList
+            SurveysModeList.Add("A", "Automatic")
+            SurveysModeList.Add("M", "Manual")
+
+            'Accuracy dropdown
+            With Grid.RootTable.Columns("Accuracy")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysAccuracyList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Accuracy").ValueList
+            SurveysAccuracyList.Add(1, 1)
+            SurveysAccuracyList.Add(2, 2)
+            SurveysAccuracyList.Add(3, 3)
+
+            'load the radiotracking gridex search areas dropdown
+            With Grid.RootTable.Columns("SearchArea")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+
+            'this line loads the csv list of search areas from my.settings into a datatable
+            Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+            'get a ref to the searchareas valuelist
+            Dim SearchAreasList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("SearchArea").ValueList
+            'load in the searcharea items into the combobox
+            For Each Row As DataRow In SearchAreasDataTable.Rows
+                Dim SearchArea As String = Row.Item("SearchArea")
+                SearchAreasList.Add(SearchArea, SearchArea)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Sets up the SurveysGridEX default values and DropDowns/Combos
+    ''' </summary>
+    Private Sub SetUpPopulationEstimateGridEXDropDowns()
+
+        'Set up default values
+        Dim Grid As GridEX = Me.PopulationEstimateGridEX
+        Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+
+        'Herd dropdown
+        With Grid.RootTable.Columns("Herd")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+        Dim HerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
+        HerdList.Add("Chisana", "Chisana")
+        HerdList.Add("Mentasta", "Mentasta")
+
+        'search areas dropdown
+        'this line loads the csv list of search areas from my.settings into a datatable
+        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+
+        'set up the search area column to accept a dropdown
+        With Grid.RootTable.Columns("SearchArea")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+
+        'get a ref to the searchareas valuelist
+        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
+        'load in the searcharea items into the combobox
+        For Each Row As DataRow In SearchAreasDataTable.Rows
+            Dim SearchArea As String = Row.Item("SearchArea")
+            SearchAreasList.Add(SearchArea, SearchArea)
+        Next
+
+    End Sub
+
+    Private Sub SetUpCompCountGridEXDropDowns()
+        'Set up default values
+        Dim Grid As GridEX = Me.CompositionCountsGridEX
+        Grid.RootTable.Columns("CCID").DefaultValue = Guid.NewGuid.ToString
+        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
+        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
+
+        'Herd dropdown
+        With Grid.RootTable.Columns("Herd")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+        Dim HerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
+        HerdList.Add("Chisana", "Chisana")
+        HerdList.Add("Mentasta", "Mentasta")
+
+        'search areas dropdown
+        'this line loads the csv list of search areas from my.settings into a datatable
+        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
+
+        'set up the search area column to accept a dropdown
+        With Grid.RootTable.Columns("SearchArea")
+            .HasValueList = True
+            .LimitToList = True
+            .ValueList.Clear()
+            .EditType = EditType.DropDownList
+        End With
+
+        'get a ref to the searchareas valuelist
+        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
+        'load in the searcharea items into the combobox
+        For Each Row As DataRow In SearchAreasDataTable.Rows
+            Dim SearchArea As String = Row.Item("SearchArea")
+            SearchAreasList.Add(SearchArea, SearchArea)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Loads distinct items from a DataTable's DataColumn into a GridEX GridEXColumn's DropDown ValueList
+    ''' </summary>
+    ''' <param name="GridEX">The GridEX containing the GridEXColumn requiring a DropDown ValueList</param>
+    ''' <param name="SourceDataTable">Name of the DataTable containing the DataColumn from which distinct values will be drawn</param>
+    ''' <param name="SourceColumnName">Name of the source DataTable's DataColumn from which distinct values will be drawn</param>
+    ''' <param name="GridEXColumnName">Name of the GridEX column into which to load dropdown values</param>
+    Private Sub LoadGridEXDropDownWithDistinctDataTableValues(GridEX As GridEX, SourceDataTable As DataTable, SourceColumnName As String, GridEXColumnName As String, LimitToList As Boolean)
+        Try
+            'Ensure the GridEXColumn is configured for a DropDown
+            With GridEX.RootTable.Columns(GridEXColumnName)
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = False
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
+
+            'Make a GridEXValueListItemCollection to hold the distinct items
+            Dim ItemsList As GridEXValueListItemCollection = GridEX.RootTable.Columns(GridEXColumnName).ValueList
+
+            'Get the distinct items from a DataTable
+            Dim DistinctItemsDataTable As DataTable = SourceDataTable.DefaultView.ToTable(True, SourceColumnName)
+
+            'Sort the DataView
+            Dim DistinctItemsDataView As New DataView(DistinctItemsDataTable, "", SourceColumnName, DataRowState.Unchanged)
+
+            'Add the distinct items from the DataView into the GridEXValueListItemCollection
+            If DistinctItemsDataView.Table.Rows.Count > 0 Then
+                For Each Row As DataRow In DistinctItemsDataView.Table.Rows
+                    If Not IsDBNull(Row.Item(SourceColumnName)) Then
+                        Dim Item As String = Row.Item(SourceColumnName)
+                        ItemsList.Add(Item, Item)
+                    End If
+                Next
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+#End Region
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -448,16 +794,11 @@ Public Class Form1
     End Sub
 
 
-
-
-
-#Region "Set up GridEXes"
-
     ''' <summary>
     ''' Standardizes the look, feel and function of a GridEX
     ''' </summary>
     ''' <param name="GridEX">The GridEX to set up</param>
-    Private Sub SetUpGridEX(GridEX As GridEX)
+    Private Sub FormatGridEX(GridEX As GridEX)
         Try
             Dim MyFont As New Font("Sans Serif", 10, FontStyle.Regular)
             With GridEX
@@ -486,228 +827,11 @@ Public Class Form1
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Set up the CampaignsGridEX dropdowns
-    ''' </summary>
-    Private Sub SetCampaignsGridEXDropDowns()
-        Try
-            'Herd dropdown values
-            With Me.CampaignsGridEX.RootTable.Columns("Herd")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-            Dim HerdList As GridEXValueListItemCollection = Me.CampaignsGridEX.RootTable.Columns("Herd").ValueList
-            HerdList.Add("Chisana", "Chisana")
-            HerdList.Add("Mentasta", "Mentasta")
-
-            'Survey type dropdown values
-            With Me.CampaignsGridEX.RootTable.Columns("SurveyType")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-            Dim SurveyTypeList As GridEXValueListItemCollection = Me.CampaignsGridEX.RootTable.Columns("SurveyType").ValueList
-            SurveyTypeList.Add("Composition", "Composition")
-            SurveyTypeList.Add("Population", "Population")
-            SurveyTypeList.Add("Radiotracking", "Radiotracking")
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
-
-    Private Sub SetFlightsGridEXDropDowns()
-        Dim Grid As GridEX = Me.SurveyFlightsGridEX
-        'Set up dropdowns
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "TailNo", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "AircraftType", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer1", "Observer1", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
-        LoadGridEXDropDown(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
-
-        'Herd dropdown
-        With Grid.RootTable.Columns("Herd")
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-        End With
-        Dim SurveysHerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
-        SurveysHerdList.Add("Chisana", "Chisana")
-        SurveysHerdList.Add("Mentasta", "Mentasta")
-
-        'CertificationLevel dropdown
-        With Grid.RootTable.Columns("CertificationLevel")
-            .EditType = EditType.DropDownList
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-        End With
-        Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
-        CertificationLevelList.Add("Raw", "Raw")
-        CertificationLevelList.Add("Provisional", "Provisional")
-        CertificationLevelList.Add("Accepted", "Accepted")
-        CertificationLevelList.Add("Certified", "Certified")
-    End Sub
-
-
-
-
-    ''' <summary>
-    ''' Sets up the RadiotrackingGridEX with default values and other settings
-    ''' </summary>
-    Private Sub SetUpRadiotrackingGridEX()
-        Try
-            'Set up default values
-            Dim Grid As GridEX = Me.RadioTrackingGridEX
-
-            'Herd dropdown
-            With Grid.RootTable.Columns("Herd")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-
-            'Herd dropdown
-            Dim SurveysHerdList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Herd").ValueList
-            SurveysHerdList.Add("Chisana", "Chisana")
-            SurveysHerdList.Add("Mentasta", "Mentasta")
-
-            'Mode dropdown
-            With Grid.RootTable.Columns("Mode")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-            Dim SurveysModeList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Mode").ValueList
-            SurveysModeList.Add("A", "Automatic")
-            SurveysModeList.Add("M", "Manual")
-
-            'Accuracy dropdown
-            With Grid.RootTable.Columns("Accuracy")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-            Dim SurveysAccuracyList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("Accuracy").ValueList
-            SurveysAccuracyList.Add(1, 1)
-            SurveysAccuracyList.Add(2, 2)
-            SurveysAccuracyList.Add(3, 3)
-
-            'load the radiotracking gridex search areas dropdown
-            With Grid.RootTable.Columns("SearchArea")
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
-
-            'this line loads the csv list of search areas from my.settings into a datatable
-            Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
-            'get a ref to the searchareas valuelist
-            Dim SearchAreasList As GridEXValueListItemCollection = Me.RadioTrackingGridEX.RootTable.Columns("SearchArea").ValueList
-            'load in the searcharea items into the combobox
-            For Each Row As DataRow In SearchAreasDataTable.Rows
-                Dim SearchArea As String = Row.Item("SearchArea")
-                SearchAreasList.Add(SearchArea, SearchArea)
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
 
 
 
 
 
-    ''' <summary>
-    ''' Sets up the SurveysGridEX default values and DropDowns/Combos
-    ''' </summary>
-    Private Sub SetUpPopulationEstimateGridEX()
-
-        'Set up default values
-        Dim Grid As GridEX = Me.PopulationEstimateGridEX
-        Grid.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
-        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
-        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-
-        'Herd dropdown
-        With Grid.RootTable.Columns("Herd")
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-            .EditType = EditType.DropDownList
-        End With
-        Dim HerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
-        HerdList.Add("Chisana", "Chisana")
-        HerdList.Add("Mentasta", "Mentasta")
-
-        'search areas dropdown
-        'this line loads the csv list of search areas from my.settings into a datatable
-        Dim SearchAreasDataTable As DataTable = GetSearchAreasDataTable()
-
-        'set up the search area column to accept a dropdown
-        With Grid.RootTable.Columns("SearchArea")
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-            .EditType = EditType.DropDownList
-        End With
-
-        'get a ref to the searchareas valuelist
-        Dim SearchAreasList As GridEXValueListItemCollection = Grid.RootTable.Columns("SearchArea").ValueList
-        'load in the searcharea items into the combobox
-        For Each Row As DataRow In SearchAreasDataTable.Rows
-            Dim SearchArea As String = Row.Item("SearchArea")
-            SearchAreasList.Add(SearchArea, SearchArea)
-        Next
-
-    End Sub
-#End Region
-
-
-    ''' <summary>
-    ''' Loads distinct items from a DataTable's DataColumn into a GridEX GridEXColumn's DropDown ValueList
-    ''' </summary>
-    ''' <param name="GridEX">The GridEX containing the GridEXColumn requiring a DropDown ValueList</param>
-    ''' <param name="SourceDataTable">Name of the DataTable containing the DataColumn from which distinct values will be drawn</param>
-    ''' <param name="SourceColumnName">Name of the source DataTable's DataColumn from which distinct values will be drawn</param>
-    ''' <param name="GridEXColumnName">Name of the GridEX column into which to load dropdown values</param>
-    Private Sub LoadGridEXDropDown(GridEX As GridEX, SourceDataTable As DataTable, SourceColumnName As String, GridEXColumnName As String, LimitToList As Boolean)
-        Try
-            'Ensure the GridEXColumn is configured for a DropDown
-            With GridEX.RootTable.Columns(GridEXColumnName)
-                .EditType = EditType.Combo
-                .HasValueList = True
-                .LimitToList = False
-                .AllowSort = True
-                .AutoComplete = True
-                .ValueList.Clear()
-            End With
-
-            'Make a GridEXValueListItemCollection to hold the distinct items
-            Dim ItemsList As GridEXValueListItemCollection = GridEX.RootTable.Columns(GridEXColumnName).ValueList
-
-            'Get the distinct items from a DataTable
-            Dim DistinctItemsDataTable As DataTable = SourceDataTable.DefaultView.ToTable(True, SourceColumnName)
-
-            'Sort the DataView
-            Dim DistinctItemsDataView As New DataView(DistinctItemsDataTable, "", SourceColumnName, DataRowState.Unchanged)
-
-            'Add the distinct items from the DataView into the GridEXValueListItemCollection
-            If DistinctItemsDataView.Table.Rows.Count > 0 Then
-                For Each Row As DataRow In DistinctItemsDataView.Table.Rows
-                    If Not IsDBNull(Row.Item(SourceColumnName)) Then
-                        Dim Item As String = Row.Item(SourceColumnName)
-                        ItemsList.Add(Item, Item)
-                    End If
-                Next
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
 
 
 
@@ -926,58 +1050,61 @@ Public Class Form1
     Private Sub OpenWaypointsFile(DestinationTableName As String)
         Try
             'we must have a FlightID to create child records
-            If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
-                If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID")) And Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd")) Then
+            If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
+                If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing And Not Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd") Is Nothing Then
+                    If Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID")) And Not IsDBNull(Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd")) Then
 
-                    'we also require a flightid and a herd from the survey record
-                    Dim FlightID As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID").Value
-                    Dim Herd As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value
+                        'we also require a flightid and a herd from the survey record
+                        Dim FlightID As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID").Value
+                        Dim Herd As String = Me.SurveyFlightsGridEX.CurrentRow.Cells("Herd").Value
 
-                    'herd must be mentasta or chisana
-                    Herd = Herd.Trim
-                    If Herd <> "Mentasta" And Herd <> "Chisana" Then
-                        MsgBox("Herd must be 'Mentasta' or 'Chisana'")
-                        Exit Sub
-                    End If
+                        'herd must be mentasta or chisana
+                        Herd = Herd.Trim
+                        If Herd <> "Mentasta" And Herd <> "Chisana" Then
+                            MsgBox("Herd must be 'Mentasta' or 'Chisana'")
+                            Exit Sub
+                        End If
 
-                    'get the  file of waypoints
-                    Dim WaypointsImportFile As String = GetWaypointsFile()
+                        'get the  file of waypoints
+                        Dim WaypointsImportFile As String = GetWaypointsFile()
 
-                    'make sure the file exists
-                    If My.Computer.FileSystem.FileExists(WaypointsImportFile) Then
+                        'make sure the file exists
+                        If My.Computer.FileSystem.FileExists(WaypointsImportFile) Then
 
-                        'get the waypoints file into a FileInfo to get more info about it
-                        Dim WaypointsImportFileInfo As New FileInfo(WaypointsImportFile)
+                            'get the waypoints file into a FileInfo to get more info about it
+                            Dim WaypointsImportFileInfo As New FileInfo(WaypointsImportFile)
 
-                        'load the waypoints to import into a datatable
-                        Dim WaypointsImportDataTable As DataTable = WaypointFileToDataTable(WaypointsImportFileInfo.FullName)
-                        Dim WaypointsPreviewDataTable As DataTable = Me.WRST_CaribouDataSet.Tables(DestinationTableName).Clone()
-                        WaypointsPreviewDataTable.Clear()
+                            'load the waypoints to import into a datatable
+                            Dim WaypointsImportDataTable As DataTable = WaypointFileToDataTable(WaypointsImportFileInfo.FullName)
+                            Dim WaypointsPreviewDataTable As DataTable = Me.WRST_CaribouDataSet.Tables(DestinationTableName).Clone()
+                            WaypointsPreviewDataTable.Clear()
 
-                        'Load the waypoints into a datatable
-                        If Not WaypointsImportDataTable Is Nothing Then
-                            If WaypointsImportDataTable.Rows.Count > 0 Then
-                                'import the waypoint records to the proper dataset datatable based on tablename
-                                If DestinationTableName = "Radiotracking" Then
-                                    ImportRadiotrackingDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
-                                ElseIf DestinationTableName = "PopulationEstimate" Then
-                                    ImportPopulationSurveyDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
-                                ElseIf DestinationTableName = "CompositionCounts" Then
-                                    ImportCompositionCountDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
+                            'Load the waypoints into a datatable
+                            If Not WaypointsImportDataTable Is Nothing Then
+                                If WaypointsImportDataTable.Rows.Count > 0 Then
+                                    'import the waypoint records to the proper dataset datatable based on tablename
+                                    If DestinationTableName = "Radiotracking" Then
+                                        ImportRadiotrackingDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
+                                    ElseIf DestinationTableName = "PopulationEstimate" Then
+                                        ImportPopulationSurveyDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
+                                    ElseIf DestinationTableName = "CompositionCounts" Then
+                                        ImportCompositionCountDNRGPSWaypoints(WaypointsImportDataTable, WaypointsPreviewDataTable, FlightID, Herd, WaypointsImportFileInfo)
+                                    End If
+                                Else
+                                    MsgBox("No records.")
                                 End If
                             Else
-                                MsgBox("No records.")
+                                MsgBox("Waypoints input DataTable does not exist.")
                             End If
                         Else
-                            MsgBox("Waypoints input DataTable does not exist.")
+                            MsgBox("Input file does not exist")
                         End If
                     Else
-                        MsgBox("Input file does not exist")
+                        MsgBox("FlightID and Herd are required parts of the Survey record.")
                     End If
-                Else
-                    MsgBox("FlightID and Herd are required parts of the Survey record.")
                 End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1325,12 +1452,7 @@ Public Class Form1
     Private Sub CompositionCountsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.SelectionChanged
         Try
             'default values
-            With Me.CompositionCountsGridEX.RootTable
-                .Columns("CCID").DefaultValue = Guid.NewGuid.ToString
-                .Columns("RecordInsertedDate").DefaultValue = Now
-                .Columns("RecordInsertedBy").DefaultValue = My.User.Name
-                .Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
-            End With
+            SetCompCountGridEXDefaultValues()
 
             'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
             'gps collars to allow the user to associate a collared caribou with the observed group
@@ -1688,9 +1810,6 @@ Public Class Form1
 
     Private Sub XrefPopulationCaribouGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles XrefPopulationCaribouGridEX.DropDown
         Try
-            'query the animal movement database for a list of collared animals
-            'Dim CollarDeploymentsDataTable As DataTable = GetCollarDeploymentsDataTable()
-
             'get a ref to the animalid valuelist
             Dim Grid As GridEX = Me.XrefPopulationCaribouGridEX
             With Grid.RootTable.Columns("AnimalID")
@@ -1758,46 +1877,6 @@ Public Class Form1
         SaveDataset()
     End Sub
 
-    Private Sub XrefPopulationCaribouGridEX_EditingCell(sender As Object, e As EditingCellEventArgs) Handles XrefPopulationCaribouGridEX.EditingCell
-        'when the user clicks on a population survey caribou group, then load the collared caribou cross reference gridex with available 
-        'gps collars to allow the user to associate a collared caribou with the observed group
-        'Try
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        'End Try
-
-        'MsgBox(Me.XrefPopulationCaribouGridEX.CurrentColumn.Key & " " & e.Column.Key)
-        'If Me.XrefPopulationCaribouGridEX.CurrentColumn.Key = "AnimalID" Then
-        '    Dim SightingDate As Date = GetCurrentSightingDate(Me.PopulationEstimateGridEX)
-        '    ''if we have a valid observation date and an ID then load the collar selector dropdown with available collars
-        '    ''load the AnimalID with a selection of collars that were deployed on the date the caribou group was observed
-        '    LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SightingDate)
-        'End If
-
-        'determine the EID, primary key of the caribou group record, and set the default value to the new xrefcariboupopulation record
-        ' 
-        'Dim SightingDate As Date
-
-        ''get the sighting date to use later, and get the EID to relate to any new xrefcariboupopulation records
-        'With Me.PopulationEstimateGridEX
-        '    If Not .CurrentRow Is Nothing Then
-        '        'get the SightingDate
-        '        If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
-        '            If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then SightingDate = .CurrentRow.Cells("SightingDate").Value
-        '        End If
-
-        '        'set up the EID primary key for syncing with the group
-        '        'If Not .CurrentRow.Cells("EID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("EID")) Then
-        '        '    If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
-        '        '        EID = .CurrentRow.Cells("EID").Value
-        '        '    End If
-        '        'End If
-        '    End If
-        'End With
-
-
-
-    End Sub
 
     ''' <summary>
     ''' Returns the EID of the current row of XrefPopulationCaribouGridEX.
@@ -1842,51 +1921,51 @@ Public Class Form1
     ' </summary>
     ' <param name="GridEx">Parent GridEX</param>
     ' <param name="ObservationDate">Results will be filtered by available GPS collars deployed on this date.</param>
-    Private Sub LoadCollaredCaribouDropdown(GridEx As GridEX, ObservationDate As Date)
+    'Private Sub LoadCollaredCaribouDropdown(GridEx As GridEX, ObservationDate As Date)
 
-        'Caribou groups often contain GPS collared animals. 
-        'When this event fires the user wants to associate a collared caribou with a group of caribou seen during a population survey.
-        'The collar is detected by radio frequency.  We need to find out which collar was detected and which animal the collar was deployed on.
-        'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
-        ' the population survey group.
+    '    'Caribou groups often contain GPS collared animals. 
+    '    'When this event fires the user wants to associate a collared caribou with a group of caribou seen during a population survey.
+    '    'The collar is detected by radio frequency.  We need to find out which collar was detected and which animal the collar was deployed on.
+    '    'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
+    '    ' the population survey group.
 
-        'Try
-        'Catch ex As Exception
-        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        'End Try
-        ''Ensure the GridEXColumn is configured for a DropDown
-        'With GridEx.RootTable.Columns("AnimalID")
-        '    .EditType = EditType.Combo
-        '    .HasValueList = True
-        '    .LimitToList = True
-        '    .AllowSort = True
-        '    .AutoComplete = True
-        '    .ValueList.Clear()
-        'End With
+    '    'Try
+    '    'Catch ex As Exception
+    '    '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+    '    'End Try
+    '    ''Ensure the GridEXColumn is configured for a DropDown
+    '    'With GridEx.RootTable.Columns("AnimalID")
+    '    '    .EditType = EditType.Combo
+    '    '    .HasValueList = True
+    '    '    .LimitToList = True
+    '    '    .AllowSort = True
+    '    '    .AutoComplete = True
+    '    '    .ValueList.Clear()
+    '    'End With
 
-        ''retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
-        'Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
-        '    FROM   Animals INNER JOIN
-        '           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-        '           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-        '    WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
-        '    ORDER BY Collars.Frequency"
+    '    ''retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
+    '    'Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
+    '    '    FROM   Animals INNER JOIN
+    '    '           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+    '    '           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+    '    '    WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+    '    '    ORDER BY Collars.Frequency"
 
-        ''get the filtered data into a datatable
-        'Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+    '    ''get the filtered data into a datatable
+    '    'Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
-        ''Add the animalids into the GridEXValueListItemCollection
-        'If Me.AnimalMovementDataset.Tables("Animals").Rows.Count > 0 Then
-        '    For Each Row As DataRow In PossibleCollaredAnimalsDataTable.Rows
-        '        If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
-        '            Dim ValueItem As String = Row.Item("AnimalID")
-        '            Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
+    '    ''Add the animalids into the GridEXValueListItemCollection
+    '    'If Me.AnimalMovementDataset.Tables("Animals").Rows.Count > 0 Then
+    '    '    For Each Row As DataRow In PossibleCollaredAnimalsDataTable.Rows
+    '    '        If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
+    '    '            Dim ValueItem As String = Row.Item("AnimalID")
+    '    '            Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
 
-        '            GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
-        '        End If
-        '    Next
-        'End If
+    '    '            GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
+    '    '        End If
+    '    '    Next
+    '    'End If
 
-    End Sub
+    'End Sub
 
 End Class
