@@ -240,8 +240,9 @@ Public Class Form1
         If Not Grid.CurrentRow Is Nothing Then
             If Not Grid.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Grid.CurrentRow.Cells("Herd").Value) Then
                 Dim CampaignHerd As String = Grid.CurrentRow.Cells("Herd").Value
-                Debug.Print("CampaignHerd: " & CampaignHerd)
+                Dim CampaignID As String = Grid.CurrentRow.Cells("CampaignID").Value
                 Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
+                Me.SurveyFlightsGridEX.RootTable.Columns("CampaignID").DefaultValue = CampaignID
 
                 'while we're here set up the Herd column in the other gridexes to match 
                 Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
@@ -384,42 +385,38 @@ Public Class Form1
     Private Sub BringSurveyTypeTabControlForward()
         Try
             'set the survey type tab control to the current survey type
-            Dim CurrentSurveyType As String = ""
-            If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
-                If Not Me.CampaignsGridEX.CurrentRow.Cells("SurveyType") Is Nothing Then
-                    If Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value) Then
-                        CurrentSurveyType = Me.CampaignsGridEX.CurrentRow.Cells("SurveyType").Value
+            Dim CurrentSurveyType As String = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "SurveyType")
 
-                        'clear the results datagridview
-                        Me.ResultsDataGridView.DataSource = Nothing
+            'if we have a survey type then bring the correct tab forward
+            If Not IsDBNull(CurrentSurveyType) Then
 
-                        'bring forward the correct data entry tab based on the survey type
-                        Select Case CurrentSurveyType
-                            Case "Composition"
-                                Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
-                                DisableUnneededTabs("Composition")
+                'clear the results datagridview
+                Me.ResultsDataGridView.DataSource = Nothing
 
-                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "CC_ResultsByCampaign")
-                            Case "Population"
-                                Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
-                                DisableUnneededTabs("Population")
+                'bring forward the correct data entry tab based on the survey type
+                Select Case CurrentSurveyType
+                    Case "Composition"
+                        Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                        DisableUnneededTabs("Composition")
 
-                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "PE_ResultsByCampaign")
-                            Case "Radiotracking"
-                                Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
-                                DisableUnneededTabs("Radiotracking")
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "CC_ResultsByCampaign")
+                    Case "Population"
+                        Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
+                        DisableUnneededTabs("Population")
 
-                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "RT_ResultsByCampaign")
-                            Case Else
-                                Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
-                        End Select
-                    End If
-                End If
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "PE_ResultsByCampaign")
+                    Case "Radiotracking"
+                        Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
+                        DisableUnneededTabs("Radiotracking")
+
+                        'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                        LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "RT_ResultsByCampaign")
+                    Case Else
+                        Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                End Select
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -1688,7 +1685,7 @@ Public Class Form1
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCount)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCount, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
     End Sub
 
     'import arbitrary waypoints to population
@@ -1696,7 +1693,7 @@ Public Class Form1
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate], Bull        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
     End Sub
 
     'import arbitrary waypoints to radiotracking
@@ -1704,7 +1701,7 @@ Public Class Form1
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT        TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking)
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
     End Sub
 
     ''' <summary>
@@ -1721,7 +1718,7 @@ Public Class Form1
     ''' Finally, loads the transformed data into the DestinationDataTable.
     ''' </summary>
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
-    Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType)
+    Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType, Herd As String, FlightID As String)
         Try
             'get the data fileinfo to import
             Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
@@ -1745,6 +1742,8 @@ Public Class Form1
                 InputDataTable = ExcelDataset.Tables(0) 'first worksheet
             End If
 
+
+
             'make a list of desired default values to pass into the data tables translator form
             'these items will show up in the mappings datagridview's default values column to make things a little easier
             Dim DefaultValuesList As New List(Of String)
@@ -1762,8 +1761,8 @@ Public Class Form1
                 End If
 
                 'common default values
-                .Add(GetCurrentFlightID) 'the primary key of the currently selected flight
-                .Add(GetCurrentCampaignHerd) 'the currently selected herd in the campaigns table
+                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
+                .Add(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")) 'the currently selected herd in the campaigns table
                 .Add(SourceFileInfo.Name) 'the import file name
             End With
 
@@ -1773,7 +1772,6 @@ Public Class Form1
 
             'at this point we have transformed the csv into a clone of the destination datatable
             Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
-
 
             'the next step is to get the transformed data into the correct table
             'loop through the waypoints datatable and try to insert them into the datatable
@@ -1787,10 +1785,10 @@ Public Class Form1
                 Next
 
                 'override any selections made on the translator form
-                NewRow.Item("FlightID") = GetCurrentFlightID()
+                NewRow.Item("FlightID") = FlightID
                 NewRow.Item("RecordInsertedDate") = Now
                 NewRow.Item("RecordInsertedBy") = My.User.Name
-                NewRow.Item("Herd") = GetCurrentCampaignHerd()
+                NewRow.Item("Herd") = Herd
 
                 Select Case SurveyType
                     Case SurveyType.CompositionCount
