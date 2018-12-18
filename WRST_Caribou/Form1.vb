@@ -240,6 +240,7 @@ Public Class Form1
         If Not Grid.CurrentRow Is Nothing Then
             If Not Grid.CurrentRow.Cells("Herd") Is Nothing And Not IsDBNull(Grid.CurrentRow.Cells("Herd").Value) Then
                 Dim CampaignHerd As String = Grid.CurrentRow.Cells("Herd").Value
+                Debug.Print("CampaignHerd: " & CampaignHerd)
                 Me.SurveyFlightsGridEX.RootTable.Columns("Herd").DefaultValue = CampaignHerd
 
                 'while we're here set up the Herd column in the other gridexes to match 
@@ -377,21 +378,10 @@ Public Class Form1
 
 
 
-
-
-
-
-
-#Region "GridEX_SelectionChanged"
-    Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
-        'user gets here when they select a campaign from the campaigns gridex
-
-        'load the campaign header
-        LoadCampaignHeader()
-
-        'load the grid's default values
-        SetCampaignsGridEXDefaultValues()
-
+    ''' <summary>
+    ''' Brings the correct SurveyType tab forward in the census type tab control based on the SurveyType selected in the Campaigns GridEX, i.e. if the user selected a population survey then this sub will bring the population survey data tab to the front and disable the comp count and radiotracking tabs
+    ''' </summary>
+    Private Sub BringSurveyTypeTabControlForward()
         Try
             'set the survey type tab control to the current survey type
             Dim CurrentSurveyType As String = ""
@@ -410,18 +400,19 @@ Public Class Form1
                                 DisableUnneededTabs("Composition")
 
                                 'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentCampaignID, "CC_ResultsByCampaign")
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "CC_ResultsByCampaign")
                             Case "Population"
                                 Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
                                 DisableUnneededTabs("Population")
+
                                 'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentCampaignID, "PE_ResultsByCampaign")
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "PE_ResultsByCampaign")
                             Case "Radiotracking"
                                 Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
                                 DisableUnneededTabs("Radiotracking")
 
                                 'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
-                                LoadCampaignResults(GetCurrentCampaignID, "RT_ResultsByCampaign")
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "RT_ResultsByCampaign")
                             Case Else
                                 Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
                         End Select
@@ -432,9 +423,71 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
+    End Sub
+
+
+    Private Sub LoadCampaignDatabaseView()
+        Try
+            'set the survey type tab control to the current survey type
+            Dim Grid As GridEX = Me.CampaignsGridEX
+            Dim CurrentSurveyType As String = GetCurrentGridEXCellValue(Grid, "CampaignID")
+
+            If Not Grid.CurrentRow Is Nothing Then
+                If Not Grid.CurrentRow.Cells("SurveyType") Is Nothing Then
+                    If Not IsDBNull(Grid.CurrentRow.Cells("SurveyType").Value) Then
+                        CurrentSurveyType = Grid.CurrentRow.Cells("SurveyType").Value
+
+                        'clear the results datagridview
+                        Me.ResultsDataGridView.DataSource = Nothing
+
+                        'bring forward the correct data entry tab based on the survey type
+                        Select Case CurrentSurveyType
+                            Case "Composition"
+                                Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                                DisableUnneededTabs("Composition")
+
+                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "CC_ResultsByCampaign")
+                            Case "Population"
+                                Me.SurveyDataTabControl.SelectedTab = Me.PopulationTabPage
+                                DisableUnneededTabs("Population")
+
+                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "PE_ResultsByCampaign")
+                            Case "Radiotracking"
+                                Me.SurveyDataTabControl.SelectedTab = Me.RadiotrackingTabPage
+                                DisableUnneededTabs("Radiotracking")
+
+                                'summarize the campaign's results by querying the sql server and showing results in the resultsdatagridview
+                                LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), "RT_ResultsByCampaign")
+                            Case Else
+                                Me.SurveyDataTabControl.SelectedTab = Me.CompositionCountTabPage
+                        End Select
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
+#Region "GridEX_SelectionChanged"
+    Private Sub CampaignsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles CampaignsGridEX.SelectionChanged
+        'user gets here when they select a campaign from the campaigns gridex
+
+        'load the campaign header
+        LoadCampaignHeader()
+
+        'load the grid's default values
+        SetCampaignsGridEXDefaultValues()
 
         'when the current survey campaign current record changes then re-set up the flights grid default values.
         SetFlightsGridExDefaultValues()
+
+        'bring the selected surveytype tab forward, if population survey bring the population survey tab forward, etc.
+        BringSurveyTypeTabControlForward()
     End Sub
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
@@ -921,30 +974,54 @@ Public Class Form1
     End Sub
 
     ''' <summary>
-    ''' Returns the CampaignID of the currently selected Campaign
+    ''' Returns the current value of the cell specified by GridEXColumnKey  of the current row of GridEX.
     ''' </summary>
-    ''' <returns>String</returns>
-    Private Function GetCurrentCampaignID() As String
-        Dim CampaignID As String = ""
+    ''' <param name="GridEX">GridEX to search. GridEX</param>
+    ''' <param name="GridEXColumnKey">The key (name) of the GridEX column from which you would like the current value. String.</param>
+    ''' <returns></returns>
+    Private Function GetCurrentGridEXCellValue(GridEX As GridEX, GridEXColumnKey As String) As String
+        Dim CellValue As String = ""
         Try
             'get the current row of the VS GridEX
-            If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
-                Dim CurrentRow As GridEXRow = Me.CampaignsGridEX.CurrentRow
-                'loop through the columns and look for the CampaignID columns
-                For i As Integer = 0 To CurrentRow.Cells.Count - 1
-                    If CurrentRow.Cells(i).Column.Key = "CampaignID" Then
-                        'if there is a value
-                        If Not IsDBNull(CurrentRow.Cells(i).Value) Then
-                            CampaignID = CurrentRow.Cells(i).Value
-                        End If
+            If Not GridEX.CurrentRow Is Nothing Then
+                Dim CurrentRow As GridEXRow = GridEX.CurrentRow
+                If Not CurrentRow.Cells(GridEXColumnKey) Is Nothing Then
+                    If Not IsDBNull(CurrentRow.Cells(GridEXColumnKey)) Then
+                        CellValue = CurrentRow.Cells(GridEXColumnKey).Value
                     End If
-                Next
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
-        Return CampaignID
+        Return CellValue
     End Function
+
+    '''' <summary>
+    '''' Returns the CampaignID of the currently selected Campaign
+    '''' </summary>
+    '''' <returns>String</returns>
+    ''Private Function GetCurrentCampaignID() As String
+    '    Dim CampaignID As String = ""
+    '    Try
+    '        'get the current row of the VS GridEX
+    '        If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
+    '            Dim CurrentRow As GridEXRow = Me.CampaignsGridEX.CurrentRow
+    '            'loop through the columns and look for the CampaignID columns
+    '            For i As Integer = 0 To CurrentRow.Cells.Count - 1
+    '                If CurrentRow.Cells(i).Column.Key = "CampaignID" Then
+    '                    'if there is a value
+    '                    If Not IsDBNull(CurrentRow.Cells(i).Value) Then
+    '                        CampaignID = CurrentRow.Cells(i).Value
+    '                    End If
+    '                End If
+    '            Next
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+    '    End Try
+    '    Return CampaignID
+    'End Function
 
     ''' <summary>
     ''' Returns the FlightID of the currently selected Flight
@@ -982,15 +1059,16 @@ Public Class Form1
             'get the current row of the VS GridEX
             If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
                 Dim CurrentRow As GridEXRow = Me.CampaignsGridEX.CurrentRow
+                If Not IsDBNull(CurrentRow.Cells("Herd").Value) Then
+                    Herd = CurrentRow.Cells("Herd").Value
+                End If
                 'loop through the columns and look for the Herd columns
-                For i As Integer = 0 To CurrentRow.Cells.Count - 1
-                    If CurrentRow.Cells(i).Column.Key = "Herd" Then
-                        'if there is a value
-                        If Not IsDBNull(CurrentRow.Cells(i).Value) Then
-                            Herd = CurrentRow.Cells(i).Value
-                        End If
-                    End If
-                Next
+                'For i As Integer = 0 To CurrentRow.Cells.Count - 1
+                '    If CurrentRow.Cells(i).Column.Key = "Herd" Then
+                '        'if there is a value
+                ' Herd = CurrentRow.Cells(i).Value
+                '    End If
+                'Next
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
@@ -1600,7 +1678,7 @@ Public Class Form1
 
     Private Sub RefreshResultsToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshResultsToolStripButton.Click
         SaveDataset()
-        LoadCampaignResults(GetCurrentCampaignID, Me.DatabaseViewNameToolStripLabel.Text)
+        LoadCampaignResults(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID"), Me.DatabaseViewNameToolStripLabel.Text)
     End Sub
 
 #Region "Import waypoints from an arbitrary file"
@@ -1687,7 +1765,6 @@ Public Class Form1
                 .Add(GetCurrentFlightID) 'the primary key of the currently selected flight
                 .Add(GetCurrentCampaignHerd) 'the currently selected herd in the campaigns table
                 .Add(SourceFileInfo.Name) 'the import file name
-                .Add(0) 'useful for filling in required but null animal counts.
             End With
 
             'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
