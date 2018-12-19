@@ -75,10 +75,28 @@ Public Class Form1
         'load the Animal_Movement database grids
         LoadAnimalMovementGrids()
 
+
+        'load a list of available database views into the results tab combobox so users can choose an analytical view
+        LoadDatabaseViewsComboBox()
+
+
     End Sub
 
 
-
+    ''' <summary>
+    ''' Queries the database for a list of Views. Loads the View names into Me.DatabaseViewsToolStripComboBox
+    ''' </summary>
+    Private Sub LoadDatabaseViewsComboBox()
+        Try
+            Dim DatabaseViewsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT Name FROM sys.views ORDER BY Name")
+            Me.DatabaseViewsToolStripComboBox.Items.Add("")
+            For Each Row As DataRow In DatabaseViewsDataTable.Rows
+                Me.DatabaseViewsToolStripComboBox.Items.Add(Row.Item("Name"))
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 
 
 
@@ -117,7 +135,7 @@ Public Class Form1
             If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing Then
 
                 'set up flightid default values for child tables
-                Dim FlightID As String = GetCurrentFlightID()
+                Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
 
                 'set up the flight header to show the user which flight is being edited
                 'get some information about the survey flight to put in the header label so users know which survey flight they are editing
@@ -259,7 +277,7 @@ Public Class Form1
         'Set up default values
         Dim Grid As GridEX = Me.SurveyFlightsGridEX
         Grid.RootTable.Columns("FlightID").DefaultValue = Guid.NewGuid.ToString
-        Grid.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+        Grid.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Grid.RootTable.Columns("SOPNumber").DefaultValue = 0
         Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
         Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
@@ -289,7 +307,7 @@ Public Class Form1
             If Not Me.SurveyFlightsGridEX.CurrentRow.Cells("FlightID") Is Nothing Then
 
                 'set up flightid default values for child tables
-                Dim FlightID As String = GetCurrentFlightID()
+                Dim FlightID As String = GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")
                 Me.RadioTrackingGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
                 Me.CompositionCountsGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
                 Me.PopulationEstimateGridEX.RootTable.Columns("FlightID").DefaultValue = FlightID
@@ -304,7 +322,7 @@ Public Class Form1
             GridEX.RootTable.Columns("EID").DefaultValue = Guid.NewGuid.ToString
             GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -316,7 +334,7 @@ Public Class Form1
             GridEX.RootTable.Columns("CCID").DefaultValue = Guid.NewGuid.ToString
             GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -328,7 +346,7 @@ Public Class Form1
             GridEX.RootTable.Columns("RTID").DefaultValue = Guid.NewGuid.ToString
             GridEX.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             GridEX.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentCampaignHerd()
+            GridEX.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -1020,58 +1038,47 @@ Public Class Form1
     '    Return CampaignID
     'End Function
 
-    ''' <summary>
-    ''' Returns the FlightID of the currently selected Flight
-    ''' </summary>
-    ''' <returns>String</returns>
-    Private Function GetCurrentFlightID() As String
-        Dim FlightID As String = ""
-        Try
-            'get the current row of the VS GridEX
-            If Not Me.SurveyFlightsGridEX.CurrentRow Is Nothing Then
-                Dim CurrentRow As GridEXRow = Me.SurveyFlightsGridEX.CurrentRow
-                'loop through the columns and look for the FlightID columns
-                For i As Integer = 0 To CurrentRow.Cells.Count - 1
-                    If CurrentRow.Cells(i).Column.Key = "FlightID" Then
-                        'if there is a value
-                        If Not IsDBNull(CurrentRow.Cells(i).Value) Then
-                            FlightID = CurrentRow.Cells(i).Value
-                        End If
-                    End If
-                Next
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-        Return FlightID
-    End Function
+    '''' <summary>
+    '''' Returns the FlightID of the currently selected Flight
+    '''' </summary>
+    '''' <returns>String</returns>
+    'Private Function GetCurrentFlightID() As String
+    '    Dim Grid As GridEX = Me.SurveyFlightsGridEX
+    '    Dim FlightID As String = ""
+    '    Try
+    '        'get the current row of the VS GridEX
+    '        If Not Grid.CurrentRow Is Nothing Then
+    '            If Not Grid.CurrentRow.Cells("FlightID") Is Nothing Then
+    '                If Not IsDBNull(Grid.CurrentRow.Cells("FlightID").Value) Then
+    '                    FlightID = 
+    '                End If
+    '            End If
 
-    ''' <summary>
-    ''' Returns the Herd of the currently selected Flight
-    ''' </summary>
-    ''' <returns>String</returns>
-    Private Function GetCurrentCampaignHerd() As String
-        Dim Herd As String = ""
-        Try
-            'get the current row of the VS GridEX
-            If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
-                Dim CurrentRow As GridEXRow = Me.CampaignsGridEX.CurrentRow
-                If Not IsDBNull(CurrentRow.Cells("Herd").Value) Then
-                    Herd = CurrentRow.Cells("Herd").Value
-                End If
-                'loop through the columns and look for the Herd columns
-                'For i As Integer = 0 To CurrentRow.Cells.Count - 1
-                '    If CurrentRow.Cells(i).Column.Key = "Herd" Then
-                '        'if there is a value
-                ' Herd = CurrentRow.Cells(i).Value
-                '    End If
-                'Next
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-        Return Herd
-    End Function
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+    '    End Try
+    '    Return FlightID
+    'End Function
+
+    '''' <summary>
+    '''' Returns the Herd of the currently selected Flight
+    '''' </summary>
+    '''' <returns>String</returns>
+    'Private Function GetCurrentCampaignHerd() As String
+    '    Dim Herd As String = ""
+    '    Try
+    '        'get the current row of the VS GridEX
+    '        If Not Me.CampaignsGridEX.CurrentRow Is Nothing Then
+    '            If Not IsDBNull(Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value) Then
+    '                Herd = Me.CampaignsGridEX.CurrentRow.Cells("Herd").Value
+    '            End If
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+    '    End Try
+    '    Return Herd
+    'End Function
 
     ''' <summary>
     ''' Runs the Sql Server view PE_ResultsByCampaign for the survey campaign and returns the results as a DataTable to the ResultsDataGridView
@@ -1828,27 +1835,23 @@ Public Class Form1
         LoadDataset()
     End Sub
 
-    Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectSurveyTypeToolStripComboBox.SelectedIndexChanged
-        LoadSurveyResultsGrid()
+    Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DatabaseViewsToolStripComboBox.SelectedIndexChanged
+        If Not Me.DatabaseViewsToolStripComboBox.SelectedItem.ToString = "" Then
+            LoadSurveyResultsGrid()
+        Else
+            MsgBox("Select a database View to load")
+        End If
+
     End Sub
 
 
     ''' <summary>
-    ''' Fetches the data from the submitted query and loads it into the SurveyResultsDataGridView
+    ''' Fetches the data from the View selected in Me.DatabaseViewsToolStripComboBox and loads it into the SurveyResultsDataGridView
     ''' </summary>
     Private Sub LoadSurveyResultsGrid()
         Try
-            Dim Sql As String = ""
-            Select Case Me.SelectSurveyTypeToolStripComboBox.Text
-                Case "Composition count"
-                    Sql = "SELECT * FROM CC_Results_NoLocation"
-                Case "Population"
-                    Sql = "SELECT  * FROM PE_Results_NoLocation"
-                Case "Radiotracking"
-                    Sql = "SELECT  * FROM RT_Results_NoLocation"
-                Case Else
-                    Me.SurveyResultsBindingSource.DataSource = Nothing
-            End Select
+            Dim ViewName As String = Me.DatabaseViewsToolStripComboBox.SelectedItem
+            Dim Sql As String = "SELECT * FROM " & ViewName
 
             If Sql.Trim.Length > 0 Then
                 ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
@@ -1973,24 +1976,24 @@ Public Class Form1
         Return EID
     End Function
 
-    ''' <summary>
-    ''' Returns the value of the column SightingDate of GridEX.
-    ''' </summary>
-    ''' <returns>String</returns>
-    Private Function GetCurrentSightingDate(GridEX As GridEX) As Date
-        Dim SightingDate As Date
-        Try
-            'get the current row of the VS GridEX
-            If Not GridEX Is Nothing Then
-                If Not GridEX.CurrentRow Is Nothing Then
-                    SightingDate = GridEX.CurrentRow.Cells("SightingDate").Value
-                End If
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-        Return SightingDate
-    End Function
+    '''' <summary>
+    '''' Returns the value of the column SightingDate of GridEX.
+    '''' </summary>
+    '''' <returns>String</returns>
+    'Private Function GetCurrentSightingDate(GridEX As GridEX) As Date
+    '    Dim SightingDate As Date
+    '    Try
+    '        'get the current row of the VS GridEX
+    '        If Not GridEX Is Nothing Then
+    '            If Not GridEX.CurrentRow Is Nothing Then
+    '                SightingDate = GridEX.CurrentRow.Cells("SightingDate").Value
+    '            End If
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+    '    End Try
+    '    Return SightingDate
+    'End Function
 
 
 

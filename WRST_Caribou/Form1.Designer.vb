@@ -126,7 +126,7 @@ Partial Class Form1
         Me.ExportResultsToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.SurveyResultsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SelectSurveyTypeToolStripLabel = New System.Windows.Forms.ToolStripLabel()
-        Me.SelectSurveyTypeToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.DatabaseViewsToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -1195,7 +1195,7 @@ Partial Class Form1
         '
         'SurveyResultsToolStrip
         '
-        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.SelectSurveyTypeToolStripComboBox, Me.ToolStripSeparator10, Me.RefreshToolStripButton})
+        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.DatabaseViewsToolStripComboBox, Me.ToolStripSeparator10, Me.RefreshToolStripButton})
         Me.SurveyResultsToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.SurveyResultsToolStrip.Name = "SurveyResultsToolStrip"
         Me.SurveyResultsToolStrip.Size = New System.Drawing.Size(1170, 25)
@@ -1208,11 +1208,10 @@ Partial Class Form1
         Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(104, 22)
         Me.SelectSurveyTypeToolStripLabel.Text = "Select survey type:"
         '
-        'SelectSurveyTypeToolStripComboBox
+        'DatabaseViewsToolStripComboBox
         '
-        Me.SelectSurveyTypeToolStripComboBox.Items.AddRange(New Object() {"", "Composition count", "Population", "Radiotracking"})
-        Me.SelectSurveyTypeToolStripComboBox.Name = "SelectSurveyTypeToolStripComboBox"
-        Me.SelectSurveyTypeToolStripComboBox.Size = New System.Drawing.Size(200, 25)
+        Me.DatabaseViewsToolStripComboBox.Name = "DatabaseViewsToolStripComboBox"
+        Me.DatabaseViewsToolStripComboBox.Size = New System.Drawing.Size(200, 25)
         '
         'ToolStripSeparator10
         '
@@ -1506,7 +1505,7 @@ Partial Class Form1
     Friend WithEvents SurveyResultsDataGridView As DataGridView
     Friend WithEvents SurveyResultsToolStrip As ToolStrip
     Friend WithEvents SelectSurveyTypeToolStripLabel As ToolStripLabel
-    Friend WithEvents SelectSurveyTypeToolStripComboBox As ToolStripComboBox
+    Friend WithEvents DatabaseViewsToolStripComboBox As ToolStripComboBox
     Friend WithEvents SurveyResultsBindingNavigator As BindingNavigator
     Friend WithEvents BindingNavigatorCountItem As ToolStripLabel
     Friend WithEvents BindingNavigatorMoveFirstItem As ToolStripButton
