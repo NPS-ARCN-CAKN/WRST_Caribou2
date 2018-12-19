@@ -1223,8 +1223,8 @@ Partial Class Form1
         Me.RefreshToolStripButton.Image = CType(resources.GetObject("RefreshToolStripButton.Image"), System.Drawing.Image)
         Me.RefreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.RefreshToolStripButton.Name = "RefreshToolStripButton"
-        Me.RefreshToolStripButton.Size = New System.Drawing.Size(145, 22)
-        Me.RefreshToolStripButton.Text = "Refresh from database"
+        Me.RefreshToolStripButton.Size = New System.Drawing.Size(143, 22)
+        Me.RefreshToolStripButton.Text = "Refresh database view"
         '
         'CapturesBindingSource
         '

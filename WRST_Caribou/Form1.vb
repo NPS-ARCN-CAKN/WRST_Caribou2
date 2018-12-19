@@ -989,7 +989,7 @@ Public Class Form1
     End Sub
 
     ''' <summary>
-    ''' Returns the current value of the cell specified by GridEXColumnKey  of the current row of GridEX.
+    ''' Returns the current value of the cell specified by GridEXColumnKey of the current row of GridEX.
     ''' </summary>
     ''' <param name="GridEX">GridEX to search. GridEX</param>
     ''' <param name="GridEXColumnKey">The key (name) of the GridEX column from which you would like the current value. String.</param>
@@ -1885,6 +1885,10 @@ Public Class Form1
     End Sub
 
     Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
+        'refresh the list of database views
+        LoadDatabaseViewsComboBox()
+
+        'refresh the data in the results grid.
         LoadSurveyResultsGrid()
     End Sub
 
@@ -1958,23 +1962,23 @@ Public Class Form1
     End Sub
 
 
-    ''' <summary>
-    ''' Returns the EID of the current row of XrefPopulationCaribouGridEX.
-    ''' </summary>
-    ''' <returns>String</returns>
-    Private Function GetCurrentEID() As String
-        Dim GridEX As GridEX = Me.XrefPopulationCaribouGridEX
-        Dim EID As String = ""
-        Try
-            'get the current row of the VS GridEX
-            If Not GridEX.CurrentRow Is Nothing Then
-                EID = GridEX.CurrentRow.Cells("EID").Value
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-        End Try
-        Return EID
-    End Function
+    '''' <summary>
+    '''' Returns the EID of the current row of XrefPopulationCaribouGridEX.
+    '''' </summary>
+    '''' <returns>String</returns>
+    'Private Function GetCurrentEID() As String
+    '    Dim GridEX As GridEX = Me.XrefPopulationCaribouGridEX
+    '    Dim EID As String = ""
+    '    Try
+    '        'get the current row of the VS GridEX
+    '        If Not GridEX.CurrentRow Is Nothing Then
+    '            EID = GridEX.CurrentRow.Cells("EID").Value
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
+    '    End Try
+    '    Return EID
+    'End Function
 
     '''' <summary>
     '''' Returns the value of the column SightingDate of GridEX.
