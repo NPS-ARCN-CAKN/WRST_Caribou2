@@ -2013,7 +2013,7 @@ Public Class Form1
     End Sub
 
     Private Sub CampaignsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CampaignsGridEX.RecordUpdated
-        Me.CampaignsGridEX..CurrentRow.EndEdit()
+        Me.CampaignsGridEX.CurrentRow.EndEdit()
     End Sub
 
     Private Sub SurveyFlightsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.RecordUpdated
