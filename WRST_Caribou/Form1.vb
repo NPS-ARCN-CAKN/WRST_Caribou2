@@ -89,10 +89,13 @@ Public Class Form1
     Private Sub LoadDatabaseViewsComboBox()
         Try
             Dim DatabaseViewsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT Name FROM sys.views ORDER BY Name")
-            Me.DatabaseViewsToolStripComboBox.Items.Add("")
-            For Each Row As DataRow In DatabaseViewsDataTable.Rows
-                Me.DatabaseViewsToolStripComboBox.Items.Add(Row.Item("Name"))
-            Next
+            With Me.DatabaseViewsToolStripComboBox
+                .Items.Clear()
+                .Items.Add("")
+                For Each Row As DataRow In DatabaseViewsDataTable.Rows
+                    .Items.Add(Row.Item("Name"))
+                Next
+            End With
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try

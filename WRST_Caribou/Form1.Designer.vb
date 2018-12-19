@@ -1078,7 +1078,7 @@ Partial Class Form1
         Me.ResultsTabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.ResultsTabPage2.Size = New System.Drawing.Size(1176, 684)
         Me.ResultsTabPage2.TabIndex = 2
-        Me.ResultsTabPage2.Text = "Results"
+        Me.ResultsTabPage2.Text = "Database views"
         Me.ResultsTabPage2.UseVisualStyleBackColor = True
         '
         'SurveyResultsDataGridView
@@ -1205,8 +1205,8 @@ Partial Class Form1
         'SelectSurveyTypeToolStripLabel
         '
         Me.SelectSurveyTypeToolStripLabel.Name = "SelectSurveyTypeToolStripLabel"
-        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(104, 22)
-        Me.SelectSurveyTypeToolStripLabel.Text = "Select survey type:"
+        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(118, 22)
+        Me.SelectSurveyTypeToolStripLabel.Text = "Select database view:"
         '
         'DatabaseViewsToolStripComboBox
         '
