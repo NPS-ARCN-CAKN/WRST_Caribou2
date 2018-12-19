@@ -129,12 +129,6 @@
   <metadata name="HelpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>255, 60</value>
   </metadata>
-  <metadata name="WRST_CaribouDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="CompCountToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>809, 146</value>
-  </metadata>
   <metadata name="CompositionCountsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>400, 60</value>
   </metadata>
@@ -150,9 +144,6 @@
   <data name="XrefCompCountCaribouGridEX_DesignTimeLayout.LayoutString" xml:space="preserve">
     <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;IBindingList&lt;/Key&gt;&lt;Caption&gt;GPS collared caribou detected in this group:&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="AnimalID"&gt;&lt;Caption&gt;Animal ID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;AnimalID&lt;/DataMember&gt;&lt;EditType&gt;Combo&lt;/EditType&gt;&lt;Key&gt;AnimalID&lt;/Key&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;/Column0&gt;&lt;Column1 ID="ProjectID"&gt;&lt;Caption&gt;Project ID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;ProjectID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;ProjectID&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;/Column1&gt;&lt;Column2 ID="RecordInsertedDate"&gt;&lt;Caption&gt;Record Inserted Date&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedDate&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;FormatString&gt;d&lt;/FormatString&gt;&lt;Key&gt;RecordInsertedDate&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;/Column2&gt;&lt;Column3 ID="RecordInsertedBy"&gt;&lt;Caption&gt;Record Inserted By&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedBy&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;RecordInsertedBy&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;/Column3&gt;&lt;Column4 ID="CCID"&gt;&lt;Caption&gt;CCID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;CCID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;CCID&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;/Column4&gt;&lt;Column5 ID="CCCID"&gt;&lt;Caption&gt;CCCID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;CCCID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;CCCID&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;/Column5&gt;&lt;/Columns&gt;&lt;SortKeys Collection="true" ElementName="SortKey"&gt;&lt;SortKey0 ID="SortKey0"&gt;&lt;ColIndex&gt;5&lt;/ColIndex&gt;&lt;/SortKey0&gt;&lt;/SortKeys&gt;&lt;GroupCondition /&gt;&lt;/RootTable&gt;&lt;/GridEXLayoutData&gt;</value>
   </data>
-  <metadata name="SurveyFlightsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1143, 17</value>
-  </metadata>
   <metadata name="CompCountToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>809, 146</value>
   </metadata>
@@ -187,9 +178,6 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="PopulationToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>320, 232</value>
-  </metadata>
   <metadata name="PopulationEstimateBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 103</value>
   </metadata>
@@ -235,9 +223,6 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="RadiotrackingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>512, 232</value>
-  </metadata>
   <metadata name="RadioTrackingBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>328, 275</value>
   </metadata>
@@ -283,9 +268,6 @@
   <data name="SurveyFlightsGridEX_DesignTimeLayout.LayoutString" xml:space="preserve">
     <value>&lt;GridEXLayoutData&gt;&lt;RootTable&gt;&lt;Key&gt;Surveys&lt;/Key&gt;&lt;Caption&gt;Survey flights&lt;/Caption&gt;&lt;Columns Collection="true" ElementName="Column"&gt;&lt;Column0 ID="CrewNumber"&gt;&lt;Caption&gt;Crew Number&lt;/Caption&gt;&lt;DataTypeCode&gt;Int32&lt;/DataTypeCode&gt;&lt;DataMember&gt;CrewNumber&lt;/DataMember&gt;&lt;Key&gt;CrewNumber&lt;/Key&gt;&lt;Position&gt;0&lt;/Position&gt;&lt;/Column0&gt;&lt;Column1 ID="TailNo"&gt;&lt;Caption&gt;Tail Number&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;TailNo&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;TailNo&lt;/Key&gt;&lt;Position&gt;1&lt;/Position&gt;&lt;LimitToList&gt;False&lt;/LimitToList&gt;&lt;HasValueList&gt;True&lt;/HasValueList&gt;&lt;/Column1&gt;&lt;Column2 ID="AircraftType"&gt;&lt;Caption&gt;Aircraft Type&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;AircraftType&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;AircraftType&lt;/Key&gt;&lt;Position&gt;2&lt;/Position&gt;&lt;/Column2&gt;&lt;Column3 ID="IsFollowUpFlight"&gt;&lt;Caption&gt;Is Follow Up Flight&lt;/Caption&gt;&lt;DataTypeCode&gt;Boolean&lt;/DataTypeCode&gt;&lt;ColumnType&gt;CheckBox&lt;/ColumnType&gt;&lt;DataMember&gt;IsFollowUpFlight&lt;/DataMember&gt;&lt;EditType&gt;CheckBox&lt;/EditType&gt;&lt;Key&gt;IsFollowUpFlight&lt;/Key&gt;&lt;Position&gt;3&lt;/Position&gt;&lt;DefaultValue&gt;False&lt;/DefaultValue&gt;&lt;DefaultValueType&gt;System.Boolean&lt;/DefaultValueType&gt;&lt;/Column3&gt;&lt;Column4 ID="Herd"&gt;&lt;Caption&gt;Herd&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Herd&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;Herd&lt;/Key&gt;&lt;Position&gt;4&lt;/Position&gt;&lt;/Column4&gt;&lt;Column5 ID="Pilot"&gt;&lt;Caption&gt;Pilot&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Pilot&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;Pilot&lt;/Key&gt;&lt;Position&gt;5&lt;/Position&gt;&lt;Width&gt;107&lt;/Width&gt;&lt;/Column5&gt;&lt;Column6 ID="Observer1"&gt;&lt;Caption&gt;Observer1&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Observer1&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;Observer1&lt;/Key&gt;&lt;Position&gt;6&lt;/Position&gt;&lt;/Column6&gt;&lt;Column7 ID="Observer2"&gt;&lt;Caption&gt;Observer2&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Observer2&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;Observer2&lt;/Key&gt;&lt;Position&gt;7&lt;/Position&gt;&lt;/Column7&gt;&lt;Column8 ID="TimeDepart"&gt;&lt;Caption&gt;Time Depart&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;TimeDepart&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;CalendarCombo&lt;/EditType&gt;&lt;FormatString&gt;yyyy-MM-dd HH:mm:ss&lt;/FormatString&gt;&lt;Key&gt;TimeDepart&lt;/Key&gt;&lt;Position&gt;8&lt;/Position&gt;&lt;Width&gt;197&lt;/Width&gt;&lt;/Column8&gt;&lt;Column9 ID="TimeReturn"&gt;&lt;Caption&gt;Time Return&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;TimeReturn&lt;/DataMember&gt;&lt;DefaultGroupFormatString /&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;CalendarCombo&lt;/EditType&gt;&lt;FormatString&gt;yyyy-MM-dd HH:mm:ss&lt;/FormatString&gt;&lt;Key&gt;TimeReturn&lt;/Key&gt;&lt;Position&gt;9&lt;/Position&gt;&lt;Width&gt;197&lt;/Width&gt;&lt;/Column9&gt;&lt;Column10 ID="SpotterPlaneTailNo"&gt;&lt;Caption&gt;Spotter Plane Tail No&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;SpotterPlaneTailNo&lt;/DataMember&gt;&lt;Key&gt;SpotterPlaneTailNo&lt;/Key&gt;&lt;Position&gt;10&lt;/Position&gt;&lt;Width&gt;183&lt;/Width&gt;&lt;/Column10&gt;&lt;Column11 ID="SpotterPlaneType"&gt;&lt;Caption&gt;Spotter Plane Type&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;SpotterPlaneType&lt;/DataMember&gt;&lt;Key&gt;SpotterPlaneType&lt;/Key&gt;&lt;Position&gt;11&lt;/Position&gt;&lt;Width&gt;153&lt;/Width&gt;&lt;/Column11&gt;&lt;Column12 ID="SpotterPlanePilot"&gt;&lt;Caption&gt;Spotter Plane Pilot&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;SpotterPlanePilot&lt;/DataMember&gt;&lt;Key&gt;SpotterPlanePilot&lt;/Key&gt;&lt;Position&gt;12&lt;/Position&gt;&lt;Width&gt;147&lt;/Width&gt;&lt;/Column12&gt;&lt;Column13 ID="WeatherConditions"&gt;&lt;Caption&gt;Weather Conditions&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;WeatherConditions&lt;/DataMember&gt;&lt;Key&gt;WeatherConditions&lt;/Key&gt;&lt;Position&gt;13&lt;/Position&gt;&lt;Width&gt;161&lt;/Width&gt;&lt;/Column13&gt;&lt;Column14 ID="SnowConditions"&gt;&lt;Caption&gt;Snow Conditions&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;SnowConditions&lt;/DataMember&gt;&lt;Key&gt;SnowConditions&lt;/Key&gt;&lt;Position&gt;14&lt;/Position&gt;&lt;Width&gt;148&lt;/Width&gt;&lt;/Column14&gt;&lt;Column15 ID="SOPNumber"&gt;&lt;Caption&gt;SOPNumber&lt;/Caption&gt;&lt;DataTypeCode&gt;Int32&lt;/DataTypeCode&gt;&lt;DataMember&gt;SOPNumber&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;Key&gt;SOPNumber&lt;/Key&gt;&lt;Position&gt;15&lt;/Position&gt;&lt;/Column15&gt;&lt;Column16 ID="SOPVersion"&gt;&lt;Caption&gt;SOPVersion&lt;/Caption&gt;&lt;DataTypeCode&gt;Decimal&lt;/DataTypeCode&gt;&lt;DataMember&gt;SOPVersion&lt;/DataMember&gt;&lt;EditType&gt;DropDownList&lt;/EditType&gt;&lt;FormatString&gt;0.00&lt;/FormatString&gt;&lt;Key&gt;SOPVersion&lt;/Key&gt;&lt;Position&gt;16&lt;/Position&gt;&lt;/Column16&gt;&lt;Column17 ID="Notes"&gt;&lt;Caption&gt;Notes&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;Notes&lt;/DataMember&gt;&lt;Key&gt;Notes&lt;/Key&gt;&lt;Position&gt;17&lt;/Position&gt;&lt;/Column17&gt;&lt;Column18 ID="CertificationDate"&gt;&lt;Caption&gt;Certification Date&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;CertificationDate&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;FormatString&gt;yyyy-MM-dd HH:mm:ss&lt;/FormatString&gt;&lt;Key&gt;CertificationDate&lt;/Key&gt;&lt;Position&gt;18&lt;/Position&gt;&lt;/Column18&gt;&lt;Column19 ID="CertifiedBy"&gt;&lt;Caption&gt;Certified By&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;CertifiedBy&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;CertifiedBy&lt;/Key&gt;&lt;Position&gt;19&lt;/Position&gt;&lt;/Column19&gt;&lt;Column20 ID="CertificationLevel"&gt;&lt;Caption&gt;Certification Level&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;CertificationLevel&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;CertificationLevel&lt;/Key&gt;&lt;Position&gt;20&lt;/Position&gt;&lt;DefaultValue&gt;Provisional&lt;/DefaultValue&gt;&lt;/Column20&gt;&lt;Column21 ID="RecordInsertedBy"&gt;&lt;Caption&gt;Record Inserted By&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedBy&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;RecordInsertedBy&lt;/Key&gt;&lt;Position&gt;21&lt;/Position&gt;&lt;/Column21&gt;&lt;Column22 ID="RecordInsertedDate"&gt;&lt;Caption&gt;Record Inserted Date&lt;/Caption&gt;&lt;DataTypeCode&gt;DateTime&lt;/DataTypeCode&gt;&lt;DataMember&gt;RecordInsertedDate&lt;/DataMember&gt;&lt;DefaultGroupInterval&gt;Date&lt;/DefaultGroupInterval&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;FormatString&gt;yyyy-MM-dd HH:mm:ss&lt;/FormatString&gt;&lt;Key&gt;RecordInsertedDate&lt;/Key&gt;&lt;Position&gt;22&lt;/Position&gt;&lt;/Column22&gt;&lt;Column23 ID="FlightID"&gt;&lt;Caption&gt;Flight ID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;FlightID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;FlightID&lt;/Key&gt;&lt;Position&gt;23&lt;/Position&gt;&lt;/Column23&gt;&lt;Column24 ID="CampaignID"&gt;&lt;Caption&gt;Campaign ID&lt;/Caption&gt;&lt;DataTypeCode&gt;String&lt;/DataTypeCode&gt;&lt;DataMember&gt;CampaignID&lt;/DataMember&gt;&lt;EditType&gt;NoEdit&lt;/EditType&gt;&lt;Key&gt;CampaignID&lt;/Key&gt;&lt;Position&gt;24&lt;/Position&gt;&lt;/Column24&gt;&lt;/Columns&gt;&lt;SortKeys Collection="true" ElementName="SortKey"&gt;&lt;SortKey0 ID="SortKey0"&gt;&lt;ColIndex&gt;8&lt;/ColIndex&gt;&lt;/SortKey0&gt;&lt;/SortKeys&gt;&lt;FormatConditions Collection="true" ElementName="Condition"&gt;&lt;Condition0 ID="FormatConditionCertified"&gt;&lt;ColIndex&gt;20&lt;/ColIndex&gt;&lt;FormatStyle&gt;&lt;BackColor&gt;192, 255, 192&lt;/BackColor&gt;&lt;/FormatStyle&gt;&lt;TargetColIndex&gt;0&lt;/TargetColIndex&gt;&lt;Key&gt;FormatConditionCertified&lt;/Key&gt;&lt;FilterCondition&gt;&lt;ColumnIndex&gt;20&lt;/ColumnIndex&gt;&lt;Value1&gt;Certified&lt;/Value1&gt;&lt;/FilterCondition&gt;&lt;/Condition0&gt;&lt;Condition1 ID="FormatConditionNotCertified"&gt;&lt;ColIndex&gt;20&lt;/ColIndex&gt;&lt;FormatStyle&gt;&lt;BackColor&gt;255, 255, 192&lt;/BackColor&gt;&lt;/FormatStyle&gt;&lt;TargetColIndex&gt;0&lt;/TargetColIndex&gt;&lt;Key&gt;FormatConditionNotCertified&lt;/Key&gt;&lt;FilterCondition&gt;&lt;ColumnIndex&gt;20&lt;/ColumnIndex&gt;&lt;ConditionOperator&gt;NotEqual&lt;/ConditionOperator&gt;&lt;Value1&gt;Certified&lt;/Value1&gt;&lt;/FilterCondition&gt;&lt;/Condition1&gt;&lt;Condition2 ID="FormatConditionTimeReturenLTTimeDepart"&gt;&lt;ColIndex&gt;8&lt;/ColIndex&gt;&lt;FormatStyle&gt;&lt;BackColor&gt;Red&lt;/BackColor&gt;&lt;/FormatStyle&gt;&lt;TargetColIndex&gt;9&lt;/TargetColIndex&gt;&lt;Key&gt;FormatConditionTimeReturenLTTimeDepart&lt;/Key&gt;&lt;FilterCondition&gt;&lt;ColumnIndex&gt;9&lt;/ColumnIndex&gt;&lt;ConditionOperator&gt;LessThan&lt;/ConditionOperator&gt;&lt;ValueColumnIndex1&gt;8&lt;/ValueColumnIndex1&gt;&lt;/FilterCondition&gt;&lt;/Condition2&gt;&lt;/FormatConditions&gt;&lt;GroupCondition /&gt;&lt;RowHeaders&gt;True&lt;/RowHeaders&gt;&lt;TableHeader&gt;False&lt;/TableHeader&gt;&lt;/RootTable&gt;&lt;FormatStyles Collection="true" ElementName="Style"&gt;&lt;Style0 ID="ProvisionalFormatStyle"&gt;&lt;BackColor&gt;255, 255, 192&lt;/BackColor&gt;&lt;Key&gt;ProvisionalFormatStyle&lt;/Key&gt;&lt;/Style0&gt;&lt;Style1 ID="RawFormatStyle"&gt;&lt;BackColor&gt;255, 192, 192&lt;/BackColor&gt;&lt;Key&gt;RawFormatStyle&lt;/Key&gt;&lt;/Style1&gt;&lt;Style2 ID="CertifiedFormatStyle"&gt;&lt;BackColor&gt;192, 255, 192&lt;/BackColor&gt;&lt;Key&gt;CertifiedFormatStyle&lt;/Key&gt;&lt;/Style2&gt;&lt;/FormatStyles&gt;&lt;/GridEXLayoutData&gt;</value>
   </data>
-  <metadata name="ResultsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>434, 146</value>
-  </metadata>
   <metadata name="ResultsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>434, 146</value>
   </metadata>
@@ -388,12 +370,6 @@
   <metadata name="SurveyResultsBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>538, 103</value>
   </metadata>
-  <metadata name="SurveyResultsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>294, 103</value>
-  </metadata>
-  <metadata name="SurveyResultsBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>538, 103</value>
-  </metadata>
   <metadata name="SurveyResultsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>401, 103</value>
   </metadata>
@@ -458,26 +434,23 @@
   <data name="RefreshToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALTSURBVDhPlVNtS5NRGH7ID9KHfoFQWfaioWZRCH0JwqCQ
+        QGuWszXfMtNoSUppkKVRkWlMpmJO5rSxttl82dicihvTD2bNzTHXllOmH1QeUobOlzH16nlOQ8mI6IID
+        55z7XNc5133fh2Kh0+nCe3t7OcxQ6/V6Z0tLS5DZC2i1WotGo1F0d3dfVCqVYeTwbvT398cYDIYxm82G
+        +fl5LC8vY3NzExsbG1hYWIDX64XZbEZ7e/ugQqGICNF2wJCN09PT2Nrawt8QDAZhtVrxyCDwcpSc31/C
+        CNDr6+v/FKBpGnwJP5ij4ZpC1F9gPNNra2tgLXg8HmIjEAjg2w8H3lleQmDKQWF/Ju7oeagwl+LpQAnS
+        ZVcMITpFdXZ20qurq5iZmYHFYsHQ0BB0IxpUDpVCbBeh+7sKHe6P+OSSQelshXxcgmLtPSTXJXm2BVZW
+        VrC4uIjZ2VkiJLE1osFagy63EpWDZcjquI6bilQ81gtQrClEsiipj5BZsAJ+v594ZJM5OTmJMnMR8nt4
+        yNVwUdIlgNFoJMK8prTgJdEFc3k5tSexOnHvtgBburm5OUJ2u92kdBMTE8SOvkePvr4+Ip5Rl7H+RxXU
+        ajW9tLREbnC5XBgfHyfJZOcmkwlMI+GBtJCI1tfX0yHaDpgGoX0+H6ampuBwOGC328ntdscYBowDyG3i
+        g1t3jcSrqqroxCcnzadLYhEniEZM3hEv1dbWRrNB1gYhhgScTicKWnJRoMjG7Q88nHt2BmfLEnCjIQXV
+        wxXIkWYgKjuykZLJZJeZ4R8dHSWtyyaUrUr6+xTkyzPRYKmG6MsbCEdeoebzC7wdfk72o7IOfj3AjzhP
+        bLS2tkYyH6hZIpH4pFIpVCoV5HI50l6n4lZzGriNVxFfFIMThUdxLO8wDmXvN22Td0MsFu9jkpVQW1sb
+        LxQKw089jDXF3Y+2h8L/Dw6HCjt+94gytNwFivoJ/95MzYRjdOYAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="CapturesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>218, 146</value>
-  </metadata>
-  <metadata name="CaribouBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>720, 103</value>
   </metadata>
   <metadata name="CaribouBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>720, 103</value>

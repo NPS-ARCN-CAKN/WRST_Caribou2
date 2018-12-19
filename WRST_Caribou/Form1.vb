@@ -805,11 +805,11 @@ Public Class Form1
             If Me.WRST_CaribouDataSet.HasChanges = True Then
                 'If MsgBox("Save all changes to the database?", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes Then
                 Me.Validate()
+                Me.CampaignsBindingSource.EndEdit()
+                Me.SurveyFlightsBindingSource.EndEdit()
                 Me.CompositionCountsBindingSource.EndEdit()
                 Me.PopulationEstimateBindingSource.EndEdit()
                 Me.RadioTrackingBindingSource.EndEdit()
-                Me.SurveyFlightsBindingSource.EndEdit()
-                Me.CampaignsBindingSource.EndEdit()
                 Me.XrefPopulationCaribouBindingSource.EndEdit()
                 Me.XrefCompCountCaribouBindingSource.EndEdit()
                 Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
@@ -1742,8 +1742,6 @@ Public Class Form1
                 InputDataTable = ExcelDataset.Tables(0) 'first worksheet
             End If
 
-
-
             'make a list of desired default values to pass into the data tables translator form
             'these items will show up in the mappings datagridview's default values column to make things a little easier
             Dim DefaultValuesList As New List(Of String)
@@ -1790,6 +1788,7 @@ Public Class Form1
                 NewRow.Item("RecordInsertedBy") = My.User.Name
                 NewRow.Item("Herd") = Herd
 
+
                 Select Case SurveyType
                     Case SurveyType.CompositionCount
                         NewRow.Item("CCID") = Guid.NewGuid.ToString
@@ -1806,10 +1805,13 @@ Public Class Form1
                 Select Case SurveyType
                     Case SurveyType.CompositionCount
                         Me.CompositionCountsBindingSource.EndEdit()
+                        'Me.CompositionCountsGridEX.CurrentRow.EndEdit()
                     Case SurveyType.PopulationEstimate
                         Me.PopulationEstimateBindingSource.EndEdit()
+                        'Me.PopulationEstimateGridEX.CurrentRow.EndEdit()
                     Case SurveyType.Radiotracking
                         Me.RadioTrackingBindingSource.EndEdit()
+                        'Me.RadioTrackingGridEX.CurrentRow.EndEdit()
                 End Select
 
             Next
@@ -1989,6 +1991,52 @@ Public Class Form1
         End Try
         Return SightingDate
     End Function
+
+
+
+
+
+
+#Region "After GridEX edits"
+
+    Private Sub PopulationEstimateGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.RecordUpdated
+        Me.PopulationEstimateGridEX.CurrentRow.EndEdit()
+        'Me.PopulationEstimateBindingSource.EndEdit()
+    End Sub
+
+    Private Sub CompositionCountsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.RecordUpdated
+        Me.CompositionCountsGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub RadioTrackingGridEX_RecordUpdated(sender As Object, e As EventArgs)
+        Me.RadioTrackingGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub CampaignsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CampaignsGridEX.RecordUpdated
+        Me.CampaignsGridEX..CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub SurveyFlightsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.RecordUpdated
+        Me.SurveyFlightsGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub XrefCompCountCaribouGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles XrefCompCountCaribouGridEX.RecordUpdated
+        Me.XrefCompCountCaribouGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub XrefPopulationCaribouGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.RecordUpdated
+        Me.XrefPopulationCaribouGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub XrefRadiotrackingCaribouGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.RecordUpdated
+        Me.XrefRadiotrackingCaribouGridEX.CurrentRow.EndEdit()
+    End Sub
+
+
+#End Region
+
+
+
 
     ' <summary>
     ' Queries the Animal_Movement database for deployed GPS collars during SightingDate and then loads the submitted GridEX's AnimalID column
