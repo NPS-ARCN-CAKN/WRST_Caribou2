@@ -21,11 +21,14 @@ Public Class Form1
         LoadDataset()
 
         'make all gridexes read-only to start with. this is changed by the user clicking Me.EditCampaignsCheckBox
-        ToggleGridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
-        ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
-        ToggleGridEXReadOnly(Me.RadioTrackingGridEX, InheritableBoolean.False)
-        ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
-        ToggleGridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
+        'make all the GridEXes readonly/editable
+        MakeGridEXesReadOnly(False)
+        'ToggleGridEXReadOnly(Me.CampaignsGridEX, InheritableBoolean.False)
+        'ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, InheritableBoolean.False)
+        'ToggleGridEXReadOnly(Me.RadioTrackingGridEX, InheritableBoolean.False)
+        'ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, InheritableBoolean.False)
+        'ToggleGridEXReadOnly(Me.CompositionCountsGridEX, InheritableBoolean.False)
+
 
         'set up campaigns gridex
         FormatGridEX(Me.CampaignsGridEX) 'consistent look and feel
@@ -936,17 +939,7 @@ Public Class Form1
         MsgBox(AboutText)
     End Sub
 
-    Private Sub ToggleGridEXReadOnly(GridEX As GridEX, AllowEdits As InheritableBoolean)
-        Try
-            With GridEX.RootTable
-                .AllowAddNew = AllowEdits
-                .AllowEdit = AllowEdits
-                .AllowDelete = AllowEdits
-            End With
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
+
 
 
     Private Function GetCurrentCampaignHeader() As String
@@ -1925,9 +1918,20 @@ Public Class Form1
     End Sub
 
     Private Sub EditCampaignsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles EditCampaignsCheckBox.CheckedChanged
+        'make all the GridEXes readonly/editable
+        MakeGridEXesReadOnly(Me.EditCampaignsCheckBox.Checked)
+    End Sub
+
+    ''' <summary>
+    ''' Renders all the GridEXes in the application read only.
+    ''' </summary>
+    ''' <param name="AllowEdits">Make all the GridEXes read only. Boolean.</param>
+    Private Sub MakeGridEXesReadOnly(AllowEdits As Boolean)
         'for some bizarre reason the checkbox does not return true or false, maybe because inheritableboolean? anyway, convert
         Dim Checked As InheritableBoolean = InheritableBoolean.False
-        If Me.EditCampaignsCheckBox.Checked = True Then Checked = InheritableBoolean.True Else Checked = InheritableBoolean.False
+        If AllowEdits = True Then Checked = InheritableBoolean.True Else Checked = InheritableBoolean.False
+
+        'toggle all the gridexes editability
         ToggleGridEXReadOnly(Me.CampaignsGridEX, Checked)
         ToggleGridEXReadOnly(Me.SurveyFlightsGridEX, Checked)
         ToggleGridEXReadOnly(Me.PopulationEstimateGridEX, Checked)
@@ -1938,6 +1942,22 @@ Public Class Form1
         ToggleGridEXReadOnly(Me.XrefRadiotrackingCaribouGridEX, Checked)
     End Sub
 
+    ''' <summary>
+    ''' Enables/disables GridEX.
+    ''' </summary>
+    ''' <param name="GridEX">GridEX to modify. GridEX.</param>
+    ''' <param name="AllowEdits">Allow edits. Boolean.</param>
+    Private Sub ToggleGridEXReadOnly(GridEX As GridEX, AllowEdits As InheritableBoolean)
+        Try
+            With GridEX.RootTable
+                .AllowAddNew = AllowEdits
+                .AllowEdit = AllowEdits
+                .AllowDelete = AllowEdits
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 
     ''' <summary>
     ''' Updates the SurveyTime_Min column of the Flights GridEX with the survey effort in minutes by caculating TimeReturn - TimeDepart.
@@ -2010,8 +2030,18 @@ Public Class Form1
 #Region "After GridEX edits"
 
     Private Sub PopulationEstimateGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.RecordUpdated
-        Me.PopulationEstimateGridEX.CurrentRow.EndEdit()
+        Dim Grid As GridEX = Me.PopulationEstimateGridEX
+        Grid.CurrentRow.EndEdit()
+
         'Me.PopulationEstimateBindingSource.EndEdit()
+    End Sub
+
+    Private Sub PopulationEstimateGridEX_Error(sender As Object, e As Janus.Windows.GridEX.ErrorEventArgs) Handles PopulationEstimateGridEX.Error
+        Dim Grid As GridEX = Me.PopulationEstimateGridEX
+        If MsgBox(e.ErrorMessage & " Cancel edit?", MsgBoxStyle.YesNo, "Cancel edit?") = MsgBoxResult.Yes Then
+            Grid.CancelCurrentEdit()
+        End If
+
     End Sub
 
     Private Sub CompositionCountsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.RecordUpdated
@@ -2041,6 +2071,8 @@ Public Class Form1
     Private Sub XrefRadiotrackingCaribouGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.RecordUpdated
         Me.XrefRadiotrackingCaribouGridEX.CurrentRow.EndEdit()
     End Sub
+
+
 
 
 #End Region
