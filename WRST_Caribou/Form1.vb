@@ -826,28 +826,31 @@ Public Class Form1
     ''' </summary>
     Private Sub SaveDataset()
         Try
+            'end all bindingsource edits
+            Me.CampaignsBindingSource.EndEdit()
+            Me.SurveyFlightsBindingSource.EndEdit()
+            Me.CompositionCountsBindingSource.EndEdit()
+            Me.PopulationEstimateBindingSource.EndEdit()
+            Me.RadioTrackingBindingSource.EndEdit()
+            Me.XrefPopulationCaribouBindingSource.EndEdit()
+            Me.XrefCompCountCaribouBindingSource.EndEdit()
+            Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
+
+            'try to save
             If Me.WRST_CaribouDataSet.HasChanges = True Then
-                'If MsgBox("Save all changes to the database?", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes Then
                 Me.Validate()
-                Me.CampaignsBindingSource.EndEdit()
-                Me.SurveyFlightsBindingSource.EndEdit()
-                Me.CompositionCountsBindingSource.EndEdit()
-                Me.PopulationEstimateBindingSource.EndEdit()
-                Me.RadioTrackingBindingSource.EndEdit()
-                Me.XrefPopulationCaribouBindingSource.EndEdit()
-                Me.XrefCompCountCaribouBindingSource.EndEdit()
-                Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
                 Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
                 Me.WRST_CaribouDataSet.AcceptChanges()
-                'End If
             End If
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            Dim Response As MsgBoxResult = MsgBox("There was an error saving your data to the database." & vbNewLine & ex.Message & vbNewLine & vbNewLine & "Click Yes to continue. Click No to abandon all edits since the last save. ", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes
+            If Response = 0 Then
+                'cancel all pending edits, last resort
+                Me.WRST_CaribouDataSet.RejectChanges()
+            End If
         End Try
 
     End Sub
-
-
 
     Private Sub LoadDataset()
         Try
@@ -2034,14 +2037,6 @@ Public Class Form1
         Grid.CurrentRow.EndEdit()
 
         'Me.PopulationEstimateBindingSource.EndEdit()
-    End Sub
-
-    Private Sub PopulationEstimateGridEX_Error(sender As Object, e As Janus.Windows.GridEX.ErrorEventArgs) Handles PopulationEstimateGridEX.Error
-        Dim Grid As GridEX = Me.PopulationEstimateGridEX
-        If MsgBox(e.ErrorMessage & " Cancel edit?", MsgBoxStyle.YesNo, "Cancel edit?") = MsgBoxResult.Yes Then
-            Grid.CancelCurrentEdit()
-        End If
-
     End Sub
 
     Private Sub CompositionCountsGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.RecordUpdated
