@@ -914,16 +914,7 @@ Public Class Form1
     ''' </summary>
     Private Sub SaveDataset()
         'end all bindingsource edits
-        Me.CampaignsBindingSource.EndEdit()
-        Me.SurveyFlightsBindingSource.EndEdit()
-        Me.CompositionCountsBindingSource.EndEdit()
-        Me.PopulationEstimateBindingSource.EndEdit()
-        Me.RadioTrackingBindingSource.EndEdit()
-        Me.XrefPopulationCaribouBindingSource.EndEdit()
-        Me.XrefCompCountCaribouBindingSource.EndEdit()
-        Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
-
-
+        EndAllBindingSourceEdits
 
         'try to save
         If Me.WRST_CaribouDataSet.HasChanges = True Then
@@ -942,18 +933,24 @@ Public Class Form1
             End Try
 
         End If
+    End Sub
 
-
-        'Me.PopulationEstimateGridEX.EventErrorHandling = False
-        'With Me.PopulationEstimateGridEX
-        '    .Refetch()
-        '    .Refresh()
-        '    .Validate()
-        '    .UpdateData()
-        '    .Update()
-        '    .
-        'End With
-
+    ''' <summary>
+    ''' Ends edits on all the application's BindingSources. Usually done before saving.
+    ''' </summary>
+    Private Sub EndAllBindingSourceEdits()
+        Try
+            Me.CampaignsBindingSource.EndEdit()
+            Me.SurveyFlightsBindingSource.EndEdit()
+            Me.CompositionCountsBindingSource.EndEdit()
+            Me.PopulationEstimateBindingSource.EndEdit()
+            Me.RadioTrackingBindingSource.EndEdit()
+            Me.XrefPopulationCaribouBindingSource.EndEdit()
+            Me.XrefCompCountCaribouBindingSource.EndEdit()
+            Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     Private Sub LoadDataset()
