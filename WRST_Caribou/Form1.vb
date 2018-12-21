@@ -913,30 +913,46 @@ Public Class Form1
     ''' Save any pending changes in the in-memory Dataset, with confirmation, back to the database.
     ''' </summary>
     Private Sub SaveDataset()
-        Try
-            'end all bindingsource edits
-            Me.CampaignsBindingSource.EndEdit()
-            Me.SurveyFlightsBindingSource.EndEdit()
-            Me.CompositionCountsBindingSource.EndEdit()
-            Me.PopulationEstimateBindingSource.EndEdit()
-            Me.RadioTrackingBindingSource.EndEdit()
-            Me.XrefPopulationCaribouBindingSource.EndEdit()
-            Me.XrefCompCountCaribouBindingSource.EndEdit()
-            Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
+        'end all bindingsource edits
+        Me.CampaignsBindingSource.EndEdit()
+        Me.SurveyFlightsBindingSource.EndEdit()
+        Me.CompositionCountsBindingSource.EndEdit()
+        Me.PopulationEstimateBindingSource.EndEdit()
+        Me.RadioTrackingBindingSource.EndEdit()
+        Me.XrefPopulationCaribouBindingSource.EndEdit()
+        Me.XrefCompCountCaribouBindingSource.EndEdit()
+        Me.XrefRadiotrackingCaribouBindingSource.EndEdit()
 
-            'try to save
-            If Me.WRST_CaribouDataSet.HasChanges = True Then
+
+
+        'try to save
+        If Me.WRST_CaribouDataSet.HasChanges = True Then
+            Try
                 Me.Validate()
                 Me.TableAdapterManager.UpdateAll(Me.WRST_CaribouDataSet)
                 Me.WRST_CaribouDataSet.AcceptChanges()
-            End If
-        Catch ex As Exception
-            Dim Response As MsgBoxResult = MsgBox("There was an error saving your data to the database." & vbNewLine & ex.Message & vbNewLine & vbNewLine & "Click Yes to continue. Click No to abandon all edits since the last save. ", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes
-            If Response = 0 Then
-                'cancel all pending edits, last resort
-                Me.WRST_CaribouDataSet.RejectChanges()
-            End If
-        End Try
+            Catch ex As Exception
+                Dim Response As MsgBoxResult = MsgBox("There was an error saving your data to the database." & vbNewLine & ex.Message & vbNewLine & vbNewLine & "Click Yes to continue. Click No to abandon all edits since the last save. ", MsgBoxStyle.YesNo, "Save") = MsgBoxResult.Yes
+                If Response = 0 Then 'No
+                    'cancel all pending edits, last resort
+                    Me.WRST_CaribouDataSet.RejectChanges()
+                    SaveDataset()
+                    LoadDataset()
+                End If
+            End Try
+
+        End If
+
+
+        'Me.PopulationEstimateGridEX.EventErrorHandling = False
+        'With Me.PopulationEstimateGridEX
+        '    .Refetch()
+        '    .Refresh()
+        '    .Validate()
+        '    .UpdateData()
+        '    .Update()
+        '    .
+        'End With
 
     End Sub
 
