@@ -404,7 +404,6 @@ Public Class Form1
             Grid.RootTable.Columns("PCID").DefaultValue = Guid.NewGuid.ToString 'primary key
             Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            Grid.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -416,10 +415,9 @@ Public Class Form1
     Private Sub SetXrefCompCountCaribouGridEXDefaultValues()
         Try
             Dim Grid As GridEX = Me.XrefCompCountCaribouGridEX
-            Grid.RootTable.Columns("RTID").DefaultValue = Guid.NewGuid.ToString 'primary key
+            Grid.RootTable.Columns("CCID").DefaultValue = Guid.NewGuid.ToString 'primary key
             Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
             Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-            Grid.RootTable.Columns("Herd").DefaultValue = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")
         Catch ex As Exception
             MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
         End Try
@@ -445,15 +443,6 @@ Public Class Form1
 
 
 
-
-
-
-
-
-#Region "Set up GridEX dropdowns"
-
-
-#End Region
 
 
 
@@ -588,11 +577,7 @@ Public Class Form1
     End Sub
 
     Private Sub XrefCompCountCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefCompCountCaribouGridEX.SelectionChanged
-        Dim Grid As GridEX = Me.XrefCompCountCaribouGridEX
-        Grid.RootTable.Columns("CCCID").DefaultValue = Guid.NewGuid.ToString 'primary key
-        Grid.RootTable.Columns("RecordInsertedDate").DefaultValue = Now
-        Grid.RootTable.Columns("RecordInsertedBy").DefaultValue = My.User.Name
-        Grid.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+        SetXrefCompCountCaribouGridEXDefaultValues()
     End Sub
 
     Private Sub RadioTrackingGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.SelectionChanged
@@ -660,6 +645,9 @@ Public Class Form1
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Sets up the Flights GridEX dropdowns
+    ''' </summary>
     Private Sub SetFlightsGridEXDropDowns()
         Dim Grid As GridEX = Me.SurveyFlightsGridEX
         'Set up dropdowns
@@ -670,6 +658,9 @@ Public Class Form1
         LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
         LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
         LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlanePilot", "Pilot", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlaneTailNo", "Pilot", False)
+        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlaneType", "Pilot", False)
 
         'Herd dropdown
         With Grid.RootTable.Columns("Herd")
