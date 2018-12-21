@@ -545,7 +545,6 @@ Public Class Form1
         Try
             'load the current flight info into the flight header label so the user can see which flight is currently selected
             LoadFlightHeader()
-            SetFlightsGridEXDropDowns()
             SetFlightsGridExDefaultValues()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -649,41 +648,46 @@ Public Class Form1
     ''' Sets up the Flights GridEX dropdowns
     ''' </summary>
     Private Sub SetFlightsGridEXDropDowns()
-        Dim Grid As GridEX = Me.SurveyFlightsGridEX
-        'Set up dropdowns
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "TailNo", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "AircraftType", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer1", "Observer1", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlanePilot", "Pilot", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlaneTailNo", "Pilot", False)
-        LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SpotterPlaneType", "Pilot", False)
+        Try
+            Dim Grid As GridEX = Me.SurveyFlightsGridEX
+            'Set up dropdowns
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "Pilot", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "TailNo", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "AircraftType", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer1", "Observer1", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Observer2", "Observer2", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPNumber", "SOPNumber", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "SOPVersion", "SOPVersion", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "Pilot", "SpotterPlanePilot", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "TailNo", "SpotterPlaneTailNo", False)
+            LoadGridEXDropDownWithDistinctDataTableValues(Grid, Me.WRST_CaribouDataSet.Tables("SurveyFlights"), "AircraftType", "SpotterPlaneType", False)
 
-        'Herd dropdown
-        With Grid.RootTable.Columns("Herd")
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-        End With
-        Dim SurveysHerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
-        SurveysHerdList.Add("Chisana", "Chisana")
-        SurveysHerdList.Add("Mentasta", "Mentasta")
+            'Herd dropdown
+            With Grid.RootTable.Columns("Herd")
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim SurveysHerdList As GridEXValueListItemCollection = Grid.RootTable.Columns("Herd").ValueList
+            SurveysHerdList.Add("Chisana", "Chisana")
+            SurveysHerdList.Add("Mentasta", "Mentasta")
 
-        'CertificationLevel dropdown
-        With Grid.RootTable.Columns("CertificationLevel")
-            .EditType = EditType.DropDownList
-            .HasValueList = True
-            .LimitToList = True
-            .ValueList.Clear()
-        End With
-        Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
-        CertificationLevelList.Add("Raw", "Raw")
-        CertificationLevelList.Add("Provisional", "Provisional")
-        CertificationLevelList.Add("Accepted", "Accepted")
-        CertificationLevelList.Add("Certified", "Certified")
+            'CertificationLevel dropdown
+            With Grid.RootTable.Columns("CertificationLevel")
+                .EditType = EditType.DropDownList
+                .HasValueList = True
+                .LimitToList = True
+                .ValueList.Clear()
+            End With
+            Dim CertificationLevelList As GridEXValueListItemCollection = Grid.RootTable.Columns("CertificationLevel").ValueList
+            CertificationLevelList.Add("Raw", "Raw")
+            CertificationLevelList.Add("Provisional", "Provisional")
+            CertificationLevelList.Add("Accepted", "Accepted")
+            CertificationLevelList.Add("Certified", "Certified")
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     ''' <summary>
@@ -842,7 +846,7 @@ Public Class Form1
         Try
             'Ensure the GridEXColumn is configured for a DropDown
             With GridEX.RootTable.Columns(GridEXColumnName)
-                .EditType = EditType.Combo
+                .EditType = EditType.DropDownList
                 .HasValueList = True
                 .LimitToList = False
                 .AllowSort = True
@@ -850,14 +854,14 @@ Public Class Form1
                 .ValueList.Clear()
             End With
 
-            'Make a GridEXValueListItemCollection to hold the distinct items
-            Dim ItemsList As GridEXValueListItemCollection = GridEX.RootTable.Columns(GridEXColumnName).ValueList
-
             'Get the distinct items from a DataTable
             Dim DistinctItemsDataTable As DataTable = SourceDataTable.DefaultView.ToTable(True, SourceColumnName)
 
             'Sort the DataView
             Dim DistinctItemsDataView As New DataView(DistinctItemsDataTable, "", SourceColumnName, DataRowState.Unchanged)
+
+            'Make a GridEXValueListItemCollection to hold the distinct items
+            Dim ItemsList As GridEXValueListItemCollection = GridEX.RootTable.Columns(GridEXColumnName).ValueList
 
             'Add the distinct items from the DataView into the GridEXValueListItemCollection
             If DistinctItemsDataView.Table.Rows.Count > 0 Then
@@ -1972,6 +1976,10 @@ Public Class Form1
 
     Private Sub XrefRadiotrackingCaribouGridEX_RecordUpdated(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.RecordUpdated
         Me.XrefRadiotrackingCaribouGridEX.CurrentRow.EndEdit()
+    End Sub
+
+    Private Sub SurveyFlightsGridEX_EditingCell(sender As Object, e As EditingCellEventArgs) Handles SurveyFlightsGridEX.EditingCell
+        SetFlightsGridEXDropDowns()
     End Sub
 
 
