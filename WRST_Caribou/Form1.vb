@@ -81,23 +81,6 @@ Public Class Form1
     End Sub
 
 
-    ''' <summary>
-    ''' Queries the database for a list of Views. Loads the View names into Me.DatabaseViewsToolStripComboBox
-    ''' </summary>
-    Private Sub LoadDatabaseViewsComboBox()
-        Try
-            Dim DatabaseViewsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT Name FROM sys.views ORDER BY Name")
-            With Me.DatabaseViewsToolStripComboBox
-                .Items.Clear()
-                .Items.Add("")
-                For Each Row As DataRow In DatabaseViewsDataTable.Rows
-                    .Items.Add(Row.Item("Name"))
-                Next
-            End With
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
 
 
 
@@ -841,13 +824,14 @@ Public Class Form1
     ''' <param name="SourceDataTable">Name of the DataTable containing the DataColumn from which distinct values will be drawn</param>
     ''' <param name="SourceColumnName">Name of the source DataTable's DataColumn from which distinct values will be drawn</param>
     ''' <param name="GridEXColumnName">Name of the GridEX column into which to load dropdown values</param>
+    '''  <param name="LimitToList">Whether options for the dropdown should be limited to the list or not. Boolean.</param>
     Private Sub LoadGridEXDropDownWithDistinctDataTableValues(GridEX As GridEX, SourceDataTable As DataTable, SourceColumnName As String, GridEXColumnName As String, LimitToList As Boolean)
         Try
             'Ensure the GridEXColumn is configured for a DropDown
             With GridEX.RootTable.Columns(GridEXColumnName)
-                .EditType = EditType.DropDownList
+                .EditType = EditType.Combo
                 .HasValueList = True
-                .LimitToList = False
+                .LimitToList = LimitToList
                 .AllowSort = True
                 .AutoComplete = True
                 .ValueList.Clear()
@@ -1758,36 +1742,10 @@ Public Class Form1
         LoadDataset()
     End Sub
 
-    Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DatabaseViewsToolStripComboBox.SelectedIndexChanged
-        If Not Me.DatabaseViewsToolStripComboBox.SelectedItem.ToString = "" Then
-            LoadSurveyResultsGrid()
-        Else
-            MsgBox("Select a database View to load")
-        End If
-
-    End Sub
 
 
-    ''' <summary>
-    ''' Fetches the data from the View selected in Me.DatabaseViewsToolStripComboBox and loads it into the SurveyResultsDataGridView
-    ''' </summary>
-    Private Sub LoadSurveyResultsGrid()
-        Try
-            Dim ViewName As String = Me.DatabaseViewsToolStripComboBox.SelectedItem
-            Dim Sql As String = "SELECT * FROM " & ViewName
 
-            If Sql.Trim.Length > 0 Then
-                ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-            Else
-                ResultsDataTable = Nothing
-            End If
 
-            Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
-            Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
 
     Private Sub ExportResultsToCSVToolStripButton_Click(sender As Object, e As EventArgs) Handles ExportResultsToCSVToolStripButton.Click
         Dim SFD As New SaveFileDialog()
@@ -1912,42 +1870,14 @@ Public Class Form1
     End Sub
 
 
-    '''' <summary>
-    '''' Returns the EID of the current row of XrefPopulationCaribouGridEX.
-    '''' </summary>
-    '''' <returns>String</returns>
-    'Private Function GetCurrentEID() As String
-    '    Dim GridEX As GridEX = Me.XrefPopulationCaribouGridEX
-    '    Dim EID As String = ""
-    '    Try
-    '        'get the current row of the VS GridEX
-    '        If Not GridEX.CurrentRow Is Nothing Then
-    '            EID = GridEX.CurrentRow.Cells("EID").Value
-    '        End If
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-    '    End Try
-    '    Return EID
-    'End Function
 
-    '''' <summary>
-    '''' Returns the value of the column SightingDate of GridEX.
-    '''' </summary>
-    '''' <returns>String</returns>
-    'Private Function GetCurrentSightingDate(GridEX As GridEX) As Date
-    '    Dim SightingDate As Date
-    '    Try
-    '        'get the current row of the VS GridEX
-    '        If Not GridEX Is Nothing Then
-    '            If Not GridEX.CurrentRow Is Nothing Then
-    '                SightingDate = GridEX.CurrentRow.Cells("SightingDate").Value
-    '            End If
-    '        End If
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message & " " & System.Reflection.MethodBase.GetCurrentMethod.Name)
-    '    End Try
-    '    Return SightingDate
-    'End Function
+
+
+
+
+
+
+
 
 
 
@@ -1999,9 +1929,66 @@ Public Class Form1
 
 
 
+
+
+
+
 #End Region
 
 
+    Private Sub SelectSurveyTypeToolStripComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DatabaseViewsToolStripComboBox.SelectedIndexChanged
+        If Not Me.DatabaseViewsToolStripComboBox.SelectedItem.ToString = "" Then
+            LoadSurveyResultsGrid()
+        Else
+            MsgBox("Select a database View to load")
+        End If
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Fetches the data from the View selected in Me.DatabaseViewsToolStripComboBox and loads it into the SurveyResultsDataGridView
+    ''' </summary>
+    Private Sub LoadSurveyResultsGrid()
+        Try
+            Dim ViewName As String = Me.DatabaseViewsToolStripComboBox.SelectedItem
+            Dim Sql As String = "SELECT * FROM " & ViewName
+
+            If Sql.Trim.Length > 0 Then
+                ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            Else
+                ResultsDataTable = Nothing
+            End If
+
+            Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
+            Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
+    ''' <summary>
+    ''' Queries the database for a list of Views. Loads the View names into Me.DatabaseViewsToolStripComboBox
+    ''' </summary>
+    Private Sub LoadDatabaseViewsComboBox()
+        Try
+            Dim DatabaseViewsDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, "SELECT Name FROM sys.views ORDER BY Name")
+            With Me.DatabaseViewsToolStripComboBox
+                .Items.Clear()
+                .Items.Add("")
+                For Each Row As DataRow In DatabaseViewsDataTable.Rows
+                    .Items.Add(Row.Item("Name"))
+                Next
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub DatabaseViewsToolStripComboBox_Enter(sender As Object, e As EventArgs) Handles DatabaseViewsToolStripComboBox.Enter
+        LoadDatabaseViewsComboBox()
+    End Sub
 
 
     ' <summary>
