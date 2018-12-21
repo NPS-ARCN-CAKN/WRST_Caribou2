@@ -766,7 +766,6 @@ Public Class Form1
         'Herd dropdown
         With Grid.RootTable.Columns("Herd")
             .HasValueList = True
-            .LimitToList = True
             .ValueList.Clear()
             .EditType = EditType.DropDownList
         End With
@@ -1192,15 +1191,16 @@ Public Class Form1
     ''' </summary>
     ''' <param name="GridEX"></param>
     Private Sub ToggleGridEXTableCardView(GridEX As GridEX)
-        Try
-            If GridEX.View = View.TableView Then
-                GridEX.View = View.CardView
-            Else
-                GridEX.View = View.TableView
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
+        'Disabled for now; too annoying and surprising to end user
+        'Try
+        '    If GridEX.View = View.TableView Then
+        '        GridEX.View = View.CardView
+        '    Else
+        '        GridEX.View = View.TableView
+        '    End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        'End Try
     End Sub
 
     Private Sub CampaignsGridEX_DoubleClick(sender As Object, e As EventArgs) Handles CampaignsGridEX.DoubleClick
@@ -1981,6 +1981,7 @@ Public Class Form1
     Private Sub SurveyFlightsGridEX_EditingCell(sender As Object, e As EditingCellEventArgs) Handles SurveyFlightsGridEX.EditingCell
         SetFlightsGridEXDropDowns()
     End Sub
+
 
 
 

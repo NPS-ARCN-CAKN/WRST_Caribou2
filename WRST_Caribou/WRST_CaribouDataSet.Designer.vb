@@ -3974,9 +3974,9 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal LargeBull As Integer,  _
                     ByVal Cow As Integer,  _
                     ByVal Calf As Integer,  _
-                    ByVal InOrOut As Integer,  _
-                    ByVal Seen As Integer,  _
-                    ByVal Marked As Integer,  _
+                    ByVal InOrOut As Boolean,  _
+                    ByVal Seen As Boolean,  _
+                    ByVal Marked As Boolean,  _
                     ByVal FrequenciesInGroup As String,  _
                     ByVal Lat As Decimal,  _
                     ByVal Lon As Decimal,  _
@@ -4070,11 +4070,11 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnCow)
             Me.columnCalf = New Global.System.Data.DataColumn("Calf", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCalf)
-            Me.columnInOrOut = New Global.System.Data.DataColumn("InOrOut", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnInOrOut = New Global.System.Data.DataColumn("InOrOut", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnInOrOut)
-            Me.columnSeen = New Global.System.Data.DataColumn("Seen", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnSeen = New Global.System.Data.DataColumn("Seen", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSeen)
-            Me.columnMarked = New Global.System.Data.DataColumn("Marked", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnMarked = New Global.System.Data.DataColumn("Marked", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnMarked)
             Me.columnFrequenciesInGroup = New Global.System.Data.DataColumn("FrequenciesInGroup", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFrequenciesInGroup)
@@ -4637,10 +4637,10 @@ Partial Public Class WRST_CaribouDataSet
                     ByVal Adult As Integer,  _
                     ByVal Unknown As Integer,  _
                     ByVal Waypoint As String,  _
-                    ByVal RetainedAntler As Integer,  _
-                    ByVal DistendedUdders As Integer,  _
-                    ByVal CalvesAtHeel As Integer,  _
-                    ByVal Seen As Integer,  _
+                    ByVal RetainedAntler As Boolean,  _
+                    ByVal DistendedUdders As Boolean,  _
+                    ByVal CalvesAtHeel As Boolean,  _
+                    ByVal Seen As Boolean,  _
                     ByVal parentSurveyFlightsRowByFK_RadioTracking_SurveyFlights As SurveyFlightsRow,  _
                     ByVal AnimalID As String,  _
                     ByVal ProjectID As String,  _
@@ -4746,13 +4746,13 @@ Partial Public Class WRST_CaribouDataSet
             MyBase.Columns.Add(Me.columnUnknown)
             Me.columnWaypoint = New Global.System.Data.DataColumn("Waypoint", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnWaypoint)
-            Me.columnRetainedAntler = New Global.System.Data.DataColumn("RetainedAntler", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnRetainedAntler = New Global.System.Data.DataColumn("RetainedAntler", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRetainedAntler)
-            Me.columnDistendedUdders = New Global.System.Data.DataColumn("DistendedUdders", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnDistendedUdders = New Global.System.Data.DataColumn("DistendedUdders", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDistendedUdders)
-            Me.columnCalvesAtHeel = New Global.System.Data.DataColumn("CalvesAtHeel", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnCalvesAtHeel = New Global.System.Data.DataColumn("CalvesAtHeel", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCalvesAtHeel)
-            Me.columnSeen = New Global.System.Data.DataColumn("Seen", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnSeen = New Global.System.Data.DataColumn("Seen", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSeen)
             Me.columnFlightID = New Global.System.Data.DataColumn("FlightID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFlightID)
@@ -10261,10 +10261,10 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property InOrOut() As Integer
+        Public Property InOrOut() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tablePopulationEstimate.InOrOutColumn),Integer)
+                    Return CType(Me(Me.tablePopulationEstimate.InOrOutColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'InOrOut' in table 'PopulationEstimate' is DBNull.", e)
                 End Try
@@ -10276,9 +10276,9 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Seen() As Integer
+        Public Property Seen() As Boolean
             Get
-                Return CType(Me(Me.tablePopulationEstimate.SeenColumn),Integer)
+                Return CType(Me(Me.tablePopulationEstimate.SeenColumn),Boolean)
             End Get
             Set
                 Me(Me.tablePopulationEstimate.SeenColumn) = value
@@ -10287,9 +10287,9 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Marked() As Integer
+        Public Property Marked() As Boolean
             Get
-                Return CType(Me(Me.tablePopulationEstimate.MarkedColumn),Integer)
+                Return CType(Me(Me.tablePopulationEstimate.MarkedColumn),Boolean)
             End Get
             Set
                 Me(Me.tablePopulationEstimate.MarkedColumn) = value
@@ -10788,10 +10788,10 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property RetainedAntler() As Integer
+        Public Property RetainedAntler() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tableRadioTracking.RetainedAntlerColumn),Integer)
+                    Return CType(Me(Me.tableRadioTracking.RetainedAntlerColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'RetainedAntler' in table 'RadioTracking' is DBNull.", e)
                 End Try
@@ -10803,10 +10803,10 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property DistendedUdders() As Integer
+        Public Property DistendedUdders() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tableRadioTracking.DistendedUddersColumn),Integer)
+                    Return CType(Me(Me.tableRadioTracking.DistendedUddersColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'DistendedUdders' in table 'RadioTracking' is DBNull.", e)
                 End Try
@@ -10818,10 +10818,10 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CalvesAtHeel() As Integer
+        Public Property CalvesAtHeel() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tableRadioTracking.CalvesAtHeelColumn),Integer)
+                    Return CType(Me(Me.tableRadioTracking.CalvesAtHeelColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'CalvesAtHeel' in table 'RadioTracking' is DBNull.", e)
                 End Try
@@ -10833,10 +10833,10 @@ Partial Public Class WRST_CaribouDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Seen() As Integer
+        Public Property Seen() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tableRadioTracking.SeenColumn),Integer)
+                    Return CType(Me(Me.tableRadioTracking.SeenColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Seen' in table 'RadioTracking' is DBNull.", e)
                 End Try
