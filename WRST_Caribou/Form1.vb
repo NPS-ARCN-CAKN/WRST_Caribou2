@@ -886,7 +886,8 @@ Public Class Form1
             AnimalsDataGridView.DataSource = AnimalsBindingSource
 
             'bind the collardeployments grid to the AnimalMovementDataset using a bindingsource
-            Dim CollarDeploymentsBindingSource As New BindingSource(AnimalsBindingSource, "Animals_CollarDeploymentsDataRelation") 'NOTE: Bound to the DataRelation of the AnimalsBindingSource, not the CollarDeploymentsDataTable
+            'NOTE: Bound to the DataRelation of the AnimalsBindingSource, not the CollarDeploymentsDataTable
+            Dim CollarDeploymentsBindingSource As New BindingSource(AnimalsBindingSource, "Animals_CollarDeploymentsDataRelation")
             CollarDeploymentsDataGridView.DataSource = CollarDeploymentsBindingSource
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")

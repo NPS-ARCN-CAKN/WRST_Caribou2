@@ -248,6 +248,35 @@ Module Utilites
         Return CollarsDataTable
     End Function
 
+    ''' <summary>
+    ''' Returns a DataTable of collar deployments for the WRST caribou animals from the Animal_Movement database
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetCurrentAnimalCollarDeploymentsDataTable() As DataTable
+        Dim CurrentDeploymentsDataTable As New DataTable()
+        Try
+            'query the database and build the table
+            Dim Sql As String = "SELECT Animals.AnimalId, Collars.Frequency, CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate, Animals.Species, Animals.Gender, Animals.MortalityDate, 
+                         CollarDeployments.CollarManufacturer, Collars.CollarModel, Animals.GroupName, Animals.Description AS AnimalDescription, Collars.Manager, Collars.Owner, Collars.SerialNumber, Collars.HasGps, 
+                         Collars.Notes AS CollarNotes, Collars.DisposalDate
+FROM            Animals INNER JOIN
+                         CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+                         Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+WHERE        (Animals.ProjectId = 'WRST_Caribou')
+ORDER BY Animals.AnimalId, Collars.Frequency, CollarDeployments.DeploymentDate DESC"
+            CurrentDeploymentsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            CurrentDeploymentsDataTable.TableName = "CollarDeployments"
+
+            'set up the primary key(s)
+            Dim PrimaryKeyColumn(1) As DataColumn
+            PrimaryKeyColumn(0) = CurrentDeploymentsDataTable.Columns("AnimalID")
+            CurrentDeploymentsDataTable.PrimaryKey = PrimaryKeyColumn
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return CurrentDeploymentsDataTable
+    End Function
+
     Public Function GetAnimal_MovementDataset() As DataSet
         Dim AMDataset As New DataSet("Animal_Movement")
         Try
@@ -255,12 +284,14 @@ Module Utilites
             Dim AnimalsDataTable As DataTable = GetAnimalsDataTable()
             Dim CollarsDatatable As DataTable = GetCollarsDataTable()
             Dim CollarDeploymentsDataTable As DataTable = GetCollarDeploymentsDataTable()
+            Dim CurrentAnimalCollarDeploymentsDataTable As DataTable = GetCurrentAnimalCollarDeploymentsDataTable()
 
             'load the datatables into the animal movement dataset
             With AMDataset
                 .Tables.Add(GetCollarsDataTable)
                 .Tables.Add(GetAnimalsDataTable)
                 .Tables.Add(GetCollarDeploymentsDataTable)
+                .Tables.Add(GetCurrentAnimalCollarDeploymentsDataTable)
             End With
 
             'set up relationships to show the history of collar deployments per animal
