@@ -108,9 +108,19 @@ Partial Class Form1
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.SurveysTabPage = New System.Windows.Forms.TabPage()
         Me.CaribouTabPage = New System.Windows.Forms.TabPage()
-        Me.AnimalsSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.AnimalsDataGridView = New System.Windows.Forms.DataGridView()
-        Me.CollarDeploymentsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.AnimalsToolStrip = New System.Windows.Forms.ToolStrip()
+        Me.CollarDeploymentsToolStripLabel = New System.Windows.Forms.ToolStripLabel()
+        Me.AnimalsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.BindingNavigatorCountItem1 = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorMoveFirstItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResultsTabPage2 = New System.Windows.Forms.TabPage()
         Me.SurveyResultsDataGridView = New System.Windows.Forms.DataGridView()
         Me.SurveyResultsBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -203,12 +213,10 @@ Partial Class Form1
         Me.MainTabControl.SuspendLayout()
         Me.SurveysTabPage.SuspendLayout()
         Me.CaribouTabPage.SuspendLayout()
-        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.AnimalsSplitContainer.Panel1.SuspendLayout()
-        Me.AnimalsSplitContainer.Panel2.SuspendLayout()
-        Me.AnimalsSplitContainer.SuspendLayout()
         CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.AnimalsToolStrip.SuspendLayout()
+        CType(Me.AnimalsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.AnimalsBindingNavigator.SuspendLayout()
         Me.ResultsTabPage2.SuspendLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SurveyResultsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -235,6 +243,7 @@ Partial Class Form1
         Me.CampaignsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CampaignsGridEX.Name = "CampaignsGridEX"
         Me.CampaignsGridEX.RecordNavigator = True
+        Me.CampaignsGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.CampaignsGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
         Me.HelpProvider.SetShowHelp(Me.CampaignsGridEX, True)
         Me.CampaignsGridEX.Size = New System.Drawing.Size(217, 649)
@@ -311,6 +320,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.CompositionCountsGridEX.Name = "CompositionCountsGridEX"
         Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
+        Me.CompositionCountsGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.CompositionCountsGridEX.Size = New System.Drawing.Size(537, 337)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -441,6 +451,10 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.Name = "PopulationEstimateGridEX"
         Me.PopulationEstimateGridEX.RecordNavigator = True
         Me.PopulationEstimateGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.PopulationEstimateGridEX.SelectedFormatStyle.BackColor = System.Drawing.Color.DarkRed
+        Me.PopulationEstimateGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
+        Me.PopulationEstimateGridEX.SelectedInactiveFormatStyle.BackColor = System.Drawing.Color.Fuchsia
+        Me.PopulationEstimateGridEX.SelectedInactiveFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.PopulationEstimateGridEX.SelectionMode = Janus.Windows.GridEX.SelectionMode.MultipleSelection
         Me.PopulationEstimateGridEX.Size = New System.Drawing.Size(488, 337)
         Me.PopulationEstimateGridEX.TabIndex = 0
@@ -564,6 +578,7 @@ Partial Class Form1
         Me.RadioTrackingGridEX.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTrackingGridEX.Name = "RadioTrackingGridEX"
         Me.RadioTrackingGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
+        Me.RadioTrackingGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.RadioTrackingGridEX.Size = New System.Drawing.Size(484, 337)
         Me.RadioTrackingGridEX.TabIndex = 0
         Me.RadioTrackingGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
@@ -734,6 +749,8 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveyFlightsGridEX.AlternatingColors = True
         Me.SurveyFlightsGridEX.AutoEdit = True
+        Me.SurveyFlightsGridEX.ColumnAutoResize = True
+        Me.SurveyFlightsGridEX.ColumnAutoSizeMode = Janus.Windows.GridEX.ColumnAutoSizeMode.DisplayedCellsAndHeader
         Me.SurveyFlightsGridEX.DataSource = Me.SurveyFlightsBindingSource
         SurveyFlightsGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveyFlightsGridEX_DesignTimeLayout.LayoutString")
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
@@ -746,6 +763,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
+        Me.SurveyFlightsGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(940, 162)
         Me.SurveyFlightsGridEX.TabIndex = 0
         '
@@ -1021,7 +1039,9 @@ Partial Class Form1
         'CaribouTabPage
         '
         Me.CaribouTabPage.AutoScroll = True
-        Me.CaribouTabPage.Controls.Add(Me.AnimalsSplitContainer)
+        Me.CaribouTabPage.Controls.Add(Me.AnimalsDataGridView)
+        Me.CaribouTabPage.Controls.Add(Me.AnimalsToolStrip)
+        Me.CaribouTabPage.Controls.Add(Me.AnimalsBindingNavigator)
         Me.CaribouTabPage.Location = New System.Drawing.Point(4, 22)
         Me.CaribouTabPage.Margin = New System.Windows.Forms.Padding(2)
         Me.CaribouTabPage.Name = "CaribouTabPage"
@@ -1031,23 +1051,6 @@ Partial Class Form1
         Me.CaribouTabPage.Text = "Caribou"
         Me.CaribouTabPage.UseVisualStyleBackColor = True
         '
-        'AnimalsSplitContainer
-        '
-        Me.AnimalsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsSplitContainer.Location = New System.Drawing.Point(2, 2)
-        Me.AnimalsSplitContainer.Name = "AnimalsSplitContainer"
-        '
-        'AnimalsSplitContainer.Panel1
-        '
-        Me.AnimalsSplitContainer.Panel1.Controls.Add(Me.AnimalsDataGridView)
-        '
-        'AnimalsSplitContainer.Panel2
-        '
-        Me.AnimalsSplitContainer.Panel2.Controls.Add(Me.CollarDeploymentsDataGridView)
-        Me.AnimalsSplitContainer.Size = New System.Drawing.Size(1172, 680)
-        Me.AnimalsSplitContainer.SplitterDistance = 654
-        Me.AnimalsSplitContainer.TabIndex = 2
-        '
         'AnimalsDataGridView
         '
         Me.AnimalsDataGridView.AllowUserToAddRows = False
@@ -1055,24 +1058,111 @@ Partial Class Form1
         Me.AnimalsDataGridView.AllowUserToOrderColumns = True
         Me.AnimalsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AnimalsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsDataGridView.Location = New System.Drawing.Point(0, 0)
+        Me.AnimalsDataGridView.Location = New System.Drawing.Point(2, 27)
         Me.AnimalsDataGridView.Name = "AnimalsDataGridView"
         Me.AnimalsDataGridView.ReadOnly = True
-        Me.AnimalsDataGridView.Size = New System.Drawing.Size(654, 680)
+        Me.AnimalsDataGridView.Size = New System.Drawing.Size(1172, 630)
         Me.AnimalsDataGridView.TabIndex = 0
         '
-        'CollarDeploymentsDataGridView
+        'AnimalsToolStrip
         '
-        Me.CollarDeploymentsDataGridView.AllowUserToAddRows = False
-        Me.CollarDeploymentsDataGridView.AllowUserToDeleteRows = False
-        Me.CollarDeploymentsDataGridView.AllowUserToOrderColumns = True
-        Me.CollarDeploymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.CollarDeploymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CollarDeploymentsDataGridView.Location = New System.Drawing.Point(0, 0)
-        Me.CollarDeploymentsDataGridView.Name = "CollarDeploymentsDataGridView"
-        Me.CollarDeploymentsDataGridView.ReadOnly = True
-        Me.CollarDeploymentsDataGridView.Size = New System.Drawing.Size(514, 680)
-        Me.CollarDeploymentsDataGridView.TabIndex = 1
+        Me.AnimalsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CollarDeploymentsToolStripLabel})
+        Me.AnimalsToolStrip.Location = New System.Drawing.Point(2, 2)
+        Me.AnimalsToolStrip.Name = "AnimalsToolStrip"
+        Me.AnimalsToolStrip.Size = New System.Drawing.Size(1172, 25)
+        Me.AnimalsToolStrip.TabIndex = 2
+        Me.AnimalsToolStrip.Text = "ToolStrip1"
+        '
+        'CollarDeploymentsToolStripLabel
+        '
+        Me.CollarDeploymentsToolStripLabel.Name = "CollarDeploymentsToolStripLabel"
+        Me.CollarDeploymentsToolStripLabel.Size = New System.Drawing.Size(307, 22)
+        Me.CollarDeploymentsToolStripLabel.Text = "Collared caribou inventory (Animal Movement database)"
+        '
+        'AnimalsBindingNavigator
+        '
+        Me.AnimalsBindingNavigator.AddNewItem = Nothing
+        Me.AnimalsBindingNavigator.CountItem = Me.BindingNavigatorCountItem1
+        Me.AnimalsBindingNavigator.DeleteItem = Nothing
+        Me.AnimalsBindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.AnimalsBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem1, Me.BindingNavigatorMovePreviousItem1, Me.BindingNavigatorSeparator3, Me.BindingNavigatorPositionItem1, Me.BindingNavigatorCountItem1, Me.BindingNavigatorSeparator4, Me.BindingNavigatorMoveNextItem1, Me.BindingNavigatorMoveLastItem1, Me.BindingNavigatorSeparator5})
+        Me.AnimalsBindingNavigator.Location = New System.Drawing.Point(2, 657)
+        Me.AnimalsBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem1
+        Me.AnimalsBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem1
+        Me.AnimalsBindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem1
+        Me.AnimalsBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem1
+        Me.AnimalsBindingNavigator.Name = "AnimalsBindingNavigator"
+        Me.AnimalsBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem1
+        Me.AnimalsBindingNavigator.Size = New System.Drawing.Size(1172, 25)
+        Me.AnimalsBindingNavigator.TabIndex = 1
+        Me.AnimalsBindingNavigator.Text = "BindingNavigator1"
+        '
+        'BindingNavigatorCountItem1
+        '
+        Me.BindingNavigatorCountItem1.Name = "BindingNavigatorCountItem1"
+        Me.BindingNavigatorCountItem1.Size = New System.Drawing.Size(35, 22)
+        Me.BindingNavigatorCountItem1.Text = "of {0}"
+        Me.BindingNavigatorCountItem1.ToolTipText = "Total number of items"
+        '
+        'BindingNavigatorMoveFirstItem1
+        '
+        Me.BindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
+        Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveFirstItem1.Text = "Move first"
+        '
+        'BindingNavigatorMovePreviousItem1
+        '
+        Me.BindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
+        Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMovePreviousItem1.Text = "Move previous"
+        '
+        'BindingNavigatorSeparator3
+        '
+        Me.BindingNavigatorSeparator3.Name = "BindingNavigatorSeparator3"
+        Me.BindingNavigatorSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorPositionItem1
+        '
+        Me.BindingNavigatorPositionItem1.AccessibleName = "Position"
+        Me.BindingNavigatorPositionItem1.AutoSize = False
+        Me.BindingNavigatorPositionItem1.Name = "BindingNavigatorPositionItem1"
+        Me.BindingNavigatorPositionItem1.Size = New System.Drawing.Size(50, 23)
+        Me.BindingNavigatorPositionItem1.Text = "0"
+        Me.BindingNavigatorPositionItem1.ToolTipText = "Current position"
+        '
+        'BindingNavigatorSeparator4
+        '
+        Me.BindingNavigatorSeparator4.Name = "BindingNavigatorSeparator4"
+        Me.BindingNavigatorSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorMoveNextItem1
+        '
+        Me.BindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
+        Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveNextItem1.Text = "Move next"
+        '
+        'BindingNavigatorMoveLastItem1
+        '
+        Me.BindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
+        Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveLastItem1.Text = "Move last"
+        '
+        'BindingNavigatorSeparator5
+        '
+        Me.BindingNavigatorSeparator5.Name = "BindingNavigatorSeparator5"
+        Me.BindingNavigatorSeparator5.Size = New System.Drawing.Size(6, 25)
         '
         'ResultsTabPage2
         '
@@ -1397,12 +1487,13 @@ Partial Class Form1
         Me.MainTabControl.ResumeLayout(False)
         Me.SurveysTabPage.ResumeLayout(False)
         Me.CaribouTabPage.ResumeLayout(False)
-        Me.AnimalsSplitContainer.Panel1.ResumeLayout(False)
-        Me.AnimalsSplitContainer.Panel2.ResumeLayout(False)
-        CType(Me.AnimalsSplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.AnimalsSplitContainer.ResumeLayout(False)
+        Me.CaribouTabPage.PerformLayout()
         CType(Me.AnimalsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CollarDeploymentsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsToolStrip.ResumeLayout(False)
+        Me.AnimalsToolStrip.PerformLayout()
+        CType(Me.AnimalsBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.AnimalsBindingNavigator.ResumeLayout(False)
+        Me.AnimalsBindingNavigator.PerformLayout()
         Me.ResultsTabPage2.ResumeLayout(False)
         Me.ResultsTabPage2.PerformLayout()
         CType(Me.SurveyResultsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1526,11 +1617,21 @@ Partial Class Form1
     Friend WithEvents SurveyResultsBindingSource As BindingSource
     Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
     Friend WithEvents RefreshToolStripButton As ToolStripButton
+    Friend WithEvents EditCampaignsCheckBox As CheckBox
+    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents AnimalsDataGridView As DataGridView
-    Friend WithEvents CollarDeploymentsDataGridView As DataGridView
-    Friend WithEvents AnimalsSplitContainer As SplitContainer
-    Friend WithEvents EditCampaignsCheckBox As CheckBox
-    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
+    Friend WithEvents AnimalsBindingNavigator As BindingNavigator
+    Friend WithEvents BindingNavigatorCountItem1 As ToolStripLabel
+    Friend WithEvents BindingNavigatorMoveFirstItem1 As ToolStripButton
+    Friend WithEvents BindingNavigatorMovePreviousItem1 As ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator3 As ToolStripSeparator
+    Friend WithEvents BindingNavigatorPositionItem1 As ToolStripTextBox
+    Friend WithEvents BindingNavigatorSeparator4 As ToolStripSeparator
+    Friend WithEvents BindingNavigatorMoveNextItem1 As ToolStripButton
+    Friend WithEvents BindingNavigatorMoveLastItem1 As ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator5 As ToolStripSeparator
+    Friend WithEvents AnimalsToolStrip As ToolStrip
+    Friend WithEvents CollarDeploymentsToolStripLabel As ToolStripLabel
 End Class

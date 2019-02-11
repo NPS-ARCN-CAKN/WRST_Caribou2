@@ -10,7 +10,8 @@ Public Class Form1
     Dim ResultsDataTable As DataTable 'This reusable datatable will contain the data to be displayed in the Me.SurveyResultsDataGridView of the Results tab
 
     'load the animals inventory grid from animal_movement database
-    Dim AnimalMovementDataset As DataSet = GetAnimal_MovementDataset()
+    'Dim AnimalMovementDataset As DataSet = GetAnimal_MovementDataset()
+    Dim AnimalFrequenciesLookupTable As DataTable = GetCollarDeploymentsDataTable()
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'set up the form
@@ -881,14 +882,37 @@ Public Class Form1
     ''' </summary>
     Private Sub LoadAnimalMovementGrids()
         'bind the animals grid to the AnimalMovementDataset using a bindingsource
+
         Try
-            Dim AnimalsBindingSource As New BindingSource(AnimalMovementDataset, "Animals")
+            Dim AnimalsBindingSource As New BindingSource
+            AnimalsBindingSource.DataSource = GetCollarDeploymentsDataTable()
+            Me.AnimalsBindingNavigator.BindingSource = AnimalsBindingSource
             AnimalsDataGridView.DataSource = AnimalsBindingSource
 
-            'bind the collardeployments grid to the AnimalMovementDataset using a bindingsource
-            'NOTE: Bound to the DataRelation of the AnimalsBindingSource, not the CollarDeploymentsDataTable
-            Dim CollarDeploymentsBindingSource As New BindingSource(AnimalsBindingSource, "Animals_CollarDeploymentsDataRelation")
-            CollarDeploymentsDataGridView.DataSource = CollarDeploymentsBindingSource
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' DID NOT WORK, don't know why
+    ''' </summary>
+    Private Sub FormatAnimalsDataGridView()
+
+        For Each Row As DataGridViewRow In Me.AnimalsDataGridView.Rows
+            Row.Cells("AnimalID").Style.BackColor = Color.AliceBlue
+            If Not Row Is Nothing Then
+
+                If Not Row.Cells("MortalityDate") Is Nothing Then
+                    If Not IsDBNull(Row.Cells("MortalityDate").Value) Then
+                        Row.Cells("AnimalID").Style.Font = New Font(Me.AnimalsDataGridView.Font, FontStyle.Italic)
+
+                    End If
+                End If
+            End If
+        Next
+        Try
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -984,6 +1008,12 @@ Public Class Form1
                 .SelectionMode = SelectionMode.MultipleSelection
                 .SelectOnExpand = False
                 .TotalRowPosition = TotalRowPosition.BottomFixed
+                .SelectedFormatStyle.BackColor = Color.SteelBlue
+                .SelectedFormatStyle.ForeColor = Color.White
+                .SelectedFormatStyle.FontBold = TriState.False
+                .SelectedInactiveFormatStyle.BackColor = Color.SteelBlue
+                .SelectedInactiveFormatStyle.ForeColor = Color.White
+                .SelectedInactiveFormatStyle.FontBold = TriState.False
             End With
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -1789,7 +1819,7 @@ Public Class Form1
             Dim List As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
 
             'load in the items into the dropdown
-            For Each Row As DataRow In AnimalMovementDataset.Tables("CollarDeployments").Rows
+            For Each Row As DataRow In AnimalFrequenciesLookupTable.Rows
                 Dim AnimalID As String = Row.Item("AnimalID")
                 Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
                 List.Add(AnimalID, CollaredCaribou)
