@@ -316,6 +316,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.DesignTimeLayout = CompositionCountsGridEX_DesignTimeLayout
         Me.CompositionCountsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CompositionCountsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!)
+        Me.CompositionCountsGridEX.FrozenColumns = 4
         Me.CompositionCountsGridEX.GroupByBoxVisible = False
         Me.CompositionCountsGridEX.Location = New System.Drawing.Point(0, 0)
         Me.CompositionCountsGridEX.Margin = New System.Windows.Forms.Padding(2)
@@ -447,6 +448,7 @@ Partial Class Form1
         Me.PopulationEstimateGridEX.DesignTimeLayout = PopulationEstimateGridEX_DesignTimeLayout
         Me.PopulationEstimateGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PopulationEstimateGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!)
+        Me.PopulationEstimateGridEX.FrozenColumns = 4
         Me.PopulationEstimateGridEX.GroupByBoxVisible = False
         Me.PopulationEstimateGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(0, 0)
@@ -575,6 +577,7 @@ Partial Class Form1
         RadioTrackingGridEX_DesignTimeLayout.LayoutString = resources.GetString("RadioTrackingGridEX_DesignTimeLayout.LayoutString")
         Me.RadioTrackingGridEX.DesignTimeLayout = RadioTrackingGridEX_DesignTimeLayout
         Me.RadioTrackingGridEX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadioTrackingGridEX.FrozenColumns = 3
         Me.RadioTrackingGridEX.GroupByBoxVisible = False
         Me.RadioTrackingGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.RadioTrackingGridEX.Location = New System.Drawing.Point(0, 0)
@@ -760,6 +763,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.DesignTimeLayout = SurveyFlightsGridEX_DesignTimeLayout
         Me.SurveyFlightsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SurveyFlightsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.SurveyFlightsGridEX.FrozenColumns = 6
         Me.SurveyFlightsGridEX.GroupByBoxVisible = False
         Me.SurveyFlightsGridEX.Location = New System.Drawing.Point(0, 31)
         Me.SurveyFlightsGridEX.Margin = New System.Windows.Forms.Padding(2)
