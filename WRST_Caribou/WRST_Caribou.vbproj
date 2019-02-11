@@ -91,6 +91,10 @@
     <Reference Include="Janus.Windows.UI.v3, Version=3.5.109.0, Culture=neutral, PublicKeyToken=21d5517571b185bf" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Microsoft.SqlServer.Types\Microsoft.SqlServer.Types\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="SkeeterDataTablesTranslator">
       <HintPath>..\..\..\SkeeterDataTablesTranslator\SkeeterDataTablesTranslator\bin\Debug\SkeeterDataTablesTranslator.dll</HintPath>
     </Reference>
