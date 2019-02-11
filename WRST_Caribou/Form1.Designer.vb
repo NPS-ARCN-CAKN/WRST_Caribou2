@@ -237,6 +237,7 @@ Partial Class Form1
         Me.CampaignsGridEX.DesignTimeLayout = CampaignsGridEX_DesignTimeLayout
         Me.CampaignsGridEX.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CampaignsGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CampaignsGridEX.FrozenColumns = 3
         Me.CampaignsGridEX.GroupByBoxVisible = False
         Me.HelpProvider.SetHelpKeyword(Me.CampaignsGridEX, "Introduction")
         Me.CampaignsGridEX.Location = New System.Drawing.Point(0, 31)
@@ -326,6 +327,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.Key = "CCTotalRowFormatStyleKey"
+        Me.CompositionCountsGridEX.Visible = False
         '
         'CompositionCountsBindingSource
         '
@@ -354,6 +356,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(388, 337)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
+        Me.XrefCompCountCaribouGridEX.Visible = False
         '
         'XrefCompCountCaribouBindingSource
         '
@@ -443,7 +446,7 @@ Partial Class Form1
         PopulationEstimateGridEX_DesignTimeLayout.LayoutString = resources.GetString("PopulationEstimateGridEX_DesignTimeLayout.LayoutString")
         Me.PopulationEstimateGridEX.DesignTimeLayout = PopulationEstimateGridEX_DesignTimeLayout
         Me.PopulationEstimateGridEX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PopulationEstimateGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PopulationEstimateGridEX.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!)
         Me.PopulationEstimateGridEX.GroupByBoxVisible = False
         Me.PopulationEstimateGridEX.GroupTotals = Janus.Windows.GridEX.GroupTotals.Always
         Me.PopulationEstimateGridEX.Location = New System.Drawing.Point(0, 0)
@@ -583,6 +586,7 @@ Partial Class Form1
         Me.RadioTrackingGridEX.TabIndex = 0
         Me.RadioTrackingGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.RadioTrackingGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
+        Me.RadioTrackingGridEX.Visible = False
         '
         'RadioTrackingBindingSource
         '
@@ -603,6 +607,7 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(441, 337)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
+        Me.XrefRadiotrackingCaribouGridEX.Visible = False
         '
         'RadiotrackingToolStrip
         '
@@ -749,7 +754,6 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.AllowDelete = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.SurveyFlightsGridEX.AlternatingColors = True
         Me.SurveyFlightsGridEX.AutoEdit = True
-        Me.SurveyFlightsGridEX.ColumnAutoResize = True
         Me.SurveyFlightsGridEX.ColumnAutoSizeMode = Janus.Windows.GridEX.ColumnAutoSizeMode.DisplayedCellsAndHeader
         Me.SurveyFlightsGridEX.DataSource = Me.SurveyFlightsBindingSource
         SurveyFlightsGridEX_DesignTimeLayout.LayoutString = resources.GetString("SurveyFlightsGridEX_DesignTimeLayout.LayoutString")
