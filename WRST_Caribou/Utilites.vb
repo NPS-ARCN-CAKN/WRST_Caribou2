@@ -108,6 +108,7 @@ Module Utilites
 
                 'clean up
                 MyDataReader.Close()
+                MySqlConnection.Close()
             End Using
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -207,7 +208,7 @@ FROM            Animals INNER JOIN
                          CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
                          Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
 WHERE        (Animals.ProjectId = 'WRST_Caribou')
-ORDER BY AnimalID"
+ORDER BY Frequency"
             CollarDeploymentsDataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
             CollarDeploymentsDataTable.TableName = "CollarDeployments"
         Catch ex As Exception

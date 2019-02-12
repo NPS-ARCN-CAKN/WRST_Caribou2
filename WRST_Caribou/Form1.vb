@@ -1644,7 +1644,7 @@ Public Class Form1
     'import arbitrary waypoints to radiotracking
     Private Sub ImportRadiotrackingWaypointsFromFileToolStripButton_Click(sender As Object, e As EventArgs) Handles ImportRadiotrackingWaypointsFromFileToolStripButton.Click
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
-        Dim Sql As String = "SELECT        TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
+        Dim Sql As String = "SELECT  TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
     End Sub
@@ -1804,30 +1804,7 @@ Public Class Form1
         LoadSurveyResultsGrid()
     End Sub
 
-    Private Sub XrefPopulationCaribouGridEX_DropDown(sender As Object, e As ColumnActionEventArgs) Handles XrefPopulationCaribouGridEX.DropDown
-        Try
-            'get a ref to the animalid valuelist
-            Dim Grid As GridEX = Me.XrefPopulationCaribouGridEX
-            With Grid.RootTable.Columns("AnimalID")
-                .EditType = EditType.DropDownList
-                .HasValueList = True
-                .LimitToList = True
-                .ValueList.Clear()
-            End With
 
-            'get a reference to the AnimalID column's ValueList
-            Dim List As GridEXValueListItemCollection = Grid.RootTable.Columns("AnimalID").ValueList
-
-            'load in the items into the dropdown
-            For Each Row As DataRow In AnimalFrequenciesLookupTable.Rows
-                Dim AnimalID As String = Row.Item("AnimalID")
-                Dim CollaredCaribou As String = Row.Item("CollaredCaribou")
-                List.Add(AnimalID, CollaredCaribou)
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
-    End Sub
 
     Private Sub CampaignsBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)
         SaveDataset()
@@ -1983,18 +1960,22 @@ Public Class Form1
     Private Sub LoadSurveyResultsGrid()
         Try
             Dim ViewName As String = Me.DatabaseViewsToolStripComboBox.SelectedItem
-            Dim Sql As String = "SELECT * FROM " & ViewName
-
-            If Sql.Trim.Length > 0 Then
-                ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+            If ViewName.Trim.Length > 0 Then
+                Try
+                    Dim Sql As String = "SELECT * FROM " & ViewName.Trim
+                    ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
+                    Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
+                    Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
+                Catch ex As Exception
+                    MsgBox("Could not load the database view " & ViewName.Trim & ". " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " a)")
+                    Me.SurveyResultsBindingSource.DataSource = Nothing
+                    Me.SurveyResultsDataGridView.DataSource = Nothing
+                End Try
             Else
-                ResultsDataTable = Nothing
+                MsgBox("Select a database view.", MsgBoxStyle.Information, "View not selected")
             End If
-
-            Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
-            Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " b)")
         End Try
     End Sub
 
@@ -2022,57 +2003,70 @@ Public Class Form1
     End Sub
 
 
-    ' <summary>
-    ' Queries the Animal_Movement database for deployed GPS collars during SightingDate and then loads the submitted GridEX's AnimalID column
-    ' with available collared animals based on collar frequency.
-    ' </summary>
-    ' <param name="GridEx">Parent GridEX</param>
-    ' <param name="ObservationDate">Results will be filtered by available GPS collars deployed on this date.</param>
-    'Private Sub LoadCollaredCaribouDropdown(GridEx As GridEX, ObservationDate As Date)
+    '''<summary>
+    '''Queries the Animal_Movement database For deployed GPS collars during SightingDate And Then loads the submitted GridEX's AnimalID column
+    '''With available collared animals based On collar frequency.
+    ''' </summary>
+    '''<param name = "GridEx" > Parent GridEX</param>
+    '''<param name = "ObservationDate" > Results will be filtered by available GPS collars deployed On this Date.</param>
+    Private Sub LoadCollaredCaribouDropdown(GridEx As GridEX, ObservationDate As Date)
 
-    '    'Caribou groups often contain GPS collared animals. 
-    '    'When this event fires the user wants to associate a collared caribou with a group of caribou seen during a population survey.
-    '    'The collar is detected by radio frequency.  We need to find out which collar was detected and which animal the collar was deployed on.
-    '    'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
-    '    ' the population survey group.
+        'Caribou groups often contain GPS collared animals. 
+        'When this event fires the user wants to associate a collared caribou with a group of caribou seen during a population survey.
+        'The collar is detected by radio frequency.  We need to find out which collar was detected and which animal the collar was deployed on.
+        'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
+        ' the population survey group.
 
-    '    'Try
-    '    'Catch ex As Exception
-    '    '    MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-    '    'End Try
-    '    ''Ensure the GridEXColumn is configured for a DropDown
-    '    'With GridEx.RootTable.Columns("AnimalID")
-    '    '    .EditType = EditType.Combo
-    '    '    .HasValueList = True
-    '    '    .LimitToList = True
-    '    '    .AllowSort = True
-    '    '    .AutoComplete = True
-    '    '    .ValueList.Clear()
-    '    'End With
+        Try
+            'Ensure the GridEXColumn is configured for a DropDown
+            With GridEx.RootTable.Columns("AnimalID")
+                .EditType = EditType.Combo
+                .HasValueList = True
+                .LimitToList = True
+                .AllowSort = True
+                .AutoComplete = True
+                .ValueList.Clear()
+            End With
 
-    '    ''retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
-    '    'Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
-    '    '    FROM   Animals INNER JOIN
-    '    '           CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-    '    '           Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-    '    '    WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
-    '    '    ORDER BY Collars.Frequency"
+            'retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
+            Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
+            FROM   Animals INNER JOIN
+                   CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
+                   Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
+            WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
+            ORDER BY Collars.Frequency"
 
-    '    ''get the filtered data into a datatable
-    '    'Dim PossibleCollaredAnimalsDataTable As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            'get the filtered data into a datatable
+            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
 
-    '    ''Add the animalids into the GridEXValueListItemCollection
-    '    'If Me.AnimalMovementDataset.Tables("Animals").Rows.Count > 0 Then
-    '    '    For Each Row As DataRow In PossibleCollaredAnimalsDataTable.Rows
-    '    '        If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
-    '    '            Dim ValueItem As String = Row.Item("AnimalID")
-    '    '            Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
+            'Add the animalids into the GridEXValueListItemCollection
+            For Each Row As DataRow In DT.Rows
+                If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
+                    Dim ValueItem As String = Row.Item("AnimalID")
+                    Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
+                    GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 
-    '    '            GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
-    '    '        End If
-    '    '    Next
-    '    'End If
-
-    'End Sub
-
+    Private Sub XrefPopulationCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.Enter
+        'refresh the list of frequencies 
+        Try
+            If Not Me.XrefPopulationCaribouGridEX.CurrentRow Is Nothing Then
+                If Not Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate") Is Nothing Then
+                    If Not IsDBNull(Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text) Then
+                        If IsDate(Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text) Then
+                            Dim SurveyDate As Date = Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text
+                            LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SurveyDate)
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
 End Class
