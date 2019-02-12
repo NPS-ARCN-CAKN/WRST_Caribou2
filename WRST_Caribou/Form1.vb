@@ -1797,11 +1797,13 @@ Public Class Form1
     End Sub
 
     Private Sub RefreshToolStripButton_Click(sender As Object, e As EventArgs) Handles RefreshToolStripButton.Click
-        'refresh the list of database views
-        LoadDatabaseViewsComboBox()
+
 
         'refresh the data in the results grid.
         LoadSurveyResultsGrid()
+
+        'refresh the list of database views
+        LoadDatabaseViewsComboBox()
     End Sub
 
 
@@ -1962,7 +1964,11 @@ Public Class Form1
             Dim ViewName As String = Me.DatabaseViewsToolStripComboBox.SelectedItem
             If ViewName.Trim.Length > 0 Then
                 Try
-                    Dim Sql As String = "SELECT * FROM " & ViewName.Trim
+                    Dim Filter As String = ""
+                    If Me.QueryFilterToolStripTextBox.Text.Trim.Length > 0 Then
+                        Filter = " WHERE " & Me.QueryFilterToolStripTextBox.Text.Trim.Replace("DELETE", "").Replace("UPDATE", "")
+                    End If
+                    Dim Sql As String = "SELECT * FROM " & ViewName.Trim & Filter
                     ResultsDataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
                     Me.SurveyResultsBindingSource.DataSource = ResultsDataTable
                     Me.SurveyResultsDataGridView.DataSource = Me.SurveyResultsBindingSource
@@ -1975,7 +1981,7 @@ Public Class Form1
                 MsgBox("Select a database view.", MsgBoxStyle.Information, "View not selected")
             End If
         Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & " b)")
+            MsgBox("Query failed: " & ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 

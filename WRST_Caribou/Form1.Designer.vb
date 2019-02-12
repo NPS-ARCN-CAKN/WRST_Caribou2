@@ -155,6 +155,8 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
+        Me.WhereToolStripLabel = New System.Windows.Forms.ToolStripLabel()
+        Me.QueryFilterToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1299,7 +1301,7 @@ Partial Class Form1
         '
         'SurveyResultsToolStrip
         '
-        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.DatabaseViewsToolStripComboBox, Me.ToolStripSeparator10, Me.RefreshToolStripButton})
+        Me.SurveyResultsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectSurveyTypeToolStripLabel, Me.DatabaseViewsToolStripComboBox, Me.WhereToolStripLabel, Me.QueryFilterToolStripTextBox, Me.ToolStripSeparator10, Me.RefreshToolStripButton})
         Me.SurveyResultsToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.SurveyResultsToolStrip.Name = "SurveyResultsToolStrip"
         Me.SurveyResultsToolStrip.Size = New System.Drawing.Size(1170, 25)
@@ -1309,8 +1311,8 @@ Partial Class Form1
         'SelectSurveyTypeToolStripLabel
         '
         Me.SelectSurveyTypeToolStripLabel.Name = "SelectSurveyTypeToolStripLabel"
-        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(118, 22)
-        Me.SelectSurveyTypeToolStripLabel.Text = "Select database view:"
+        Me.SelectSurveyTypeToolStripLabel.Size = New System.Drawing.Size(281, 22)
+        Me.SelectSurveyTypeToolStripLabel.Text = "Use this tool to query the database: SELECT * FROM "
         '
         'DatabaseViewsToolStripComboBox
         '
@@ -1327,8 +1329,8 @@ Partial Class Form1
         Me.RefreshToolStripButton.Image = CType(resources.GetObject("RefreshToolStripButton.Image"), System.Drawing.Image)
         Me.RefreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.RefreshToolStripButton.Name = "RefreshToolStripButton"
-        Me.RefreshToolStripButton.Size = New System.Drawing.Size(143, 22)
-        Me.RefreshToolStripButton.Text = "Refresh database view"
+        Me.RefreshToolStripButton.Size = New System.Drawing.Size(65, 22)
+        Me.RefreshToolStripButton.Text = "Submit"
         '
         'CapturesBindingSource
         '
@@ -1405,6 +1407,17 @@ Partial Class Form1
         'XrefRadiotrackingCaribouTableAdapter
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
+        '
+        'WhereToolStripLabel
+        '
+        Me.WhereToolStripLabel.Name = "WhereToolStripLabel"
+        Me.WhereToolStripLabel.Size = New System.Drawing.Size(49, 22)
+        Me.WhereToolStripLabel.Text = "WHERE "
+        '
+        'QueryFilterToolStripTextBox
+        '
+        Me.QueryFilterToolStripTextBox.Name = "QueryFilterToolStripTextBox"
+        Me.QueryFilterToolStripTextBox.Size = New System.Drawing.Size(300, 25)
         '
         'Form1
         '
@@ -1642,4 +1655,6 @@ Partial Class Form1
     Friend WithEvents BindingNavigatorSeparator5 As ToolStripSeparator
     Friend WithEvents AnimalsToolStrip As ToolStrip
     Friend WithEvents CollarDeploymentsToolStripLabel As ToolStripLabel
+    Friend WithEvents WhereToolStripLabel As ToolStripLabel
+    Friend WithEvents QueryFilterToolStripTextBox As ToolStripTextBox
 End Class
