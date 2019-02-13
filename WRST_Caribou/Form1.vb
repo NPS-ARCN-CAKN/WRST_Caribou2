@@ -2105,4 +2105,22 @@ Public Class Form1
         End Try
         Return SightingDate
     End Function
+
+    Private Sub CampaignsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CampaignsGridEX.DeletingRecords
+        'ask the user if they really want to delete the records and all related records
+        Dim Result As DialogResult = MessageBox.Show("WARNING: You are about to delete one or more survey campaign records. This will cascade delete all related flights and survey data. This action cannot be undone." & vbNewLine & vbNewLine & " Click Yes to delete, No to cancel.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If Result = DialogResult.No Then
+            'user selected No, cancel deleting the records.
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub SurveyFlightsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SurveyFlightsGridEX.DeletingRecords
+        'ask the user if they really want to delete the records and all related records
+        Dim Result As DialogResult = MessageBox.Show("WARNING: You are about to delete one or more flight records. This will cascade delete all survey data related to the flight. This action cannot be undone." & vbNewLine & vbNewLine & " Click Yes to delete, No to cancel.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+        If Result = DialogResult.No Then
+            'user selected No, cancel deleting the records.
+            e.Cancel = True
+        End If
+    End Sub
 End Class
