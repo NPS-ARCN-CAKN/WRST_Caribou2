@@ -138,6 +138,8 @@ Partial Class Form1
         Me.SurveyResultsToolStrip = New System.Windows.Forms.ToolStrip()
         Me.SelectSurveyTypeToolStripLabel = New System.Windows.Forms.ToolStripLabel()
         Me.DatabaseViewsToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.WhereToolStripLabel = New System.Windows.Forms.ToolStripLabel()
+        Me.QueryFilterToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -155,8 +157,6 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.WhereToolStripLabel = New System.Windows.Forms.ToolStripLabel()
-        Me.QueryFilterToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -612,6 +612,7 @@ Partial Class Form1
         Me.XrefRadiotrackingCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.XrefRadiotrackingCaribouGridEX.Size = New System.Drawing.Size(441, 337)
         Me.XrefRadiotrackingCaribouGridEX.TabIndex = 0
+        Me.XrefRadiotrackingCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
         Me.XrefRadiotrackingCaribouGridEX.Visible = False
         '
         'RadiotrackingToolStrip
@@ -1319,6 +1320,17 @@ Partial Class Form1
         Me.DatabaseViewsToolStripComboBox.Name = "DatabaseViewsToolStripComboBox"
         Me.DatabaseViewsToolStripComboBox.Size = New System.Drawing.Size(200, 25)
         '
+        'WhereToolStripLabel
+        '
+        Me.WhereToolStripLabel.Name = "WhereToolStripLabel"
+        Me.WhereToolStripLabel.Size = New System.Drawing.Size(49, 22)
+        Me.WhereToolStripLabel.Text = "WHERE "
+        '
+        'QueryFilterToolStripTextBox
+        '
+        Me.QueryFilterToolStripTextBox.Name = "QueryFilterToolStripTextBox"
+        Me.QueryFilterToolStripTextBox.Size = New System.Drawing.Size(300, 25)
+        '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
@@ -1407,17 +1419,6 @@ Partial Class Form1
         'XrefRadiotrackingCaribouTableAdapter
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
-        '
-        'WhereToolStripLabel
-        '
-        Me.WhereToolStripLabel.Name = "WhereToolStripLabel"
-        Me.WhereToolStripLabel.Size = New System.Drawing.Size(49, 22)
-        Me.WhereToolStripLabel.Text = "WHERE "
-        '
-        'QueryFilterToolStripTextBox
-        '
-        Me.QueryFilterToolStripTextBox.Name = "QueryFilterToolStripTextBox"
-        Me.QueryFilterToolStripTextBox.Size = New System.Drawing.Size(300, 25)
         '
         'Form1
         '

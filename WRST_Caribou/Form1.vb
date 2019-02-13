@@ -2059,20 +2059,50 @@ Public Class Form1
     End Sub
 
     Private Sub XrefPopulationCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.Enter
-        'refresh the list of frequencies 
+        'save the dataset to avoid datarelation errors
+        If Me.WRST_CaribouDataSet.HasChanges = True Then
+            SaveDataset()
+        End If
+
+        'refresh the list of frequencies in the animal frequencies GridEX chooser
+        LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, GetCurrentSightingDate(Me.PopulationEstimateGridEX))
+    End Sub
+
+    Private Sub XrefCompCountCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefCompCountCaribouGridEX.Enter
+        'save the dataset to avoid datarelation errors
+        If Me.WRST_CaribouDataSet.HasChanges = True Then
+            SaveDataset()
+        End If
+
+        'refresh the list of frequencies in the animal frequencies GridEX chooser
+        LoadCollaredCaribouDropdown(Me.XrefCompCountCaribouGridEX, GetCurrentSightingDate(Me.CompositionCountsGridEX))
+    End Sub
+
+    Private Sub XrefRadiotrackingCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.Enter
+        'save the dataset to avoid datarelation errors
+        If Me.WRST_CaribouDataSet.HasChanges = True Then
+            SaveDataset()
+        End If
+
+        'refresh the list of frequencies in the animal frequencies GridEX chooser
+        LoadCollaredCaribouDropdown(Me.XrefRadiotrackingCaribouGridEX, GetCurrentSightingDate(Me.RadioTrackingGridEX))
+    End Sub
+
+    Private Function GetCurrentSightingDate(GridEX As GridEX) As Date
+        'get the caribou group sighting date
+        Dim SightingDate As Date = Nothing
         Try
-            If Not Me.XrefPopulationCaribouGridEX.CurrentRow Is Nothing Then
-                If Not Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate") Is Nothing Then
-                    If Not IsDBNull(Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text) Then
-                        If IsDate(Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text) Then
-                            Dim SurveyDate As Date = Me.PopulationEstimateGridEX.CurrentRow.Cells("SightingDate").Text
-                            LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, SurveyDate)
-                        End If
+            If Not GridEX.CurrentRow.Cells("SightingDate") Is Nothing Then
+                If Not IsDBNull(GridEX.CurrentRow.Cells("SightingDate").Text) Then
+                    If IsDate(GridEX.CurrentRow.Cells("SightingDate").Text) Then
+                        'SurveyDate is the date the current caribou group was spotted
+                        SightingDate = GridEX.CurrentRow.Cells("SightingDate").Text
                     End If
                 End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
-    End Sub
+        Return SightingDate
+    End Function
 End Class
