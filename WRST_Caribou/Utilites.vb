@@ -217,6 +217,28 @@ ORDER BY Frequency"
         Return CollarDeploymentsDataTable
     End Function
 
+    ''' <summary>
+    ''' Returns a DataTable of the WRST caribou collar deployments from the Animal_Movement database
+    ''' </summary>
+    ''' <returns>DataTable</returns>
+    Public Function GetCurrentCollarDeploymentsDataTable(AsOfDate As Date) As DataTable
+        Dim DT As New DataTable
+        Try
+            Dim Sql As String = "SELECT Collars.Frequency, CollarDeployments.AnimalId, CollarDeployments.DeploymentDate,CollarDeployments.RetrievalDate,iif(Animals.MortalityDate is NULL,'Alive','Dead') as Status , Animals.MortalityDate, CollarDeployments.CollarId
+        FROM            CollarDeployments INNER JOIN
+                                 Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId INNER JOIN
+                                 Animals ON CollarDeployments.ProjectId = Animals.ProjectId AND CollarDeployments.AnimalId = Animals.AnimalId
+        WHERE        (CollarDeployments.ProjectId = 'WRST_Caribou') AND 
+		((DeploymentDate < '" & AsOfDate & "') AND (RetrievalDate IS NULL)) OR
+		( (DeploymentDate < '" & AsOfDate & "') AND (RetrievalDate > '" & AsOfDate & "'))
+        ORDER BY Frequency,DeploymentDate "
+            DT = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            DT.TableName = "CurrentCollarDeployments"
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return DT
+    End Function
 
     ''' <summary>
     ''' Returns a DataTable of the WRST caribou animals from the Animal_Movement database

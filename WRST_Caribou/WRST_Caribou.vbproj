@@ -138,6 +138,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrequencyToAnimalMatcherForm.Designer.vb">
+      <DependentUpon>FrequencyToAnimalMatcherForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrequencyToAnimalMatcherForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ImportWaypoints.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrequencyToAnimalMatcherForm.resx">
+      <DependentUpon>FrequencyToAnimalMatcherForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

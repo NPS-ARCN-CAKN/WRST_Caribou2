@@ -9,10 +9,6 @@ Public Class Form1
 
     Dim ResultsDataTable As DataTable 'This reusable datatable will contain the data to be displayed in the Me.SurveyResultsDataGridView of the Results tab
 
-    'load the animals inventory grid from animal_movement database
-    'Dim AnimalMovementDataset As DataSet = GetAnimal_MovementDataset()
-    Dim AnimalFrequenciesLookupTable As DataTable = GetCollarDeploymentsDataTable()
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'set up the form
         Me.DatabaseViewNameToolStripLabel.Text = ""
@@ -34,7 +30,7 @@ Public Class Form1
         'set up flights gridex
         FormatGridEX(Me.SurveyFlightsGridEX) 'consistent look and feel
         SetFlightsGridExDefaultValues() 'set up default values
-        SetFlightsGridEXDropDowns 'set up dropdowns
+        SetFlightsGridEXDropDowns() 'set up dropdowns
         LoadFlightHeader() 'load the flight header with context information
 
         'set up population survey data gridex
@@ -2023,9 +2019,9 @@ Public Class Form1
         'These data come from the Animal_Movement database.  Query based on survey date and frequency to determine which animal to associate with 
         ' the population survey group.
 
-        Try
-            'Ensure the GridEXColumn is configured for a DropDown
-            With GridEx.RootTable.Columns("AnimalID")
+
+        'Ensure the GridEXColumn is configured for a DropDown
+        With GridEx.RootTable.Columns("AnimalID")
                 .EditType = EditType.Combo
                 .HasValueList = True
                 .LimitToList = True
@@ -2034,25 +2030,55 @@ Public Class Form1
                 .ValueList.Clear()
             End With
 
-            'retrieve the animal associated with the collar that was deployed during the time of the survey.  i.e.:
-            Dim Sql As String = "SELECT   Collars.Frequency, Animals.ProjectId, Animals.AnimalId,CollarDeployments.DeploymentDate, CollarDeployments.RetrievalDate
-            FROM   Animals INNER JOIN
-                   CollarDeployments ON Animals.ProjectId = CollarDeployments.ProjectId AND Animals.AnimalId = CollarDeployments.AnimalId INNER JOIN
-                   Collars ON CollarDeployments.CollarManufacturer = Collars.CollarManufacturer AND CollarDeployments.CollarId = Collars.CollarId
-            WHERE  (Animals.ProjectId = 'WRST_Caribou') And (DeploymentDate < '" & ObservationDate & "' And (RetrievalDate is NULL or RetrievalDate > '" & ObservationDate & "'))
-            ORDER BY Collars.Frequency"
 
             'get the filtered data into a datatable
-            Dim DT As DataTable = GetDataTable(My.Settings.Animal_MovementConnectionString, Sql)
+            Dim DT As DataTable = GetCurrentCollarDeploymentsDataTable(ObservationDate)
 
             'Add the animalids into the GridEXValueListItemCollection
             For Each Row As DataRow In DT.Rows
-                If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
-                    Dim ValueItem As String = Row.Item("AnimalID")
-                    Dim DisplayItem As String = Row.Item("AnimalID") & " Freq:" & Row.Item("Frequency")
-                    GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
+            If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
+
+                Dim ValueItem As String = Row.Item("AnimalID")
+                Dim Frequency As String = Row.Item("Frequency")
+
+                Dim DeploymentDate As String = ""
+                If Not IsDBNull(Row.Item("DeploymentDate")) = True And IsDate(Row.Item("DeploymentDate")) Then
+                    DeploymentDate = Row.Item("DeploymentDate")
                 End If
-            Next
+
+
+                Dim RetrievalDate As String = ""
+                If Not IsDBNull(Row.Item("RetrievalDate")) = True And IsDate(Row.Item("RetrievalDate")) Then
+                    RetrievalDate = Row.Item("RetrievalDate")
+                End If
+
+                Dim MortalityDate As String = ""
+                If Not IsDBNull(Row.Item("MortalityDate")) = True And IsDate(Row.Item("MortalityDate")) Then
+                    MortalityDate = Row.Item("MortalityDate")
+                End If
+
+                Dim Status As String = ""
+                If MortalityDate.Trim.Length = 0 Then Status = "(Alive)" Else Status = "(Dead" & MortalityDate & ")"
+
+
+                Dim DeploymentPeriod As String = ""
+                If DeploymentDate.Trim.Length > 0 And RetrievalDate.Trim.Length = 0 Then
+                    'still deployed
+                    DeploymentPeriod = " Deployed on: " & DeploymentDate & " (Current)."
+                ElseIf DeploymentDate.Trim.Length > 0 And RetrievalDate.Trim.Length > 0 Then
+                    'deployed and later retrieved
+                    DeploymentPeriod = " Deployed from: " & DeploymentDate & " to " & RetrievalDate & "."
+                Else
+                    'wierd situation where collar is neither deployed or retrieved
+                    DeploymentPeriod = "ERROR: Cannot determine deployment status."
+                End If
+
+
+                Dim DisplayItem As String = Row.Item("AnimalID") & " " & Row.Item("Frequency") & " " & Status & " " & DeploymentPeriod
+                GridEx.RootTable.Columns("AnimalID").ValueList.Add(ValueItem, DisplayItem)
+            End If
+        Next
+        Try
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -2088,6 +2114,11 @@ Public Class Form1
         LoadCollaredCaribouDropdown(Me.XrefRadiotrackingCaribouGridEX, GetCurrentSightingDate(Me.RadioTrackingGridEX))
     End Sub
 
+    ''' <summary>
+    ''' Returns the SightingDate for the current row of GridEX
+    ''' </summary>
+    ''' <param name="GridEX"></param>
+    ''' <returns></returns>
     Private Function GetCurrentSightingDate(GridEX As GridEX) As Date
         'get the caribou group sighting date
         Dim SightingDate As Date = Nothing
@@ -2106,6 +2137,27 @@ Public Class Form1
         Return SightingDate
     End Function
 
+    ''' <summary>
+    ''' Returns the FrequenciesInGroup for the current row of GridEX
+    ''' </summary>
+    ''' <param name="GridEX"></param>
+    ''' <returns>String</returns>
+    Private Function GetCurrentFrequenciesInGroup(GridEX As GridEX) As String
+        'get the caribou group frequencies
+        Dim Frequencies As String = ""
+        Try
+            If Not GridEX.CurrentRow.Cells("FrequenciesInGroup") Is Nothing Then
+                If Not IsDBNull(GridEX.CurrentRow.Cells("FrequenciesInGroup").Text) Then
+                    'Collar frequencies detected in the current animal group
+                    Frequencies = GridEX.CurrentRow.Cells("FrequenciesInGroup").Text
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return Frequencies
+    End Function
+
     Private Sub CampaignsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CampaignsGridEX.DeletingRecords
         'ask the user if they really want to delete the records and all related records
         Dim Result As DialogResult = MessageBox.Show("WARNING: You are about to delete one or more survey campaign records. This will cascade delete all related flights and survey data. This action cannot be undone." & vbNewLine & vbNewLine & " Click Yes to delete, No to cancel.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
@@ -2122,5 +2174,16 @@ Public Class Form1
             'user selected No, cancel deleting the records.
             e.Cancel = True
         End If
+    End Sub
+
+    Private Sub AutoMatchPEFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsToolStripButton.Click
+        Dim ObservationDate As Date = GetCurrentSightingDate(Me.PopulationEstimateGridEX)
+        Dim Frequencies As String = GetCurrentFrequenciesInGroup(Me.PopulationEstimateGridEX)
+        Dim FrequenciesList As New ArrayList
+        For Each Item In Frequencies.Split(",")
+            FrequenciesList.Add(Item)
+        Next
+        Dim FMForm As New FrequencyToAnimalMatcherForm(FrequenciesList, ObservationDate)
+        FMForm.Show()
     End Sub
 End Class
