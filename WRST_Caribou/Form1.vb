@@ -2184,6 +2184,6 @@ Public Class Form1
             FrequenciesList.Add(Item)
         Next
         Dim FMForm As New FrequencyToAnimalMatcherForm(FrequenciesList, ObservationDate)
-        FMForm.Show()
+        FMForm.ShowDialog()
     End Sub
 End Class

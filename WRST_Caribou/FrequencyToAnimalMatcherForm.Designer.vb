@@ -65,7 +65,6 @@ Partial Class FrequencyToAnimalMatcherForm
         Me.GroupDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupDataGridView.Location = New System.Drawing.Point(0, 0)
         Me.GroupDataGridView.Name = "GroupDataGridView"
-        Me.GroupDataGridView.ReadOnly = True
         Me.GroupDataGridView.Size = New System.Drawing.Size(350, 561)
         Me.GroupDataGridView.TabIndex = 0
         '
@@ -79,6 +78,7 @@ Partial Class FrequencyToAnimalMatcherForm
         Me.CurrentCollarsDataGridView.Location = New System.Drawing.Point(0, 25)
         Me.CurrentCollarsDataGridView.MultiSelect = False
         Me.CurrentCollarsDataGridView.Name = "CurrentCollarsDataGridView"
+        Me.CurrentCollarsDataGridView.ReadOnly = True
         Me.CurrentCollarsDataGridView.Size = New System.Drawing.Size(697, 536)
         Me.CurrentCollarsDataGridView.TabIndex = 0
         '
