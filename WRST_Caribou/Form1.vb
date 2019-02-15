@@ -158,49 +158,58 @@ Public Class Form1
         Try
             Dim Grid As GridEX = Me.PopulationEstimateGridEX
 
-            'when the user clicks on a composition survey caribou group, then load the xrefcariboucomposition gridex with available 
-            'gps collars to allow the user to associate a collared caribou with the observed group
             'determine the EID, primary key of the caribou group record, and set the default value to the new xrefcariboucomposition record
-            Dim EID As String = ""
-            Dim SightingDate As Date
+            'Dim EID As String = ""
+            'Dim SightingDate As Date
             Dim GroupNumber As Integer = 0
-            Dim Waypoint As String = ""
+            'Dim Waypoint As String = ""
+            Dim FrequenciesInGroup As String = ""
 
             'get the sighting date to use later, and get the EID to relate to any new xrefcariboucomposition records
             With Grid
                 If Not .CurrentRow Is Nothing Then
                     'get the SightingDate
-                    If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
-                        If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then
-                            SightingDate = .CurrentRow.Cells("SightingDate").Value
-                        End If
-                    End If
+                    'If Not .CurrentRow.Cells("SightingDate") Is Nothing And Not IsDBNull(.CurrentRow.Cells("SightingDate")) Then
+                    '    If Not IsDBNull(.CurrentRow.Cells("SightingDate").Value) Then
+                    '        SightingDate = .CurrentRow.Cells("SightingDate").Value
+                    '    End If
+                    'End If
 
                     'set up the EID primary key for syncing with the group
-                    If Not .CurrentRow.Cells("EID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("EID")) Then
-                        If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
-                            EID = .CurrentRow.Cells("EID").Value
-                        End If
-                    End If
+                    'If Not .CurrentRow.Cells("EID") Is Nothing And Not IsDBNull(.CurrentRow.Cells("EID")) Then
+                    '    If Not IsDBNull(.CurrentRow.Cells("EID").Value) Then
+                    '        EID = .CurrentRow.Cells("EID").Value
+                    '    End If
+                    'End If
 
                     'get the GroupNumber
-                    If Not .CurrentRow.Cells("GroupNumber") Is Nothing And Not IsDBNull(.CurrentRow.Cells("GroupNumber")) Then
+                    If Not .CurrentRow.Cells("GroupNumber") Is Nothing Then
                         If Not IsDBNull(.CurrentRow.Cells("GroupNumber").Value) Then
                             GroupNumber = .CurrentRow.Cells("GroupNumber").Value
                         End If
                     End If
 
                     'get the Waypoint
-                    If Not .CurrentRow.Cells("WaypointName") Is Nothing And Not IsDBNull(.CurrentRow.Cells("WaypointName")) Then
-                        If Not IsDBNull(.CurrentRow.Cells("WaypointName").Value) Then
-                            Waypoint = .CurrentRow.Cells("WaypointName").Value
+                    'If Not .CurrentRow.Cells("WaypointName") Is Nothing Then
+                    '    If Not IsDBNull(.CurrentRow.Cells("WaypointName").Value) Then
+                    '        Waypoint = .CurrentRow.Cells("WaypointName").Value
+                    '    End If
+                    'End If
+
+                    'get the Waypoint
+                    If Not .CurrentRow.Cells("FrequenciesInGroup") Is Nothing Then
+                        If Not IsDBNull(.CurrentRow.Cells("FrequenciesInGroup").Value) Then
+                            FrequenciesInGroup = .CurrentRow.Cells("FrequenciesInGroup").Value
                         End If
                     End If
                 End If
             End With
 
             'modify the header
-            Me.XrefPopulationCaribouGridEX.RootTable.Caption = "GPS collared caribou in group number " & GroupNumber & " (Waypoint " & Waypoint & ")"
+            If FrequenciesInGroup = "" Then
+                FrequenciesInGroup = "NONE"
+            End If
+            Me.XrefPopulationCaribouGridEX.RootTable.Caption = "GPS collared caribou in group number " & GroupNumber & " (Frequencies: " & FrequenciesInGroup & ")"
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
@@ -2085,9 +2094,24 @@ Public Class Form1
     End Sub
 
     Private Sub XrefPopulationCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.Enter
+
+
+
+
         'save the dataset to avoid datarelation errors
         If Me.WRST_CaribouDataSet.HasChanges = True Then
+            'mark the current record index so we can move back to it after the savedataset blows it away
+            Dim GridEX As GridEX = Me.XrefPopulationCaribouGridEX
+            Dim RowIndex As Integer = GridEX.CurrentRow.RowIndex
+
+            'save the dataset
             SaveDataset()
+
+            'now move back to the original row, if it's still there
+            If Not GridEX.GetRow(RowIndex) Is Nothing Then
+                Me.XrefPopulationCaribouGridEX.MoveTo(RowIndex)
+            End If
+
         End If
 
         'refresh the list of frequencies in the animal frequencies GridEX chooser
@@ -2177,13 +2201,116 @@ Public Class Form1
     End Sub
 
     Private Sub AutoMatchPEFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsToolStripButton.Click
-        Dim ObservationDate As Date = GetCurrentSightingDate(Me.PopulationEstimateGridEX)
-        Dim Frequencies As String = GetCurrentFrequenciesInGroup(Me.PopulationEstimateGridEX)
-        Dim FrequenciesList As New ArrayList
-        For Each Item In Frequencies.Split(",")
-            FrequenciesList.Add(Item)
-        Next
-        Dim FMForm As New FrequencyToAnimalMatcherForm(FrequenciesList, ObservationDate)
-        FMForm.ShowDialog()
+        Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
+Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
+No existing records will be deleted. No duplicate records will be added.  
+Yes to Continue. No to cancel."
+        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            AutomatchFrequenciesToAnimals_Flight()
+        End If
     End Sub
+
+    Private Sub AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Click
+        Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
+Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
+No existing records will be deleted. No duplicate records will be added.  
+Yes to Continue. No to cancel."
+        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            'this arraylist will hold any frequencies not found in animal movement tool
+            Dim MissingFrequenciesArrayList As New ArrayList
+            If Not Me.PopulationEstimateGridEX.CurrentRow Is Nothing Then
+                AutomatchFrequencyToAnimal(Me.PopulationEstimateGridEX.CurrentRow, MissingFrequenciesArrayList)
+                ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+            Else
+                MsgBox("Select a row")
+            End If
+
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Loops through the PopulationEstimateGridEX rows and tries to match Group Frequencies to AnimalIDs in the Animal Movement database
+    ''' </summary>
+    Private Sub AutomatchFrequenciesToAnimals_Flight()
+        'this arraylist will hold any frequencies not found in animal movement tool
+        Dim MissingFrequenciesArrayList As New ArrayList
+        Try
+            For Each Row As GridEXRow In Me.PopulationEstimateGridEX.GetRows
+                AutomatchFrequencyToAnimal(Row, MissingFrequenciesArrayList)
+            Next
+            ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+    Private Sub ShowMissingFrequenciesList(MissingFrequenciesArrayList As ArrayList)
+        If MissingFrequenciesArrayList.Count > 1 Then
+            Dim Warning As String = "WARNING: The following Frequencies were not associated with any deployed collar on the date the caribou group was observed" & vbNewLine
+            Dim Message As String = ""
+            For Each Freq In MissingFrequenciesArrayList
+                Message = Message & Freq & vbNewLine
+            Next
+            Message = Message & vbNewLine & vbNewLine & "Ctl-C to copy this message to your clipboard."
+            MsgBox(Warning & Message, MsgBoxStyle.Exclamation, "WARNING")
+        End If
+    End Sub
+
+
+    ''' <summary>
+    ''' Auto-matches a GPS collar Frequency to an AnimalID in the Animal Movement database. Helper sub to process GridEX rows from AutomatchFrequenciesToAnimals()
+    ''' </summary>
+    ''' <param name="Row"></param>
+    ''' <param name="MissingFrequenciesArrayList"></param>
+    Private Sub AutomatchFrequencyToAnimal(Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
+        Try
+            If Not Row Is Nothing Then
+                If Not Row.Cells("FrequenciesInGroup") Is Nothing And Not Row.Cells("SightingDate") Is Nothing And Not Row.Cells("EID") Is Nothing Then
+                    If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) And Not IsDBNull(Row.Cells("SightingDate").Value) And Not IsDBNull(Row.Cells("EID").Value) Then
+
+                        'get some caribou group row values into variables
+                        Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
+                        Dim SightingDate As String = Row.Cells("SightingDate").Value
+                        Dim EID As String = Row.Cells("EID").Value
+
+                        'parse the comma separated frequencies so we can deal with them individually
+                        For Each Frequency In FrequenciesInGroup.Split(",")
+                            Frequency = Frequency.Trim
+                            If IsNumeric(Frequency.Trim) = True Then
+                                Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
+                                If AnimalID.Length = 0 Then
+                                    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
+                                    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
+                                    AnimalID = "ERR: " & Frequency
+                                End If
+
+                                'add the animalid to the XrefPopulationCaribouDataTable
+                                Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("XrefPopulationCaribou")
+                                'see if the AnimalID already exists
+                                Dim ExistenceCheck As DataRow() = XrefDataTable.Select("EID = '" & EID & "' And AnimalID='" & AnimalID & "'")
+                                If ExistenceCheck.Count = 0 Then
+                                    'the animalid does not exist for the animal group
+                                    Dim XrefDataRow As DataRow = XrefDataTable.NewRow
+                                    With XrefDataRow
+                                        .Item("AnimalID") = AnimalID
+                                        .Item("EID") = EID
+                                        .Item("RecordInsertedBy") = My.User.Name
+                                        .Item("RecordInsertedDate") = Now
+                                        .Item("ProjectID") = "WRST_Caribou"
+                                        .Item("PCID") = Guid.NewGuid.ToString
+                                    End With
+                                    XrefDataTable.Rows.Add(XrefDataRow)
+                                    XrefPopulationCaribouBindingSource.EndEdit()
+                                End If
+                            End If
+                        Next
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
 End Class

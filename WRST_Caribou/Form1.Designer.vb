@@ -60,6 +60,7 @@ Partial Class Form1
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ImportPopulationSurveyWaypointsFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.RadiotrackingTabPage = New System.Windows.Forms.TabPage()
         Me.RadioTrackingSplitContainer = New System.Windows.Forms.SplitContainer()
         Me.RadioTrackingGridEX = New Janus.Windows.GridEX.GridEX()
@@ -158,7 +159,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefCompCountCaribouTableAdapter()
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -512,7 +513,7 @@ Partial Class Form1
         'PopulationToolStrip
         '
         Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationWaypointsToolStripButton, Me.ToolStripSeparator4, Me.ImportPopulationSurveyWaypointsFromFileToolStripButton, Me.ToolStripSeparator8, Me.AutoMatchPEFrequenciesToAnimalsToolStripButton})
+        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationSurveyWaypointsFromFileToolStripButton, Me.ToolStripSeparator8, Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton, Me.ToolStripSeparator4, Me.AutoMatchPEFrequenciesToAnimalsToolStripButton, Me.ImportPopulationWaypointsToolStripButton})
         Me.PopulationToolStrip.Location = New System.Drawing.Point(2, 2)
         Me.PopulationToolStrip.Name = "PopulationToolStrip"
         Me.PopulationToolStrip.Size = New System.Drawing.Size(928, 25)
@@ -526,7 +527,7 @@ Partial Class Form1
         Me.ImportPopulationWaypointsToolStripButton.Image = CType(resources.GetObject("ImportPopulationWaypointsToolStripButton.Image"), System.Drawing.Image)
         Me.ImportPopulationWaypointsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ImportPopulationWaypointsToolStripButton.Name = "ImportPopulationWaypointsToolStripButton"
-        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(161, 22)
+        Me.ImportPopulationWaypointsToolStripButton.Size = New System.Drawing.Size(161, 19)
         Me.ImportPopulationWaypointsToolStripButton.Text = "Import DNRGPS waypoints..."
         '
         'ToolStripSeparator4
@@ -547,6 +548,15 @@ Partial Class Form1
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
+        '
+        'AutoMatchPEFrequenciesToAnimalsToolStripButton
+        '
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Image = CType(resources.GetObject("AutoMatchPEFrequenciesToAnimalsToolStripButton.Image"), System.Drawing.Image)
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Name = "AutoMatchPEFrequenciesToAnimalsToolStripButton"
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Size = New System.Drawing.Size(235, 22)
+        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Text = "Auto match frequencies to animals (flight)"
         '
         'RadiotrackingTabPage
         '
@@ -1432,14 +1442,14 @@ Partial Class Form1
         '
         Me.XrefRadiotrackingCaribouTableAdapter.ClearBeforeFill = True
         '
-        'AutoMatchPEFrequenciesToAnimalsToolStripButton
+        'AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton
         '
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Image = CType(resources.GetObject("AutoMatchPEFrequenciesToAnimalsToolStripButton.Image"), System.Drawing.Image)
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Name = "AutoMatchPEFrequenciesToAnimalsToolStripButton"
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Size = New System.Drawing.Size(205, 22)
-        Me.AutoMatchPEFrequenciesToAnimalsToolStripButton.Text = "Auto match frequencies to animals..."
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Image = CType(resources.GetObject("AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Image"), System.Drawing.Image)
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Name = "AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton"
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Size = New System.Drawing.Size(282, 22)
+        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Text = "Auto match frequencies to animals (current record)"
         '
         'Form1
         '
@@ -1681,4 +1691,5 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents AutoMatchCCFrequenciesToAnimalsToolStripButton As ToolStripButton
     Friend WithEvents AutoMatchPEFrequenciesToAnimalsToolStripButton As ToolStripButton
+    Friend WithEvents AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton As ToolStripButton
 End Class
