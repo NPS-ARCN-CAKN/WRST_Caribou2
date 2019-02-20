@@ -3492,12 +3492,6 @@ Partial Public Class WRST_CaribouDataSet
             Me.columnGroupNumber.AllowDBNull = false
             Me.columnSearchArea.AllowDBNull = false
             Me.columnSearchArea.MaxLength = 20
-            Me.columnSmallBull.AllowDBNull = false
-            Me.columnMediumBull.AllowDBNull = false
-            Me.columnLargeBull.AllowDBNull = false
-            Me.columnCow.AllowDBNull = false
-            Me.columnCalf.AllowDBNull = false
-            Me.columnIndeterminate.AllowDBNull = false
             Me.columnWaypoint.AllowDBNull = false
             Me.columnWaypoint.MaxLength = 20
             Me.columnFrequencies.MaxLength = 255
@@ -9845,7 +9839,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SmallBull() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.SmallBullColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.SmallBullColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SmallBull' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.SmallBullColumn) = value
@@ -9856,7 +9854,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property MediumBull() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.MediumBullColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.MediumBullColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MediumBull' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.MediumBullColumn) = value
@@ -9867,7 +9869,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property LargeBull() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.LargeBullColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.LargeBullColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LargeBull' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.LargeBullColumn) = value
@@ -9878,7 +9884,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Cow() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.CowColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.CowColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Cow' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.CowColumn) = value
@@ -9889,7 +9899,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Calf() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.CalfColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.CalfColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Calf' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.CalfColumn) = value
@@ -9900,7 +9914,11 @@ Partial Public Class WRST_CaribouDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Indeterminate() As Integer
             Get
-                Return CType(Me(Me.tableCompositionCounts.IndeterminateColumn),Integer)
+                Try 
+                    Return CType(Me(Me.tableCompositionCounts.IndeterminateColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Indeterminate' in table 'CompositionCounts' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableCompositionCounts.IndeterminateColumn) = value
@@ -10054,6 +10072,78 @@ Partial Public Class WRST_CaribouDataSet
                 Me.SetParentRow(value, Me.Table.ParentRelations("FK_CompositionCounts_SurveyFlights"))
             End Set
         End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSmallBullNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.SmallBullColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSmallBullNull()
+            Me(Me.tableCompositionCounts.SmallBullColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsMediumBullNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.MediumBullColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetMediumBullNull()
+            Me(Me.tableCompositionCounts.MediumBullColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLargeBullNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.LargeBullColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLargeBullNull()
+            Me(Me.tableCompositionCounts.LargeBullColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCowNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.CowColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCowNull()
+            Me(Me.tableCompositionCounts.CowColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCalfNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.CalfColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCalfNull()
+            Me(Me.tableCompositionCounts.CalfColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsIndeterminateNull() As Boolean
+            Return Me.IsNull(Me.tableCompositionCounts.IndeterminateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetIndeterminateNull()
+            Me(Me.tableCompositionCounts.IndeterminateColumn) = Global.System.Convert.DBNull
+        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -15615,12 +15705,12 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Herd As String,  _
                     ByVal GroupNumber As Integer,  _
                     ByVal SearchArea As String,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal Indeterminate As Integer,  _
+                    ByVal SmallBull As Global.System.Nullable(Of Integer),  _
+                    ByVal MediumBull As Global.System.Nullable(Of Integer),  _
+                    ByVal LargeBull As Global.System.Nullable(Of Integer),  _
+                    ByVal Cow As Global.System.Nullable(Of Integer),  _
+                    ByVal Calf As Global.System.Nullable(Of Integer),  _
+                    ByVal Indeterminate As Global.System.Nullable(Of Integer),  _
                     ByVal Waypoint As String,  _
                     ByVal Frequencies As String,  _
                     ByVal FlightID As String,  _
@@ -15641,12 +15731,36 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(3).Value = CType(SearchArea,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(SmallBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(MediumBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(LargeBull,Integer)
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(Cow,Integer)
-            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Calf,Integer)
-            Me.Adapter.InsertCommand.Parameters(9).Value = CType(Indeterminate,Integer)
+            If (SmallBull.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(SmallBull.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (MediumBull.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(MediumBull.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (LargeBull.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(LargeBull.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (Cow.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Cow.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (Calf.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(Calf.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (Indeterminate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Indeterminate.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
@@ -15703,12 +15817,12 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal Herd As String,  _
                     ByVal GroupNumber As Integer,  _
                     ByVal SearchArea As String,  _
-                    ByVal SmallBull As Integer,  _
-                    ByVal MediumBull As Integer,  _
-                    ByVal LargeBull As Integer,  _
-                    ByVal Cow As Integer,  _
-                    ByVal Calf As Integer,  _
-                    ByVal Indeterminate As Integer,  _
+                    ByVal SmallBull As Global.System.Nullable(Of Integer),  _
+                    ByVal MediumBull As Global.System.Nullable(Of Integer),  _
+                    ByVal LargeBull As Global.System.Nullable(Of Integer),  _
+                    ByVal Cow As Global.System.Nullable(Of Integer),  _
+                    ByVal Calf As Global.System.Nullable(Of Integer),  _
+                    ByVal Indeterminate As Global.System.Nullable(Of Integer),  _
                     ByVal Waypoint As String,  _
                     ByVal Frequencies As String,  _
                     ByVal SourceFilename As String,  _
@@ -15729,12 +15843,36 @@ Namespace WRST_CaribouDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(3).Value = CType(SearchArea,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SmallBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(MediumBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(LargeBull,Integer)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Cow,Integer)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Calf,Integer)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Indeterminate,Integer)
+            If (SmallBull.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(SmallBull.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (MediumBull.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(MediumBull.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (LargeBull.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(LargeBull.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (Cow.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Cow.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (Calf.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Calf.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (Indeterminate.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Indeterminate.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
             If (Waypoint Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Waypoint")
             Else
