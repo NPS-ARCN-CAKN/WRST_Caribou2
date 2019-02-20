@@ -1635,7 +1635,7 @@ Public Class Form1
         'get the structure of the destination datatable, we only need one record since the translator will clear all records anyway
         Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
-        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCount, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+        ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCounts, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
     End Sub
 
     'import arbitrary waypoints to population
@@ -1658,7 +1658,7 @@ Public Class Form1
     ''' Survey types
     ''' </summary>
     Public Enum SurveyType
-        CompositionCount
+        CompositionCounts
         PopulationEstimate
         Radiotracking
     End Enum
@@ -1669,106 +1669,120 @@ Public Class Form1
     ''' </summary>
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
     Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType, Herd As String, FlightID As String)
-        Try
-            'get the data fileinfo to import
-            Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
+        If Not DestinationDataTable Is Nothing Then
+            If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCount" Or SurveyType.ToString = "Radiotracking" Then
+                If Herd = "Mentasta" Or Herd = "Chisana" Then
+                    If FlightID.Trim.Length > 0 Then
+                        Try
+                            'get the data fileinfo to import
+                            Dim SourceFileInfo As New FileInfo(GetFile("Select a data file to open. If Excel workbook the data to be imported must be in the first worksheet (tab).", "Survey data file (.csv;.xls;.xlsx)|*.csv;*.xls;*.xlsx|Comma separated values (.csv)|*.csv|Excel worksheet (.xlsx)|*.xlsx|Excel worksheet (.xls)|*.xls"))
 
-            'convert the file into a datatable so we can work with it
-            Dim InputDataTable As DataTable = Nothing
+                            'convert the file into a datatable so we can work with it
+                            Dim InputDataTable As DataTable = Nothing
 
-            'determine if the input file is csv or excel
-            If SourceFileInfo.Extension = ".csv" Then
-                'convert the data file into a datatable
-                InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
-            ElseIf SourceFileInfo.Extension = ".xlsx" Then
-                'convert the excel sheet into a datatable
-                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES"";"
-                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-                InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
-            ElseIf SourceFileInfo.Extension = ".xls" Then
-                'convert the excel sheet into a datatable
-                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES"";"
-                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
-                InputDataTable = ExcelDataset.Tables(0) 'first worksheet
-            End If
+                            'determine if the input file is csv or excel
+                            If SourceFileInfo.Extension = ".csv" Then
+                                'convert the data file into a datatable
+                                InputDataTable = GetDataTableFromDelimitedTextFile(SourceFileInfo, ",")
+                            ElseIf SourceFileInfo.Extension = ".xlsx" Then
+                                'convert the excel sheet into a datatable
+                                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 12.0 Xml;HDR=YES"";"
+                                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                                InputDataTable = ExcelDataset.Tables(0) 'can only grab the first worksheet (tab)
+                            ElseIf SourceFileInfo.Extension = ".xls" Then
+                                'convert the excel sheet into a datatable
+                                Dim ExcelConnectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & SourceFileInfo.FullName & ";Extended Properties=""Excel 8.0;HDR=YES"";"
+                                Dim ExcelDataset As DataSet = GetDatasetFromExcelWorkbook(ExcelConnectionString)
+                                InputDataTable = ExcelDataset.Tables(0) 'first worksheet
+                            End If
 
-            'make a list of desired default values to pass into the data tables translator form
-            'these items will show up in the mappings datagridview's default values column to make things a little easier
-            Dim DefaultValuesList As New List(Of String)
-            With DefaultValuesList
-                'add the search areas from my.settings to the default values
-                For Each Item In My.Settings.SearchAreas.Split(",")
-                    .Add(Item)
-                Next
+                            'make a list of desired default values to pass into the data tables translator form
+                            'these items will show up in the mappings datagridview's default values column to make things a little easier
+                            Dim DefaultValuesList As New List(Of String)
+                            With DefaultValuesList
+                                'add the search areas from my.settings to the default values
+                                For Each Item In My.Settings.SearchAreas.Split(",")
+                                    .Add(Item)
+                                Next
 
-                'add radiotracking special default values
-                If SurveyType = SurveyType.Radiotracking Then
-                    .Add("WRST_Caribou")
-                    .Add("Manual")
-                    .Add("Automatic")
+                                'add radiotracking special default values
+                                If SurveyType = SurveyType.Radiotracking Then
+                                    .Add("WRST_Caribou")
+                                    .Add("Manual")
+                                    .Add("Automatic")
+                                End If
+
+                                'common default values
+                                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
+                                .Add(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")) 'the currently selected herd in the campaigns table
+                                .Add(SourceFileInfo.Name) 'the import file name
+                            End With
+
+                            'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
+                            Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
+                            TranslatorForm.ShowDialog()
+
+                            'at this point we have transformed the csv into a clone of the destination datatable
+                            Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
+
+                            'the next step is to get the transformed data into the correct table
+                            'loop through the waypoints datatable and try to insert them into the datatable
+                            Dim TableName As String = SurveyType.ToString
+                            For Each Row As DataRow In ImportDataTable.Rows
+
+                                'make a new row
+                                Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables(TableName).NewRow
+                                For Each Column As DataColumn In ImportDataTable.Columns
+                                    NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
+                                Next
+
+                                'override any selections made on the translator form
+                                NewRow.Item("FlightID") = FlightID
+                                NewRow.Item("RecordInsertedDate") = Now
+                                NewRow.Item("RecordInsertedBy") = My.User.Name
+                                NewRow.Item("Herd") = Herd
+
+
+                                Select Case SurveyType
+                                    Case SurveyType.CompositionCounts
+                                        NewRow.Item("CCID") = Guid.NewGuid.ToString
+                                    Case SurveyType.PopulationEstimate
+                                        NewRow.Item("EID") = Guid.NewGuid.ToString
+                                    Case SurveyType.Radiotracking
+                                        NewRow.Item("RTID") = Guid.NewGuid.ToString
+                                End Select
+
+                                'add the row
+                                Me.WRST_CaribouDataSet.Tables(TableName).Rows.Add(NewRow)
+
+                                'end the edit
+                                Select Case SurveyType
+                                    Case SurveyType.CompositionCounts
+                                        Me.CompositionCountsBindingSource.EndEdit()
+                                    Case SurveyType.PopulationEstimate
+                                        Me.PopulationEstimateBindingSource.EndEdit()
+                                    Case SurveyType.Radiotracking
+                                        Me.RadioTrackingBindingSource.EndEdit()
+                                End Select
+
+                            Next
+
+                        Catch ex As Exception
+                            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+                        End Try
+                    Else
+                        MsgBox("FlightID is required")
+                    End If
+                Else
+                    MsgBox("Herd must be Mentasta or Chisana")
                 End If
+            Else
+                MsgBox("SurveyType must be PopulationEstimate Object CompositionCount Or Radiotracking")
+            End If
+        Else
+            MsgBox("DestinationDataTable cannot be nothing.")
+        End If
 
-                'common default values
-                .Add(GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID")) 'the primary key of the currently selected flight
-                .Add(GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd")) 'the currently selected herd in the campaigns table
-                .Add(SourceFileInfo.Name) 'the import file name
-            End With
-
-            'open up a datatable translator form to allow the user to map fields from the csv file to the destination datatable
-            Dim TranslatorForm As New SkeeterDataTablesTranslatorForm(InputDataTable, DestinationDataTable, "Import data", "Use the tool on the left to map the fields from your source data table to the destination data table.", DefaultValuesList)
-            TranslatorForm.ShowDialog()
-
-            'at this point we have transformed the csv into a clone of the destination datatable
-            Dim ImportDataTable As DataTable = TranslatorForm.DestinationDataTable
-
-            'the next step is to get the transformed data into the correct table
-            'loop through the waypoints datatable and try to insert them into the datatable
-            Dim TableName As String = SurveyType.ToString
-            For Each Row As DataRow In ImportDataTable.Rows
-
-                'make a new row
-                Dim NewRow As DataRow = Me.WRST_CaribouDataSet.Tables(TableName).NewRow
-                For Each Column As DataColumn In ImportDataTable.Columns
-                    NewRow.Item(Column.ColumnName) = Row.Item(Column.ColumnName)
-                Next
-
-                'override any selections made on the translator form
-                NewRow.Item("FlightID") = FlightID
-                NewRow.Item("RecordInsertedDate") = Now
-                NewRow.Item("RecordInsertedBy") = My.User.Name
-                NewRow.Item("Herd") = Herd
-
-
-                Select Case SurveyType
-                    Case SurveyType.CompositionCount
-                        NewRow.Item("CCID") = Guid.NewGuid.ToString
-                    Case SurveyType.PopulationEstimate
-                        NewRow.Item("EID") = Guid.NewGuid.ToString
-                    Case SurveyType.Radiotracking
-                        NewRow.Item("RTID") = Guid.NewGuid.ToString
-                End Select
-
-                'add the row
-                Me.WRST_CaribouDataSet.Tables(TableName).Rows.Add(NewRow)
-
-                'end the edit
-                Select Case SurveyType
-                    Case SurveyType.CompositionCount
-                        Me.CompositionCountsBindingSource.EndEdit()
-                        'Me.CompositionCountsGridEX.CurrentRow.EndEdit()
-                    Case SurveyType.PopulationEstimate
-                        Me.PopulationEstimateBindingSource.EndEdit()
-                        'Me.PopulationEstimateGridEX.CurrentRow.EndEdit()
-                    Case SurveyType.Radiotracking
-                        Me.RadioTrackingBindingSource.EndEdit()
-                        'Me.RadioTrackingGridEX.CurrentRow.EndEdit()
-                End Select
-
-            Next
-
-        Catch ex As Exception
-            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
-        End Try
     End Sub
 
 #End Region
