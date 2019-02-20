@@ -33,6 +33,8 @@ Partial Class Form1
         Dim XrefRadiotrackingCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.CampaignsGridEX = New Janus.Windows.GridEX.GridEX()
+        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
         Me.SurveyDataTabControl = New System.Windows.Forms.TabControl()
         Me.CompositionCountTabPage = New System.Windows.Forms.TabPage()
         Me.CompCountSplitContainer = New System.Windows.Forms.SplitContainer()
@@ -56,7 +58,7 @@ Partial Class Form1
         Me.PopulationToolStrip = New System.Windows.Forms.ToolStrip()
         Me.ImportPopulationSurveyWaypointsFromFileToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.AutoMatchPEFrequenciesToAnimalsToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ImportPopulationWaypointsToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -144,11 +146,9 @@ Partial Class Form1
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
-        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
-        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CampaignsTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CampaignsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
@@ -161,6 +161,8 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyDataTabControl.SuspendLayout()
         Me.CompositionCountTabPage.SuspendLayout()
         CType(Me.CompCountSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -227,10 +229,8 @@ Partial Class Form1
         CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyResultsToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -254,6 +254,16 @@ Partial Class Form1
         Me.CampaignsGridEX.Size = New System.Drawing.Size(326, 1017)
         Me.CampaignsGridEX.TabIndex = 1
         '
+        'CampaignsBindingSource
+        '
+        Me.CampaignsBindingSource.DataMember = "Campaigns"
+        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'SurveyDataTabControl
         '
         Me.SurveyDataTabControl.Controls.Add(Me.CompositionCountTabPage)
@@ -272,7 +282,7 @@ Partial Class Form1
         Me.CompositionCountTabPage.Controls.Add(Me.CompCountToolStrip)
         Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 29)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
-        Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.CompositionCountTabPage.Size = New System.Drawing.Size(1410, 588)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition"
@@ -345,7 +355,6 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(588, 550)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.XrefCompCountCaribouGridEX.Visible = False
         '
         'XrefCompCountCaribouBindingSource
         '
@@ -398,8 +407,8 @@ Partial Class Form1
         Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Image = CType(resources.GetObject("AutoMatchCCFrequenciesToAnimalsToolStripButton.Image"), System.Drawing.Image)
         Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Name = "AutoMatchCCFrequenciesToAnimalsToolStripButton"
-        Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Size = New System.Drawing.Size(303, 29)
-        Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Text = "Auto match frequencies to animals..."
+        Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Size = New System.Drawing.Size(347, 29)
+        Me.AutoMatchCCFrequenciesToAnimalsToolStripButton.Text = "Auto match frequencies to animals (flight)"
         '
         'PopulationTabPage
         '
@@ -408,7 +417,7 @@ Partial Class Form1
         Me.PopulationTabPage.Controls.Add(Me.PopulationToolStrip)
         Me.PopulationTabPage.Location = New System.Drawing.Point(4, 29)
         Me.PopulationTabPage.Name = "PopulationTabPage"
-        Me.PopulationTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.PopulationTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.PopulationTabPage.Size = New System.Drawing.Size(1410, 588)
         Me.PopulationTabPage.TabIndex = 1
         Me.PopulationTabPage.Text = "Population"
@@ -492,7 +501,7 @@ Partial Class Form1
         'PopulationToolStrip
         '
         Me.PopulationToolStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationSurveyWaypointsFromFileToolStripButton, Me.ToolStripSeparator8, Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton, Me.ToolStripSeparator4, Me.AutoMatchPEFrequenciesToAnimalsToolStripButton, Me.ImportPopulationWaypointsToolStripButton})
+        Me.PopulationToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportPopulationSurveyWaypointsFromFileToolStripButton, Me.ToolStripSeparator8, Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton, Me.ToolStripSeparator4, Me.AutoMatchPEFrequenciesToAnimalsToolStripButton, Me.ImportPopulationWaypointsToolStripButton})
         Me.PopulationToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.PopulationToolStrip.Name = "PopulationToolStrip"
         Me.PopulationToolStrip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
@@ -514,14 +523,14 @@ Partial Class Form1
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 32)
         '
-        'AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton
+        'AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton
         '
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Image = CType(resources.GetObject("AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Image"), System.Drawing.Image)
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Name = "AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton"
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Size = New System.Drawing.Size(417, 29)
-        Me.AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Text = "Auto match frequencies to animals (current record)"
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Image = CType(resources.GetObject("AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Image"), System.Drawing.Image)
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Name = "AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton"
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Size = New System.Drawing.Size(417, 29)
+        Me.AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Text = "Auto match frequencies to animals (current record)"
         '
         'ToolStripSeparator4
         '
@@ -553,7 +562,7 @@ Partial Class Form1
         Me.RadiotrackingTabPage.Controls.Add(Me.RadiotrackingToolStrip)
         Me.RadiotrackingTabPage.Location = New System.Drawing.Point(4, 29)
         Me.RadiotrackingTabPage.Name = "RadiotrackingTabPage"
-        Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.RadiotrackingTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.RadiotrackingTabPage.Size = New System.Drawing.Size(1410, 588)
         Me.RadiotrackingTabPage.TabIndex = 2
         Me.RadiotrackingTabPage.Text = "Radiotracking"
@@ -728,7 +737,7 @@ Partial Class Form1
         Me.DataEditingTabPage.Controls.Add(Me.SurveyFlightsSplitContainer)
         Me.DataEditingTabPage.Location = New System.Drawing.Point(4, 29)
         Me.DataEditingTabPage.Name = "DataEditingTabPage"
-        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.DataEditingTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.DataEditingTabPage.Size = New System.Drawing.Size(1424, 984)
         Me.DataEditingTabPage.TabIndex = 1
         Me.DataEditingTabPage.Text = "Data editing"
@@ -823,7 +832,7 @@ Partial Class Form1
         Me.ResultsTabPage.Controls.Add(Me.ResultsToolStrip)
         Me.ResultsTabPage.Location = New System.Drawing.Point(4, 29)
         Me.ResultsTabPage.Name = "ResultsTabPage"
-        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.ResultsTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.ResultsTabPage.Size = New System.Drawing.Size(1424, 984)
         Me.ResultsTabPage.TabIndex = 0
         Me.ResultsTabPage.Text = "Results"
@@ -1031,7 +1040,7 @@ Partial Class Form1
         Me.SurveysTabPage.Controls.Add(Me.CampaignsSplitContainer)
         Me.SurveysTabPage.Location = New System.Drawing.Point(4, 29)
         Me.SurveysTabPage.Name = "SurveysTabPage"
-        Me.SurveysTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.SurveysTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.SurveysTabPage.Size = New System.Drawing.Size(1768, 1071)
         Me.SurveysTabPage.TabIndex = 0
         Me.SurveysTabPage.Text = "Surveys"
@@ -1045,7 +1054,7 @@ Partial Class Form1
         Me.CaribouTabPage.Controls.Add(Me.AnimalsBindingNavigator)
         Me.CaribouTabPage.Location = New System.Drawing.Point(4, 29)
         Me.CaribouTabPage.Name = "CaribouTabPage"
-        Me.CaribouTabPage.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.CaribouTabPage.Padding = New System.Windows.Forms.Padding(3)
         Me.CaribouTabPage.Size = New System.Drawing.Size(1768, 1071)
         Me.CaribouTabPage.TabIndex = 1
         Me.CaribouTabPage.Text = "Caribou"
@@ -1349,6 +1358,11 @@ Partial Class Form1
         Me.CapturesBindingSource.DataMember = "FK_Captures_Caribou"
         Me.CapturesBindingSource.DataSource = Me.CaribouBindingSource
         '
+        'CaribouBindingSource
+        '
+        Me.CaribouBindingSource.DataMember = "Caribou"
+        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
         'XrefRadiotrackingCaribouBindingSource
         '
         Me.XrefRadiotrackingCaribouBindingSource.DataMember = "FK_xrefRadiotrackingCaribou_Caribou"
@@ -1358,21 +1372,6 @@ Partial Class Form1
         '
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
     " Database Application.chm"
-        '
-        'CampaignsBindingSource
-        '
-        Me.CampaignsBindingSource.DataMember = "Campaigns"
-        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'CaribouBindingSource
-        '
-        Me.CaribouBindingSource.DataMember = "Caribou"
-        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
         '
         'CampaignsTableAdapter
         '
@@ -1446,6 +1445,8 @@ Partial Class Form1
         Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Wrangell St. Elias National Park & Preserve Caribou Monitoring Program"
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyDataTabControl.ResumeLayout(False)
         Me.CompositionCountTabPage.ResumeLayout(False)
         Me.CompositionCountTabPage.PerformLayout()
@@ -1533,10 +1534,8 @@ Partial Class Form1
         Me.SurveyResultsToolStrip.ResumeLayout(False)
         Me.SurveyResultsToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1669,5 +1668,5 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents AutoMatchCCFrequenciesToAnimalsToolStripButton As ToolStripButton
     Friend WithEvents AutoMatchPEFrequenciesToAnimalsToolStripButton As ToolStripButton
-    Friend WithEvents AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton As ToolStripButton
+    Friend WithEvents AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton As ToolStripButton
 End Class

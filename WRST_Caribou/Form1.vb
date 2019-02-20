@@ -1670,7 +1670,7 @@ Public Class Form1
     ''' <param name="DestinationDataTable">DataTable. The DataTable schema into which the source DataTable's columns should be matched.</param>
     Private Sub ImportSurveyDataFromFile(DestinationDataTable As DataTable, SurveyType As SurveyType, Herd As String, FlightID As String)
         If Not DestinationDataTable Is Nothing Then
-            If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCount" Or SurveyType.ToString = "Radiotracking" Then
+            If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCounts" Or SurveyType.ToString = "Radiotracking" Then
                 If Herd = "Mentasta" Or Herd = "Chisana" Then
                     If FlightID.Trim.Length > 0 Then
                         Try
@@ -2045,20 +2045,20 @@ Public Class Form1
 
         'Ensure the GridEXColumn is configured for a DropDown
         With GridEx.RootTable.Columns("AnimalID")
-                .EditType = EditType.Combo
-                .HasValueList = True
-                .LimitToList = True
-                .AllowSort = True
-                .AutoComplete = True
-                .ValueList.Clear()
-            End With
+            .EditType = EditType.Combo
+            .HasValueList = True
+            .LimitToList = True
+            .AllowSort = True
+            .AutoComplete = True
+            .ValueList.Clear()
+        End With
 
 
-            'get the filtered data into a datatable
-            Dim DT As DataTable = GetCurrentCollarDeploymentsDataTable(ObservationDate)
+        'get the filtered data into a datatable
+        Dim DT As DataTable = GetCurrentCollarDeploymentsDataTable(ObservationDate)
 
-            'Add the animalids into the GridEXValueListItemCollection
-            For Each Row As DataRow In DT.Rows
+        'Add the animalids into the GridEXValueListItemCollection
+        For Each Row As DataRow In DT.Rows
             If Not IsDBNull(Row.Item("AnimalID")) And Not IsDBNull(Row.Item("Frequency")) Then
 
                 Dim ValueItem As String = Row.Item("AnimalID")
@@ -2108,26 +2108,6 @@ Public Class Form1
     End Sub
 
     Private Sub XrefPopulationCaribouGridEX_Enter(sender As Object, e As EventArgs) Handles XrefPopulationCaribouGridEX.Enter
-
-
-
-
-        'save the dataset to avoid datarelation errors
-        If Me.WRST_CaribouDataSet.HasChanges = True Then
-            'mark the current record index so we can move back to it after the savedataset blows it away
-            Dim GridEX As GridEX = Me.XrefPopulationCaribouGridEX
-            Dim RowIndex As Integer = GridEX.CurrentRow.RowIndex
-
-            'save the dataset
-            SaveDataset()
-
-            'now move back to the original row, if it's still there
-            If Not GridEX.GetRow(RowIndex) Is Nothing Then
-                Me.XrefPopulationCaribouGridEX.MoveTo(RowIndex)
-            End If
-
-        End If
-
         'refresh the list of frequencies in the animal frequencies GridEX chooser
         LoadCollaredCaribouDropdown(Me.XrefPopulationCaribouGridEX, GetCurrentSightingDate(Me.PopulationEstimateGridEX))
     End Sub
@@ -2220,11 +2200,21 @@ Frequency records matching collar deployments will be inserted into the XrefPopu
 No existing records will be deleted. No duplicate records will be added.  
 Yes to Continue. No to cancel."
         If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            AutomatchFrequenciesToAnimals_Flight()
+            AutomatchFrequenciesToAnimalsByFlight(SurveyType.PopulationEstimate, Me.PopulationEstimateGridEX)
         End If
     End Sub
 
-    Private Sub AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsCurrencRecordToolStripButton.Click
+    Private Sub AutoMatchCCFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchCCFrequenciesToAnimalsToolStripButton.Click
+        Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
+Frequency records matching collar deployments will be inserted into the XrefCompCountCaribou table. 
+No existing records will be deleted. No duplicate records will be added.  
+Yes to Continue. No to cancel."
+        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            AutomatchFrequenciesToAnimalsByFlight(SurveyType.CompositionCounts, Me.CompositionCountsGridEX)
+        End If
+    End Sub
+
+    Private Sub AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Click
         Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
 Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
 No existing records will be deleted. No duplicate records will be added.  
@@ -2233,7 +2223,7 @@ Yes to Continue. No to cancel."
             'this arraylist will hold any frequencies not found in animal movement tool
             Dim MissingFrequenciesArrayList As New ArrayList
             If Not Me.PopulationEstimateGridEX.CurrentRow Is Nothing Then
-                AutomatchFrequencyToAnimal(Me.PopulationEstimateGridEX.CurrentRow, MissingFrequenciesArrayList)
+                AutomatchFrequencyToAnimal(SurveyType.PopulationEstimate, Me.PopulationEstimateGridEX.CurrentRow, MissingFrequenciesArrayList)
                 ShowMissingFrequenciesList(MissingFrequenciesArrayList)
             Else
                 MsgBox("Select a row")
@@ -2245,12 +2235,12 @@ Yes to Continue. No to cancel."
     ''' <summary>
     ''' Loops through the PopulationEstimateGridEX rows and tries to match Group Frequencies to AnimalIDs in the Animal Movement database
     ''' </summary>
-    Private Sub AutomatchFrequenciesToAnimals_Flight()
+    Private Sub AutomatchFrequenciesToAnimalsByFlight(SurveyType As SurveyType, GridEX As GridEX)
         'this arraylist will hold any frequencies not found in animal movement tool
         Dim MissingFrequenciesArrayList As New ArrayList
         Try
-            For Each Row As GridEXRow In Me.PopulationEstimateGridEX.GetRows
-                AutomatchFrequencyToAnimal(Row, MissingFrequenciesArrayList)
+            For Each Row As GridEXRow In GridEX.GetRows
+                AutomatchFrequencyToAnimal(SurveyType, Row, MissingFrequenciesArrayList)
             Next
             ShowMissingFrequenciesList(MissingFrequenciesArrayList)
         Catch ex As Exception
@@ -2276,55 +2266,99 @@ Yes to Continue. No to cancel."
     ''' </summary>
     ''' <param name="Row"></param>
     ''' <param name="MissingFrequenciesArrayList"></param>
-    Private Sub AutomatchFrequencyToAnimal(Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
+    Private Sub AutomatchFrequencyToAnimal(SurveyType As SurveyType, Row As GridEXRow, MissingFrequenciesArrayList As ArrayList)
         Try
-            If Not Row Is Nothing Then
-                If Not Row.Cells("FrequenciesInGroup") Is Nothing And Not Row.Cells("SightingDate") Is Nothing And Not Row.Cells("EID") Is Nothing Then
-                    If Not IsDBNull(Row.Cells("FrequenciesInGroup").Value) And Not IsDBNull(Row.Cells("SightingDate").Value) And Not IsDBNull(Row.Cells("EID").Value) Then
+            'make sure we have a good table type
+            If SurveyType.ToString = "PopulationEstimate" Or SurveyType.ToString = "CompositionCounts" Or SurveyType.ToString = "Radiotracking" Then
 
-                        'get some caribou group row values into variables
-                        Dim FrequenciesInGroup As String = Row.Cells("FrequenciesInGroup").Value
-                        Dim SightingDate As String = Row.Cells("SightingDate").Value
-                        Dim EID As String = Row.Cells("EID").Value
+                'the purpose of this sub is to match animal groups from the pop est, comp count or radiotracking tables to the appropriate cross reference tables
+                'XrefPopulationCaribou, XrefCompCountCaribou, XrefRadioTrackingCaribou
+                'we need to know which kind of data we are dealing with and the key columns that will be used to match frequencies with animals in the animal movement database.
+                Dim CaribouGroupToAnimalXrefTableName As String = ""
+                Dim CaribouGroupPrimaryKeyColumnName As String = "" 'the column name of the cross refere
+                Dim XrefTablePrimaryKeyColumnName As String = ""
+                Dim FrequenciesColumnName As String = "" 'the frequencies in group column name differs between cross reference tables
+                Select Case SurveyType.ToString
+                    Case "PopulationEstimate"
+                        CaribouGroupToAnimalXrefTableName = "XrefPopulationCaribou"
+                        CaribouGroupPrimaryKeyColumnName = "EID"
+                        XrefTablePrimaryKeyColumnName = "PCID"
+                        FrequenciesColumnName = "FrequenciesInGroup"
+                    Case "CompositionCounts"
+                        CaribouGroupToAnimalXrefTableName = "XrefCompCountCaribou"
+                        CaribouGroupPrimaryKeyColumnName = "CCID"
+                        XrefTablePrimaryKeyColumnName = "CCCID"
+                        FrequenciesColumnName = "Frequencies"
+                    Case "Radiotracking"
+                        CaribouGroupToAnimalXrefTableName = "XrefRadioTrackingCaribou"
+                        CaribouGroupPrimaryKeyColumnName = "RTID"
+                        XrefTablePrimaryKeyColumnName = "RTCID"
+                        FrequenciesColumnName = "Frequency"
+                End Select
 
-                        'parse the comma separated frequencies so we can deal with them individually
-                        For Each Frequency In FrequenciesInGroup.Split(",")
-                            Frequency = Frequency.Trim
-                            If IsNumeric(Frequency.Trim) = True Then
-                                Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
-                                If AnimalID.Length = 0 Then
-                                    'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
-                                    MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
-                                    AnimalID = "ERR: " & Frequency
+                'extract the frequencies from the row's FrequenciesInGroup column and try to parse it, search for the correct animalid and insert it into the cross reference table
+                If Not Row Is Nothing Then
+                    If Not Row.Cells(FrequenciesColumnName) Is Nothing And Not Row.Cells("SightingDate") Is Nothing And Not Row.Cells(CaribouGroupPrimaryKeyColumnName) Is Nothing Then
+                        If Not IsDBNull(Row.Cells(FrequenciesColumnName).Value) And Not IsDBNull(Row.Cells("SightingDate").Value) And Not IsDBNull(Row.Cells(CaribouGroupPrimaryKeyColumnName).Value) Then
+
+                            'get caribou group row values into variables
+                            Dim FrequenciesInGroup As String = Row.Cells(FrequenciesColumnName).Value
+                            Dim SightingDate As String = Row.Cells("SightingDate").Value
+
+                            'parse the comma separated frequencies so we can deal with them individually
+                            For Each Frequency In FrequenciesInGroup.Split(",")
+                                Frequency = Frequency.Trim
+                                If IsNumeric(Frequency.Trim) = True Then
+                                    Dim AnimalID As String = GetAnimalIDFromFrequencyAndObservationDate(Frequency, SightingDate)
+                                    If AnimalID.Length = 0 Then
+                                        'the collar was not found in the AM database, add to the list so we can inform the user of data quality issues.
+                                        MissingFrequenciesArrayList.Add(Frequency & "," & SightingDate)
+                                        AnimalID = "FRQ: " & Frequency
+                                    End If
+
+                                    'add the animalid to the XrefDataTable
+                                    Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables(CaribouGroupToAnimalXrefTableName)
+                                    'see if the AnimalID already exists
+                                    Dim Filter As String = CaribouGroupPrimaryKeyColumnName & " = '" & Row.Cells(CaribouGroupPrimaryKeyColumnName).Value & "' And AnimalID='" & AnimalID & "'"
+                                    Dim ExistenceCheck As DataRow() = XrefDataTable.Select(Filter)
+                                    If ExistenceCheck.Count = 0 Then
+                                        'the animalid does not exist for the animal group
+                                        Dim XrefDataRow As DataRow = XrefDataTable.NewRow
+                                        With XrefDataRow
+                                            .Item("AnimalID") = AnimalID
+                                            .Item(CaribouGroupPrimaryKeyColumnName) = Row.Cells(CaribouGroupPrimaryKeyColumnName).Value
+                                            .Item("RecordInsertedBy") = My.User.Name
+                                            .Item("RecordInsertedDate") = Now
+                                            .Item("ProjectID") = "WRST_Caribou"
+                                            .Item(XrefTablePrimaryKeyColumnName) = Guid.NewGuid.ToString
+                                        End With
+                                        XrefDataTable.Rows.Add(XrefDataRow)
+                                        XrefPopulationCaribouBindingSource.EndEdit()
+                                    End If
                                 End If
-
-                                'add the animalid to the XrefPopulationCaribouDataTable
-                                Dim XrefDataTable As DataTable = Me.WRST_CaribouDataSet.Tables("XrefPopulationCaribou")
-                                'see if the AnimalID already exists
-                                Dim ExistenceCheck As DataRow() = XrefDataTable.Select("EID = '" & EID & "' And AnimalID='" & AnimalID & "'")
-                                If ExistenceCheck.Count = 0 Then
-                                    'the animalid does not exist for the animal group
-                                    Dim XrefDataRow As DataRow = XrefDataTable.NewRow
-                                    With XrefDataRow
-                                        .Item("AnimalID") = AnimalID
-                                        .Item("EID") = EID
-                                        .Item("RecordInsertedBy") = My.User.Name
-                                        .Item("RecordInsertedDate") = Now
-                                        .Item("ProjectID") = "WRST_Caribou"
-                                        .Item("PCID") = Guid.NewGuid.ToString
-                                    End With
-                                    XrefDataTable.Rows.Add(XrefDataRow)
-                                    XrefPopulationCaribouBindingSource.EndEdit()
-                                End If
-                            End If
-                        Next
+                            Next
+                        End If
                     End If
                 End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
+    Private Sub PopulationEstimateGridEX_Validated(sender As Object, e As EventArgs) Handles PopulationEstimateGridEX.Validated
+        'save the dataset
+        SaveDataset()
+    End Sub
 
+    Private Sub CompositionCountsGridEX_Validated(sender As Object, e As EventArgs) Handles CompositionCountsGridEX.Validated
+        'save the dataset
+        SaveDataset()
+    End Sub
+
+    Private Sub RadioTrackingGridEX_Validated(sender As Object, e As EventArgs) Handles RadioTrackingGridEX.Validated
+        'save the dataset
+        SaveDataset()
+    End Sub
 End Class
