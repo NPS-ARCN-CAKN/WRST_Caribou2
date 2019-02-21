@@ -17386,7 +17386,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (FlightID = @Original_FlightID)"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (FlightID = @Original_FlightID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
@@ -17430,19 +17430,19 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsFollowUpFlight", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "IsFollowUpFlight", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE       SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                CrewNumber = @CrewNumber, Pilot = "& _ 
-                "@Pilot, Observer1 = @Observer1, Observer2 = @Observer2, AircraftType = @Aircraft"& _ 
-                "Type, TailNo = @TailNo, TimeDepart = @TimeDepart, TimeReturn = @TimeReturn, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"  "& _ 
-                "                       SpotterPlaneTailNo = @SpotterPlaneTailNo, SpotterPlaneTyp"& _ 
-                "e = @SpotterPlaneType, SpotterPlanePilot = @SpotterPlanePilot, WeatherConditions"& _ 
-                " = @WeatherConditions, SnowConditions = @SnowConditions, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    Notes = @Notes, Herd = @Herd, SOPNumber = @SOPNumber, SOPVersion = @SOPVersi"& _ 
-                "on, IsFollowUpFlight = @IsFollowUpFlight"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (FlightID = @Original_Fli"& _ 
-                "ghtID);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailN"& _ 
-                "o, TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePil"& _ 
-                "ot, WeatherConditions, SnowConditions, Notes, RecordInsertedDate, RecordInserted"& _ 
-                "By, Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLe"& _ 
-                "vel, FlightID, CampaignID, TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE SurveyFlights"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET       CrewNumber = @CrewNumber, Pilot = @Pilot, Observe"& _ 
+                "r1 = @Observer1, Observer2 = @Observer2, AircraftType = @AircraftType, TailNo = "& _ 
+                "@TailNo, TimeDepart = @TimeDepart, TimeReturn = @TimeReturn, SpotterPlaneTailNo "& _ 
+                "= @SpotterPlaneTailNo, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             SpotterPlaneType = @SpotterPlaneType, Spot"& _ 
+                "terPlanePilot = @SpotterPlanePilot, WeatherConditions = @WeatherConditions, Snow"& _ 
+                "Conditions = @SnowConditions, Notes = @Notes, Herd = @Herd, SOPNumber = @SOPNumb"& _ 
+                "er, SOPVersion = @SOPVersion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             IsFollowUpFlight = @IsFollowUpFligh"& _ 
+                "t, CertificationLevel = @CertificationLevel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE (FlightID = @Original_FlightI"& _ 
+                "D);     "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT CrewNumber, Pilot, Observer1, Observer2, AircraftType, TailNo, "& _ 
+                "TimeDepart, TimeReturn, SpotterPlaneTailNo, SpotterPlaneType, SpotterPlanePilot,"& _ 
+                " WeatherConditions, SnowConditions, Notes, RecordInsertedDate, RecordInsertedBy,"& _ 
+                " Herd, SOPNumber, SOPVersion, CertificationDate, CertifiedBy, CertificationLevel"& _ 
+                ", FlightID, CampaignID, TS FROM SurveyFlights WHERE (FlightID = @FlightID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CrewNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "CrewNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Pilot", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Pilot", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -17462,6 +17462,7 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPNumber", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "SOPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SOPVersion", Global.System.Data.SqlDbType.[Decimal], 5, Global.System.Data.ParameterDirection.Input, 6, 2, "SOPVersion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsFollowUpFlight", Global.System.Data.SqlDbType.Bit, 1, Global.System.Data.ParameterDirection.Input, 0, 0, "IsFollowUpFlight", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CertificationLevel", Global.System.Data.SqlDbType.VarChar, 15, Global.System.Data.ParameterDirection.Input, 0, 0, "CertificationLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FlightID", Global.System.Data.SqlDbType.VarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "FlightID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
@@ -17712,6 +17713,7 @@ Namespace WRST_CaribouDataSetTableAdapters
                     ByVal SOPNumber As Integer,  _
                     ByVal SOPVersion As Decimal,  _
                     ByVal IsFollowUpFlight As Boolean,  _
+                    ByVal CertificationLevel As String,  _
                     ByVal Original_FlightID As String,  _
                     ByVal FlightID As String) As Integer
             Me.Adapter.UpdateCommand.Parameters(0).Value = CType(CrewNumber,Integer)
@@ -17780,15 +17782,20 @@ Namespace WRST_CaribouDataSetTableAdapters
             Me.Adapter.UpdateCommand.Parameters(15).Value = CType(SOPNumber,Integer)
             Me.Adapter.UpdateCommand.Parameters(16).Value = CType(SOPVersion,Decimal)
             Me.Adapter.UpdateCommand.Parameters(17).Value = CType(IsFollowUpFlight,Boolean)
+            If (CertificationLevel Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(CertificationLevel,String)
+            End If
             If (Original_FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_FlightID,String)
             End If
             If (FlightID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("FlightID")
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(FlightID,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(FlightID,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

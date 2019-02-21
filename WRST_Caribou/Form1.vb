@@ -535,10 +535,37 @@ Public Class Form1
             'load the current flight info into the flight header label so the user can see which flight is currently selected
             LoadFlightHeader()
             SetFlightsGridExDefaultValues()
+
+            'determine if the application is in edit mode based on the edit checkbox
+            'if edits are allowed then only allow edits on non-certified records
+            If Me.EditCampaignsCheckBox.Checked = True Then
+                If RecordIsCertified() = True Then
+                    'make all the GridEXes readonly
+                    MakeGridEXesReadOnly(False)
+                    Me.EditCampaignsCheckBox.Enabled = False
+                    Me.EditCampaignsCheckBox.Text = "Read only (Record is certified)"
+                Else
+                    'make all the GridEXes editable
+                    MakeGridEXesReadOnly(True)
+                    Me.EditCampaignsCheckBox.Enabled = True
+                    Me.EditCampaignsCheckBox.Text = "Allow edits"
+                End If
+            End If
+
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+    Private Function RecordIsCertified() As Boolean
+        Dim IsCertified As Boolean = False
+        'disallow edits on certified flights
+        If GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "CertificationLevel") = "Certified" Then
+            IsCertified = True
+
+        End If
+        Return IsCertified
+    End Function
 
     Private Sub XrefRadiotrackingCaribouGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles XrefRadiotrackingCaribouGridEX.SelectionChanged
         SetXrefRadioTrackingCaribouGridEXDefaultValues()
@@ -2248,6 +2275,10 @@ Yes to Continue. No to cancel."
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Helper Sub to show which GPS collar frequencies were not matched to animal groups, most likely because the collar is not registered or deployed in the Animal Movement database.
+    ''' </summary>
+    ''' <param name="MissingFrequenciesArrayList"></param>
     Private Sub ShowMissingFrequenciesList(MissingFrequenciesArrayList As ArrayList)
         If MissingFrequenciesArrayList.Count > 1 Then
             Dim Warning As String = "WARNING: The following Frequencies were not associated with any deployed collar on the date the caribou group was observed" & vbNewLine
@@ -2361,4 +2392,6 @@ Yes to Continue. No to cancel."
         'save the dataset
         SaveDataset()
     End Sub
+
+
 End Class

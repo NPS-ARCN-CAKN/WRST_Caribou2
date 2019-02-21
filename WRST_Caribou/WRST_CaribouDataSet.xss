@@ -12,7 +12,7 @@
     <Shape ID="DesignTable:CompositionCounts" ZOrder="19" X="403" Y="70" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
     <Shape ID="DesignTable:PopulationEstimate" ZOrder="18" X="403" Y="505" Height="365" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
     <Shape ID="DesignTable:RadioTracking" ZOrder="17" X="403" Y="940" Height="365" Width="276" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
-    <Shape ID="DesignTable:SurveyFlights" ZOrder="16" X="70" Y="70" Height="365" Width="263" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="306" />
+    <Shape ID="DesignTable:SurveyFlights" ZOrder="16" X="70" Y="70" Height="562" Width="263" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="470" />
     <Shape ID="DesignTable:WorkLog" ZOrder="15" X="1803" Y="70" Height="273" Width="232" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="214" />
     <Shape ID="DesignTable:xrefCompCountCaribou" ZOrder="14" X="773" Y="70" Height="250" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="191" />
     <Shape ID="DesignTable:xrefPopulationCaribou" ZOrder="1" X="773" Y="505" Height="250" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="191" />
@@ -47,15 +47,15 @@
       <RoutePoints>
         <Point>
           <X>316</X>
-          <Y>435</Y>
+          <Y>632</Y>
         </Point>
         <Point>
           <X>316</X>
-          <Y>522</Y>
+          <Y>640</Y>
         </Point>
         <Point>
           <X>403</X>
-          <Y>522</Y>
+          <Y>640</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -63,7 +63,7 @@
       <RoutePoints>
         <Point>
           <X>308</X>
-          <Y>435</Y>
+          <Y>632</Y>
         </Point>
         <Point>
           <X>308</X>
@@ -87,7 +87,7 @@
         </Point>
         <Point>
           <X>300</X>
-          <Y>435</Y>
+          <Y>632</Y>
         </Point>
       </RoutePoints>
     </Connector>
