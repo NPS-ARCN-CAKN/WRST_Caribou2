@@ -17,9 +17,7 @@ Public Class Form1
         'load the data from the WRST_Caribou Sql Server database
         LoadDataset()
 
-        'make all gridexes read-only to start with. this is changed by the user clicking Me.EditCampaignsCheckBox
-        'make all the GridEXes readonly/editable
-        MakeGridEXesReadOnly(False)
+
 
         'set up campaigns gridex
         FormatGridEX(Me.CampaignsGridEX) 'consistent look and feel
@@ -75,6 +73,19 @@ Public Class Form1
 
         'Caribou are isolated in the Animal_Movement database based on ProjectID and AnimalID. ProjectID always = 'WRST_Caribou' Set it here permanently
         Me.RadioTrackingGridEX.RootTable.Columns("ProjectID").DefaultValue = "WRST_Caribou" 'always 'WRST_Caribou', primary key, with AnimalID in the Animal_Movement database for the GPS collar
+
+
+        'make all gridexes read-only to start with. this is changed by the user clicking Me.EditCampaignsCheckBox
+        'make all the GridEXes readonly/editable
+        AllowFormEdits(False)
+
+        'check to see if the flight is certified, disable if so
+        DoCertifiedFlightCheck()
+
+        'disable editing on any campaigns with certified related flights
+        DoCertifiedCampaignCheck()
+
+
     End Sub
 
 
@@ -528,6 +539,50 @@ Public Class Form1
 
         'bring the selected surveytype tab forward, if population survey bring the population survey tab forward, etc.
         BringSurveyTypeTabControlForward()
+
+        'see if related flights are certified, disallow editing if needed
+        DoCertifiedCampaignCheck()
+    End Sub
+
+    ''' <summary>
+    ''' Checks to see if the Campaign has related certified flights. Disallows editing if found.
+    ''' </summary>
+    Private Sub DoCertifiedCampaignCheck()
+        If CampaignHasCertifiedRecords() = True Then
+            'make all the GridEXes readonly
+            AllowFormEdits(False)
+            Me.EditCampaignsCheckBox.Enabled = False
+            Me.EditCampaignsCheckBox.Text = "Allow edits (Related record[s] are certified"
+
+        Else
+            Me.EditCampaignsCheckBox.Enabled = True
+            Me.EditCampaignsCheckBox.Text = "Allow edits"
+            'determine if the application is in edit mode based on the edit checkbox
+            'if edits are allowed then only allow edits on non-certified records
+            If Me.EditCampaignsCheckBox.Checked = True Then
+                'make all the GridEXes editable
+                AllowFormEdits(True)
+            End If
+        End If
+    End Sub
+
+    Private Sub DoCertifiedFlightCheck()
+        If FlightRecordIsCertified() = True Then
+            'make all the GridEXes readonly
+            AllowFormEdits(False)
+            Me.EditCampaignsCheckBox.Enabled = False
+            Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
+
+        Else
+            Me.EditCampaignsCheckBox.Enabled = True
+            Me.EditCampaignsCheckBox.Text = "Allow edits"
+            'determine if the application is in edit mode based on the edit checkbox
+            'if edits are allowed then only allow edits on non-certified records
+            If Me.EditCampaignsCheckBox.Checked = True Then
+                'make all the GridEXes editable
+                AllowFormEdits(True)
+            End If
+        End If
     End Sub
 
     Private Sub SurveyFlightsGridEX_SelectionChanged(sender As Object, e As EventArgs) Handles SurveyFlightsGridEX.SelectionChanged
@@ -536,48 +591,22 @@ Public Class Form1
             LoadFlightHeader()
             SetFlightsGridExDefaultValues()
 
-            If RecordIsCertified() = True Then
-                'make all the GridEXes readonly
-                MakeGridEXesReadOnly(False)
-                Me.EditCampaignsCheckBox.Enabled = False
-                Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
-                Me.CompCountToolStrip.Enabled = False
-                Me.PopulationToolStrip.Enabled = False
-                Me.RadiotrackingToolStrip.Enabled = False
-
-            Else
-                Me.EditCampaignsCheckBox.Enabled = True
-                Me.EditCampaignsCheckBox.Text = "Allow edits"
-                'determine if the application is in edit mode based on the edit checkbox
-                'if edits are allowed then only allow edits on non-certified records
-                If Me.EditCampaignsCheckBox.Checked = True Then
-                    'make all the GridEXes editable
-                    MakeGridEXesReadOnly(True)
-                    Me.CompCountToolStrip.Enabled = True
-                    Me.PopulationToolStrip.Enabled = True
-                    Me.RadiotrackingToolStrip.Enabled = True
-                End If
-
-            End If
-
-
-
-
+            'check to see if the flight is certified, disable if so
+            DoCertifiedFlightCheck()
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
 
 
-
-
-    Private Function RecordIsCertified() As Boolean
+    Private Function FlightRecordIsCertified() As Boolean
         Dim IsCertified As Boolean = False
-        'disallow edits on certified flights
+
+        'determine if the current flight is certified
         If GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "CertificationLevel") = "Certified" Then
             IsCertified = True
-
         End If
+
         Return IsCertified
     End Function
 
@@ -1877,14 +1906,14 @@ Public Class Form1
 
     Private Sub EditCampaignsCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles EditCampaignsCheckBox.CheckedChanged
         'make all the GridEXes readonly/editable
-        MakeGridEXesReadOnly(Me.EditCampaignsCheckBox.Checked)
+        AllowFormEdits(Me.EditCampaignsCheckBox.Checked)
     End Sub
 
     ''' <summary>
     ''' Renders all the GridEXes in the application read only.
     ''' </summary>
     ''' <param name="AllowEdits">Make all the GridEXes read only. Boolean.</param>
-    Private Sub MakeGridEXesReadOnly(AllowEdits As Boolean)
+    Private Sub AllowFormEdits(AllowEdits As Boolean)
         'for some bizarre reason the checkbox does not return true or false, maybe because inheritableboolean? anyway, convert
         Dim Checked As InheritableBoolean = InheritableBoolean.False
         If AllowEdits = True Then Checked = InheritableBoolean.True Else Checked = InheritableBoolean.False
@@ -1898,6 +1927,11 @@ Public Class Form1
         ToggleGridEXReadOnly(Me.XrefPopulationCaribouGridEX, Checked)
         ToggleGridEXReadOnly(Me.XrefCompCountCaribouGridEX, Checked)
         ToggleGridEXReadOnly(Me.XrefRadiotrackingCaribouGridEX, Checked)
+
+        'toggle toolstrips enabled
+        Me.CompCountToolStrip.Enabled = AllowEdits
+        Me.PopulationToolStrip.Enabled = AllowEdits
+        Me.RadiotrackingToolStrip.Enabled = AllowEdits
     End Sub
 
     ''' <summary>
@@ -2221,6 +2255,7 @@ Public Class Form1
     End Function
 
     Private Sub CampaignsGridEX_DeletingRecords(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CampaignsGridEX.DeletingRecords
+        FlightRecordIsCertified()
         'ask the user if they really want to delete the records and all related records
         Dim Result As DialogResult = MessageBox.Show("WARNING: You are about to delete one or more survey campaign records. This will cascade delete all related flights and survey data. This action cannot be undone." & vbNewLine & vbNewLine & " Click Yes to delete, No to cancel.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
         If Result = DialogResult.No Then
@@ -2410,5 +2445,25 @@ Yes to Continue. No to cancel."
         SaveDataset()
     End Sub
 
-
+    ''' <summary>
+    ''' Returns True if the Campaign has associated Flights that have been certified.
+    ''' </summary>
+    ''' <returns>Boolean</returns>
+    Private Function CampaignHasCertifiedRecords() As Boolean
+        'find out if related flights are certified or not
+        Dim CertifiedFlightsExist As Boolean = False
+        Try
+            Dim CurrentCampaignID As String = GetCurrentGridEXCellValue(Me.CampaignsGridEX, "CampaignID")
+            If CurrentCampaignID.Trim.Length > 0 Then
+                Dim Filter As String = "CampaignID = '" & CurrentCampaignID & "' And CertificationLevel = 'Certified'"
+                Dim CertifiedFlightsDataRow As DataRow() = WRST_CaribouDataSet.Tables("SurveyFlights").Select(Filter)
+                If CertifiedFlightsDataRow.Count > 0 Then
+                    CertifiedFlightsExist = True
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+        Return CertifiedFlightsExist
+    End Function
 End Class

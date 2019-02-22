@@ -33,8 +33,6 @@ Partial Class Form1
         Dim XrefRadiotrackingCaribouGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim SurveyFlightsGridEX_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.CampaignsGridEX = New Janus.Windows.GridEX.GridEX()
-        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
         Me.SurveyDataTabControl = New System.Windows.Forms.TabControl()
         Me.CompositionCountTabPage = New System.Windows.Forms.TabPage()
         Me.CompCountSplitContainer = New System.Windows.Forms.SplitContainer()
@@ -146,9 +144,11 @@ Partial Class Form1
         Me.RefreshToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.CapturesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.XrefRadiotrackingCaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HelpProvider = New System.Windows.Forms.HelpProvider()
+        Me.CampaignsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WRST_CaribouDataSet = New WRST_Caribou.WRST_CaribouDataSet()
+        Me.CaribouBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CampaignsTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CampaignsTableAdapter()
         Me.TableAdapterManager = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.TableAdapterManager()
         Me.CapturesTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.CapturesTableAdapter()
@@ -161,8 +161,6 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyDataTabControl.SuspendLayout()
         Me.CompositionCountTabPage.SuspendLayout()
         CType(Me.CompCountSplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -229,8 +227,10 @@ Partial Class Form1
         CType(Me.SurveyResultsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SurveyResultsToolStrip.SuspendLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CampaignsGridEX
@@ -254,16 +254,6 @@ Partial Class Form1
         Me.CampaignsGridEX.Size = New System.Drawing.Size(326, 1017)
         Me.CampaignsGridEX.TabIndex = 1
         '
-        'CampaignsBindingSource
-        '
-        Me.CampaignsBindingSource.DataMember = "Campaigns"
-        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
-        'WRST_CaribouDataSet
-        '
-        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
-        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'SurveyDataTabControl
         '
         Me.SurveyDataTabControl.Controls.Add(Me.CompositionCountTabPage)
@@ -273,7 +263,7 @@ Partial Class Form1
         Me.SurveyDataTabControl.Location = New System.Drawing.Point(0, 48)
         Me.SurveyDataTabControl.Name = "SurveyDataTabControl"
         Me.SurveyDataTabControl.SelectedIndex = 0
-        Me.SurveyDataTabControl.Size = New System.Drawing.Size(1418, 621)
+        Me.SurveyDataTabControl.Size = New System.Drawing.Size(1418, 718)
         Me.SurveyDataTabControl.TabIndex = 4
         '
         'CompositionCountTabPage
@@ -283,7 +273,7 @@ Partial Class Form1
         Me.CompositionCountTabPage.Location = New System.Drawing.Point(4, 29)
         Me.CompositionCountTabPage.Name = "CompositionCountTabPage"
         Me.CompositionCountTabPage.Padding = New System.Windows.Forms.Padding(3)
-        Me.CompositionCountTabPage.Size = New System.Drawing.Size(1410, 588)
+        Me.CompositionCountTabPage.Size = New System.Drawing.Size(1410, 685)
         Me.CompositionCountTabPage.TabIndex = 0
         Me.CompositionCountTabPage.Text = "Composition"
         Me.CompositionCountTabPage.UseVisualStyleBackColor = True
@@ -302,7 +292,7 @@ Partial Class Form1
         '
         Me.CompCountSplitContainer.Panel2.AutoScroll = True
         Me.CompCountSplitContainer.Panel2.Controls.Add(Me.XrefCompCountCaribouGridEX)
-        Me.CompCountSplitContainer.Size = New System.Drawing.Size(1404, 550)
+        Me.CompCountSplitContainer.Size = New System.Drawing.Size(1404, 647)
         Me.CompCountSplitContainer.SplitterDistance = 812
         Me.CompCountSplitContainer.TabIndex = 3
         '
@@ -323,7 +313,7 @@ Partial Class Form1
         Me.CompositionCountsGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
         Me.CompositionCountsGridEX.RecordNavigator = True
         Me.CompositionCountsGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
-        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(812, 550)
+        Me.CompositionCountsGridEX.Size = New System.Drawing.Size(812, 647)
         Me.CompositionCountsGridEX.TabIndex = 0
         Me.CompositionCountsGridEX.TotalRow = Janus.Windows.GridEX.InheritableBoolean.[True]
         Me.CompositionCountsGridEX.TotalRowFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
@@ -352,7 +342,7 @@ Partial Class Form1
         Me.XrefCompCountCaribouGridEX.Location = New System.Drawing.Point(0, 0)
         Me.XrefCompCountCaribouGridEX.Name = "XrefCompCountCaribouGridEX"
         Me.XrefCompCountCaribouGridEX.NewRowPosition = Janus.Windows.GridEX.NewRowPosition.BottomRow
-        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(588, 550)
+        Me.XrefCompCountCaribouGridEX.Size = New System.Drawing.Size(588, 647)
         Me.XrefCompCountCaribouGridEX.TabIndex = 0
         Me.XrefCompCountCaribouGridEX.TableHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
         '
@@ -760,7 +750,7 @@ Partial Class Form1
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.SurveyDataTabControl)
         Me.SurveyFlightsSplitContainer.Panel2.Controls.Add(Me.DataPanel)
         Me.SurveyFlightsSplitContainer.Size = New System.Drawing.Size(1418, 978)
-        Me.SurveyFlightsSplitContainer.SplitterDistance = 304
+        Me.SurveyFlightsSplitContainer.SplitterDistance = 207
         Me.SurveyFlightsSplitContainer.SplitterWidth = 5
         Me.SurveyFlightsSplitContainer.TabIndex = 5
         '
@@ -784,7 +774,7 @@ Partial Class Form1
         Me.SurveyFlightsGridEX.RecordNavigator = True
         Me.SurveyFlightsGridEX.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[Default]
         Me.SurveyFlightsGridEX.SelectedFormatStyle.FontBold = Janus.Windows.GridEX.TriState.[True]
-        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1418, 256)
+        Me.SurveyFlightsGridEX.Size = New System.Drawing.Size(1418, 159)
         Me.SurveyFlightsGridEX.TabIndex = 0
         '
         'Panel2
@@ -1358,11 +1348,6 @@ Partial Class Form1
         Me.CapturesBindingSource.DataMember = "FK_Captures_Caribou"
         Me.CapturesBindingSource.DataSource = Me.CaribouBindingSource
         '
-        'CaribouBindingSource
-        '
-        Me.CaribouBindingSource.DataMember = "Caribou"
-        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
-        '
         'XrefRadiotrackingCaribouBindingSource
         '
         Me.XrefRadiotrackingCaribouBindingSource.DataMember = "FK_xrefRadiotrackingCaribou_Caribou"
@@ -1372,6 +1357,21 @@ Partial Class Form1
         '
         Me.HelpProvider.HelpNamespace = "C:\Work\Code\WRST_CaribouWindowsForms\WRST_Caribou\WRST_Caribou\help\WRST Caribou" &
     " Database Application.chm"
+        '
+        'CampaignsBindingSource
+        '
+        Me.CampaignsBindingSource.DataMember = "Campaigns"
+        Me.CampaignsBindingSource.DataSource = Me.WRST_CaribouDataSet
+        '
+        'WRST_CaribouDataSet
+        '
+        Me.WRST_CaribouDataSet.DataSetName = "WRST_CaribouDataSet"
+        Me.WRST_CaribouDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'CaribouBindingSource
+        '
+        Me.CaribouBindingSource.DataMember = "Caribou"
+        Me.CaribouBindingSource.DataSource = Me.WRST_CaribouDataSet
         '
         'CampaignsTableAdapter
         '
@@ -1445,8 +1445,6 @@ Partial Class Form1
         Me.HelpProvider.SetShowHelp(Me, True)
         Me.Text = "NPS Wrangell St. Elias National Park & Preserve Caribou Monitoring Program"
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SurveyDataTabControl.ResumeLayout(False)
         Me.CompositionCountTabPage.ResumeLayout(False)
         Me.CompositionCountTabPage.PerformLayout()
@@ -1534,8 +1532,10 @@ Partial Class Form1
         Me.SurveyResultsToolStrip.ResumeLayout(False)
         Me.SurveyResultsToolStrip.PerformLayout()
         CType(Me.CapturesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrefRadiotrackingCaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CaribouBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
