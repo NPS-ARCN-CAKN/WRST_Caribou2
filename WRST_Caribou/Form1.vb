@@ -83,7 +83,7 @@ Public Class Form1
         DoCertifiedFlightCheck()
 
         'disable editing on any campaigns with certified related flights
-        DoCertifiedCampaignCheck()
+
 
 
     End Sub
@@ -540,31 +540,29 @@ Public Class Form1
         'bring the selected surveytype tab forward, if population survey bring the population survey tab forward, etc.
         BringSurveyTypeTabControlForward()
 
-        'see if related flights are certified, disallow editing if needed
-        DoCertifiedCampaignCheck()
     End Sub
 
-    ''' <summary>
-    ''' Checks to see if the Campaign has related certified flights. Disallows editing if found.
-    ''' </summary>
-    Private Sub DoCertifiedCampaignCheck()
-        If CampaignHasCertifiedRecords() = True Then
-            'make all the GridEXes readonly
-            AllowFormEdits(False)
-            Me.EditCampaignsCheckBox.Enabled = False
-            Me.EditCampaignsCheckBox.Text = "Allow edits (Related record[s] are certified"
+    '''' <summary>
+    '''' Checks to see if the Campaign has related certified flights. Disallows editing if found.
+    '''' </summary>
+    'Private Sub DoCertifiedCampaignCheck()
+    '    If CampaignHasCertifiedRecords() = True Then
+    '        'make all the GridEXes readonly
+    '        AllowFormEdits(False)
+    '        Me.EditCampaignsCheckBox.Enabled = False
+    '        Me.EditCampaignsCheckBox.Text = "Allow edits (Related record[s] are certified"
 
-        Else
-            Me.EditCampaignsCheckBox.Enabled = True
-            Me.EditCampaignsCheckBox.Text = "Allow edits"
-            'determine if the application is in edit mode based on the edit checkbox
-            'if edits are allowed then only allow edits on non-certified records
-            If Me.EditCampaignsCheckBox.Checked = True Then
-                'make all the GridEXes editable
-                AllowFormEdits(True)
-            End If
-        End If
-    End Sub
+    '    Else
+    '        Me.EditCampaignsCheckBox.Enabled = True
+    '        Me.EditCampaignsCheckBox.Text = "Allow edits"
+    '        'determine if the application is in edit mode based on the edit checkbox
+    '        'if edits are allowed then only allow edits on non-certified records
+    '        If Me.EditCampaignsCheckBox.Checked = True Then
+    '            'make all the GridEXes editable
+    '            AllowFormEdits(True)
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub DoCertifiedFlightCheck()
         If FlightRecordIsCertified() = True Then
