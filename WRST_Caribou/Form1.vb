@@ -536,26 +536,40 @@ Public Class Form1
             LoadFlightHeader()
             SetFlightsGridExDefaultValues()
 
-            'determine if the application is in edit mode based on the edit checkbox
-            'if edits are allowed then only allow edits on non-certified records
-            If Me.EditCampaignsCheckBox.Checked = True Then
-                If RecordIsCertified() = True Then
-                    'make all the GridEXes readonly
-                    MakeGridEXesReadOnly(False)
-                    Me.EditCampaignsCheckBox.Enabled = False
-                    Me.EditCampaignsCheckBox.Text = "Read only (Record is certified)"
-                Else
+            If RecordIsCertified() = True Then
+                'make all the GridEXes readonly
+                MakeGridEXesReadOnly(False)
+                Me.EditCampaignsCheckBox.Enabled = False
+                Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
+                Me.CompCountToolStrip.Enabled = False
+                Me.PopulationToolStrip.Enabled = False
+                Me.RadiotrackingToolStrip.Enabled = False
+
+            Else
+                Me.EditCampaignsCheckBox.Enabled = True
+                Me.EditCampaignsCheckBox.Text = "Allow edits"
+                'determine if the application is in edit mode based on the edit checkbox
+                'if edits are allowed then only allow edits on non-certified records
+                If Me.EditCampaignsCheckBox.Checked = True Then
                     'make all the GridEXes editable
                     MakeGridEXesReadOnly(True)
-                    Me.EditCampaignsCheckBox.Enabled = True
-                    Me.EditCampaignsCheckBox.Text = "Allow edits"
+                    Me.CompCountToolStrip.Enabled = True
+                    Me.PopulationToolStrip.Enabled = True
+                    Me.RadiotrackingToolStrip.Enabled = True
                 End If
+
             End If
+
+
+
 
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+
+
 
     Private Function RecordIsCertified() As Boolean
         Dim IsCertified As Boolean = False
@@ -1663,6 +1677,7 @@ Public Class Form1
         Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCounts, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+        SaveDataset()
     End Sub
 
     'import arbitrary waypoints to population
@@ -1671,6 +1686,7 @@ Public Class Form1
         Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate], Bull        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+        SaveDataset()
     End Sub
 
     'import arbitrary waypoints to radiotracking
@@ -1679,6 +1695,7 @@ Public Class Form1
         Dim Sql As String = "SELECT  TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+        SaveDataset()
     End Sub
 
     ''' <summary>
