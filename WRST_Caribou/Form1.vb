@@ -565,21 +565,34 @@ Public Class Form1
     'End Sub
 
     Private Sub DoCertifiedFlightCheck()
-        If FlightRecordIsCertified() = True Then
-            'make all the GridEXes readonly
-            AllowFormEdits(False)
-            Me.EditCampaignsCheckBox.Enabled = False
-            Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
 
-        Else
-            Me.EditCampaignsCheckBox.Enabled = True
+        'we are in edit mode
+        If Me.EditCampaignsCheckBox.Checked = True And FlightRecordIsCertified() = True Then
+
+            'form is editable but record is certified
+            AllowFormEdits(False)
+            Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
+            Me.EditCampaignsCheckBox.Enabled = False
+        ElseIf Me.EditCampaignsCheckBox.Checked = True And FlightRecordIsCertified() = False Then
+
+            'form is editable and record is uncertified
+            AllowFormEdits(True)
             Me.EditCampaignsCheckBox.Text = "Allow edits"
-            'determine if the application is in edit mode based on the edit checkbox
-            'if edits are allowed then only allow edits on non-certified records
-            If Me.EditCampaignsCheckBox.Checked = True Then
-                'make all the GridEXes editable
-                AllowFormEdits(True)
-            End If
+            Me.EditCampaignsCheckBox.Enabled = True
+
+        ElseIf Me.EditCampaignsCheckBox.Checked = False And FlightRecordIsCertified() = True Then
+
+            'form is not editable and record is certified
+            AllowFormEdits(False)
+            Me.EditCampaignsCheckBox.Text = "Allow edits (Record is certified)"
+            Me.EditCampaignsCheckBox.Enabled = False
+
+        ElseIf Me.EditCampaignsCheckBox.Checked = False And FlightRecordIsCertified() = False Then
+            'form is not editable and record is uncertified
+            AllowFormEdits(False)
+            Me.EditCampaignsCheckBox.Text = "Allow edits"
+            Me.EditCampaignsCheckBox.Enabled = True
+
         End If
     End Sub
 
@@ -597,6 +610,10 @@ Public Class Form1
     End Sub
 
 
+    ''' <summary>
+    ''' Examines the value of the CertificationLevel of the SurveyFlightsGridEX. Returns true if the flight is 'Certified'.
+    ''' </summary>
+    ''' <returns>Boolean</returns>
     Private Function FlightRecordIsCertified() As Boolean
         Dim IsCertified As Boolean = False
 
@@ -1037,6 +1054,17 @@ Public Class Form1
 
     Private Sub LoadDataset()
         Try
+            If WRST_CaribouDataSet.HasChanges = True Then
+                Dim Result As MsgBoxResult = MsgBox("The local dataset has changes that have not been pushed to the database server. If you do not save these edits they will be lost. Yes to save recent edits. No to lose edits and refresh the dataset. Cancel to abort.", MsgBoxStyle.YesNoCancel, "Save?")
+                If Result = MsgBoxResult.Cancel Then
+                    'abort the dataset reload
+                    Exit Sub
+                ElseIf Result = MsgBoxResult.Yes Then
+                    'save the dataset
+                    SaveDataset()
+                End If
+            End If
+
             'load the data
             Me.CampaignsTableAdapter.Fill(Me.WRST_CaribouDataSet.Campaigns)
             Me.SurveyFlightsTableAdapter.Fill(Me.WRST_CaribouDataSet.SurveyFlights)
@@ -1704,7 +1732,15 @@ Public Class Form1
         Dim Sql As String = "SELECT TOP (1) SightingDate, Herd, GroupNumber, SearchArea, SmallBull, MediumBull, LargeBull, Cow, Calf, Indeterminate, Waypoint, Frequencies, FlightID, CCID, RecordInsertedDate, RecordInsertedBy,        SourceFilename, Comment, Lat, Lon FROM   CompositionCounts"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.CompositionCounts, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+
+        'save the dataset
         SaveDataset()
+
+        'convert any animal counts of zero to null
+        ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
+
+        'reload the corrected dataset
+        LoadDataset()
     End Sub
 
     'import arbitrary waypoints to population
@@ -1713,7 +1749,15 @@ Public Class Form1
         Dim Sql As String = "SELECT TOP 1 [Herd]        ,[SearchArea]        ,[GroupNumber]        ,[WaypointName]        ,[SightingDate], Bull        ,[SmallBull]        ,[MediumBull]        ,[LargeBull]        ,[Cow]        ,[Calf]        ,[InOrOut]        ,[Seen]        ,[Marked]        ,[FrequenciesInGroup]        ,[Lat]        ,[Lon]        ,[Comment]        ,[SourceFilename],[FlightID]        ,[EID]        ,[RecordInsertedDate]        ,[RecordInsertedBy]    FROM [WRST_Caribou].[dbo].[PopulationEstimate]"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.PopulationEstimate, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+
+        'save the dataset
         SaveDataset()
+
+        'convert any animal counts of zero to null
+        ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
+
+        'reload the corrected dataset
+        LoadDataset()
     End Sub
 
     'import arbitrary waypoints to radiotracking
@@ -1722,7 +1766,15 @@ Public Class Form1
         Dim Sql As String = "SELECT  TOP (1) Herd, GroupNumber, Frequency, VisualCollar, SightingDate, Mode, Accuracy, Bull, Cow, Calf, Adult, Unknown, Waypoint, RetainedAntler, DistendedUdders, CalvesAtHeel, Seen, FlightID, AnimalID, ProjectID, RTID, RecordInsertedDate, RecordInsertedBy, SearchArea, SourceFilename, Comment, Lat, Lon FROM            RadioTracking"
         Dim DestinationDataTable As DataTable = GetDataTable(My.Settings.WRST_CaribouConnectionString, Sql)
         ImportSurveyDataFromFile(DestinationDataTable, SurveyType.Radiotracking, GetCurrentGridEXCellValue(Me.CampaignsGridEX, "Herd"), GetCurrentGridEXCellValue(Me.SurveyFlightsGridEX, "FlightID"))
+
+        'save the dataset
         SaveDataset()
+
+        'convert any animal counts of zero to null
+        ExecuteStoredProcedure("SP_CaribouGroupsZeroesToNulls")
+
+        'reload the corrected dataset
+        LoadDataset()
     End Sub
 
     ''' <summary>
@@ -2272,42 +2324,78 @@ Public Class Form1
     End Sub
 
     Private Sub AutoMatchPEFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsToolStripButton.Click
-        Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
-Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
-No existing records will be deleted. No duplicate records will be added.  
-Yes to Continue. No to cancel."
-        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+        Try
+            Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
+                Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
+                No existing records will be deleted. No duplicate records will be added.  
+                Yes to Continue. No to cancel."
+            If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             AutomatchFrequenciesToAnimalsByFlight(SurveyType.PopulationEstimate, Me.PopulationEstimateGridEX)
         End If
+        Catch ex As Exception
+        MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     Private Sub AutoMatchCCFrequenciesToAnimalsToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchCCFrequenciesToAnimalsToolStripButton.Click
-        Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
-Frequency records matching collar deployments will be inserted into the XrefCompCountCaribou table. 
-No existing records will be deleted. No duplicate records will be added.  
-Yes to Continue. No to cancel."
-        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            AutomatchFrequenciesToAnimalsByFlight(SurveyType.CompositionCounts, Me.CompositionCountsGridEX)
-        End If
+        Try
+            Dim Explanation As String = "The application will cross reference the Group Frequencies for this flight with GPS collar deployments found in the Animal Movement database.
+                Frequency records matching collar deployments will be inserted into the XrefCompCountCaribou table. 
+                No existing records will be deleted. No duplicate records will be added.  
+                Yes to Continue. No to cancel."
+            If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+                AutomatchFrequenciesToAnimalsByFlight(SurveyType.CompositionCounts, Me.CompositionCountsGridEX)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
     End Sub
 
     Private Sub AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton.Click
         Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
-Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
-No existing records will be deleted. No duplicate records will be added.  
-Yes to Continue. No to cancel."
+            Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
+            No existing records will be deleted. No duplicate records will be added.  
+            Yes to Continue. No to cancel."
         If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-            'this arraylist will hold any frequencies not found in animal movement tool
-            Dim MissingFrequenciesArrayList As New ArrayList
-            If Not Me.PopulationEstimateGridEX.CurrentRow Is Nothing Then
-                AutomatchFrequencyToAnimal(SurveyType.PopulationEstimate, Me.PopulationEstimateGridEX.CurrentRow, MissingFrequenciesArrayList)
-                ShowMissingFrequenciesList(MissingFrequenciesArrayList)
-            Else
-                MsgBox("Select a row")
-            End If
-
+            Try
+                'this arraylist will hold any frequencies not found in animal movement tool
+                Dim MissingFrequenciesArrayList As New ArrayList
+                Dim GridEX As GridEX = Me.PopulationEstimateGridEX
+                If Not GridEX.CurrentRow Is Nothing Then
+                    AutomatchFrequencyToAnimal(SurveyType.CompositionCounts, Me.CompositionCountsGridEX.CurrentRow, MissingFrequenciesArrayList)
+                    ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+                Else
+                    MsgBox("Select a row")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            End Try
         End If
     End Sub
+
+    Private Sub AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton_Click(sender As Object, e As EventArgs) Handles AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton.Click
+        Dim Explanation As String = "The application will cross reference the Group Frequencies for this record with GPS collar deployments found in the Animal Movement database.
+            Frequency records matching collar deployments will be inserted into the XrefPopulationCaribou table. 
+            No existing records will be deleted. No duplicate records will be added.  
+            Yes to Continue. No to cancel."
+        If MsgBox(Explanation, MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
+            Try
+                'this arraylist will hold any frequencies not found in animal movement tool
+                Dim MissingFrequenciesArrayList As New ArrayList
+                Dim GridEX As GridEX = Me.CompositionCountsGridEX
+                If Not GridEX.CurrentRow Is Nothing Then
+                    AutomatchFrequencyToAnimal(SurveyType.CompositionCounts, Me.CompositionCountsGridEX.CurrentRow, MissingFrequenciesArrayList)
+                    ShowMissingFrequenciesList(MissingFrequenciesArrayList)
+                Else
+                    MsgBox("Select a row")
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+            End Try
+        End If
+    End Sub
+
+
 
     ''' <summary>
     ''' Loops through the PopulationEstimateGridEX rows and tries to match Group Frequencies to AnimalIDs in the Animal Movement database
@@ -2464,4 +2552,21 @@ Yes to Continue. No to cancel."
         End Try
         Return CertifiedFlightsExist
     End Function
+
+    Private Sub ExecuteStoredProcedure(ProcedureName As String)
+        Try
+            Dim MySqlConnection As New SqlConnection(My.Settings.WRST_CaribouConnectionString)
+            MySqlConnection.Open()
+
+            Dim MySqlCommand As New SqlCommand(ProcedureName, MySqlConnection)
+            MySqlCommand.CommandType = CommandType.StoredProcedure
+            MySqlCommand.ExecuteNonQuery()
+            MySqlCommand.Dispose()
+            MySqlConnection.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
+        End Try
+    End Sub
+
+
 End Class
