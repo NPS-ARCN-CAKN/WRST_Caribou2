@@ -161,6 +161,8 @@ Partial Class Form1
         Me.XrefPopulationCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefPopulationCaribouTableAdapter()
         Me.XrefRadiotrackingCaribouTableAdapter = New WRST_Caribou.WRST_CaribouDataSetTableAdapters.xrefRadiotrackingCaribouTableAdapter()
         Me.AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CaribouInventoryToCSVToolStripButton = New System.Windows.Forms.ToolStripButton()
         CType(Me.CampaignsGridEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CampaignsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WRST_CaribouDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1068,28 +1070,28 @@ Partial Class Form1
         Me.AnimalsDataGridView.AllowUserToOrderColumns = True
         Me.AnimalsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AnimalsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.AnimalsDataGridView.Location = New System.Drawing.Point(3, 31)
+        Me.AnimalsDataGridView.Location = New System.Drawing.Point(3, 35)
         Me.AnimalsDataGridView.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.AnimalsDataGridView.Name = "AnimalsDataGridView"
         Me.AnimalsDataGridView.ReadOnly = True
-        Me.AnimalsDataGridView.Size = New System.Drawing.Size(1762, 1006)
+        Me.AnimalsDataGridView.Size = New System.Drawing.Size(1762, 1002)
         Me.AnimalsDataGridView.TabIndex = 0
         '
         'AnimalsToolStrip
         '
         Me.AnimalsToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.AnimalsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CollarDeploymentsToolStripLabel})
+        Me.AnimalsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CollarDeploymentsToolStripLabel, Me.ToolStripSeparator10, Me.CaribouInventoryToCSVToolStripButton})
         Me.AnimalsToolStrip.Location = New System.Drawing.Point(3, 3)
         Me.AnimalsToolStrip.Name = "AnimalsToolStrip"
         Me.AnimalsToolStrip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.AnimalsToolStrip.Size = New System.Drawing.Size(1762, 28)
+        Me.AnimalsToolStrip.Size = New System.Drawing.Size(1762, 32)
         Me.AnimalsToolStrip.TabIndex = 2
         Me.AnimalsToolStrip.Text = "ToolStrip1"
         '
         'CollarDeploymentsToolStripLabel
         '
         Me.CollarDeploymentsToolStripLabel.Name = "CollarDeploymentsToolStripLabel"
-        Me.CollarDeploymentsToolStripLabel.Size = New System.Drawing.Size(458, 25)
+        Me.CollarDeploymentsToolStripLabel.Size = New System.Drawing.Size(458, 29)
         Me.CollarDeploymentsToolStripLabel.Text = "Collared caribou inventory (Animal Movement database)"
         '
         'AnimalsBindingNavigator
@@ -1439,6 +1441,20 @@ Partial Class Form1
         Me.AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton.Size = New System.Drawing.Size(417, 29)
         Me.AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton.Text = "Auto match frequencies to animals (current record)"
         '
+        'ToolStripSeparator10
+        '
+        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(6, 32)
+        '
+        'CaribouInventoryToCSVToolStripButton
+        '
+        Me.CaribouInventoryToCSVToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.CaribouInventoryToCSVToolStripButton.Image = CType(resources.GetObject("CaribouInventoryToCSVToolStripButton.Image"), System.Drawing.Image)
+        Me.CaribouInventoryToCSVToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.CaribouInventoryToCSVToolStripButton.Name = "CaribouInventoryToCSVToolStripButton"
+        Me.CaribouInventoryToCSVToolStripButton.Size = New System.Drawing.Size(48, 29)
+        Me.CaribouInventoryToCSVToolStripButton.Text = "CSV"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -1680,4 +1696,6 @@ Partial Class Form1
     Friend WithEvents AutoMatchPEFrequenciesToAnimalsToolStripButton As ToolStripButton
     Friend WithEvents AutoMatchPEFrequenciesToAnimalsCurrentRecordToolStripButton As ToolStripButton
     Friend WithEvents AutoMatchCCFrequenciesToAnimalsCurrentCCRecordToolStripButton As ToolStripButton
+    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
+    Friend WithEvents CaribouInventoryToCSVToolStripButton As ToolStripButton
 End Class

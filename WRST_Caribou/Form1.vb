@@ -978,8 +978,6 @@ Public Class Form1
             AnimalsBindingSource.DataSource = GetCollarDeploymentsDataTable()
             Me.AnimalsBindingNavigator.BindingSource = AnimalsBindingSource
             AnimalsDataGridView.DataSource = AnimalsBindingSource
-
-
         Catch ex As Exception
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
@@ -2567,6 +2565,4 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
-
-
 End Class
