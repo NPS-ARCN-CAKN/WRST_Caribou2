@@ -2565,4 +2565,55 @@ Public Class Form1
             MsgBox(ex.Message & " (" & System.Reflection.MethodBase.GetCurrentMethod.Name & ")")
         End Try
     End Sub
+
+    Private Sub ResultsDataGridView_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles ResultsDataGridView.DataError
+        Dim Row As Integer = e.RowIndex
+        Dim Col As Integer = e.ColumnIndex
+        Dim OffendingData As String = ""
+        Dim Grid As DataGridView = Me.ResultsDataGridView
+        If Not Grid Is Nothing Then
+            If Not Grid.Rows(Row) Is Nothing Then
+                If Not Grid.Rows(Row).Cells(Col) Is Nothing Then
+                    If Not IsDBNull(Grid.Rows(Row).Cells(Col).Value) Then
+                        OffendingData = "Row: " & Row & " Column: " & Grid.Columns(Col).Name & " Value: " & Grid.Rows(Row).Cells(Col).Value.ToString
+                    End If
+                End If
+            End If
+        End If
+        MsgBox(e.Exception.Message & " " & OffendingData)
+    End Sub
+
+    Private Sub AnimalsDataGridView_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles AnimalsDataGridView.DataError
+        Dim Row As Integer = e.RowIndex
+        Dim Col As Integer = e.ColumnIndex
+        Dim OffendingData As String = ""
+        Dim Grid As DataGridView = Me.AnimalsDataGridView
+        If Not Grid Is Nothing Then
+            If Not Grid.Rows(Row) Is Nothing Then
+                If Not Grid.Rows(Row).Cells(Col) Is Nothing Then
+                    If Not IsDBNull(Grid.Rows(Row).Cells(Col).Value) Then
+                        OffendingData = "Row: " & Row & " Column: " & Grid.Columns(Col).Name & " Value: " & Grid.Rows(Row).Cells(Col).Value.ToString
+                    End If
+                End If
+            End If
+        End If
+        MsgBox(e.Exception.Message & " " & OffendingData)
+    End Sub
+
+    Private Sub SurveyResultsDataGridView_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles SurveyResultsDataGridView.DataError
+        Dim Row As Integer = e.RowIndex
+        Dim Col As Integer = e.ColumnIndex
+        Dim OffendingData As String = ""
+        Dim Grid As DataGridView = Me.SurveyResultsDataGridView
+        If Not Grid Is Nothing Then
+            If Not Grid.Rows(Row) Is Nothing Then
+                If Not Grid.Rows(Row).Cells(Col) Is Nothing Then
+                    If Not IsDBNull(Grid.Rows(Row).Cells(Col).Value) Then
+                        OffendingData = "Row: " & Row & " Column: " & Grid.Columns(Col).Name & " Value: " & Grid.Rows(Row).Cells(Col).Value.ToString
+                    End If
+                End If
+            End If
+        End If
+        MsgBox(e.Exception.Message & " " & OffendingData)
+    End Sub
 End Class
